@@ -23,7 +23,9 @@ public class MaxValuePropertyValidator : PropertyValidator
         }
         else
         {
-            UnityEngine.Debug.LogWarning(maxValueAttribute.GetType().Name + " doesn't affect non-float or non-integer fields");
+            string warning = maxValueAttribute.GetType().Name + " doesn't affect non-float or non-integer fields";
+            EditorGUILayout.HelpBox(warning, MessageType.Warning);
+            UnityEngine.Debug.LogWarning(warning);
         }
     }
 }

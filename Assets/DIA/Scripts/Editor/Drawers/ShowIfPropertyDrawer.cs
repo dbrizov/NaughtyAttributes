@@ -33,7 +33,7 @@ public class ShowIfPropertyDrawer : PropertyDrawer
             return;
         }
 
+        EditorGUILayout.HelpBox(showIfAttribute.GetType().Name + " needs a valid condition field or method name to work", MessageType.Warning);
         EditorGUILayout.PropertyField(property);
-        UnityEngine.Debug.LogWarning(showIfAttribute.GetType().Name + " needs a valid condition field or method name");
     }
 }

@@ -33,7 +33,7 @@ public class HideIfPropertyDrawer : PropertyDrawer
             return;
         }
 
+        EditorGUILayout.HelpBox(hideIfAttribute.GetType().Name + " needs a valid condition field or method name to work", MessageType.Warning);
         EditorGUILayout.PropertyField(property);
-        UnityEngine.Debug.LogWarning(hideIfAttribute.GetType().Name + " needs a valid condition field or method name");
     }
 }

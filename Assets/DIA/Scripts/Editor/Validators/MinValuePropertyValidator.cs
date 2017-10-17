@@ -23,7 +23,9 @@ public class MinValuePropertyValidator : PropertyValidator
         }
         else
         {
-            UnityEngine.Debug.LogWarning(minValueAttribute.GetType().Name + " doesn't affect non-float or non-integer fields");
+            string warning = minValueAttribute.GetType().Name + " doesn't affect non-float or non-integer fields";
+            EditorGUILayout.HelpBox(warning, MessageType.Warning);
+            UnityEngine.Debug.LogWarning(warning);
         }
     }
 }

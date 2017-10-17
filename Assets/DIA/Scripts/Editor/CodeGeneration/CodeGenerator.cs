@@ -98,6 +98,7 @@ public class CodeGenerator : Editor
                 }
             }
         }
+
         return result;
     }
 }
