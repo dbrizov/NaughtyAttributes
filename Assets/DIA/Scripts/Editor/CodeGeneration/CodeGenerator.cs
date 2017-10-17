@@ -11,16 +11,21 @@ public class CodeGenerator : Editor
 
     private static readonly string ENTRIES_PLACEHOLDER = "__entries__";
     private static readonly string VALIDATOR_ENTRY_FORMAT = "validatorsByAttributeType[typeof({0})] = new {1}();" + Environment.NewLine;
-
+    
     [UnityEditor.Callbacks.DidReloadScripts]
     private static void GenerateCode()
+    {
+        GenerateValidatorUtilityScript();
+
+        AssetDatabase.Refresh();
+    }
+
+    private static void GenerateValidatorUtilityScript()
     {
         string templateGUID = AssetDatabase.FindAssets("ValidatorUtilityTemplate")[0];
         string templateRelativePath = AssetDatabase.GUIDToAssetPath(templateGUID);
         string templateFullPath = (Application.dataPath.Replace("Assets", string.Empty) + templateRelativePath).Replace("/", "\\");
-
         string templateFormat = IOUtility.ReadFromFile(templateFullPath);
-        Debug.Log(templateFormat);
 
         StringBuilder validatorEntriesBuilder = new StringBuilder();
         List<Type> validatorTypes = GetAllSubTypes(typeof(PropertyValidator));
@@ -34,8 +39,9 @@ public class CodeGenerator : Editor
             }
         }
 
-        string validatorUtilityClassContent = templateFormat.Replace(ENTRIES_PLACEHOLDER, validatorEntriesBuilder.ToString());
-        Debug.Log(validatorUtilityClassContent); 
+        string scriptContent = templateFormat.Replace(ENTRIES_PLACEHOLDER, validatorEntriesBuilder.ToString());
+        string scriptPath = (Application.dataPath.Replace("Assets", string.Empty) + GENERATED_CODE_TARGET_RELATIVE_PATH).Replace("/", "\\") + "ValidatorUtility.cs";
+        IOUtility.WriteToFile(scriptPath, scriptContent);
     }
 
     private static List<Type> GetAllSubTypes(Type baseClass)

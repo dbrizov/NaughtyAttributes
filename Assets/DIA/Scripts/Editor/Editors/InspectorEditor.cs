@@ -27,15 +27,18 @@ public class InspectorEditor : Editor
             }
         }
 
-        // If we have fields with validators
-        if (fields.Any(f => f.GetCustomAttributes(typeof(ValidatorAttribute), true).Length > 0))
+        // Validate the fields
+        foreach (var field in fields)
         {
-            Debug.Log("Validate");
-            // Validate the fields
-        }
-        else
-        {
-            Debug.Log("Don't Validate");
+            ValidatorAttribute[] validatorAttributes = (ValidatorAttribute[])field.GetCustomAttributes(typeof(ValidatorAttribute), true);
+            if (validatorAttributes.Length > 0)
+            {
+                foreach (var attribute in validatorAttributes)
+                {
+                    PropertyValidator validator = ValidatorUtility.GetValidatorForAttribute(attribute.GetType());
+                    validator.ValidateProperty(this.serializedObject.FindProperty(field.Name));
+                }
+            }
         }
 
         this.serializedObject.ApplyModifiedProperties();

@@ -1,4 +1,6 @@
-﻿using System;
+﻿// This class is auto generated
+
+using System;
 using System.Collections.Generic;
 
 public static class ValidatorUtility
