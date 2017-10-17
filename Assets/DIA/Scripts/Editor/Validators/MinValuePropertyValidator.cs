@@ -14,12 +14,16 @@ public class MinValuePropertyValidator : PropertyValidator
                 property.floatValue = minValueAttribute.MinValue;
             }
         }
-        else
+        else if (property.propertyType == SerializedPropertyType.Integer)
         {
             if (property.intValue < minValueAttribute.MinValue)
             {
                 property.intValue = (int)minValueAttribute.MinValue;
             }
+        }
+        else
+        {
+            UnityEngine.Debug.LogWarning(minValueAttribute.GetType().Name + " doesn't affect non-float or non-integer fields");
         }
     }
 }

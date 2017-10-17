@@ -2,7 +2,11 @@
 
 public class TestScript : MonoBehaviour
 {
-    [ShowIf("asd")]
+    [SerializeField]
+    private bool showFloatValue = true;
+
+    [SerializeField]
+    [ShowIf("showFloatValue")]
     [MinValue(-100f), MaxValue(100f)]
-    public float floatValue = 0f;
+    private float floatValue = 0f;
 }

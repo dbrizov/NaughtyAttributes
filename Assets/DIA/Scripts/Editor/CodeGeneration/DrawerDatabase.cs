@@ -10,7 +10,8 @@ public static class DrawerDatabase
     static DrawerDatabase()
     {
         drawersByAttributeType = new Dictionary<Type, PropertyDrawer>();
-        drawersByAttributeType[typeof(ShowIfAttribute)] = new ShowIfPropertyDrawer();
+        drawersByAttributeType[typeof(HideIfAttribute)] = new HideIfPropertyDrawer();
+drawersByAttributeType[typeof(ShowIfAttribute)] = new ShowIfPropertyDrawer();
 
     }
 

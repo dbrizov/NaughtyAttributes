@@ -7,10 +7,13 @@ using System.Text;
 
 public class CodeGenerator : Editor
 {
-    private const string GENERATED_CODE_TARGET_RELATIVE_PATH = "Assets/DIA/Scripts/Editor/CodeGeneration/";
+    private static readonly string GENERATED_CODE_TARGET_FOLDER =
+        (Application.dataPath.Replace("Assets", string.Empty) + AssetDatabase.GUIDToAssetPath(AssetDatabase.FindAssets("CodeGenerator")[0]))
+        .Replace("CodeGenerator.cs", string.Empty)
+        .Replace("/", "\\");
 
-    private const string CLASS_NAME_PLACEHOLDER = "__classname__";
-    private const string ENTRIES_PLACEHOLDER = "__entries__";
+    private static readonly string CLASS_NAME_PLACEHOLDER = "__classname__";
+    private static readonly string ENTRIES_PLACEHOLDER = "__entries__";
     private static readonly string DRAWER_ENTRY_FORMAT = "drawersByAttributeType[typeof({0})] = new {1}();" + Environment.NewLine;
     private static readonly string VALIDATOR_ENTRY_FORMAT = "validatorsByAttributeType[typeof({0})] = new {1}();" + Environment.NewLine;
 
@@ -46,7 +49,7 @@ public class CodeGenerator : Editor
             .Replace(CLASS_NAME_PLACEHOLDER, scriptName)
             .Replace(ENTRIES_PLACEHOLDER, drawerEntriesBuilder.ToString());
 
-        string scriptPath = (Application.dataPath.Replace("Assets", string.Empty) + GENERATED_CODE_TARGET_RELATIVE_PATH).Replace("/", "\\") + scriptName + ".cs";
+        string scriptPath = GENERATED_CODE_TARGET_FOLDER + scriptName + ".cs";
 
         IOUtility.WriteToFile(scriptPath, scriptContent);
     }
@@ -74,7 +77,7 @@ public class CodeGenerator : Editor
             .Replace(CLASS_NAME_PLACEHOLDER, scriptName)
             .Replace(ENTRIES_PLACEHOLDER, validatorEntriesBuilder.ToString());
 
-        string scriptPath = (Application.dataPath.Replace("Assets", string.Empty) + GENERATED_CODE_TARGET_RELATIVE_PATH).Replace("/", "\\") + scriptName + ".cs";
+        string scriptPath = GENERATED_CODE_TARGET_FOLDER + scriptName + ".cs";
 
         IOUtility.WriteToFile(scriptPath, scriptContent);
     }

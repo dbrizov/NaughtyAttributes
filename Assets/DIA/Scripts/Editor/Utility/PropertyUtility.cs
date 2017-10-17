@@ -7,7 +7,7 @@ public static class PropertyUtility
     public static T[] GetAttributes<T>(SerializedProperty property) where T : DiaAttribute
     {
         Type targetType = GetTargetObject(property).GetType();
-        FieldInfo fieldInfo = targetType.GetField(property.name);
+        FieldInfo fieldInfo = targetType.GetField(property.name, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
 
         return (T[])fieldInfo.GetCustomAttributes(typeof(T), true);
     }

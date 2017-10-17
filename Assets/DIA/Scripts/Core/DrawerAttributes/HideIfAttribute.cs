@@ -1,11 +1,11 @@
 ﻿using System;
 
 [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-public class ShowIfAttribute : DrawerAttribute
+public class HideIfAttribute : DrawerAttribute
 {
     private string conditionName;
 
-    public ShowIfAttribute(string conditionName)
+    public HideIfAttribute(string conditionName)
     {
         this.conditionName = conditionName;
     }

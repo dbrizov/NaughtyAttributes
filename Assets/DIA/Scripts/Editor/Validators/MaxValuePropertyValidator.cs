@@ -14,12 +14,16 @@ public class MaxValuePropertyValidator : PropertyValidator
                 property.floatValue = maxValueAttribute.MaxValue;
             }
         }
-        else
+        else if (property.propertyType == SerializedPropertyType.Integer)
         {
             if (property.intValue > maxValueAttribute.MaxValue)
             {
                 property.intValue = (int)maxValueAttribute.MaxValue;
             }
+        }
+        else
+        {
+            UnityEngine.Debug.LogWarning(maxValueAttribute.GetType().Name + " doesn't affect non-float or non-integer fields");
         }
     }
 }
