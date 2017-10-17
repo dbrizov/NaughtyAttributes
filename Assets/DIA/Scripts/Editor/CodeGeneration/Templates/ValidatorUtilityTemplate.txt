@@ -8,6 +8,7 @@ public static class ValidatorUtility
     static ValidatorUtility()
     {
         validatorsByAttributeType = new Dictionary<Type, PropertyValidator>();
+        __entries__
     }
 
     public static PropertyValidator GetValidatorForAttribute(Type attributeType)
