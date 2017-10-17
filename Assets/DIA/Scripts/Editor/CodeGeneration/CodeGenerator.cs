@@ -7,22 +7,53 @@ using System.Text;
 
 public class CodeGenerator : Editor
 {
-    private const string GENERATED_CODE_TARGET_RELATIVE_PATH = "Assets/DIA/Scripts/Editor/Utility/";
+    private const string GENERATED_CODE_TARGET_RELATIVE_PATH = "Assets/DIA/Scripts/Editor/CodeGeneration/";
 
-    private static readonly string ENTRIES_PLACEHOLDER = "__entries__";
+    private const string CLASS_NAME_PLACEHOLDER = "__classname__";
+    private const string ENTRIES_PLACEHOLDER = "__entries__";
+    private static readonly string DRAWER_ENTRY_FORMAT = "drawersByAttributeType[typeof({0})] = new {1}();" + Environment.NewLine;
     private static readonly string VALIDATOR_ENTRY_FORMAT = "validatorsByAttributeType[typeof({0})] = new {1}();" + Environment.NewLine;
-    
+
     [UnityEditor.Callbacks.DidReloadScripts]
     private static void GenerateCode()
     {
-        GenerateValidatorUtilityScript();
+        GenerateDrawerDatabaseScript("DrawerDatabase", "DrawerDatabaseTemplate");
+        GenerateValidatorDatabaseScript("ValidatorDatabase", "ValidatorDatabaseTemplate");
 
         AssetDatabase.Refresh();
     }
 
-    private static void GenerateValidatorUtilityScript()
+    private static void GenerateDrawerDatabaseScript(string scriptName, string templateName)
     {
-        string templateGUID = AssetDatabase.FindAssets("ValidatorUtilityTemplate")[0];
+        string templateGUID = AssetDatabase.FindAssets(templateName)[0];
+        string templateRelativePath = AssetDatabase.GUIDToAssetPath(templateGUID);
+        string templateFullPath = (Application.dataPath.Replace("Assets", string.Empty) + templateRelativePath).Replace("/", "\\");
+        string templateFormat = IOUtility.ReadFromFile(templateFullPath);
+
+        StringBuilder drawerEntriesBuilder = new StringBuilder();
+        List<Type> drawerTypes = GetAllSubTypes(typeof(PropertyDrawer));
+
+        foreach (var drawerType in drawerTypes)
+        {
+            PropertyDrawerAttribute[] attributes = (PropertyDrawerAttribute[])drawerType.GetCustomAttributes(typeof(PropertyDrawerAttribute), true);
+            if (attributes.Length > 0)
+            {
+                drawerEntriesBuilder.AppendFormat(DRAWER_ENTRY_FORMAT, attributes[0].TargetAttributeType.Name, drawerType.Name);
+            }
+        }
+
+        string scriptContent = templateFormat
+            .Replace(CLASS_NAME_PLACEHOLDER, scriptName)
+            .Replace(ENTRIES_PLACEHOLDER, drawerEntriesBuilder.ToString());
+
+        string scriptPath = (Application.dataPath.Replace("Assets", string.Empty) + GENERATED_CODE_TARGET_RELATIVE_PATH).Replace("/", "\\") + scriptName + ".cs";
+
+        IOUtility.WriteToFile(scriptPath, scriptContent);
+    }
+
+    private static void GenerateValidatorDatabaseScript(string scriptName, string templateName)
+    {
+        string templateGUID = AssetDatabase.FindAssets(templateName)[0];
         string templateRelativePath = AssetDatabase.GUIDToAssetPath(templateGUID);
         string templateFullPath = (Application.dataPath.Replace("Assets", string.Empty) + templateRelativePath).Replace("/", "\\");
         string templateFormat = IOUtility.ReadFromFile(templateFullPath);
@@ -39,8 +70,12 @@ public class CodeGenerator : Editor
             }
         }
 
-        string scriptContent = templateFormat.Replace(ENTRIES_PLACEHOLDER, validatorEntriesBuilder.ToString());
-        string scriptPath = (Application.dataPath.Replace("Assets", string.Empty) + GENERATED_CODE_TARGET_RELATIVE_PATH).Replace("/", "\\") + "ValidatorUtility.cs";
+        string scriptContent = templateFormat
+            .Replace(CLASS_NAME_PLACEHOLDER, scriptName)
+            .Replace(ENTRIES_PLACEHOLDER, validatorEntriesBuilder.ToString());
+
+        string scriptPath = (Application.dataPath.Replace("Assets", string.Empty) + GENERATED_CODE_TARGET_RELATIVE_PATH).Replace("/", "\\") + scriptName + ".cs";
+
         IOUtility.WriteToFile(scriptPath, scriptContent);
     }
 

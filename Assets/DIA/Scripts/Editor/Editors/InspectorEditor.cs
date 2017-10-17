@@ -13,15 +13,16 @@ public class InspectorEditor : Editor
 
         FieldInfo[] fields = this.target.GetType().GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
 
-        // If we have fields with custom drawers
-        if (fields.Any(f => f.GetCustomAttributes(typeof(DrawerAttribute), true).Length > 0))
+        // Draw the fields
+        foreach (var field in fields)
         {
-            // Use the custom property drawer
-        }
-        else
-        {
-            // Use default drawer
-            foreach (var field in fields)
+            DrawerAttribute[] drawerAttributes = (DrawerAttribute[])field.GetCustomAttributes(typeof(DrawerAttribute), true);
+            if (drawerAttributes.Length > 0)
+            {
+                PropertyDrawer drawer = DrawerDatabase.GetDrawerForAttribute(drawerAttributes[0].GetType());
+                drawer.DrawProperty(this.serializedObject.FindProperty(field.Name));
+            }
+            else
             {
                 EditorGUILayout.PropertyField(this.serializedObject.FindProperty(field.Name));
             }
@@ -35,7 +36,7 @@ public class InspectorEditor : Editor
             {
                 foreach (var attribute in validatorAttributes)
                 {
-                    PropertyValidator validator = ValidatorUtility.GetValidatorForAttribute(attribute.GetType());
+                    PropertyValidator validator = ValidatorDatabase.GetValidatorForAttribute(attribute.GetType());
                     validator.ValidateProperty(this.serializedObject.FindProperty(field.Name));
                 }
             }

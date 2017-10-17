@@ -1,16 +1,19 @@
-﻿using System;
+﻿// This class is auto generated
+
+using System;
 using System.Collections.Generic;
 
-public static class DrawerUtility
+public static class __classname__
 {
     private static Dictionary<Type, PropertyDrawer> drawersByAttributeType;
 
-    static DrawerUtility()
+    static __classname__()
     {
         drawersByAttributeType = new Dictionary<Type, PropertyDrawer>();
+        __entries__
     }
 
-    public static PropertyDrawer GetDrawer(Type attributeType)
+    public static PropertyDrawer GetDrawerForAttribute(Type attributeType)
     {
         return drawersByAttributeType[attributeType];
     }

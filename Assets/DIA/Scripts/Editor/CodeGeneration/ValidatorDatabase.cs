@@ -1,16 +1,18 @@
-﻿// This class is auto generated
+// This class is auto generated
 
 using System;
 using System.Collections.Generic;
 
-public static class ValidatorUtility
+public static class ValidatorDatabase
 {
     private static Dictionary<Type, PropertyValidator> validatorsByAttributeType;
 
-    static ValidatorUtility()
+    static ValidatorDatabase()
     {
         validatorsByAttributeType = new Dictionary<Type, PropertyValidator>();
-        __entries__
+        validatorsByAttributeType[typeof(MaxValueAttribute)] = new MaxValuePropertyValidator();
+validatorsByAttributeType[typeof(MinValueAttribute)] = new MinValuePropertyValidator();
+
     }
 
     public static PropertyValidator GetValidatorForAttribute(Type attributeType)
@@ -18,3 +20,4 @@ public static class ValidatorUtility
         return validatorsByAttributeType[attributeType];
     }
 }
+
