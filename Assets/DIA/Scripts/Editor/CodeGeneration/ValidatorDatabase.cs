@@ -17,7 +17,15 @@ validatorsByAttributeType[typeof(MinValueAttribute)] = new MinValuePropertyValid
 
     public static PropertyValidator GetValidatorForAttribute(Type attributeType)
     {
-        return validatorsByAttributeType[attributeType];
+        PropertyValidator validator;
+        if (validatorsByAttributeType.TryGetValue(attributeType, out validator))
+        {
+            return validator;
+        }
+        else
+        {
+            return null;
+        }
     }
 }
 

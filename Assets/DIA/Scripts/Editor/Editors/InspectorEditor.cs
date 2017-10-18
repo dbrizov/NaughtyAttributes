@@ -1,7 +1,8 @@
-﻿using UnityEngine;
-using UnityEditor;
-using System.Reflection;
+﻿using UnityEditor;
+using UnityEngine;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 [CanEditMultipleObjects]
 [CustomEditor(typeof(MonoBehaviour), true)]
@@ -22,7 +23,9 @@ public class InspectorEditor : Editor
         EditorGUILayout.PropertyField(this.script);
         GUI.enabled = true;
 
-        FieldInfo[] fields = this.target.GetType().GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+        IEnumerable<FieldInfo> fields =
+            this.target.GetType().GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
+            .Where(f => this.serializedObject.FindProperty(f.Name) != null);
 
         foreach (var field in fields)
         {
@@ -32,11 +35,10 @@ public class InspectorEditor : Editor
             {
                 foreach (var attribute in validatorAttributes)
                 {
-                    SerializedProperty property = this.serializedObject.FindProperty(field.Name);
-                    if (property != null)
+                    PropertyValidator validator = ValidatorDatabase.GetValidatorForAttribute(attribute.GetType());
+                    if (validator != null)
                     {
-                        PropertyValidator validator = ValidatorDatabase.GetValidatorForAttribute(attribute.GetType());
-                        validator.ValidateProperty(property);
+                        validator.ValidateProperty(this.serializedObject.FindProperty(field.Name));
                     }
                 }
             }
@@ -45,21 +47,19 @@ public class InspectorEditor : Editor
             DrawerAttribute[] drawerAttributes = (DrawerAttribute[])field.GetCustomAttributes(typeof(DrawerAttribute), true);
             if (drawerAttributes.Length > 0)
             {
-                SerializedProperty property = this.serializedObject.FindProperty(field.Name);
-                if (property != null)
+                PropertyDrawer drawer = DrawerDatabase.GetDrawerForAttribute(drawerAttributes[0].GetType());
+                if (drawer != null)
                 {
-                    PropertyDrawer drawer = DrawerDatabase.GetDrawerForAttribute(drawerAttributes[0].GetType());
-                    drawer.DrawProperty(property);
+                    drawer.DrawProperty(this.serializedObject.FindProperty(field.Name));
+                }
+                else
+                {
+                    EditorGUILayout.PropertyField(this.serializedObject.FindProperty(field.Name));
                 }
             }
             else
             {
-
-                SerializedProperty property = this.serializedObject.FindProperty(field.Name);
-                if (property != null)
-                {
-                    EditorGUILayout.PropertyField(property);
-                }
+                EditorGUILayout.PropertyField(this.serializedObject.FindProperty(field.Name));
             }
         }
 

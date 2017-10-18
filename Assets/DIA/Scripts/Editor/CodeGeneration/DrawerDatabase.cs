@@ -17,7 +17,15 @@ drawersByAttributeType[typeof(ShowIfAttribute)] = new ShowIfPropertyDrawer();
 
     public static PropertyDrawer GetDrawerForAttribute(Type attributeType)
     {
-        return drawersByAttributeType[attributeType];
+        PropertyDrawer drawer;
+        if (drawersByAttributeType.TryGetValue(attributeType, out drawer))
+        {
+            return drawer;
+        }
+        else
+        {
+            return null;
+        }
     }
 }
 
