@@ -1,31 +1,34 @@
 ﻿using UnityEditor;
 
-[PropertyValidator(typeof(MinValueAttribute))]
-public class MinValuePropertyValidator : PropertyValidator
+namespace NaughtyAttributes.Editor
 {
-    protected override void ValidatePropertyImplementation(SerializedProperty property)
+    [PropertyValidator(typeof(MinValueAttribute))]
+    public class MinValuePropertyValidator : PropertyValidator
     {
-        MinValueAttribute minValueAttribute = PropertyUtility.GetAttributes<MinValueAttribute>(property)[0];
+        protected override void ValidatePropertyImplementation(SerializedProperty property)
+        {
+            MinValueAttribute minValueAttribute = PropertyUtility.GetAttributes<MinValueAttribute>(property)[0];
 
-        if (property.propertyType == SerializedPropertyType.Float)
-        {
-            if (property.floatValue < minValueAttribute.MinValue)
+            if (property.propertyType == SerializedPropertyType.Float)
             {
-                property.floatValue = minValueAttribute.MinValue;
+                if (property.floatValue < minValueAttribute.MinValue)
+                {
+                    property.floatValue = minValueAttribute.MinValue;
+                }
             }
-        }
-        else if (property.propertyType == SerializedPropertyType.Integer)
-        {
-            if (property.intValue < minValueAttribute.MinValue)
+            else if (property.propertyType == SerializedPropertyType.Integer)
             {
-                property.intValue = (int)minValueAttribute.MinValue;
+                if (property.intValue < minValueAttribute.MinValue)
+                {
+                    property.intValue = (int)minValueAttribute.MinValue;
+                }
             }
-        }
-        else
-        {
-            string warning = minValueAttribute.GetType().Name + " doesn't affect non-float or non-integer fields";
-            EditorGUILayout.HelpBox(warning, MessageType.Warning);
-            UnityEngine.Debug.LogWarning(warning);
+            else
+            {
+                string warning = minValueAttribute.GetType().Name + " doesn't affect non-float or non-integer fields";
+                EditorGUILayout.HelpBox(warning, MessageType.Warning);
+                UnityEngine.Debug.LogWarning(warning);
+            }
         }
     }
 }

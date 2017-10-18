@@ -3,28 +3,31 @@
 using System;
 using System.Collections.Generic;
 
-public static class DrawerDatabase
+namespace NaughtyAttributes.Editor
 {
-    private static Dictionary<Type, PropertyDrawer> drawersByAttributeType;
-
-    static DrawerDatabase()
+    public static class DrawerDatabase
     {
-        drawersByAttributeType = new Dictionary<Type, PropertyDrawer>();
-        drawersByAttributeType[typeof(HideIfAttribute)] = new HideIfPropertyDrawer();
+        private static Dictionary<Type, PropertyDrawer> drawersByAttributeType;
+
+        static DrawerDatabase()
+        {
+            drawersByAttributeType = new Dictionary<Type, PropertyDrawer>();
+            drawersByAttributeType[typeof(HideIfAttribute)] = new HideIfPropertyDrawer();
 drawersByAttributeType[typeof(ShowIfAttribute)] = new ShowIfPropertyDrawer();
 
-    }
-
-    public static PropertyDrawer GetDrawerForAttribute(Type attributeType)
-    {
-        PropertyDrawer drawer;
-        if (drawersByAttributeType.TryGetValue(attributeType, out drawer))
-        {
-            return drawer;
         }
-        else
+
+        public static PropertyDrawer GetDrawerForAttribute(Type attributeType)
         {
-            return null;
+            PropertyDrawer drawer;
+            if (drawersByAttributeType.TryGetValue(attributeType, out drawer))
+            {
+                return drawer;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

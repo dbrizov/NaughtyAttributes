@@ -1,20 +1,23 @@
 ﻿using System;
 
-[AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-public class PropertyDrawerAttribute : Attribute
+namespace NaughtyAttributes.Editor
 {
-    private Type targetAttributeType;
-
-    public PropertyDrawerAttribute(Type targetAttributeType)
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+    public class PropertyDrawerAttribute : Attribute
     {
-        this.targetAttributeType = targetAttributeType;
-    }
+        private Type targetAttributeType;
 
-    public Type TargetAttributeType
-    {
-        get
+        public PropertyDrawerAttribute(Type targetAttributeType)
         {
-            return this.targetAttributeType;
+            this.targetAttributeType = targetAttributeType;
+        }
+
+        public Type TargetAttributeType
+        {
+            get
+            {
+                return this.targetAttributeType;
+            }
         }
     }
 }

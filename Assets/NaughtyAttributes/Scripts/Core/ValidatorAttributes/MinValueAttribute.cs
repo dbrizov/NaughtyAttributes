@@ -1,25 +1,28 @@
 ﻿using System;
 
-[AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-public class MinValueAttribute : ValidatorAttribute
+namespace NaughtyAttributes
 {
-    private float minValue;
-
-    public MinValueAttribute(float minValue)
+    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
+    public class MinValueAttribute : ValidatorAttribute
     {
-        this.minValue = minValue;
-    }
+        private float minValue;
 
-    public MinValueAttribute(int minValue)
-    {
-        this.minValue = minValue;
-    }
-
-    public float MinValue
-    {
-        get
+        public MinValueAttribute(float minValue)
         {
-            return this.minValue;
+            this.minValue = minValue;
+        }
+
+        public MinValueAttribute(int minValue)
+        {
+            this.minValue = minValue;
+        }
+
+        public float MinValue
+        {
+            get
+            {
+                return this.minValue;
+            }
         }
     }
 }

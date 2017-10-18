@@ -3,28 +3,31 @@
 using System;
 using System.Collections.Generic;
 
-public static class ValidatorDatabase
+namespace NaughtyAttributes.Editor
 {
-    private static Dictionary<Type, PropertyValidator> validatorsByAttributeType;
-
-    static ValidatorDatabase()
+    public static class ValidatorDatabase
     {
-        validatorsByAttributeType = new Dictionary<Type, PropertyValidator>();
-        validatorsByAttributeType[typeof(MaxValueAttribute)] = new MaxValuePropertyValidator();
+        private static Dictionary<Type, PropertyValidator> validatorsByAttributeType;
+
+        static ValidatorDatabase()
+        {
+            validatorsByAttributeType = new Dictionary<Type, PropertyValidator>();
+            validatorsByAttributeType[typeof(MaxValueAttribute)] = new MaxValuePropertyValidator();
 validatorsByAttributeType[typeof(MinValueAttribute)] = new MinValuePropertyValidator();
 
-    }
-
-    public static PropertyValidator GetValidatorForAttribute(Type attributeType)
-    {
-        PropertyValidator validator;
-        if (validatorsByAttributeType.TryGetValue(attributeType, out validator))
-        {
-            return validator;
         }
-        else
+
+        public static PropertyValidator GetValidatorForAttribute(Type attributeType)
         {
-            return null;
+            PropertyValidator validator;
+            if (validatorsByAttributeType.TryGetValue(attributeType, out validator))
+            {
+                return validator;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

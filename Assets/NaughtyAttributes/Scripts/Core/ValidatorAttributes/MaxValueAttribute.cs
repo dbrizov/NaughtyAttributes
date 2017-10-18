@@ -1,25 +1,28 @@
 ﻿using System;
 
-[AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-public class MaxValueAttribute : ValidatorAttribute
+namespace NaughtyAttributes
 {
-    private float maxValue;
-
-    public MaxValueAttribute(float maxValue)
+    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
+    public class MaxValueAttribute : ValidatorAttribute
     {
-        this.maxValue = maxValue;
-    }
+        private float maxValue;
 
-    public MaxValueAttribute(int maxValue)
-    {
-        this.maxValue = maxValue;
-    }
-
-    public float MaxValue
-    {
-        get
+        public MaxValueAttribute(float maxValue)
         {
-            return this.maxValue;
+            this.maxValue = maxValue;
+        }
+
+        public MaxValueAttribute(int maxValue)
+        {
+            this.maxValue = maxValue;
+        }
+
+        public float MaxValue
+        {
+            get
+            {
+                return this.maxValue;
+            }
         }
     }
 }

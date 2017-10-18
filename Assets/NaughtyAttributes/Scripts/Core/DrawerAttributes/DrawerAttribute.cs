@@ -1,7 +1,9 @@
-﻿using UnityEngine;
-using UnityEditor;
+﻿using System;
 
-public class DrawerAttribute : DiaAttribute
+namespace NaughtyAttributes
 {
+    public class DrawerAttribute : NaughtyAttribute
+    {
 
+    }
 }

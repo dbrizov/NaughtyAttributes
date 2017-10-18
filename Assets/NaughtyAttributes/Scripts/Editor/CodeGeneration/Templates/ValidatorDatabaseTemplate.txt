@@ -3,26 +3,29 @@
 using System;
 using System.Collections.Generic;
 
-public static class __classname__
+namespace NaughtyAttributes.Editor
 {
-    private static Dictionary<Type, PropertyValidator> validatorsByAttributeType;
-
-    static __classname__()
+    public static class __classname__
     {
-        validatorsByAttributeType = new Dictionary<Type, PropertyValidator>();
-        __entries__
-    }
+        private static Dictionary<Type, PropertyValidator> validatorsByAttributeType;
 
-    public static PropertyValidator GetValidatorForAttribute(Type attributeType)
-    {
-        PropertyValidator validator;
-        if (validatorsByAttributeType.TryGetValue(attributeType, out validator))
+        static __classname__()
         {
-            return validator;
+            validatorsByAttributeType = new Dictionary<Type, PropertyValidator>();
+            __entries__
         }
-        else
+
+        public static PropertyValidator GetValidatorForAttribute(Type attributeType)
         {
-            return null;
+            PropertyValidator validator;
+            if (validatorsByAttributeType.TryGetValue(attributeType, out validator))
+            {
+                return validator;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

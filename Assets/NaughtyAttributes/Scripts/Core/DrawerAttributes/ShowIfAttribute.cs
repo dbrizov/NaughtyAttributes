@@ -1,20 +1,23 @@
 ﻿using System;
 
-[AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-public class ShowIfAttribute : DrawerAttribute
+namespace NaughtyAttributes
 {
-    private string conditionName;
-
-    public ShowIfAttribute(string conditionName)
+    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
+    public class ShowIfAttribute : DrawerAttribute
     {
-        this.conditionName = conditionName;
-    }
+        private string conditionName;
 
-    public string ConditionName
-    {
-        get
+        public ShowIfAttribute(string conditionName)
         {
-            return this.conditionName;
+            this.conditionName = conditionName;
+        }
+
+        public string ConditionName
+        {
+            get
+            {
+                return this.conditionName;
+            }
         }
     }
 }

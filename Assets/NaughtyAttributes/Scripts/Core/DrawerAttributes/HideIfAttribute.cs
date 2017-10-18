@@ -1,20 +1,23 @@
 ﻿using System;
 
-[AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-public class HideIfAttribute : DrawerAttribute
+namespace NaughtyAttributes
 {
-    private string conditionName;
-
-    public HideIfAttribute(string conditionName)
+    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
+    public class HideIfAttribute : DrawerAttribute
     {
-        this.conditionName = conditionName;
-    }
+        private string conditionName;
 
-    public string ConditionName
-    {
-        get
+        public HideIfAttribute(string conditionName)
         {
-            return this.conditionName;
+            this.conditionName = conditionName;
+        }
+
+        public string ConditionName
+        {
+            get
+            {
+                return this.conditionName;
+            }
         }
     }
 }

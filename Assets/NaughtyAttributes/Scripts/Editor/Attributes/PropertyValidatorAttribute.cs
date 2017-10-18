@@ -1,20 +1,23 @@
 ﻿using System;
 
-[AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-public class PropertyValidatorAttribute : Attribute
+namespace NaughtyAttributes.Editor
 {
-    private Type targetAttributeType;
-
-    public PropertyValidatorAttribute(Type targetAttributeType)
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+    public class PropertyValidatorAttribute : Attribute
     {
-        this.targetAttributeType = targetAttributeType;
-    }
+        private Type targetAttributeType;
 
-    public Type TargetAttributeType
-    {
-        get
+        public PropertyValidatorAttribute(Type targetAttributeType)
         {
-            return this.targetAttributeType;
+            this.targetAttributeType = targetAttributeType;
+        }
+
+        public Type TargetAttributeType
+        {
+            get
+            {
+                return this.targetAttributeType;
+            }
         }
     }
 }

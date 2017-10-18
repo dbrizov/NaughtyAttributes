@@ -3,26 +3,29 @@
 using System;
 using System.Collections.Generic;
 
-public static class __classname__
+namespace NaughtyAttributes.Editor
 {
-    private static Dictionary<Type, PropertyDrawer> drawersByAttributeType;
-
-    static __classname__()
+    public static class __classname__
     {
-        drawersByAttributeType = new Dictionary<Type, PropertyDrawer>();
-        __entries__
-    }
+        private static Dictionary<Type, PropertyDrawer> drawersByAttributeType;
 
-    public static PropertyDrawer GetDrawerForAttribute(Type attributeType)
-    {
-        PropertyDrawer drawer;
-        if (drawersByAttributeType.TryGetValue(attributeType, out drawer))
+        static __classname__()
         {
-            return drawer;
+            drawersByAttributeType = new Dictionary<Type, PropertyDrawer>();
+            __entries__
         }
-        else
+
+        public static PropertyDrawer GetDrawerForAttribute(Type attributeType)
         {
-            return null;
+            PropertyDrawer drawer;
+            if (drawersByAttributeType.TryGetValue(attributeType, out drawer))
+            {
+                return drawer;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }

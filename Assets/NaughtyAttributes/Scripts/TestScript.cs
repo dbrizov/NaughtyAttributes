@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using NaughtyAttributes;
 using UnityEngine;
 
 public class TestScript : MonoBehaviour

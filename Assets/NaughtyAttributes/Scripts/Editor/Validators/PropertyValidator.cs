@@ -1,11 +1,14 @@
 ﻿using UnityEditor;
 
-public abstract class PropertyValidator
+namespace NaughtyAttributes.Editor
 {
-    public void ValidateProperty(SerializedProperty property)
+    public abstract class PropertyValidator
     {
-        this.ValidatePropertyImplementation(property);
-    }
+        public void ValidateProperty(SerializedProperty property)
+        {
+            this.ValidatePropertyImplementation(property);
+        }
 
-    protected abstract void ValidatePropertyImplementation(SerializedProperty property);
+        protected abstract void ValidatePropertyImplementation(SerializedProperty property);
+    }
 }

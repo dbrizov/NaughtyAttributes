@@ -1,6 +1,9 @@
 ﻿using System;
 
-public class ValidatorAttribute : DiaAttribute
+namespace NaughtyAttributes
 {
+    public class ValidatorAttribute : NaughtyAttribute
+    {
 
+    }
 }

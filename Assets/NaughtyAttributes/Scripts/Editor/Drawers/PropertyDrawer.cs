@@ -1,11 +1,14 @@
 ﻿using UnityEditor;
 
-public abstract class PropertyDrawer
+namespace NaughtyAttributes.Editor
 {
-    public void DrawProperty(SerializedProperty property)
+    public abstract class PropertyDrawer
     {
-        this.DrawPropertyImplementation(property);
-    }   
+        public void DrawProperty(SerializedProperty property)
+        {
+            this.DrawPropertyImplementation(property);
+        }
 
-    protected abstract void DrawPropertyImplementation(SerializedProperty property);
+        protected abstract void DrawPropertyImplementation(SerializedProperty property);
+    }
 }

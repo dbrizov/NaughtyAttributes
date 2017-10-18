@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   showFloatValue: 1
-  floatValue: 100
+  floatValue: 0
 --- !u!4 &2033251974
 Transform:
   m_ObjectHideFlags: 0
