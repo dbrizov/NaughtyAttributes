@@ -17,12 +17,14 @@ namespace NaughtyAttributes.Editor
         private static readonly string CLASS_NAME_PLACEHOLDER = "__classname__";
         private static readonly string ENTRIES_PLACEHOLDER = "__entries__";
         private static readonly string DRAWER_ENTRY_FORMAT = "drawersByAttributeType[typeof({0})] = new {1}();" + Environment.NewLine;
+        private static readonly string GROUPER_ENTRY_FORMAT = "groupersByAttributeType[typeof({0})] = new {1}();" + Environment.NewLine;
         private static readonly string VALIDATOR_ENTRY_FORMAT = "validatorsByAttributeType[typeof({0})] = new {1}();" + Environment.NewLine;
 
         [UnityEditor.Callbacks.DidReloadScripts]
         private static void GenerateCode()
         {
             GenerateDrawerDatabaseScript("DrawerDatabase", "DrawerDatabaseTemplate");
+            GenerateGrouperDatabaseScript("GrouperDatabase", "GrouperDatabaseTemplate");
             GenerateValidatorDatabaseScript("ValidatorDatabase", "ValidatorDatabaseTemplate");
 
             AssetDatabase.Refresh();
@@ -56,6 +58,40 @@ namespace NaughtyAttributes.Editor
             string scriptContent = templateFormat
                 .Replace(CLASS_NAME_PLACEHOLDER, scriptName)
                 .Replace(ENTRIES_PLACEHOLDER, drawerEntriesBuilder.ToString());
+
+            string scriptPath = GENERATED_CODE_TARGET_FOLDER + scriptName + ".cs";
+
+            IOUtility.WriteToFile(scriptPath, scriptContent);
+        }
+
+        private static void GenerateGrouperDatabaseScript(string scriptName, string templateName)
+        {
+            string[] templateAssets = AssetDatabase.FindAssets(templateName);
+            if (templateAssets.Length == 0)
+            {
+                return;
+            }
+
+            string templateGUID = templateAssets[0];
+            string templateRelativePath = AssetDatabase.GUIDToAssetPath(templateGUID);
+            string templateFullPath = (Application.dataPath.Replace("Assets", string.Empty) + templateRelativePath).Replace("/", "\\");
+            string templateFormat = IOUtility.ReadFromFile(templateFullPath);
+
+            StringBuilder grouperEntriesBuilder = new StringBuilder();
+            List<Type> grouperTypes = GetAllSubTypes(typeof(PropertyGrouper));
+
+            foreach (var grouperType in grouperTypes)
+            {
+                PropertyGrouperAttribute[] attributes = (PropertyGrouperAttribute[])grouperType.GetCustomAttributes(typeof(PropertyGrouperAttribute), true);
+                if (attributes.Length > 0)
+                {
+                    grouperEntriesBuilder.AppendFormat(GROUPER_ENTRY_FORMAT, attributes[0].TargetAttributeType.Name, grouperType.Name);
+                }
+            }
+
+            string scriptContent = templateFormat
+                .Replace(CLASS_NAME_PLACEHOLDER, scriptName)
+                .Replace(ENTRIES_PLACEHOLDER, grouperEntriesBuilder.ToString());
 
             string scriptPath = GENERATED_CODE_TARGET_FOLDER + scriptName + ".cs";
 

@@ -1,10 +1,11 @@
-﻿using UnityEditor;
-using System;
+﻿using System;
 
 namespace NaughtyAttributes.Editor
 {
     public abstract class PropertyGrouper
     {
-        public abstract void GroupProperties(SerializedProperty[] properties, Action<SerializedProperty> drawPropertyFunc);
+        public abstract void BeginGroup(string label);
+
+        public abstract void EndGroup();
     }
 }

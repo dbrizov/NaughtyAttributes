@@ -1,0 +1,31 @@
+﻿// This class is auto generated
+
+using System;
+using System.Collections.Generic;
+
+namespace NaughtyAttributes.Editor
+{
+    public static class __classname__
+    {
+        private static Dictionary<Type, PropertyGrouper> groupersByAttributeType;
+
+        static __classname__()
+        {
+            groupersByAttributeType = new Dictionary<Type, PropertyGrouper>();
+            __entries__
+        }
+
+        public static PropertyGrouper GetGrouperForAttribute(Type attributeType)
+        {
+            PropertyGrouper grouper;
+            if (groupersByAttributeType.TryGetValue(attributeType, out grouper))
+            {
+                return grouper;
+            }
+            else
+            {
+                return null;
+            }
+        }
+    }
+}
