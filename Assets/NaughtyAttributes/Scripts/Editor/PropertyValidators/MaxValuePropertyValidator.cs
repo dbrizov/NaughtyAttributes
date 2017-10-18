@@ -5,7 +5,7 @@ namespace NaughtyAttributes.Editor
     [PropertyValidator(typeof(MaxValueAttribute))]
     public class MaxValuePropertyValidator : PropertyValidator
     {
-        protected override void ValidatePropertyImplementation(SerializedProperty property)
+        public override void ValidateProperty(SerializedProperty property)
         {
             MaxValueAttribute maxValueAttribute = PropertyUtility.GetAttributes<MaxValueAttribute>(property)[0];
 

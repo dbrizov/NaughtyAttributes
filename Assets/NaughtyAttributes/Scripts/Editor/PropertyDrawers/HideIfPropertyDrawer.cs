@@ -6,7 +6,7 @@ namespace NaughtyAttributes.Editor
     [PropertyDrawer(typeof(HideIfAttribute))]
     public class HideIfPropertyDrawer : PropertyDrawer
     {
-        protected override void DrawPropertyImplementation(SerializedProperty property)
+        public override void DrawProperty(SerializedProperty property)
         {
             HideIfAttribute hideIfAttribute = PropertyUtility.GetAttributes<HideIfAttribute>(property)[0];
             UnityEngine.Object target = PropertyUtility.GetTargetObject(property);

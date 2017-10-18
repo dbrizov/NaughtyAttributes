@@ -6,7 +6,7 @@ namespace NaughtyAttributes.Editor
     [PropertyDrawer(typeof(ShowIfAttribute))]
     public class ShowIfPropertyDrawer : PropertyDrawer
     {
-        protected override void DrawPropertyImplementation(SerializedProperty property)
+        public override void DrawProperty(SerializedProperty property)
         {
             ShowIfAttribute showIfAttribute = PropertyUtility.GetAttributes<ShowIfAttribute>(property)[0];
             UnityEngine.Object target = PropertyUtility.GetTargetObject(property);

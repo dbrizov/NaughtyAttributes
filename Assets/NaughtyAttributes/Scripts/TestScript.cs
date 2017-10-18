@@ -2,12 +2,18 @@
 using UnityEngine;
 
 public class TestScript : MonoBehaviour
-{
-    [SerializeField]
-    private bool showFloatValue = true;
-
-    [SerializeField]
+{    
+    public bool showFloatValue = true;
+    
     [ShowIf("showFloatValue")]
     [MinValue(-100f), MaxValue(100f)]
-    private float floatValue = 0f;
+    public float floatValue = 0f;
+    
+    public int intB;
+    
+    public float floatB;
+
+    public int intNoGroup;
+
+    public float floatNoGroup;
 }

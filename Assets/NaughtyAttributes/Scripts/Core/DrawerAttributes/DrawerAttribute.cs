@@ -2,7 +2,7 @@
 
 namespace NaughtyAttributes
 {
-    public class DrawerAttribute : NaughtyAttribute
+    public abstract class DrawerAttribute : NaughtyAttribute
     {
 
     }

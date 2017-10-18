@@ -5,7 +5,7 @@ namespace NaughtyAttributes.Editor
     [PropertyValidator(typeof(MinValueAttribute))]
     public class MinValuePropertyValidator : PropertyValidator
     {
-        protected override void ValidatePropertyImplementation(SerializedProperty property)
+        public override void ValidateProperty(SerializedProperty property)
         {
             MinValueAttribute minValueAttribute = PropertyUtility.GetAttributes<MinValueAttribute>(property)[0];
 

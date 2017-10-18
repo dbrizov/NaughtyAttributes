@@ -2,7 +2,7 @@
 
 namespace NaughtyAttributes
 {
-    public class ValidatorAttribute : NaughtyAttribute
+    public abstract class ValidatorAttribute : NaughtyAttribute
     {
 
     }

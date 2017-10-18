@@ -29,6 +29,32 @@ namespace NaughtyAttributes.Editor
                 this.target.GetType().GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
                 .Where(f => this.serializedObject.FindProperty(f.Name) != null);
 
+            // Draw grouped fields
+            IEnumerable<FieldInfo> groupedFields = fields.Where(f => f.GetCustomAttributes(typeof(GroupAttribute), true).Length > 0);
+            IEnumerable<IGrouping<string, FieldInfo>> groups = groupedFields.GroupBy(f => (f.GetCustomAttributes(typeof(GroupAttribute), true)[0] as GroupAttribute).Name);
+
+            //foreach (var group in groups)
+            //{
+            //    string groupName = group.Key;
+            //    GUIStyle groupStyle = (group.First().GetCustomAttributes(typeof(GroupAttribute), true)[0] as GroupAttribute).Style;
+
+            //    EditorGUILayout.BeginVertical(groupStyle);
+            //    EditorGUILayout.LabelField(groupName, EditorStyles.boldLabel);
+
+            //    this.DrawAndValidateFields(group);
+
+            //    EditorGUILayout.EndVertical();
+            //}
+
+            // Draw non-grouped fields
+            IEnumerable<FieldInfo> nonGroupedFields = fields.Where(f => f.GetCustomAttributes(typeof(GroupAttribute), true).Length == 0);
+            this.DrawAndValidateFields(nonGroupedFields);
+
+            this.serializedObject.ApplyModifiedProperties();
+        }
+
+        private void DrawAndValidateFields(IEnumerable<FieldInfo> fields)
+        {
             foreach (var field in fields)
             {
                 // Validate the field
@@ -64,8 +90,6 @@ namespace NaughtyAttributes.Editor
                     EditorGUILayout.PropertyField(this.serializedObject.FindProperty(field.Name));
                 }
             }
-
-            this.serializedObject.ApplyModifiedProperties();
         }
     }
 }
