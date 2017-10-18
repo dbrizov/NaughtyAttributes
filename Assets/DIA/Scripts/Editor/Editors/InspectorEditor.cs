@@ -32,8 +32,12 @@ public class InspectorEditor : Editor
             {
                 foreach (var attribute in validatorAttributes)
                 {
-                    PropertyValidator validator = ValidatorDatabase.GetValidatorForAttribute(attribute.GetType());
-                    validator.ValidateProperty(this.serializedObject.FindProperty(field.Name));
+                    SerializedProperty property = this.serializedObject.FindProperty(field.Name);
+                    if (property != null)
+                    {
+                        PropertyValidator validator = ValidatorDatabase.GetValidatorForAttribute(attribute.GetType());
+                        validator.ValidateProperty(property);
+                    }
                 }
             }
 
@@ -41,12 +45,21 @@ public class InspectorEditor : Editor
             DrawerAttribute[] drawerAttributes = (DrawerAttribute[])field.GetCustomAttributes(typeof(DrawerAttribute), true);
             if (drawerAttributes.Length > 0)
             {
-                PropertyDrawer drawer = DrawerDatabase.GetDrawerForAttribute(drawerAttributes[0].GetType());
-                drawer.DrawProperty(this.serializedObject.FindProperty(field.Name));
+                SerializedProperty property = this.serializedObject.FindProperty(field.Name);
+                if (property != null)
+                {
+                    PropertyDrawer drawer = DrawerDatabase.GetDrawerForAttribute(drawerAttributes[0].GetType());
+                    drawer.DrawProperty(property);
+                }
             }
             else
             {
-                EditorGUILayout.PropertyField(this.serializedObject.FindProperty(field.Name));
+
+                SerializedProperty property = this.serializedObject.FindProperty(field.Name);
+                if (property != null)
+                {
+                    EditorGUILayout.PropertyField(property);
+                }
             }
         }
 
