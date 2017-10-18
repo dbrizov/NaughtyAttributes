@@ -1,2 +1,2 @@
-# DIA
-Inspector Attributes Extension for Unity
+# NaughtyAttributes
+Attribute Extensions for Unity
