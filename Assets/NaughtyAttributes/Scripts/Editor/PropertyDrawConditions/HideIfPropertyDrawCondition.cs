@@ -3,10 +3,10 @@ using UnityEditor;
 
 namespace NaughtyAttributes.Editor
 {
-    [PropertyDrawer(typeof(HideIfAttribute))]
-    public class HideIfPropertyDrawer : PropertyDrawer
+    [PropertyDrawCondition(typeof(HideIfAttribute))]
+    public class HideIfPropertyDrawCondition : PropertyDrawCondition
     {
-        public override void DrawProperty(SerializedProperty property)
+        public override bool CanDrawProperty(SerializedProperty property)
         {
             HideIfAttribute hideIfAttribute = PropertyUtility.GetAttributes<HideIfAttribute>(property)[0];
             UnityEngine.Object target = PropertyUtility.GetTargetObject(property);
@@ -14,12 +14,7 @@ namespace NaughtyAttributes.Editor
             FieldInfo conditionField = target.GetType().GetField(hideIfAttribute.ConditionName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
             if (conditionField != null)
             {
-                if (!(bool)conditionField.GetValue(target))
-                {
-                    EditorGUILayout.PropertyField(property, true);
-                }
-
-                return;
+                return !(bool)conditionField.GetValue(target);
             }
 
             MethodInfo conditionMethod = target.GetType().GetMethod(hideIfAttribute.ConditionName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
@@ -27,16 +22,14 @@ namespace NaughtyAttributes.Editor
                 conditionMethod.ReturnType == typeof(bool) &&
                 conditionMethod.GetParameters().Length == 0)
             {
-                if (!(bool)conditionMethod.Invoke(target, null))
-                {
-                    EditorGUILayout.PropertyField(property, true);
-                }
-
-                return;
+                return !(bool)conditionMethod.Invoke(target, null);
             }
 
-            EditorGUILayout.HelpBox(hideIfAttribute.GetType().Name + " needs a valid condition field or method name to work", MessageType.Warning);
-            EditorGUILayout.PropertyField(property, true);
+            string warning = hideIfAttribute.GetType().Name + " needs a valid condition field or method name to work";
+            EditorGUILayout.HelpBox(warning, MessageType.Warning);
+            UnityEngine.Debug.LogWarning(warning);
+
+            return true;
         }
     }
 }

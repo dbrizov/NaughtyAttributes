@@ -19,6 +19,7 @@ namespace NaughtyAttributes.Editor
             DrawerDatabase.ClearCache();
             GrouperDatabase.ClearCache();
             ValidatorDatabase.ClearCache();
+            DrawConditionDatabase.ClearCache();
         }
 
         public override void OnInspectorGUI()
@@ -88,6 +89,16 @@ namespace NaughtyAttributes.Editor
 
         private void DrawField(FieldInfo field)
         {
+            PropertyDrawCondition drawCondition = this.GetDrawConditionForField(field);
+            if (drawCondition != null)
+            {
+                bool canDrawProperty = drawCondition.CanDrawProperty(this.serializedObject.FindProperty(field.Name));
+                if (!canDrawProperty)
+                {
+                    return;
+                }
+            }
+
             PropertyDrawer drawer = this.GetDrawerForField(field);
             if (drawer != null)
             {
@@ -120,6 +131,20 @@ namespace NaughtyAttributes.Editor
             {
                 PropertyGrouper grouper = GrouperDatabase.GetGrouperForAttribute(groupAttributes[0].GetType());
                 return grouper;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        private PropertyDrawCondition GetDrawConditionForField(FieldInfo field)
+        {
+            DrawConditionAttribute[] drawConditionAttributes = (DrawConditionAttribute[])field.GetCustomAttributes(typeof(DrawConditionAttribute), true);
+            if (drawConditionAttributes.Length > 0)
+            {
+                PropertyDrawCondition drawCondition = DrawConditionDatabase.GetDrawConditionForAttribute(drawConditionAttributes[0].GetType());
+                return drawCondition;
             }
             else
             {

@@ -3,11 +3,11 @@
 namespace NaughtyAttributes
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    public class HideIfAttribute : DrawerAttribute
+    public class ShowIfAttribute : DrawConditionAttribute
     {
         private string conditionName;
 
-        public HideIfAttribute(string conditionName)
+        public ShowIfAttribute(string conditionName)
         {
             this.conditionName = conditionName;
         }
