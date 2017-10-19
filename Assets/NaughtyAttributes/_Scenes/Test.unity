@@ -288,6 +288,7 @@ MonoBehaviour:
   floatValue: 55.5
   intB: 0
   floatB: 0
+  showLists: 1
   integers: 01000000020000000300000004000000
   floats:
   - 1.1
