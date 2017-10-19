@@ -89,6 +89,7 @@ namespace NaughtyAttributes.Editor
 
         private void DrawField(FieldInfo field)
         {
+            // Check if the field has draw conditions
             PropertyDrawCondition drawCondition = this.GetDrawConditionForField(field);
             if (drawCondition != null)
             {
@@ -99,6 +100,14 @@ namespace NaughtyAttributes.Editor
                 }
             }
 
+            // Check if the field has HideInInspectorAttribute
+            HideInInspector[] hideInInspectorAttributes = (HideInInspector[])field.GetCustomAttributes(typeof(HideInInspector), true);
+            if (hideInInspectorAttributes.Length > 0)
+            {
+                return;
+            }
+
+            // Draw the field
             PropertyDrawer drawer = this.GetDrawerForField(field);
             if (drawer != null)
             {

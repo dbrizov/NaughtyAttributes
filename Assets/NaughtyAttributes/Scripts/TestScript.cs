@@ -17,16 +17,9 @@ public class TestScript : MonoBehaviour
     [BoxGroup("Group B")]
     public float floatB;
 
-    [BoxGroup("Group C")]
-    public bool showLists = true;
-
-    [BoxGroup("Group C")]
-    [ShowIf("showLists")]
     [ReorderableList]
     public List<int> integers;
 
-    [BoxGroup("Group C")]
-    [ShowIf("showLists")]
     [ReorderableList]
     public float[] floats;
 }
