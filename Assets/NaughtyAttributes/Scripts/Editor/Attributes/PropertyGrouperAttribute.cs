@@ -2,22 +2,10 @@
 
 namespace NaughtyAttributes.Editor
 {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-    public class PropertyGrouperAttribute : Attribute
+    public class PropertyGrouperAttribute : BasePropertyAttribute
     {
-        private Type targetAttributeType;
-
-        public PropertyGrouperAttribute(Type targetAttributeType)
+        public PropertyGrouperAttribute(Type targetAttributeType) : base(targetAttributeType)
         {
-            this.targetAttributeType = targetAttributeType;
-        }
-
-        public Type TargetAttributeType
-        {
-            get
-            {
-                return this.targetAttributeType;
-            }
         }
     }
 }

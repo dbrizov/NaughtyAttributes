@@ -2,22 +2,10 @@
 
 namespace NaughtyAttributes.Editor
 {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-    public class PropertyValidatorAttribute : Attribute
+    public class PropertyValidatorAttribute : BasePropertyAttribute
     {
-        private Type targetAttributeType;
-
-        public PropertyValidatorAttribute(Type targetAttributeType)
+        public PropertyValidatorAttribute(Type targetAttributeType) : base(targetAttributeType)
         {
-            this.targetAttributeType = targetAttributeType;
-        }
-
-        public Type TargetAttributeType
-        {
-            get
-            {
-                return this.targetAttributeType;
-            }
         }
     }
 }

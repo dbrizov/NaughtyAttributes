@@ -24,16 +24,16 @@ namespace NaughtyAttributes.Editor
         [UnityEditor.Callbacks.DidReloadScripts]
         private static void GenerateCode()
         {
-            // TODO Refactor the Code Generation methods
-            GenerateDrawerDatabaseScript("DrawerDatabase", "DrawerDatabaseTemplate");
-            GenerateGrouperDatabaseScript("GrouperDatabase", "GrouperDatabaseTemplate");
-            GenerateValidatorDatabaseScript("ValidatorDatabase", "ValidatorDatabaseTemplate");
-            GenerateDrawConditionDatabaseScript("DrawConditionDatabase", "DrawConditionDatabaseTemplate");
+            GenerateScript<PropertyDrawer, PropertyDrawerAttribute>("DrawerDatabase", "DrawerDatabaseTemplate", DRAWER_ENTRY_FORMAT);
+            GenerateScript<PropertyGrouper, PropertyGrouperAttribute>("GrouperDatabase", "GrouperDatabaseTemplate", GROUPER_ENTRY_FORMAT);
+            GenerateScript<PropertyValidator, PropertyValidatorAttribute>("ValidatorDatabase", "ValidatorDatabaseTemplate", VALIDATOR_ENTRY_FORMAT);
+            GenerateScript<PropertyDrawCondition, PropertyDrawConditionAttribute>("DrawConditionDatabase", "DrawConditionDatabaseTemplate", DRAW_CONDITION_ENTRY_FORMAT);
 
             AssetDatabase.Refresh();
         }
 
-        private static void GenerateDrawerDatabaseScript(string scriptName, string templateName)
+        private static void GenerateScript<TAttributeGroup, TPropertyAttribute>(string scriptName, string templateName, string entryFormat)
+            where TPropertyAttribute : IPropertyAttribute
         {
             string[] templateAssets = AssetDatabase.FindAssets(templateName);
             if (templateAssets.Length == 0)
@@ -46,125 +46,23 @@ namespace NaughtyAttributes.Editor
             string templateFullPath = (Application.dataPath.Replace("Assets", string.Empty) + templateRelativePath).Replace("/", "\\");
             string templateFormat = IOUtility.ReadFromFile(templateFullPath);
 
-            StringBuilder drawerEntriesBuilder = new StringBuilder();
-            List<Type> drawerTypes = GetAllSubTypes(typeof(PropertyDrawer));
+            StringBuilder entriesBuilder = new StringBuilder();
+            List<Type> subTypes = GetAllSubTypes(typeof(TAttributeGroup));
 
-            foreach (var drawerType in drawerTypes)
+            foreach (var subType in subTypes)
             {
-                PropertyDrawerAttribute[] attributes = (PropertyDrawerAttribute[])drawerType.GetCustomAttributes(typeof(PropertyDrawerAttribute), true);
+                IPropertyAttribute[] attributes =
+                    (IPropertyAttribute[])subType.GetCustomAttributes(typeof(TPropertyAttribute), true);
+
                 if (attributes.Length > 0)
                 {
-                    drawerEntriesBuilder.AppendFormat(DRAWER_ENTRY_FORMAT, attributes[0].TargetAttributeType.Name, drawerType.Name);
+                    entriesBuilder.AppendFormat(entryFormat, attributes[0].TargetAttributeType.Name, subType.Name);
                 }
             }
 
             string scriptContent = templateFormat
                 .Replace(CLASS_NAME_PLACEHOLDER, scriptName)
-                .Replace(ENTRIES_PLACEHOLDER, drawerEntriesBuilder.ToString());
-
-            string scriptPath = GENERATED_CODE_TARGET_FOLDER + scriptName + ".cs";
-
-            IOUtility.WriteToFile(scriptPath, scriptContent);
-        }
-
-        private static void GenerateGrouperDatabaseScript(string scriptName, string templateName)
-        {
-            string[] templateAssets = AssetDatabase.FindAssets(templateName);
-            if (templateAssets.Length == 0)
-            {
-                return;
-            }
-
-            string templateGUID = templateAssets[0];
-            string templateRelativePath = AssetDatabase.GUIDToAssetPath(templateGUID);
-            string templateFullPath = (Application.dataPath.Replace("Assets", string.Empty) + templateRelativePath).Replace("/", "\\");
-            string templateFormat = IOUtility.ReadFromFile(templateFullPath);
-
-            StringBuilder grouperEntriesBuilder = new StringBuilder();
-            List<Type> grouperTypes = GetAllSubTypes(typeof(PropertyGrouper));
-
-            foreach (var grouperType in grouperTypes)
-            {
-                PropertyGrouperAttribute[] attributes = (PropertyGrouperAttribute[])grouperType.GetCustomAttributes(typeof(PropertyGrouperAttribute), true);
-                if (attributes.Length > 0)
-                {
-                    grouperEntriesBuilder.AppendFormat(GROUPER_ENTRY_FORMAT, attributes[0].TargetAttributeType.Name, grouperType.Name);
-                }
-            }
-
-            string scriptContent = templateFormat
-                .Replace(CLASS_NAME_PLACEHOLDER, scriptName)
-                .Replace(ENTRIES_PLACEHOLDER, grouperEntriesBuilder.ToString());
-
-            string scriptPath = GENERATED_CODE_TARGET_FOLDER + scriptName + ".cs";
-
-            IOUtility.WriteToFile(scriptPath, scriptContent);
-        }
-
-        private static void GenerateValidatorDatabaseScript(string scriptName, string templateName)
-        {
-            string[] templateAssets = AssetDatabase.FindAssets(templateName);
-            if (templateAssets.Length == 0)
-            {
-                return;
-            }
-
-            string templateGUID = templateAssets[0];
-            string templateRelativePath = AssetDatabase.GUIDToAssetPath(templateGUID);
-            string templateFullPath = (Application.dataPath.Replace("Assets", string.Empty) + templateRelativePath).Replace("/", "\\");
-            string templateFormat = IOUtility.ReadFromFile(templateFullPath);
-
-            StringBuilder validatorEntriesBuilder = new StringBuilder();
-            List<Type> validatorTypes = GetAllSubTypes(typeof(PropertyValidator));
-
-            foreach (var validatorType in validatorTypes)
-            {
-                PropertyValidatorAttribute[] attributes = (PropertyValidatorAttribute[])validatorType.GetCustomAttributes(typeof(PropertyValidatorAttribute), true);
-                if (attributes.Length > 0)
-                {
-                    validatorEntriesBuilder.AppendFormat(VALIDATOR_ENTRY_FORMAT, attributes[0].TargetAttributeType.Name, validatorType.Name);
-                }
-            }
-
-            string scriptContent = templateFormat
-                .Replace(CLASS_NAME_PLACEHOLDER, scriptName)
-                .Replace(ENTRIES_PLACEHOLDER, validatorEntriesBuilder.ToString());
-
-            string scriptPath = GENERATED_CODE_TARGET_FOLDER + scriptName + ".cs";
-
-            IOUtility.WriteToFile(scriptPath, scriptContent);
-        }
-
-        private static void GenerateDrawConditionDatabaseScript(string scriptName, string templateName)
-        {
-            string[] templateAssets = AssetDatabase.FindAssets(templateName);
-            if (templateAssets.Length == 0)
-            {
-                return;
-            }
-
-            string templateGUID = templateAssets[0];
-            string templateRelativePath = AssetDatabase.GUIDToAssetPath(templateGUID);
-            string templateFullPath = (Application.dataPath.Replace("Assets", string.Empty) + templateRelativePath).Replace("/", "\\");
-            string templateFormat = IOUtility.ReadFromFile(templateFullPath);
-
-            StringBuilder drawConditionEntriesBuilder = new StringBuilder();
-            List<Type> drawConditionTypes = GetAllSubTypes(typeof(PropertyDrawCondition));
-
-            foreach (var drawConditionType in drawConditionTypes)
-            {
-                PropertyDrawConditionAttribute[] attributes =
-                    (PropertyDrawConditionAttribute[])drawConditionType.GetCustomAttributes(typeof(PropertyDrawConditionAttribute), true);
-
-                if (attributes.Length > 0)
-                {
-                    drawConditionEntriesBuilder.AppendFormat(DRAW_CONDITION_ENTRY_FORMAT, attributes[0].TargetAttributeType.Name, drawConditionType.Name);
-                }
-            }
-
-            string scriptContent = templateFormat
-                .Replace(CLASS_NAME_PLACEHOLDER, scriptName)
-                .Replace(ENTRIES_PLACEHOLDER, drawConditionEntriesBuilder.ToString());
+                .Replace(ENTRIES_PLACEHOLDER, entriesBuilder.ToString());
 
             string scriptPath = GENERATED_CODE_TARGET_FOLDER + scriptName + ".cs";
 

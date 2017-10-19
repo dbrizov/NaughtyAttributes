@@ -2,22 +2,10 @@
 
 namespace NaughtyAttributes.Editor
 {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-    public class PropertyDrawerAttribute : Attribute
+    public class PropertyDrawerAttribute : BasePropertyAttribute
     {
-        private Type targetAttributeType;
-
-        public PropertyDrawerAttribute(Type targetAttributeType)
+        public PropertyDrawerAttribute(Type targetAttributeType) : base(targetAttributeType)
         {
-            this.targetAttributeType = targetAttributeType;
-        }
-
-        public Type TargetAttributeType
-        {
-            get
-            {
-                return this.targetAttributeType;
-            }
         }
     }
 }
