@@ -13,6 +13,7 @@ namespace NaughtyAttributes.Editor
         {
             drawersByAttributeType = new Dictionary<Type, PropertyDrawer>();
             drawersByAttributeType[typeof(HideIfAttribute)] = new HideIfPropertyDrawer();
+drawersByAttributeType[typeof(ReorderableListAttribute)] = new ReorderableListPropertyDrawer();
 drawersByAttributeType[typeof(ShowIfAttribute)] = new ShowIfPropertyDrawer();
 
         }

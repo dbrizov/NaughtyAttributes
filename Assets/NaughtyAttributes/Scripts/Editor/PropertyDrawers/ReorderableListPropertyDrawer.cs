@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace NaughtyAttributes.Editor
 {
-    //[PropertyDrawer(typeof(ReorderableListAttribute))]
+    [PropertyDrawer(typeof(ReorderableListAttribute))]
     public class ReorderableListPropertyDrawer : PropertyDrawer
     {
         private Dictionary<string, ReorderableList> reorderableListsByPropertyName = new Dictionary<string, ReorderableList>();
