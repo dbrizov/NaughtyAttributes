@@ -9,18 +9,18 @@ namespace NaughtyAttributes.Editor
         {
             MinValueAttribute minValueAttribute = PropertyUtility.GetAttributes<MinValueAttribute>(property)[0];
 
-            if (property.propertyType == SerializedPropertyType.Float)
-            {
-                if (property.floatValue < minValueAttribute.MinValue)
-                {
-                    property.floatValue = minValueAttribute.MinValue;
-                }
-            }
-            else if (property.propertyType == SerializedPropertyType.Integer)
+            if (property.propertyType == SerializedPropertyType.Integer)
             {
                 if (property.intValue < minValueAttribute.MinValue)
                 {
                     property.intValue = (int)minValueAttribute.MinValue;
+                }
+            }
+            else if (property.propertyType == SerializedPropertyType.Float)
+            {
+                if (property.floatValue < minValueAttribute.MinValue)
+                {
+                    property.floatValue = minValueAttribute.MinValue;
                 }
             }
             else

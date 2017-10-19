@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using UnityEditor;
+using UnityEngine;
 
 namespace NaughtyAttributes.Editor
 {
@@ -27,7 +28,7 @@ namespace NaughtyAttributes.Editor
 
             string warning = showIfAttribute.GetType().Name + " needs a valid condition field or method name to work";
             EditorGUILayout.HelpBox(warning, MessageType.Warning);
-            UnityEngine.Debug.LogWarning(warning);
+            Debug.LogWarning(warning);
 
             return true;
         }
