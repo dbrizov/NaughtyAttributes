@@ -6,7 +6,7 @@ namespace NaughtyAttributes.Editor
     {
         public abstract void DrawProperty(SerializedProperty property);
 
-        public virtual void Dispose()
+        public virtual void ClearCache()
         {
 
         }

@@ -8,7 +8,7 @@ namespace NaughtyAttributes.Editor
 
         public abstract void EndGroup();
 
-        public virtual void Dispose()
+        public virtual void ClearCache()
         {
 
         }

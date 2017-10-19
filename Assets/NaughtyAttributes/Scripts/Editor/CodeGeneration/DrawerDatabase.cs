@@ -31,11 +31,11 @@ drawersByAttributeType[typeof(ShowIfAttribute)] = new ShowIfPropertyDrawer();
             }
         }
 
-        public static void DisposeDrawers()
+        public static void ClearCache()
         {
             foreach (var kvp in drawersByAttributeType)
             {
-                kvp.Value.Dispose();
+                kvp.Value.ClearCache();
             }
         }
     }

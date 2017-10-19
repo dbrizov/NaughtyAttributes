@@ -28,11 +28,11 @@ namespace NaughtyAttributes.Editor
             }
         }
 
-        public static void DisposeValidators()
+        public static void ClearCache()
         {
             foreach (var kvp in validatorsByAttributeType)
             {
-                kvp.Value.Dispose();
+                kvp.Value.ClearCache();
             }
         }
     }

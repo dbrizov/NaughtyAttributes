@@ -29,11 +29,11 @@ namespace NaughtyAttributes.Editor
             }
         }
 
-        public static void DisposeGroupers()
+        public static void ClearCache()
         {
             foreach (var kvp in groupersByAttributeType)
             {
-                kvp.Value.Dispose();
+                kvp.Value.ClearCache();
             }
         }
     }

@@ -16,9 +16,9 @@ namespace NaughtyAttributes.Editor
         {
             this.script = this.serializedObject.FindProperty("m_Script");
 
-            DrawerDatabase.DisposeDrawers();
-            GrouperDatabase.DisposeGroupers();
-            ValidatorDatabase.DisposeValidators();
+            DrawerDatabase.ClearCache();
+            GrouperDatabase.ClearCache();
+            ValidatorDatabase.ClearCache();
         }
 
         public override void OnInspectorGUI()

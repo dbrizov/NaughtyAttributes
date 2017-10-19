@@ -30,11 +30,11 @@ validatorsByAttributeType[typeof(MinValueAttribute)] = new MinValuePropertyValid
             }
         }
 
-        public static void DisposeValidators()
+        public static void ClearCache()
         {
             foreach (var kvp in validatorsByAttributeType)
             {
-                kvp.Value.Dispose();
+                kvp.Value.ClearCache();
             }
         }
     }

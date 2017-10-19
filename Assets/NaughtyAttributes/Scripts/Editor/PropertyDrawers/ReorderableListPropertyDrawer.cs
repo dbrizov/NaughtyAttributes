@@ -16,19 +16,20 @@ namespace NaughtyAttributes.Editor
             {
                 if (!this.reorderableListsByPropertyName.ContainsKey(property.name))
                 {
-                    ReorderableList reorderableList = new ReorderableList(property.serializedObject, property, true, true, true, true);
-
-                    reorderableList.drawHeaderCallback = (Rect rect) =>
+                    ReorderableList reorderableList = new ReorderableList(property.serializedObject, property, true, true, true, true)
                     {
-                        EditorGUI.LabelField(rect, string.Format("{0}: {1}", property.displayName, property.arraySize), EditorStyles.label);
-                    };
+                        drawHeaderCallback = (Rect rect) =>
+                        {
+                            EditorGUI.LabelField(rect, string.Format("{0}: {1}", property.displayName, property.arraySize), EditorStyles.label);
+                        },
 
-                    reorderableList.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
-                    {
-                        var element = property.GetArrayElementAtIndex(index);
-                        rect.y += 2f;
+                        drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
+                        {
+                            var element = property.GetArrayElementAtIndex(index);
+                            rect.y += 2f;
 
-                        EditorGUI.PropertyField(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), element);
+                            EditorGUI.PropertyField(new Rect(rect.x, rect.y, rect.width, EditorGUIUtility.singleLineHeight), element);
+                        }
                     };
 
                     this.reorderableListsByPropertyName[property.name] = reorderableList;
@@ -46,7 +47,7 @@ namespace NaughtyAttributes.Editor
             }
         }
 
-        public override void Dispose()
+        public override void ClearCache()
         {
             this.reorderableListsByPropertyName.Clear();
         }
