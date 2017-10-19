@@ -12,7 +12,8 @@ namespace NaughtyAttributes.Editor
         static DrawerDatabase()
         {
             drawersByAttributeType = new Dictionary<Type, PropertyDrawer>();
-            drawersByAttributeType[typeof(ReorderableListAttribute)] = new ReorderableListPropertyDrawer();
+            drawersByAttributeType[typeof(MinMaxSliderAttribute)] = new MinMaxSliderPropertyDrawer();
+drawersByAttributeType[typeof(ReorderableListAttribute)] = new ReorderableListPropertyDrawer();
 drawersByAttributeType[typeof(SliderAttribute)] = new SliderPropertyDrawer();
 
         }

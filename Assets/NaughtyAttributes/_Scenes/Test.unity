@@ -284,8 +284,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c928ea15ae74a44089beb2e534c1a35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  show: 1
   slider1: 58
-  slider2: 26.5
+  slider2: 46.8
+  minMaxSlider: {x: -5, y: 5}
 --- !u!4 &2033251974
 Transform:
   m_ObjectHideFlags: 0
