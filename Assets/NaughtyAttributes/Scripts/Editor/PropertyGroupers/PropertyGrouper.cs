@@ -7,5 +7,10 @@ namespace NaughtyAttributes.Editor
         public abstract void BeginGroup(string label);
 
         public abstract void EndGroup();
+
+        public virtual void Dispose()
+        {
+
+        }
     }
 }

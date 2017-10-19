@@ -1,8 +1,9 @@
 ﻿using NaughtyAttributes;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class TestScript : MonoBehaviour
-{    
+{
     [BoxGroup("Group A")]
     public bool showFloatValue = true;
 
@@ -10,14 +11,16 @@ public class TestScript : MonoBehaviour
     [ShowIf("showFloatValue")]
     [MinValue(-100f), MaxValue(100f)]
     public float floatValue = 0f;
-    
+
     [BoxGroup("Group B")]
     public int intB;
 
     [BoxGroup("Group B")]
     public float floatB;
-    
-    public int intNoGroup;
-    
-    public float floatNoGroup;
+
+    [ReorderableList]
+    public List<int> integers;
+
+    [ReorderableList]
+    public float[] floats;
 }

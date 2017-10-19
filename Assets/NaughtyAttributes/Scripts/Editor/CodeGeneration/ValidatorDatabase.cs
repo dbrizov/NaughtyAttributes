@@ -29,6 +29,14 @@ validatorsByAttributeType[typeof(MinValueAttribute)] = new MinValuePropertyValid
                 return null;
             }
         }
+
+        public static void DisposeValidators()
+        {
+            foreach (var kvp in validatorsByAttributeType)
+            {
+                kvp.Value.Dispose();
+            }
+        }
     }
 }
 

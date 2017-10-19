@@ -15,6 +15,10 @@ namespace NaughtyAttributes.Editor
         private void OnEnable()
         {
             this.script = this.serializedObject.FindProperty("m_Script");
+
+            DrawerDatabase.DisposeDrawers();
+            GrouperDatabase.DisposeGroupers();
+            ValidatorDatabase.DisposeValidators();
         }
 
         public override void OnInspectorGUI()
@@ -91,7 +95,7 @@ namespace NaughtyAttributes.Editor
             }
             else
             {
-                EditorGUILayout.PropertyField(this.serializedObject.FindProperty(field.Name));
+                EditorGUILayout.PropertyField(this.serializedObject.FindProperty(field.Name), true);
             }
         }
 

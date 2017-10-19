@@ -5,5 +5,10 @@ namespace NaughtyAttributes.Editor
     public abstract class PropertyValidator
     {
         public abstract void ValidateProperty(SerializedProperty property);
+
+        public virtual void Dispose()
+        {
+
+        }
     }
 }

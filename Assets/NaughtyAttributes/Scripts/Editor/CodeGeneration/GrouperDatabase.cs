@@ -28,6 +28,14 @@ namespace NaughtyAttributes.Editor
                 return null;
             }
         }
+
+        public static void DisposeGroupers()
+        {
+            foreach (var kvp in groupersByAttributeType)
+            {
+                kvp.Value.Dispose();
+            }
+        }
     }
 }
 

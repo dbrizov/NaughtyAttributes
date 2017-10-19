@@ -16,7 +16,7 @@ namespace NaughtyAttributes.Editor
             {
                 if ((bool)conditionField.GetValue(target))
                 {
-                    EditorGUILayout.PropertyField(property);
+                    EditorGUILayout.PropertyField(property, true);
                 }
 
                 return;
@@ -29,14 +29,14 @@ namespace NaughtyAttributes.Editor
             {
                 if ((bool)conditionMethod.Invoke(target, null))
                 {
-                    EditorGUILayout.PropertyField(property);
+                    EditorGUILayout.PropertyField(property, true);
                 }
 
                 return;
             }
 
             EditorGUILayout.HelpBox(showIfAttribute.GetType().Name + " needs a valid condition field or method name to work", MessageType.Warning);
-            EditorGUILayout.PropertyField(property);
+            EditorGUILayout.PropertyField(property, true);
         }
     }
 }

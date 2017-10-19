@@ -25,7 +25,7 @@ namespace NaughtyAttributes.Editor
             }
             else
             {
-                string warning = maxValueAttribute.GetType().Name + " doesn't affect non-float or non-integer fields";
+                string warning = maxValueAttribute.GetType().Name + " can be used only on int or float fields";
                 EditorGUILayout.HelpBox(warning, MessageType.Warning);
                 UnityEngine.Debug.LogWarning(warning);
             }

@@ -29,6 +29,14 @@ drawersByAttributeType[typeof(ShowIfAttribute)] = new ShowIfPropertyDrawer();
                 return null;
             }
         }
+
+        public static void DisposeDrawers()
+        {
+            foreach (var kvp in drawersByAttributeType)
+            {
+                kvp.Value.Dispose();
+            }
+        }
     }
 }
 
