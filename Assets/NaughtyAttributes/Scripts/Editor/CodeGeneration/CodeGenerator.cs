@@ -16,6 +16,7 @@ namespace NaughtyAttributes.Editor
 
         private static readonly string CLASS_NAME_PLACEHOLDER = "__classname__";
         private static readonly string ENTRIES_PLACEHOLDER = "__entries__";
+        private static readonly string META_ENTRY_FORMAT = "metasByAttributeType[typeof({0})] = new {1}();" + Environment.NewLine;
         private static readonly string DRAWER_ENTRY_FORMAT = "drawersByAttributeType[typeof({0})] = new {1}();" + Environment.NewLine;
         private static readonly string GROUPER_ENTRY_FORMAT = "groupersByAttributeType[typeof({0})] = new {1}();" + Environment.NewLine;
         private static readonly string VALIDATOR_ENTRY_FORMAT = "validatorsByAttributeType[typeof({0})] = new {1}();" + Environment.NewLine;
@@ -24,6 +25,7 @@ namespace NaughtyAttributes.Editor
         [UnityEditor.Callbacks.DidReloadScripts]
         private static void GenerateCode()
         {
+            GenerateScript<PropertyMeta, PropertyMetaAttribute>("MetaDatabase", "MetaDatabaseTemplate", META_ENTRY_FORMAT);
             GenerateScript<PropertyDrawer, PropertyDrawerAttribute>("DrawerDatabase", "DrawerDatabaseTemplate", DRAWER_ENTRY_FORMAT);
             GenerateScript<PropertyGrouper, PropertyGrouperAttribute>("GrouperDatabase", "GrouperDatabaseTemplate", GROUPER_ENTRY_FORMAT);
             GenerateScript<PropertyValidator, PropertyValidatorAttribute>("ValidatorDatabase", "ValidatorDatabaseTemplate", VALIDATOR_ENTRY_FORMAT);

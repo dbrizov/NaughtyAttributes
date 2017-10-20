@@ -1,0 +1,39 @@
+﻿// This class is auto generated
+
+using System;
+using System.Collections.Generic;
+
+namespace NaughtyAttributes.Editor
+{
+    public static class __classname__
+    {
+        private static Dictionary<Type, PropertyMeta> metasByAttributeType;
+
+        static __classname__()
+        {
+            metasByAttributeType = new Dictionary<Type, PropertyMeta>();
+            __entries__
+        }
+
+        public static PropertyMeta GetMetaForAttribute(Type attributeType)
+        {
+            PropertyMeta meta;
+            if (metasByAttributeType.TryGetValue(attributeType, out meta))
+            {
+                return meta;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static void ClearCache()
+        {
+            foreach (var kvp in metasByAttributeType)
+            {
+                kvp.Value.ClearCache();
+            }
+        }
+    }
+}

@@ -10,8 +10,8 @@ public class NaughtyComponent : MonoBehaviour
 
     [Slider(0f, 100f)]
     public float slider2;
-
-    [SerializeField]
+    
+    [ShowIf("show")]
     [MinMaxSlider(-10f, 10f)]
-    private Vector2 minMaxSlider;
+    public Vector2 minMaxSlider;
 }

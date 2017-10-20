@@ -16,6 +16,7 @@ namespace NaughtyAttributes.Editor
         {
             this.script = this.serializedObject.FindProperty("m_Script");
 
+            MetaDatabase.ClearCache();
             DrawerDatabase.ClearCache();
             GrouperDatabase.ClearCache();
             ValidatorDatabase.ClearCache();
@@ -67,6 +68,7 @@ namespace NaughtyAttributes.Editor
             foreach (var field in fields)
             {
                 this.ValidateField(field);
+                this.ApplyFieldMeta(field);
                 this.DrawField(field);
             }
         }
@@ -74,15 +76,13 @@ namespace NaughtyAttributes.Editor
         private void ValidateField(FieldInfo field)
         {
             ValidatorAttribute[] validatorAttributes = (ValidatorAttribute[])field.GetCustomAttributes(typeof(ValidatorAttribute), true);
-            if (validatorAttributes.Length > 0)
+
+            foreach (var attribute in validatorAttributes)
             {
-                foreach (var attribute in validatorAttributes)
+                PropertyValidator validator = ValidatorDatabase.GetValidatorForAttribute(attribute.GetType());
+                if (validator != null)
                 {
-                    PropertyValidator validator = ValidatorDatabase.GetValidatorForAttribute(attribute.GetType());
-                    if (validator != null)
-                    {
-                        validator.ValidateProperty(this.serializedObject.FindProperty(field.Name));
-                    }
+                    validator.ValidateProperty(this.serializedObject.FindProperty(field.Name));
                 }
             }
         }
@@ -116,6 +116,27 @@ namespace NaughtyAttributes.Editor
             else
             {
                 EditorGUILayout.PropertyField(this.serializedObject.FindProperty(field.Name), true);
+            }
+        }
+
+        private void ApplyFieldMeta(FieldInfo field)
+        {
+            MetaAttribute[] metaAttributes = (MetaAttribute[])field.GetCustomAttributes(typeof(MetaAttribute), true);
+
+            foreach (var metaAttribute in metaAttributes)
+            {
+                PropertyMeta meta = MetaDatabase.GetMetaForAttribute(metaAttribute.GetType());
+                if (meta != null)
+                {
+                    meta.ApplyPropertyMeta(this.serializedObject.FindProperty(field.Name));
+                }
+            }
+
+            // Check if the field has Unity's HeaderAttribute
+            HeaderAttribute[] headerAttributes = (HeaderAttribute[])field.GetCustomAttributes(typeof(HeaderAttribute), true);
+            if (headerAttributes.Length > 0)
+            {
+                EditorGUILayout.LabelField(headerAttributes[0].header, EditorStyles.boldLabel);
             }
         }
 
