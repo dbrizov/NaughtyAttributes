@@ -12,7 +12,8 @@ namespace NaughtyAttributes.Editor
         static MetaDatabase()
         {
             metasByAttributeType = new Dictionary<Type, PropertyMeta>();
-            metasByAttributeType[typeof(SectionAttribute)] = new SectionPropertyMeta();
+            metasByAttributeType[typeof(BlankSpaceAttribute)] = new BlankSpacePropertyMeta();
+metasByAttributeType[typeof(SectionAttribute)] = new SectionPropertyMeta();
 
         }
 

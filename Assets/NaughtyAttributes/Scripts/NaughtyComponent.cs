@@ -10,7 +10,9 @@ public class NaughtyComponent : MonoBehaviour
 
     [Slider(0f, 100f)]
     public float slider2;
-    
+
+    [BlankSpace]
+    [Section("Section")]
     [ShowIf("show")]
     [MinMaxSlider(-10f, 10f)]
     public Vector2 minMaxSlider;

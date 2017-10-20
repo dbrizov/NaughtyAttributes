@@ -121,7 +121,12 @@ namespace NaughtyAttributes.Editor
 
         private void ApplyFieldMeta(FieldInfo field)
         {
+            // Apply custom meta attributes
             MetaAttribute[] metaAttributes = (MetaAttribute[])field.GetCustomAttributes(typeof(MetaAttribute), true);
+            System.Array.Sort(metaAttributes, (x, y) =>
+            {
+                return x.Order - y.Order;
+            });
 
             foreach (var metaAttribute in metaAttributes)
             {
@@ -130,6 +135,13 @@ namespace NaughtyAttributes.Editor
                 {
                     meta.ApplyPropertyMeta(this.serializedObject.FindProperty(field.Name));
                 }
+            }
+
+            // Check if the field has Unity's SpaceAttribute
+            SpaceAttribute[] spaceAttributes = (SpaceAttribute[])field.GetCustomAttributes(typeof(SpaceAttribute), true);
+            foreach (var spaceAttribute in spaceAttributes)
+            {
+                EditorGUILayout.Space();
             }
 
             // Check if the field has Unity's HeaderAttribute
