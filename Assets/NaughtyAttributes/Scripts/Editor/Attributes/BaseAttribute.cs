@@ -3,11 +3,11 @@
 namespace NaughtyAttributes.Editor
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-    public abstract class BasePropertyAttribute : Attribute, IPropertyAttribute
+    public abstract class BaseAttribute : Attribute, IAttribute
     {
         private Type targetAttributeType;
 
-        public BasePropertyAttribute(Type targetAttributeType)
+        public BaseAttribute(Type targetAttributeType)
         {
             this.targetAttributeType = targetAttributeType;
         }

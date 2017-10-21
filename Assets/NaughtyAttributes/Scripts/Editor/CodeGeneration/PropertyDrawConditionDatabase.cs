@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace NaughtyAttributes.Editor
 {
-    public static class DrawConditionDatabase
+    public static class PropertyDrawConditionDatabase
     {
         private static Dictionary<Type, PropertyDrawCondition> drawConditionsByAttributeType;
 
-        static DrawConditionDatabase()
+        static PropertyDrawConditionDatabase()
         {
             drawConditionsByAttributeType = new Dictionary<Type, PropertyDrawCondition>();
             drawConditionsByAttributeType[typeof(HideIfAttribute)] = new HideIfPropertyDrawCondition();

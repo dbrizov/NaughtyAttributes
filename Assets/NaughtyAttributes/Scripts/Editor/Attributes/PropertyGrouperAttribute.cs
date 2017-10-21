@@ -2,7 +2,7 @@
 
 namespace NaughtyAttributes.Editor
 {
-    public class PropertyGrouperAttribute : BasePropertyAttribute
+    public class PropertyGrouperAttribute : BaseAttribute
     {
         public PropertyGrouperAttribute(Type targetAttributeType) : base(targetAttributeType)
         {

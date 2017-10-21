@@ -2,7 +2,7 @@
 
 namespace NaughtyAttributes.Editor
 {
-    public class PropertyDrawConditionAttribute : BasePropertyAttribute
+    public class PropertyDrawConditionAttribute : BaseAttribute
     {
         public PropertyDrawConditionAttribute(Type targetAttributeType) : base(targetAttributeType)
         {

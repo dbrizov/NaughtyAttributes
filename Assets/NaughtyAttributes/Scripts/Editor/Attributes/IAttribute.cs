@@ -2,7 +2,7 @@
 
 namespace NaughtyAttributes.Editor
 {
-    public interface IPropertyAttribute
+    public interface IAttribute
     {
         Type TargetAttributeType { get; }
     }

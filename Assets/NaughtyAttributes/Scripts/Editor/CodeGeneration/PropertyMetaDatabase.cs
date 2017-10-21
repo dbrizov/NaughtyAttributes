@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace NaughtyAttributes.Editor
 {
-    public static class MetaDatabase
+    public static class PropertyMetaDatabase
     {
         private static Dictionary<Type, PropertyMeta> metasByAttributeType;
 
-        static MetaDatabase()
+        static PropertyMetaDatabase()
         {
             metasByAttributeType = new Dictionary<Type, PropertyMeta>();
             metasByAttributeType[typeof(BlankSpaceAttribute)] = new BlankSpacePropertyMeta();

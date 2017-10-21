@@ -25,17 +25,19 @@ namespace NaughtyAttributes.Editor
         [UnityEditor.Callbacks.DidReloadScripts]
         private static void GenerateCode()
         {
-            GenerateScript<PropertyMeta, PropertyMetaAttribute>("MetaDatabase", "MetaDatabaseTemplate", META_ENTRY_FORMAT);
-            GenerateScript<PropertyDrawer, PropertyDrawerAttribute>("DrawerDatabase", "DrawerDatabaseTemplate", DRAWER_ENTRY_FORMAT);
-            GenerateScript<PropertyGrouper, PropertyGrouperAttribute>("GrouperDatabase", "GrouperDatabaseTemplate", GROUPER_ENTRY_FORMAT);
-            GenerateScript<PropertyValidator, PropertyValidatorAttribute>("ValidatorDatabase", "ValidatorDatabaseTemplate", VALIDATOR_ENTRY_FORMAT);
-            GenerateScript<PropertyDrawCondition, PropertyDrawConditionAttribute>("DrawConditionDatabase", "DrawConditionDatabaseTemplate", DRAW_CONDITION_ENTRY_FORMAT);
+            GenerateScript<PropertyMeta, PropertyMetaAttribute>("PropertyMetaDatabase", "PropertyMetaDatabaseTemplate", META_ENTRY_FORMAT);
+            GenerateScript<PropertyDrawer, PropertyDrawerAttribute>("PropertyDrawerDatabase", "PropertyDrawerDatabaseTemplate", DRAWER_ENTRY_FORMAT);
+            GenerateScript<PropertyGrouper, PropertyGrouperAttribute>("PropertyGrouperDatabase", "PropertyGrouperDatabaseTemplate", GROUPER_ENTRY_FORMAT);
+            GenerateScript<PropertyValidator, PropertyValidatorAttribute>("PropertyValidatorDatabase", "PropertyValidatorDatabaseTemplate", VALIDATOR_ENTRY_FORMAT);
+            GenerateScript<PropertyDrawCondition, PropertyDrawConditionAttribute>("PropertyDrawConditionDatabase", "PropertyDrawConditionDatabaseTemplate", DRAW_CONDITION_ENTRY_FORMAT);
+
+            GenerateScript<MethodDrawer, MethodDrawerAttribute>("MethodDrawerDatabase", "MethodDrawerDatabaseTemplate", DRAWER_ENTRY_FORMAT);
 
             AssetDatabase.Refresh();
         }
 
         private static void GenerateScript<TAttributeGroup, TPropertyAttribute>(string scriptName, string templateName, string entryFormat)
-            where TPropertyAttribute : IPropertyAttribute
+            where TPropertyAttribute : IAttribute
         {
             string[] templateAssets = AssetDatabase.FindAssets(templateName);
             if (templateAssets.Length == 0)
@@ -53,8 +55,8 @@ namespace NaughtyAttributes.Editor
 
             foreach (var subType in subTypes)
             {
-                IPropertyAttribute[] attributes =
-                    (IPropertyAttribute[])subType.GetCustomAttributes(typeof(TPropertyAttribute), true);
+                IAttribute[] attributes =
+                    (IAttribute[])subType.GetCustomAttributes(typeof(TPropertyAttribute), true);
 
                 if (attributes.Length > 0)
                 {

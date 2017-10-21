@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace NaughtyAttributes.Editor
 {
-    public static class DrawerDatabase
+    public static class PropertyDrawerDatabase
     {
         private static Dictionary<Type, PropertyDrawer> drawersByAttributeType;
 
-        static DrawerDatabase()
+        static PropertyDrawerDatabase()
         {
             drawersByAttributeType = new Dictionary<Type, PropertyDrawer>();
             drawersByAttributeType[typeof(MinMaxSliderAttribute)] = new MinMaxSliderPropertyDrawer();

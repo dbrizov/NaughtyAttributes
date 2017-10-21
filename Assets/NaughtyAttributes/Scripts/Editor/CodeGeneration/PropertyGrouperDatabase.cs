@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace NaughtyAttributes.Editor
 {
-    public static class GrouperDatabase
+    public static class PropertyGrouperDatabase
     {
         private static Dictionary<Type, PropertyGrouper> groupersByAttributeType;
 
-        static GrouperDatabase()
+        static PropertyGrouperDatabase()
         {
             groupersByAttributeType = new Dictionary<Type, PropertyGrouper>();
             groupersByAttributeType[typeof(BoxGroupAttribute)] = new BoxGroupPropertyGrouper();

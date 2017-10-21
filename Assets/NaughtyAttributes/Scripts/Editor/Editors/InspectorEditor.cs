@@ -16,11 +16,11 @@ namespace NaughtyAttributes.Editor
         {
             this.script = this.serializedObject.FindProperty("m_Script");
 
-            MetaDatabase.ClearCache();
-            DrawerDatabase.ClearCache();
-            GrouperDatabase.ClearCache();
-            ValidatorDatabase.ClearCache();
-            DrawConditionDatabase.ClearCache();
+            PropertyMetaDatabase.ClearCache();
+            PropertyDrawerDatabase.ClearCache();
+            PropertyGrouperDatabase.ClearCache();
+            PropertyValidatorDatabase.ClearCache();
+            PropertyDrawConditionDatabase.ClearCache();
         }
 
         public override void OnInspectorGUI()
@@ -31,6 +31,7 @@ namespace NaughtyAttributes.Editor
             EditorGUILayout.PropertyField(this.script);
             GUI.enabled = true;
 
+            // Draw fields
             IEnumerable<FieldInfo> fields =
                 this.target.GetType().GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
                 .Where(f => this.serializedObject.FindProperty(f.Name) != null);
@@ -75,6 +76,21 @@ namespace NaughtyAttributes.Editor
                 }
             }
 
+            // Draw methods
+            IEnumerable<MethodInfo> methods =
+                this.target.GetType().GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
+                .Where(m => m.GetCustomAttributes(typeof(DrawerAttribute), true).Length > 0);
+
+            foreach (var method in methods)
+            {
+                DrawerAttribute drawerAttribute = (DrawerAttribute)method.GetCustomAttributes(typeof(DrawerAttribute), true)[0];
+                MethodDrawer methodDrawer = MethodDrawerDatabase.GetDrawerForAttribute(drawerAttribute.GetType());
+                if (methodDrawer != null)
+                {
+                    methodDrawer.DrawMethod(this.serializedObject.targetObject, method);
+                }
+            }
+
             this.serializedObject.ApplyModifiedProperties();
         }
 
@@ -99,7 +115,7 @@ namespace NaughtyAttributes.Editor
 
             foreach (var attribute in validatorAttributes)
             {
-                PropertyValidator validator = ValidatorDatabase.GetValidatorForAttribute(attribute.GetType());
+                PropertyValidator validator = PropertyValidatorDatabase.GetValidatorForAttribute(attribute.GetType());
                 if (validator != null)
                 {
                     validator.ValidateProperty(this.serializedObject.FindProperty(field.Name));
@@ -150,7 +166,7 @@ namespace NaughtyAttributes.Editor
 
             foreach (var metaAttribute in metaAttributes)
             {
-                PropertyMeta meta = MetaDatabase.GetMetaForAttribute(metaAttribute.GetType());
+                PropertyMeta meta = PropertyMetaDatabase.GetMetaForAttribute(metaAttribute.GetType());
                 if (meta != null)
                 {
                     meta.ApplyPropertyMeta(this.serializedObject.FindProperty(field.Name));
@@ -177,7 +193,7 @@ namespace NaughtyAttributes.Editor
             DrawerAttribute[] drawerAttributes = (DrawerAttribute[])field.GetCustomAttributes(typeof(DrawerAttribute), true);
             if (drawerAttributes.Length > 0)
             {
-                PropertyDrawer drawer = DrawerDatabase.GetDrawerForAttribute(drawerAttributes[0].GetType());
+                PropertyDrawer drawer = PropertyDrawerDatabase.GetDrawerForAttribute(drawerAttributes[0].GetType());
                 return drawer;
             }
             else
@@ -191,7 +207,7 @@ namespace NaughtyAttributes.Editor
             GroupAttribute[] groupAttributes = (GroupAttribute[])field.GetCustomAttributes(typeof(GroupAttribute), true);
             if (groupAttributes.Length > 0)
             {
-                PropertyGrouper grouper = GrouperDatabase.GetGrouperForAttribute(groupAttributes[0].GetType());
+                PropertyGrouper grouper = PropertyGrouperDatabase.GetGrouperForAttribute(groupAttributes[0].GetType());
                 return grouper;
             }
             else
@@ -205,7 +221,7 @@ namespace NaughtyAttributes.Editor
             DrawConditionAttribute[] drawConditionAttributes = (DrawConditionAttribute[])field.GetCustomAttributes(typeof(DrawConditionAttribute), true);
             if (drawConditionAttributes.Length > 0)
             {
-                PropertyDrawCondition drawCondition = DrawConditionDatabase.GetDrawConditionForAttribute(drawConditionAttributes[0].GetType());
+                PropertyDrawCondition drawCondition = PropertyDrawConditionDatabase.GetDrawConditionForAttribute(drawConditionAttributes[0].GetType());
                 return drawCondition;
             }
             else

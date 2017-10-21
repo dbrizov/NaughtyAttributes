@@ -19,4 +19,10 @@ public class NaughtyComponent : MonoBehaviour
     [Section("Other Section")]
     [MultiLineText]
     public string someString = "";
+
+    [Button]
+    private void Method()
+    {
+        Debug.Log(this.transform.position);
+    }
 }

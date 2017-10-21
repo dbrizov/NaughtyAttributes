@@ -2,7 +2,7 @@
 
 namespace NaughtyAttributes.Editor
 {
-    public class PropertyValidatorAttribute : BasePropertyAttribute
+    public class PropertyValidatorAttribute : BaseAttribute
     {
         public PropertyValidatorAttribute(Type targetAttributeType) : base(targetAttributeType)
         {

@@ -2,7 +2,7 @@
 
 namespace NaughtyAttributes.Editor
 {
-    public class PropertyMetaAttribute : BasePropertyAttribute
+    public class PropertyMetaAttribute : BaseAttribute
     {
         public PropertyMetaAttribute(Type targetAttributeType) : base(targetAttributeType)
         {

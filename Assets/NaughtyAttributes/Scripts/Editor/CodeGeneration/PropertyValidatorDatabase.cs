@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace NaughtyAttributes.Editor
 {
-    public static class ValidatorDatabase
+    public static class PropertyValidatorDatabase
     {
         private static Dictionary<Type, PropertyValidator> validatorsByAttributeType;
 
-        static ValidatorDatabase()
+        static PropertyValidatorDatabase()
         {
             validatorsByAttributeType = new Dictionary<Type, PropertyValidator>();
             validatorsByAttributeType[typeof(MaxValueAttribute)] = new MaxValuePropertyValidator();
