@@ -5,9 +5,9 @@ namespace NaughtyAttributes.Editor
     [PropertyMeta(typeof(SectionAttribute))]
     public class SectionPropertyMeta : PropertyMeta
     {
-        public override void ApplyPropertyMeta(SerializedProperty property)
+        public override void ApplyPropertyMeta(SerializedProperty property, MetaAttribute metaAttribute)
         {
-            SectionAttribute sectionAttribute = PropertyUtility.GetAttributes<SectionAttribute>(property)[0];
+            SectionAttribute sectionAttribute = (SectionAttribute)metaAttribute;
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField(sectionAttribute.SectionLabel, EditorStyles.boldLabel);

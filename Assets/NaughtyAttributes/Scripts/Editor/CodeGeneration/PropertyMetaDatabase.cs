@@ -14,6 +14,7 @@ namespace NaughtyAttributes.Editor
             metasByAttributeType = new Dictionary<Type, PropertyMeta>();
             metasByAttributeType[typeof(BlankSpaceAttribute)] = new BlankSpacePropertyMeta();
 metasByAttributeType[typeof(InfoBoxAttribute)] = new InfoBoxPropertyMeta();
+metasByAttributeType[typeof(OnValueChangedAttribute)] = new OnValueChangedPropertyMeta();
 metasByAttributeType[typeof(SectionAttribute)] = new SectionPropertyMeta();
 
         }

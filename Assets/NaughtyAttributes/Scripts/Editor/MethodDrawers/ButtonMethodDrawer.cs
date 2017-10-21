@@ -22,7 +22,7 @@ namespace NaughtyAttributes.Editor
             }
             else
             {
-                string warning = "ButtonAttribute works only on action methods - with no return type and no parameters";
+                string warning = "ButtonAttribute works only on action methods - with void return type and no parameters";
                 EditorGUILayout.HelpBox(warning, MessageType.Warning);
                 Debug.LogWarning(warning);
             }

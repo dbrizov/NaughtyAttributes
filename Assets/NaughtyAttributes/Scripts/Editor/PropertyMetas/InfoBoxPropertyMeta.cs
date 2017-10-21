@@ -6,9 +6,9 @@ namespace NaughtyAttributes.Editor
     [PropertyMeta(typeof(InfoBoxAttribute))]
     public class InfoBoxPropertyMeta : PropertyMeta
     {
-        public override void ApplyPropertyMeta(SerializedProperty property)
+        public override void ApplyPropertyMeta(SerializedProperty property, MetaAttribute metaAttribute)
         {
-            InfoBoxAttribute infoBoxAttribute = PropertyUtility.GetAttributes<InfoBoxAttribute>(property)[0];
+            InfoBoxAttribute infoBoxAttribute = (InfoBoxAttribute)metaAttribute;
             UnityEngine.Object target = PropertyUtility.GetTargetObject(property);
 
             if (!string.IsNullOrEmpty(infoBoxAttribute.VisibleIf))

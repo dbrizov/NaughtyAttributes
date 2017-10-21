@@ -146,6 +146,7 @@ namespace NaughtyAttributes.Editor
             }
 
             // Draw the field
+            EditorGUI.BeginChangeCheck();
             PropertyDrawer drawer = this.GetDrawerForField(field);
             if (drawer != null)
             {
@@ -155,12 +156,30 @@ namespace NaughtyAttributes.Editor
             {
                 EditorGUILayout.PropertyField(this.serializedObject.FindProperty(field.Name), true);
             }
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                OnValueChangedAttribute[] onValueChangedAttributes = (OnValueChangedAttribute[])field.GetCustomAttributes(typeof(OnValueChangedAttribute), true);
+                foreach (var onValueChangedAttribute in onValueChangedAttributes)
+                {
+                    PropertyMeta meta = PropertyMetaDatabase.GetMetaForAttribute(onValueChangedAttribute.GetType());
+                    if (meta != null)
+                    {
+                        meta.ApplyPropertyMeta(this.serializedObject.FindProperty(field.Name), onValueChangedAttribute);
+                    }
+                }
+            }
         }
 
         private void ApplyFieldMeta(FieldInfo field)
         {
             // Apply custom meta attributes
-            MetaAttribute[] metaAttributes = (MetaAttribute[])field.GetCustomAttributes(typeof(MetaAttribute), true);
+            MetaAttribute[] metaAttributes = field
+                .GetCustomAttributes(typeof(MetaAttribute), true)
+                .Where(attr => attr.GetType() != typeof(OnValueChangedAttribute))
+                .Select(obj => obj as MetaAttribute)
+                .ToArray();
+
             System.Array.Sort(metaAttributes, (x, y) =>
             {
                 return x.Order - y.Order;
@@ -171,7 +190,7 @@ namespace NaughtyAttributes.Editor
                 PropertyMeta meta = PropertyMetaDatabase.GetMetaForAttribute(metaAttribute.GetType());
                 if (meta != null)
                 {
-                    meta.ApplyPropertyMeta(this.serializedObject.FindProperty(field.Name));
+                    meta.ApplyPropertyMeta(this.serializedObject.FindProperty(field.Name), metaAttribute);
                 }
             }
 

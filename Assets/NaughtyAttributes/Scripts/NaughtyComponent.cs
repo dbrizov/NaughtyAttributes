@@ -5,17 +5,18 @@ public class NaughtyComponent : MonoBehaviour
 {
     public bool show;
 
-    [InfoBox("This is a slider", "show")]
-    [Slider(0, 100)]
-    public int slider;
+    [MinMaxSlider(0f, 100f)]
+    [OnValueChanged("OnValueChanged1")]
+    [OnValueChanged("OnValueChanged2")]
+    public Vector2 slider;
 
-    private bool AlwaysShow()
+    public void OnValueChanged1()
     {
-        return true;
+        Debug.Log("OnValueChanged1");
     }
 
-    private bool NeverShow()
+    public void OnValueChanged2()
     {
-        return false;
+        Debug.Log("OnValueChanged2");
     }
 }

@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   show: 1
-  slider: 24
+  slider: {x: 39.786148, y: 67.87424}
 --- !u!4 &2033251974
 Transform:
   m_ObjectHideFlags: 0
