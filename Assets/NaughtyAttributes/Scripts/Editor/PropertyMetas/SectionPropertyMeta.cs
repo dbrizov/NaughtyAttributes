@@ -8,6 +8,8 @@ namespace NaughtyAttributes.Editor
         public override void ApplyPropertyMeta(SerializedProperty property)
         {
             SectionAttribute sectionAttribute = PropertyUtility.GetAttributes<SectionAttribute>(property)[0];
+
+            EditorGUILayout.Space();
             EditorGUILayout.LabelField(sectionAttribute.SectionLabel, EditorStyles.boldLabel);
         }
     }

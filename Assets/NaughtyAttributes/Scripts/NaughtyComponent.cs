@@ -10,10 +10,15 @@ public class NaughtyComponent : MonoBehaviour
 
     [Slider(0f, 100f)]
     public float slider2;
-
-    [BlankSpace]
+    
+    [BoxGroup("Box Group")]
     [Section("Section")]
     [ShowIf("show")]
     [MinMaxSlider(-10f, 10f)]
     public Vector2 minMaxSlider;
+
+    [BoxGroup("Box Group")]
+    [Section("Other Section")]
+    [MultiLineText]
+    public string someString = "";
 }

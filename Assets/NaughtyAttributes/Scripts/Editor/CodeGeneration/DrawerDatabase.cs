@@ -13,6 +13,7 @@ namespace NaughtyAttributes.Editor
         {
             drawersByAttributeType = new Dictionary<Type, PropertyDrawer>();
             drawersByAttributeType[typeof(MinMaxSliderAttribute)] = new MinMaxSliderPropertyDrawer();
+drawersByAttributeType[typeof(MultiLineTextAttribute)] = new MultiLineTextPropertyDrawer();
 drawersByAttributeType[typeof(ReorderableListAttribute)] = new ReorderableListPropertyDrawer();
 drawersByAttributeType[typeof(SliderAttribute)] = new SliderPropertyDrawer();
 

@@ -7,7 +7,7 @@ using System.Reflection;
 namespace NaughtyAttributes.Editor
 {
     [CanEditMultipleObjects]
-    [CustomEditor(typeof(MonoBehaviour), true)]
+    [CustomEditor(typeof(UnityEngine.Object), true)]
     public class InspectorEditor : UnityEditor.Editor
     {
         private SerializedProperty script;
