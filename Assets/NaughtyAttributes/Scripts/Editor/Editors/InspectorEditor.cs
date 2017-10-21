@@ -21,6 +21,8 @@ namespace NaughtyAttributes.Editor
             PropertyGrouperDatabase.ClearCache();
             PropertyValidatorDatabase.ClearCache();
             PropertyDrawConditionDatabase.ClearCache();
+
+            MethodDrawerDatabase.ClearCache();
         }
 
         public override void OnInspectorGUI()
