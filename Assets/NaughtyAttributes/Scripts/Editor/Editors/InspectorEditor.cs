@@ -186,6 +186,7 @@ namespace NaughtyAttributes.Editor
             HeaderAttribute[] headerAttributes = (HeaderAttribute[])field.GetCustomAttributes(typeof(HeaderAttribute), true);
             if (headerAttributes.Length > 0)
             {
+                EditorGUILayout.Space();
                 EditorGUILayout.LabelField(headerAttributes[0].header, EditorStyles.boldLabel);
             }
         }

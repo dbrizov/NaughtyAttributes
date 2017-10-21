@@ -3,26 +3,19 @@ using UnityEngine;
 
 public class NaughtyComponent : MonoBehaviour
 {
-    public bool show = true;
+    public bool show;
 
+    [InfoBox("This is a slider", "show")]
     [Slider(0, 100)]
-    public int slider1;
+    public int slider;
 
-    [Slider(0f, 100f)]
-    public float slider2;
-    
-    [Section("Section")]
-    [ShowIf("show")]
-    [MinMaxSlider(-10f, 10f)]
-    public Vector2 minMaxSlider;
-    
-    [Section("Other Section")]
-    [MultiLineText]
-    public string someString = "";
-
-    [Button]
-    private void Method()
+    private bool AlwaysShow()
     {
-        Debug.Log(this.transform.position);
+        return true;
+    }
+
+    private bool NeverShow()
+    {
+        return false;
     }
 }

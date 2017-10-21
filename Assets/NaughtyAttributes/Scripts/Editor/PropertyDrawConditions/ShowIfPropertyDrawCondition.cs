@@ -1,6 +1,5 @@
 ﻿using System.Reflection;
 using UnityEditor;
-using UnityEngine;
 
 namespace NaughtyAttributes.Editor
 {
@@ -13,7 +12,8 @@ namespace NaughtyAttributes.Editor
             UnityEngine.Object target = PropertyUtility.GetTargetObject(property);
 
             FieldInfo conditionField = target.GetType().GetField(showIfAttribute.ConditionName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-            if (conditionField != null)
+            if (conditionField != null &&
+                conditionField.FieldType == typeof(bool))
             {
                 return (bool)conditionField.GetValue(target);
             }
@@ -26,9 +26,9 @@ namespace NaughtyAttributes.Editor
                 return (bool)conditionMethod.Invoke(target, null);
             }
 
-            string warning = showIfAttribute.GetType().Name + " needs a valid condition field or method name to work";
+            string warning = showIfAttribute.GetType().Name + " needs a valid boolean condition field or method name to work";
             EditorGUILayout.HelpBox(warning, MessageType.Warning);
-            Debug.LogWarning(warning);
+            UnityEngine.Debug.LogWarning(warning);
 
             return true;
         }
