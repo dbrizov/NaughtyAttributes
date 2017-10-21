@@ -35,30 +35,45 @@ namespace NaughtyAttributes.Editor
                 this.target.GetType().GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
                 .Where(f => this.serializedObject.FindProperty(f.Name) != null);
 
-            // Validate and draw grouped fields
             IEnumerable<FieldInfo> groupedFields = fields.Where(f => f.GetCustomAttributes(typeof(GroupAttribute), true).Length > 0);
-            IEnumerable<IGrouping<string, FieldInfo>> groups = groupedFields.GroupBy(f => (f.GetCustomAttributes(typeof(GroupAttribute), true)[0] as GroupAttribute).Name);
 
-            foreach (var group in groups)
+            HashSet<string> groupNames = new HashSet<string>();
+
+            foreach (var field in fields)
             {
-                PropertyGrouper grouper = this.GetGrouperForField(group.First());
-                if (grouper != null)
+                GroupAttribute[] groupAttributes = (GroupAttribute[])field.GetCustomAttributes(typeof(GroupAttribute), true);
+                if (groupAttributes.Length > 0)
                 {
-                    grouper.BeginGroup(group.Key);
+                    // Draw grouped fields
+                    string groupName = groupAttributes[0].Name;
+                    if (!groupNames.Contains(groupName))
+                    {
+                        groupNames.Add(groupName);
 
-                    this.ValidateAndDrawFields(group);
+                        IEnumerable<FieldInfo> fieldsInSameGroup = groupedFields
+                            .Where(f => (f.GetCustomAttributes(typeof(GroupAttribute), true) as GroupAttribute[])[0].Name == groupName);
 
-                    grouper.EndGroup();
+                        PropertyGrouper grouper = this.GetGrouperForField(field);
+                        if (grouper != null)
+                        {
+                            grouper.BeginGroup(groupName);
+
+                            this.ValidateAndDrawFields(fieldsInSameGroup);
+
+                            grouper.EndGroup();
+                        }
+                        else
+                        {
+                            this.ValidateAndDrawFields(fieldsInSameGroup);
+                        }
+                    }
                 }
                 else
                 {
-                    this.ValidateAndDrawFields(group);
+                    // Draw non-grouped field
+                    this.ValidateAndDrawField(field);
                 }
             }
-
-            // Validate and draw non-grouped fields
-            IEnumerable<FieldInfo> nonGroupedFields = fields.Where(f => f.GetCustomAttributes(typeof(GroupAttribute), true).Length == 0);
-            this.ValidateAndDrawFields(nonGroupedFields);
 
             this.serializedObject.ApplyModifiedProperties();
         }
@@ -67,10 +82,15 @@ namespace NaughtyAttributes.Editor
         {
             foreach (var field in fields)
             {
-                this.ValidateField(field);
-                this.ApplyFieldMeta(field);
-                this.DrawField(field);
+                this.ValidateAndDrawField(field);
             }
+        }
+
+        private void ValidateAndDrawField(FieldInfo field)
+        {
+            this.ValidateField(field);
+            this.ApplyFieldMeta(field);
+            this.DrawField(field);
         }
 
         private void ValidateField(FieldInfo field)
