@@ -196,21 +196,6 @@ namespace NaughtyAttributes.Editor
                     meta.ApplyPropertyMeta(this.serializedObject.FindProperty(field.Name), metaAttribute);
                 }
             }
-
-            // Check if the field has Unity's SpaceAttribute
-            SpaceAttribute[] spaceAttributes = (SpaceAttribute[])field.GetCustomAttributes(typeof(SpaceAttribute), true);
-            foreach (var spaceAttribute in spaceAttributes)
-            {
-                EditorGUILayout.Space();
-            }
-
-            // Check if the field has Unity's HeaderAttribute
-            HeaderAttribute[] headerAttributes = (HeaderAttribute[])field.GetCustomAttributes(typeof(HeaderAttribute), true);
-            if (headerAttributes.Length > 0)
-            {
-                EditorGUILayout.Space();
-                EditorGUILayout.LabelField(headerAttributes[0].header, EditorStyles.boldLabel);
-            }
         }
 
         private PropertyDrawer GetDrawerForField(FieldInfo field)
