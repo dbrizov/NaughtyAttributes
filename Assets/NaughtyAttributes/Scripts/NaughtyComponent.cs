@@ -10,6 +10,9 @@ public class NaughtyComponent : MonoBehaviour
     [OnValueChanged("OnValueChanged2")]
     public Vector2 slider;
 
+    [Required]
+    public Transform trans;
+
     public void OnValueChanged1()
     {
         Debug.Log("OnValueChanged1");
