@@ -6,20 +6,14 @@ public class NaughtyComponent : MonoBehaviour
     public bool show;
 
     [MinMaxSlider(0f, 100f)]
-    [OnValueChanged("OnValueChanged1")]
-    [OnValueChanged("OnValueChanged2")]
+    [ValidateInput("ValidateSlider")]
     public Vector2 slider;
 
     [Required]
     public Transform trans;
 
-    public void OnValueChanged1()
+    private bool ValidateSlider(Vector2 slider)
     {
-        Debug.Log("OnValueChanged1");
-    }
-
-    public void OnValueChanged2()
-    {
-        Debug.Log("OnValueChanged2");
+        return slider.magnitude > 0f;
     }
 }

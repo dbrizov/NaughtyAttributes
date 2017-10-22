@@ -285,7 +285,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   show: 1
-  slider: {x: 39.786148, y: 67.87424}
+  slider: {x: 0, y: 1.2767315}
+  trans: {fileID: 1444377591}
 --- !u!4 &2033251974
 Transform:
   m_ObjectHideFlags: 0

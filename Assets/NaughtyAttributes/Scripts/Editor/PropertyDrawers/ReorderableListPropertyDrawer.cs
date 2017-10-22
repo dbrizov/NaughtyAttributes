@@ -41,7 +41,7 @@ namespace NaughtyAttributes.Editor
             {
                 string warning = typeof(ReorderableListAttribute).Name + " can be used only on arrays or lists";
                 EditorGUILayout.HelpBox(warning, MessageType.Warning);
-                Debug.LogWarning(warning);
+                Debug.LogWarning(warning, PropertyUtility.GetTargetObject(property));
 
                 EditorGUILayout.PropertyField(property, true);
             }

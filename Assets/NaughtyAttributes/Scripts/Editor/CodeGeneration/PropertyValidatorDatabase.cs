@@ -15,6 +15,7 @@ namespace NaughtyAttributes.Editor
             validatorsByAttributeType[typeof(MaxValueAttribute)] = new MaxValuePropertyValidator();
 validatorsByAttributeType[typeof(MinValueAttribute)] = new MinValuePropertyValidator();
 validatorsByAttributeType[typeof(RequiredAttribute)] = new RequiredPropertyValidator();
+validatorsByAttributeType[typeof(ValidateInputAttribute)] = new ValidateInputPropertyValidator();
 
         }
 

@@ -7,7 +7,7 @@ namespace NaughtyAttributes.Editor
     [MethodDrawer(typeof(ButtonAttribute))]
     public class ButtonMethodDrawer : MethodDrawer
     {
-        public override void DrawMethod(System.Object target, MethodInfo methodInfo)
+        public override void DrawMethod(UnityEngine.Object target, MethodInfo methodInfo)
         {
             if (methodInfo.ReturnType == typeof(void) &&
                 methodInfo.GetParameters().Length == 0)
@@ -24,7 +24,7 @@ namespace NaughtyAttributes.Editor
             {
                 string warning = "ButtonAttribute works only on action methods - with void return type and no parameters";
                 EditorGUILayout.HelpBox(warning, MessageType.Warning);
-                Debug.LogWarning(warning);
+                Debug.LogWarning(warning, target);
             }
         }
     }

@@ -1,4 +1,5 @@
 ﻿using UnityEditor;
+using UnityEngine;
 
 namespace NaughtyAttributes.Editor
 {
@@ -27,7 +28,7 @@ namespace NaughtyAttributes.Editor
             {
                 string warning = minValueAttribute.GetType().Name + " can be used only on int or float fields";
                 EditorGUILayout.HelpBox(warning, MessageType.Warning);
-                UnityEngine.Debug.LogWarning(warning);
+                Debug.LogWarning(warning, PropertyUtility.GetTargetObject(property));
             }
         }
     }

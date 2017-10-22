@@ -22,7 +22,7 @@ namespace NaughtyAttributes.Editor
             {
                 string warning = sliderAttribute.GetType().Name + " can be used only on int or float fields";
                 EditorGUILayout.HelpBox(warning, MessageType.Warning);
-                Debug.LogWarning(warning);
+                Debug.LogWarning(warning, PropertyUtility.GetTargetObject(property));
 
                 EditorGUILayout.PropertyField(property, true);
             }

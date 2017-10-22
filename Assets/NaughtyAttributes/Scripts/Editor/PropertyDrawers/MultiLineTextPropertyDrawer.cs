@@ -25,7 +25,7 @@ namespace NaughtyAttributes.Editor
             {
                 string warning = PropertyUtility.GetAttributes<MultiLineTextAttribute>(property)[0].GetType().Name + " can only be used on string fields";
                 EditorGUILayout.HelpBox(warning, MessageType.Warning);
-                Debug.LogWarning(warning);
+                Debug.LogWarning(warning, PropertyUtility.GetTargetObject(property));
 
                 EditorGUILayout.PropertyField(property, true);
             }

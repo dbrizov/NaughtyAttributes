@@ -21,14 +21,14 @@ namespace NaughtyAttributes.Editor
                     }
 
                     EditorGUILayout.HelpBox(errorMessage, MessageType.Error);
-                    Debug.LogError(errorMessage);
+                    Debug.LogError(errorMessage, PropertyUtility.GetTargetObject(property));
                 }
             }
             else
             {
                 string warning = requiredAttribute.GetType().Name + " works only on reference types";
                 EditorGUILayout.HelpBox(warning, MessageType.Warning);
-                Debug.LogWarning(warning);
+                Debug.LogWarning(warning, PropertyUtility.GetTargetObject(property));
             }
         }
     }

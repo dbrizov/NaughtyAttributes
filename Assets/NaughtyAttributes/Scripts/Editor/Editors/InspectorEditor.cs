@@ -29,9 +29,12 @@ namespace NaughtyAttributes.Editor
         {
             this.serializedObject.Update();
 
-            GUI.enabled = false;
-            EditorGUILayout.PropertyField(this.script);
-            GUI.enabled = true;
+            if (this.script != null)
+            {
+                GUI.enabled = false;
+                EditorGUILayout.PropertyField(this.script);
+                GUI.enabled = true;
+            }
 
             // Draw fields
             IEnumerable<FieldInfo> fields =
