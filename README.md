@@ -11,46 +11,46 @@ A field can have only one DrawerAttribute. If more than one are used, only the t
 ### Slider
 The same as Unity's **Range** attribute.
 
-![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/Slider_Code.PNG)
+![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/Slider_Code.PNG)
 
-![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/Slider_Inspector.PNG)
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/Slider_Inspector.PNG)
 
 ### MinMaxSlider
 A double slider. The **min value** is saved to the **X** property, and the **max value** is saved to the **Y** property of a **Vector2** field.
 
-![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/MinMaxSlider_Code.PNG)
+![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/MinMaxSlider_Code.PNG)
 
-![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/MinMaxSlider_Inspector.PNG)
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/MinMaxSlider_Inspector.PNG)
 
 ### ReorderableList
 Provides array type fields with an interface for easy reordering of elements.
 
-![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/ReorderableList_Code.PNG)
+![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ReorderableList_Code.PNG)
 
-![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/ReorderableList_Inspector.gif)
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ReorderableList_Inspector.gif)
 
 ### MultiLineText
 The same as Unity's **TextArea** attribute.
 
-![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/MultiLineText_Code.PNG)
+![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/MultiLineText_Code.PNG)
 
-![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/MultiLineText_Inspector.PNG)
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/MultiLineText_Inspector.PNG)
 
 ### Button
-A method can be marked as a button. A button appears in the inspector and executes the method if clicked. Doesn't work with static methods.
+A method can be marked as a button. A button appears in the inspector and executes the method if clicked. Works both with instance and static methods.
 
-![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/Button_Code.PNG)
+![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/Button_Code.PNG)
 
-![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/Button_Inspector.PNG)
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/Button_Inspector.PNG)
 
 ## DrawCondition Attributes
 Can be used to specify when a given serialized field is visible, and when not.
 A field can have only one DrawConditionAttribute.
 
 ### ShowIf / HideIf
-![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/ShowIf_Code.PNG)
+![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowIf_Code.PNG)
 
-![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/ShowIf_Inspector.gif)
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowIf_Inspector.gif)
 
 ## Group Attributes
 Serialized fields can be grouped in different groups.
@@ -59,9 +59,9 @@ A field can have only one GroupAttribute.
 ### BoxGroup
 Surrounds grouped fields with a box.
 
-![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/BoxGroup_Code.PNG)
+![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/BoxGroup_Code.PNG)
 
-![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/BoxGroup_Inspector.PNG)
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/BoxGroup_Inspector.PNG)
 
 ## Validator Attributes
 Used for validating the fields. A field can have infinite number of validator attributes.
@@ -69,23 +69,23 @@ Used for validating the fields. A field can have infinite number of validator at
 ### MinValue / MaxValue
 Clamps integer and float fields.
 
-![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/MinValueMaxValue_Code.PNG)
+![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/MinValueMaxValue_Code.PNG)
 
-![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/MinValueMaxValue_Inspector.gif)
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/MinValueMaxValue_Inspector.gif)
 
 ### Required
 Used to remind the developer that a given reference type field is required.
 
-![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/Required_Code.PNG)
+![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/Required_Code.PNG)
 
-![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/Required_Inspector.PNG)
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/Required_Inspector.PNG)
 
 ### ValidateInput
 The most powerful ValidatorAttribute.
 
-![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/ValidateInput_Code.PNG)
+![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ValidateInput_Code.PNG)
 
-![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/ValidateInput_Inspector.PNG)
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ValidateInput_Inspector.PNG)
 
 ## Meta Attributes
 Give the fields meta data. A field can have infinite number of meta attributes.
@@ -93,28 +93,28 @@ Give the fields meta data. A field can have infinite number of meta attributes.
 ### Section
 Can be used for grouping fields. The same as Unity's **Header** attribute.
 
-![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/Section_Code.PNG)
+![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/Section_Code.PNG)
 
-![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/Section_Inspector.PNG)
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/Section_Inspector.PNG)
 
 ### BlankSpace
 The same as Unity's **Space** attribute.
 
-![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/BlankSpace_Code.PNG)
+![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/BlankSpace_Code.PNG)
 
-![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/BlankSpace_Inspector.PNG)
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/BlankSpace_Inspector.PNG)
 
 ### InfoBox
 Used for providing additional information.
 
-![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/InfoBox_Code.PNG)
+![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/InfoBox_Code.PNG)
 
-![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/InfoBox_Inspector.PNG)
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/InfoBox_Inspector.PNG)
 
 ### OnValueChanged
 Detects a value change and executes a callback.
 
-![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/OnValueChanged_Code.PNG)
+![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/OnValueChanged_Code.PNG)
 
 ## License
 MIT License
