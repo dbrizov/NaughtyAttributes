@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEditor;
 
@@ -70,7 +71,7 @@ namespace NaughtyAttributes.Editor
 
             string scriptPath = GENERATED_CODE_TARGET_FOLDER + scriptName + ".cs";
 
-            IOUtility.WriteToFile(scriptPath, scriptContent);
+            IOUtility.WriteToFile(scriptPath, Regex.Replace(scriptContent, @"\r\n|\n\r|\r|\n", Environment.NewLine));
         }
 
         private static List<Type> GetAllSubTypes(Type baseClass)

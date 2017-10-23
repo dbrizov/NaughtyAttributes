@@ -12,11 +12,9 @@ namespace NaughtyAttributes.Editor
 
         public static void WriteToFile(string filePath, string content)
         {
-            FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write);
-            using (fileStream)
+            using (FileStream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
             {
-                StreamWriter streamWriter = new StreamWriter(fileStream, System.Text.Encoding.ASCII);
-                using (streamWriter)
+                using (StreamWriter streamWriter = new StreamWriter(fileStream, System.Text.Encoding.ASCII))
                 {
                     streamWriter.WriteLine(content);
                 }
@@ -25,11 +23,9 @@ namespace NaughtyAttributes.Editor
 
         public static string ReadFromFile(string filePath)
         {
-            FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-            using (fileStream)
+            using (FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
             {
-                StreamReader streamReader = new StreamReader(fileStream, System.Text.Encoding.ASCII);
-                using (streamReader)
+                using (StreamReader streamReader = new StreamReader(fileStream, System.Text.Encoding.ASCII))
                 {
                     string content = streamReader.ReadToEnd();
                     return content;
