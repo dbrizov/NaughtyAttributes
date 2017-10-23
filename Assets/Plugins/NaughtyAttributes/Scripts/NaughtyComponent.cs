@@ -3,13 +3,13 @@ using UnityEngine;
 
 public class NaughtyComponent : MonoBehaviour
 {
-    [Dropdown("intValues")]
+    //[Dropdown("intValues")]
     public int intValue;
 
-    [Dropdown("stringValues")]
+    //[Dropdown("stringValues")]
     public string stringValue;
 
-    [Dropdown("vectorValues")]
+    //[Dropdown("vectorValues")]
     public Vector3 vectorValue;
 
     private int[] intValues = new int[] { 1, 2, 3, 4, 5 };
@@ -25,4 +25,10 @@ public class NaughtyComponent : MonoBehaviour
         { "Forward", Vector3.forward },
         { "Back",    Vector3.back    },
     };
+
+    [Button]
+    private void Method()
+    {
+        Debug.Log("asd");
+    }
 }
