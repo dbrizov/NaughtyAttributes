@@ -15,7 +15,10 @@ namespace NaughtyAttributes.Editor
         private void OnEnable()
         {
             this.script = this.serializedObject.FindProperty("m_Script");
+        }
 
+        private void OnDisable()
+        {
             PropertyMetaDatabase.ClearCache();
             PropertyDrawerDatabase.ClearCache();
             PropertyGrouperDatabase.ClearCache();
@@ -83,7 +86,7 @@ namespace NaughtyAttributes.Editor
 
             // Draw methods
             IEnumerable<MethodInfo> methods =
-                this.target.GetType().GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
+                this.target.GetType().GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public)
                 .Where(m => m.GetCustomAttributes(typeof(DrawerAttribute), true).Length > 0);
 
             foreach (var method in methods)

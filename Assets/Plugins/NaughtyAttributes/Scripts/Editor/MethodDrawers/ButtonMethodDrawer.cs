@@ -9,8 +9,7 @@ namespace NaughtyAttributes.Editor
     {
         public override void DrawMethod(UnityEngine.Object target, MethodInfo methodInfo)
         {
-            if (methodInfo.ReturnType == typeof(void) &&
-                methodInfo.GetParameters().Length == 0)
+            if (methodInfo.GetParameters().Length == 0)
             {
                 ButtonAttribute buttonAttribute = (ButtonAttribute)methodInfo.GetCustomAttributes(typeof(ButtonAttribute), true)[0];
                 string buttonText = string.IsNullOrEmpty(buttonAttribute.Text) ? methodInfo.Name : buttonAttribute.Text;
@@ -22,7 +21,7 @@ namespace NaughtyAttributes.Editor
             }
             else
             {
-                string warning = "ButtonAttribute works only on action methods - with void return type and no parameters";
+                string warning = typeof(ButtonAttribute).Name + " works only on methods with no parameters";
                 EditorGUILayout.HelpBox(warning, MessageType.Warning);
                 Debug.LogWarning(warning, target);
             }

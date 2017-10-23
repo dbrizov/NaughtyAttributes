@@ -284,9 +284,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c928ea15ae74a44089beb2e534c1a35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  number: 0
-  text: 
-  vector: {x: 0, y: 0, z: 0}
+  intArray: 010000000300000002000000
+  floatArray:
+  - 1.1
+  - 3.3
+  - 2.2
 --- !u!4 &2033251974
 Transform:
   m_ObjectHideFlags: 0
