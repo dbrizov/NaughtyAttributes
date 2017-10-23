@@ -29,19 +29,26 @@ Provides array type fields with an interface for easy reordering of elements.
 
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ReorderableList_Inspector.gif)
 
-### MultiLineText
-The same as Unity's **TextArea** attribute.
-
-![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/MultiLineText_Code.PNG)
-
-![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/MultiLineText_Inspector.PNG)
-
 ### Button
 A method can be marked as a button. A button appears in the inspector and executes the method if clicked. Works both with instance and static methods.
 
 ![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/Button_Code.PNG)
 
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/Button_Inspector.PNG)
+
+### Dropdown
+Provides an interface for dropdown value selection.
+
+![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/Dropdown_Code.PNG)
+
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/Dropdown_Inspector.gif)
+
+### MultiLineText
+The same as Unity's **TextArea** attribute.
+
+![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/MultiLineText_Code.PNG)
+
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/MultiLineText_Inspector.PNG)
 
 ## DrawCondition Attributes
 Can be used to specify when a given serialized field is visible, and when not.
