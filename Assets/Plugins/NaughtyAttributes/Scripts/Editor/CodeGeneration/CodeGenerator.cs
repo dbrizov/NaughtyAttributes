@@ -32,6 +32,7 @@ namespace NaughtyAttributes.Editor
             GenerateScript<PropertyValidator, PropertyValidatorAttribute>("PropertyValidatorDatabase", "PropertyValidatorDatabaseTemplate", VALIDATOR_ENTRY_FORMAT);
             GenerateScript<PropertyDrawCondition, PropertyDrawConditionAttribute>("PropertyDrawConditionDatabase", "PropertyDrawConditionDatabaseTemplate", DRAW_CONDITION_ENTRY_FORMAT);
 
+            GenerateScript<FieldDrawer, FieldDrawerAttribute>("FieldDrawerDatabase", "FieldDrawerDatabaseTemplate", DRAWER_ENTRY_FORMAT);
             GenerateScript<MethodDrawer, MethodDrawerAttribute>("MethodDrawerDatabase", "MethodDrawerDatabaseTemplate", DRAWER_ENTRY_FORMAT);
 
             AssetDatabase.Refresh();

@@ -15,6 +15,7 @@ namespace NaughtyAttributes.Editor
         private IEnumerable<FieldInfo> fields;
         private HashSet<FieldInfo> groupedFields;
         private Dictionary<string, List<FieldInfo>> groupedFieldsByGroupName;
+        private IEnumerable<FieldInfo> nonSerializedFields;
         private IEnumerable<MethodInfo> methods;
 
         private Dictionary<string, SerializedProperty> serializedPropertiesByFieldName;
@@ -69,6 +70,11 @@ namespace NaughtyAttributes.Editor
                 }
             }
 
+            // Cache non-serialized fields
+            this.nonSerializedFields = this.target.GetType()
+                .GetFields(BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public)
+                .Where(f => f.GetCustomAttributes(typeof(DrawerAttribute), true).Length > 0 && this.serializedObject.FindProperty(f.Name) == null);
+
             // Cache methods with DrawerAttribute
             this.methods = this.target.GetType()
                 .GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public)
@@ -83,6 +89,7 @@ namespace NaughtyAttributes.Editor
             PropertyValidatorDatabase.ClearCache();
             PropertyDrawConditionDatabase.ClearCache();
 
+            FieldDrawerDatabase.ClearCache();
             MethodDrawerDatabase.ClearCache();
         }
 
@@ -115,7 +122,7 @@ namespace NaughtyAttributes.Editor
                         {
                             drawnGroups.Add(groupName);
 
-                            PropertyGrouper grouper = this.GetGrouperForField(field);
+                            PropertyGrouper grouper = this.GetPropertyGrouperForField(field);
                             if (grouper != null)
                             {
                                 grouper.BeginGroup(groupName);
@@ -140,6 +147,17 @@ namespace NaughtyAttributes.Editor
                 this.serializedObject.ApplyModifiedProperties();
             }
 
+            // Draw non-serialized fields
+            foreach (var field in this.nonSerializedFields)
+            {
+                DrawerAttribute drawerAttribute = (DrawerAttribute)field.GetCustomAttributes(typeof(DrawerAttribute), true)[0];
+                FieldDrawer drawer = FieldDrawerDatabase.GetDrawerForAttribute(drawerAttribute.GetType());
+                if (drawer != null)
+                {
+                    drawer.DrawField(this.target, field);
+                }
+            }
+
             // Draw methods
             foreach (var method in this.methods)
             {
@@ -147,7 +165,7 @@ namespace NaughtyAttributes.Editor
                 MethodDrawer methodDrawer = MethodDrawerDatabase.GetDrawerForAttribute(drawerAttribute.GetType());
                 if (methodDrawer != null)
                 {
-                    methodDrawer.DrawMethod(this.serializedObject.targetObject, method);
+                    methodDrawer.DrawMethod(this.target, method);
                 }
             }
         }
@@ -184,7 +202,7 @@ namespace NaughtyAttributes.Editor
         private void DrawField(FieldInfo field)
         {
             // Check if the field has draw conditions
-            PropertyDrawCondition drawCondition = this.GetDrawConditionForField(field);
+            PropertyDrawCondition drawCondition = this.GetPropertyDrawConditionForField(field);
             if (drawCondition != null)
             {
                 bool canDrawProperty = drawCondition.CanDrawProperty(this.serializedPropertiesByFieldName[field.Name]);
@@ -203,7 +221,7 @@ namespace NaughtyAttributes.Editor
 
             // Draw the field
             EditorGUI.BeginChangeCheck();
-            PropertyDrawer drawer = this.GetDrawerForField(field);
+            PropertyDrawer drawer = this.GetPropertyDrawerForField(field);
             if (drawer != null)
             {
                 drawer.DrawProperty(this.serializedPropertiesByFieldName[field.Name]);
@@ -251,7 +269,7 @@ namespace NaughtyAttributes.Editor
             }
         }
 
-        private PropertyDrawer GetDrawerForField(FieldInfo field)
+        private PropertyDrawer GetPropertyDrawerForField(FieldInfo field)
         {
             DrawerAttribute[] drawerAttributes = (DrawerAttribute[])field.GetCustomAttributes(typeof(DrawerAttribute), true);
             if (drawerAttributes.Length > 0)
@@ -265,7 +283,7 @@ namespace NaughtyAttributes.Editor
             }
         }
 
-        private PropertyGrouper GetGrouperForField(FieldInfo field)
+        private PropertyGrouper GetPropertyGrouperForField(FieldInfo field)
         {
             GroupAttribute[] groupAttributes = (GroupAttribute[])field.GetCustomAttributes(typeof(GroupAttribute), true);
             if (groupAttributes.Length > 0)
@@ -279,7 +297,7 @@ namespace NaughtyAttributes.Editor
             }
         }
 
-        private PropertyDrawCondition GetDrawConditionForField(FieldInfo field)
+        private PropertyDrawCondition GetPropertyDrawConditionForField(FieldInfo field)
         {
             DrawConditionAttribute[] drawConditionAttributes = (DrawConditionAttribute[])field.GetCustomAttributes(typeof(DrawConditionAttribute), true);
             if (drawConditionAttributes.Length > 0)
