@@ -31,10 +31,6 @@ namespace NaughtyAttributes.Editor
             {
                 EditorGUILayout.TextField(field.Name, (string)field.GetValue(target));
             }
-            else if (field.FieldType == typeof(System.Enum))
-            {
-                EditorGUILayout.EnumPopup(field.Name, (System.Enum)field.GetValue(target));
-            }
             else if (field.FieldType == typeof(Vector2))
             {
                 EditorGUILayout.Vector2Field(field.Name, (Vector2)field.GetValue(target));

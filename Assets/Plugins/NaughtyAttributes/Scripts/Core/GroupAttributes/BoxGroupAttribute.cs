@@ -8,7 +8,6 @@ namespace NaughtyAttributes
         public BoxGroupAttribute(string name = "")
             : base(name)
         {
-
         }
     }
 }
