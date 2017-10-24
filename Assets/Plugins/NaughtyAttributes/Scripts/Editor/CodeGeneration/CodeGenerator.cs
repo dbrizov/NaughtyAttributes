@@ -49,17 +49,16 @@ namespace NaughtyAttributes.Editor
 
             string templateGUID = templateAssets[0];
             string templateRelativePath = AssetDatabase.GUIDToAssetPath(templateGUID);
-            string templateFullPath = (Application.dataPath.Replace("Assets", string.Empty) + templateRelativePath).Replace("/", "\\");
-            string templateFormat = IOUtility.ReadFromFile(templateFullPath);
+            string templateFormat = (AssetDatabase.LoadAssetAtPath(templateRelativePath, typeof(TextAsset)) as TextAsset).ToString();
+            //string templateFullPath = (Application.dataPath.Replace("Assets", string.Empty) + templateRelativePath).Replace("/", "\\");
+            //string templateFormat = IOUtility.ReadFromFile(templateFullPath);
 
             StringBuilder entriesBuilder = new StringBuilder();
             List<Type> subTypes = GetAllSubTypes(typeof(TAttributeGroup));
 
             foreach (var subType in subTypes)
             {
-                IAttribute[] attributes =
-                    (IAttribute[])subType.GetCustomAttributes(typeof(TPropertyAttribute), true);
-
+                IAttribute[] attributes = (IAttribute[])subType.GetCustomAttributes(typeof(TPropertyAttribute), true);
                 if (attributes.Length > 0)
                 {
                     entriesBuilder.AppendFormat(entryFormat, attributes[0].TargetAttributeType.Name, subType.Name);
