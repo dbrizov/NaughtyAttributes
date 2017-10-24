@@ -3,8 +3,8 @@ using UnityEditor;
 
 namespace NaughtyAttributes.Editor
 {
-    [PropertyDrawer(typeof(MultiLineTextAttribute))]
-    public class MultiLineTextPropertyDrawer : PropertyDrawer
+    [PropertyDrawer(typeof(ResizableTextAreaAttribute))]
+    public class ResizableTextAreaPropertyDrawer : PropertyDrawer
     {
         public override void DrawProperty(SerializedProperty property)
         {
@@ -23,7 +23,7 @@ namespace NaughtyAttributes.Editor
             }
             else
             {
-                string warning = PropertyUtility.GetAttributes<MultiLineTextAttribute>(property)[0].GetType().Name + " can only be used on string fields";
+                string warning = PropertyUtility.GetAttributes<ResizableTextAreaAttribute>(property)[0].GetType().Name + " can only be used on string fields";
                 EditorGUILayout.HelpBox(warning, MessageType.Warning);
                 Debug.LogWarning(warning, PropertyUtility.GetTargetObject(property));
 

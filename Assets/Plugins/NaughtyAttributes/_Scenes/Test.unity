@@ -368,10 +368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c928ea15ae74a44089beb2e534c1a35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intValue: 1
-  stringValue: A
-  vectorValue: {x: 1, y: 0, z: 0}
-  intArray: 010000000200000003000000
+  resizableTextArea: 
 --- !u!4 &2033251974
 Transform:
   m_ObjectHideFlags: 0

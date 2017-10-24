@@ -3,7 +3,7 @@
 namespace NaughtyAttributes
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    public class MultiLineTextAttribute : DrawerAttribute
+    public class ResizableTextAreaAttribute : DrawerAttribute
     {
 
     }
