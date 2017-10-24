@@ -45,13 +45,13 @@ Provides an interface for dropdown value selection.
 
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/Dropdown_Inspector.gif)
 
-### MultiLineText
+### ResizableTextArea
 A resizable text area where you can see the whole text.
 Unlike Unity's **Multiline** and **TextArea** attributes where you can see only 3 rows of a given text, and in order to see it or modify it you have to manually scroll down to the desired row.
 
-![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/MultiLineText_Code.PNG)
+![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ResizableTextArea_Code.PNG)
 
-![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/MultiLineText_Inspector.PNG)
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ResizableTextArea_Inspector.gif)
 
 ## DrawCondition Attributes
 Can be used to specify when a given serialized field is visible, and when not. A field can have only one DrawConditionAttribute.
