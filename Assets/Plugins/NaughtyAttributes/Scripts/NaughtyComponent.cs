@@ -3,15 +3,23 @@ using UnityEngine;
 
 public class NaughtyComponent : MonoBehaviour
 {
-    //[Dropdown("intValues")]
+    [BoxGroup("A")]
+    [Dropdown("intValues")]
     public int intValue;
 
-    //[Dropdown("stringValues")]
+    [BoxGroup("B")]
+    [Dropdown("stringValues")]
     public string stringValue;
 
-    //[Dropdown("vectorValues")]
+    [BoxGroup("A")]
+    [Dropdown("vectorValues")]
     public Vector3 vectorValue;
 
+    [BoxGroup("C")]
+    [ReorderableList]
+    public int[] intArray;
+
+#pragma warning disable 414
     private int[] intValues = new int[] { 1, 2, 3, 4, 5 };
 
     private string[] stringValues = new string[] { "A", "B", "C", "D", "E" };
@@ -25,10 +33,11 @@ public class NaughtyComponent : MonoBehaviour
         { "Forward", Vector3.forward },
         { "Back",    Vector3.back    },
     };
+#pragma warning restore 414
 
     [Button]
     private void Method()
     {
-        Debug.Log("asd");
+        Debug.Log("Method");
     }
 }
