@@ -6,7 +6,7 @@ Unity 2017.1.0 or later versions. Feel free to try older version
 
 ## Drawer Attributes
 Provide special draw options to serialized fields.
-A field can have only one DrawerAttribute. If a field has more than one, only the top one will be used.
+A field can have only one DrawerAttribute. If a field has more than one, only the bottom one will be used.
 
 ### Slider
 The same as Unity's **Range** attribute.
