@@ -5,11 +5,12 @@ Attribute Extensions for Unity
 Unity 2017.1.0 or later versions. Feel free to try older version
 
 ## Drawer Attributes
-Give special draw options to serialized fields.
-A field can have only one DrawerAttribute. If more than one are used, only the top one will be used.
+Provide special draw options to serialized fields.
+A field can have only one DrawerAttribute. If a field has more than one, only the top one will be used.
 
 ### Slider
 The same as Unity's **Range** attribute.
+There is no difference between the two, you can use whatever you like, I just wanted to support a custom slider attribute.
 
 ![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/Slider_Code.PNG)
 
@@ -30,7 +31,8 @@ Provides array type fields with an interface for easy reordering of elements.
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ReorderableList_Inspector.gif)
 
 ### Button
-A method can be marked as a button. A button appears in the inspector and executes the method if clicked. Works both with instance and static methods.
+A method can be marked as a button. A button appears in the inspector and executes the method if clicked.
+Works both with instance and static methods.
 
 ![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/Button_Code.PNG)
 
@@ -44,15 +46,15 @@ Provides an interface for dropdown value selection.
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/Dropdown_Inspector.gif)
 
 ### MultiLineText
-The same as Unity's **TextArea** attribute.
+A resizable text area where you can see the whole text.
+Unlike Unity's **Multiline** and **TextArea** attributes where you can see only 3 rows of a given text, and in order to see it or modify it you have to manually scroll down to the desired row.
 
 ![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/MultiLineText_Code.PNG)
 
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/MultiLineText_Inspector.PNG)
 
 ## DrawCondition Attributes
-Can be used to specify when a given serialized field is visible, and when not.
-A field can have only one DrawConditionAttribute.
+Can be used to specify when a given serialized field is visible, and when not. A field can have only one DrawConditionAttribute.
 
 ### ShowIf / HideIf
 ![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowIf_Code.PNG)
@@ -99,6 +101,7 @@ Give the fields meta data. A field can have infinite number of meta attributes.
 
 ### Section
 Can be used for grouping fields. The same as Unity's **Header** attribute.
+There is no difference between the two, you can use whatever you like, I just wanted to support a custom header attribute.
 
 ![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/Section_Code.PNG)
 
@@ -106,6 +109,7 @@ Can be used for grouping fields. The same as Unity's **Header** attribute.
 
 ### BlankSpace
 The same as Unity's **Space** attribute.
+There is no difference between the two, you can use whatever you like, I just wanted to support a custom space attribute.
 
 ![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/BlankSpace_Code.PNG)
 
