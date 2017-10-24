@@ -38,8 +38,8 @@ namespace NaughtyAttributes.Editor
             AssetDatabase.Refresh();
         }
 
-        private static void GenerateScript<TAttributeGroup, TPropertyAttribute>(string scriptName, string templateName, string entryFormat)
-            where TPropertyAttribute : IAttribute
+        private static void GenerateScript<TClass, TAttribute>(string scriptName, string templateName, string entryFormat)
+            where TAttribute : IAttribute
         {
             string[] templateAssets = AssetDatabase.FindAssets(templateName);
             if (templateAssets.Length == 0)
@@ -54,11 +54,11 @@ namespace NaughtyAttributes.Editor
             //string templateFormat = IOUtility.ReadFromFile(templateFullPath);
 
             StringBuilder entriesBuilder = new StringBuilder();
-            List<Type> subTypes = GetAllSubTypes(typeof(TAttributeGroup));
+            List<Type> subTypes = GetAllSubTypes(typeof(TClass));
 
             foreach (var subType in subTypes)
             {
-                IAttribute[] attributes = (IAttribute[])subType.GetCustomAttributes(typeof(TPropertyAttribute), true);
+                IAttribute[] attributes = (IAttribute[])subType.GetCustomAttributes(typeof(TAttribute), true);
                 if (attributes.Length > 0)
                 {
                     entriesBuilder.AppendFormat(entryFormat, attributes[0].TargetAttributeType.Name, subType.Name);
@@ -69,9 +69,11 @@ namespace NaughtyAttributes.Editor
                 .Replace(CLASS_NAME_PLACEHOLDER, scriptName)
                 .Replace(ENTRIES_PLACEHOLDER, entriesBuilder.ToString());
 
+            scriptContent = Regex.Replace(scriptContent, @"\r\n|\n\r|\r|\n", Environment.NewLine); // Normalize line endings
+
             string scriptPath = GENERATED_CODE_TARGET_FOLDER + scriptName + ".cs";
 
-            IOUtility.WriteToFile(scriptPath, Regex.Replace(scriptContent, @"\r\n|\n\r|\r|\n", Environment.NewLine));
+            IOUtility.WriteToFile(scriptPath, scriptContent);
         }
 
         private static List<Type> GetAllSubTypes(Type baseClass)
