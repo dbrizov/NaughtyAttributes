@@ -56,7 +56,7 @@ Unlike Unity's **Multiline** and **TextArea** attributes where you can see only 
 ### ShowNonSerializedField
 Shows non-serialized fields in the inspector.
 All non-serialized fields are displayed at the botton of the inspector before the method buttons.
-Keep in mind that if you change a non-static, non-serialized field in the code - the value in the inspector will be updated after you press **Play** in the editor.
+Keep in mind that if you change a non-static non-serialized field in the code - the value in the inspector will be updated after you press **Play** in the editor.
 There is no such issue with static non-serialized fields because their values are updated at compile time.
 It also supports only value types (int, long, float, double, string, Vector2, Vector3, Vector4, Color, Bounds, Rect). 
 
@@ -142,6 +142,8 @@ Used for providing additional information.
 
 ### OnValueChanged
 Detects a value change and executes a callback.
+Keep in mind that the event is detected only when the value is changed from the inspector.
+If you want a runtime event, you should probably use an event/delegate and subscribe to it.
 
 ![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/OnValueChanged_Code.PNG)
 
