@@ -53,6 +53,16 @@ Unlike Unity's **Multiline** and **TextArea** attributes where you can see only 
 
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ResizableTextArea_Inspector.gif)
 
+### ShowNonSerializedField
+Shows non-serialized fields in the inspector.
+All non-serialized fields are displayed at the botton of the inspector before the method buttons.
+Keep in mind that if you change a non-static, non-serialized field in the code - the value in the inspector will be updated after you press **Play** in the editor.
+There is non such issue with static non-serialized fields because their values are updated at compile time.
+
+![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowNonSerializedField_Code.PNG)
+
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowNonSerializedField_Inspector.PNG)
+
 ## DrawCondition Attributes
 Can be used to specify when a given serialized field is visible, and when not. A field can have only one DrawConditionAttribute.
 
