@@ -64,6 +64,13 @@ It also supports only value types (int, long, float, double, string, Vector2, Ve
 
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowNonSerializedField_Inspector.PNG)
 
+### ReadOnly
+Makes a field read only.
+
+![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ReadOnly_Code.PNG)
+
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ReadOnly_Inspector.PNG)
+
 ## DrawCondition Attributes
 Can be used to specify when a given serialized field is visible, and when not. A field can have only one DrawConditionAttribute.
 
@@ -74,7 +81,7 @@ Can be used to specify when a given serialized field is visible, and when not. A
 
 ## Group Attributes
 Serialized fields can be grouped in different groups.
-A field can have only one GroupAttribute.
+A field can have only one GroupAttribute. If a field has more than one, only the bottom one will be used.
 
 ### BoxGroup
 Surrounds grouped fields with a box.

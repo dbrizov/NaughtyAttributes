@@ -14,6 +14,7 @@ namespace NaughtyAttributes.Editor
             drawersByAttributeType = new Dictionary<Type, PropertyDrawer>();
             drawersByAttributeType[typeof(DropdownAttribute)] = new DropdownPropertyDrawer();
 drawersByAttributeType[typeof(MinMaxSliderAttribute)] = new MinMaxSliderPropertyDrawer();
+drawersByAttributeType[typeof(ReadOnlyAttribute)] = new ReadOnlyPropertyDrawer();
 drawersByAttributeType[typeof(ReorderableListAttribute)] = new ReorderableListPropertyDrawer();
 drawersByAttributeType[typeof(ResizableTextAreaAttribute)] = new ResizableTextAreaPropertyDrawer();
 drawersByAttributeType[typeof(SliderAttribute)] = new SliderPropertyDrawer();
