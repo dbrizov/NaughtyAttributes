@@ -58,7 +58,7 @@ Shows non-serialized fields in the inspector.
 All non-serialized fields are displayed at the botton of the inspector before the method buttons.
 Keep in mind that if you change a non-static, non-serialized field in the code - the value in the inspector will be updated after you press **Play** in the editor.
 There is no such issue with static non-serialized fields because their values are updated at compile time.
-It also supports only value types (int, long, float, double, string, Vector2, Vector3, Vector4, Vector2Int, Vector3Int, Color, Bounds, BoundsInt, Rect, RectInt). 
+It also supports only value types (int, long, float, double, string, Vector2, Vector3, Vector4, Color, Bounds, Rect). 
 
 ![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowNonSerializedField_Code.PNG)
 

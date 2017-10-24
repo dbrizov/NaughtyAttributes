@@ -43,14 +43,6 @@ namespace NaughtyAttributes.Editor
             {
                 EditorGUILayout.Vector4Field(field.Name, (Vector4)field.GetValue(target));
             }
-            else if (field.FieldType == typeof(Vector2Int))
-            {
-                EditorGUILayout.Vector2IntField(field.Name, (Vector2Int)field.GetValue(target));
-            }
-            else if (field.FieldType == typeof(Vector3Int))
-            {
-                EditorGUILayout.Vector3IntField(field.Name, (Vector3Int)field.GetValue(target));
-            }
             else if (field.FieldType == typeof(Color))
             {
                 EditorGUILayout.ColorField(field.Name, (Color)field.GetValue(target));
@@ -59,17 +51,9 @@ namespace NaughtyAttributes.Editor
             {
                 EditorGUILayout.BoundsField(field.Name, (Bounds)field.GetValue(target));
             }
-            else if (field.FieldType == typeof(BoundsInt))
-            {
-                EditorGUILayout.BoundsIntField(field.Name, (BoundsInt)field.GetValue(target));
-            }
             else if (field.FieldType == typeof(Rect))
             {
                 EditorGUILayout.RectField(field.Name, (Rect)field.GetValue(target));
-            }
-            else if (field.FieldType == typeof(RectInt))
-            {
-                EditorGUILayout.RectIntField(field.Name, (RectInt)field.GetValue(target));
             }
             else
             {
