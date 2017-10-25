@@ -23,7 +23,8 @@ namespace NaughtyAttributes.Editor
         private static readonly string VALIDATOR_ENTRY_FORMAT = "validatorsByAttributeType[typeof({0})] = new {1}();" + Environment.NewLine;
         private static readonly string DRAW_CONDITION_ENTRY_FORMAT = "drawConditionsByAttributeType[typeof({0})] = new {1}();" + Environment.NewLine;
 
-        [UnityEditor.Callbacks.DidReloadScripts]
+        //[UnityEditor.Callbacks.DidReloadScripts]
+        [MenuItem("NaughtyAttributes/Update Attributes Database")]
         private static void GenerateCode()
         {
             GenerateScript<PropertyMeta, PropertyMetaAttribute>("PropertyMetaDatabase", "PropertyMetaDatabaseTemplate", META_ENTRY_FORMAT);
