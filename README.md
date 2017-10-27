@@ -71,6 +71,13 @@ Makes a field read only.
 
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ReadOnly_Inspector.PNG)
 
+### ShowAssetPreview
+Shows the texture preview of a given asset (Sprite, Prefab...)
+
+![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowAssetPreview_Code.PNG)
+
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowAssetPreview_Inspector.PNG)
+
 ## DrawCondition Attributes
 Can be used to specify when a given serialized field is visible, and when not. A field can have only one DrawConditionAttribute.
 

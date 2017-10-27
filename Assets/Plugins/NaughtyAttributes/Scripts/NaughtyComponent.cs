@@ -1,8 +1,12 @@
 ﻿using NaughtyAttributes;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class NaughtyComponent : MonoBehaviour
 {
-    [ReadOnly]
-    public Vector3 forwardVector = Vector3.forward;
+    [ShowAssetPreview]
+    public Sprite sprite;
+    
+    [ShowAssetPreview(128, 128)]
+    public GameObject prefab;
 }
