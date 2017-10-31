@@ -154,7 +154,7 @@ If you want a runtime event, you should probably use an event/delegate and subsc
 
 ![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/OnValueChanged_Code.PNG)
 
-## How to create you own attributes
+## How to create your own attributes
 Lets say you want to implement your own **[ReadOnly]** attribute.
 
 First you have to create a **ReadOnlyAttribute** class
