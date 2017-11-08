@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class NaughtyComponent : MonoBehaviour
 {
-    [ShowAssetPreview]
-    public Sprite sprite;
+    [Slider(0, 10)]
+    public int intSlider;
     
-    [ShowAssetPreview(128, 128)]
-    public GameObject prefab;
+    [Slider(0f, 10f)]
+    public float floatSlider;
+
+    [ShowNonSerializedField]
+    private int nonSerialized1 = 1;
+
+    [Button]
+    private void Method1()
+    {
+        Debug.Log("1");
+    }
 }

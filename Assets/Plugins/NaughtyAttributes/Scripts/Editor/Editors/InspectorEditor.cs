@@ -1,8 +1,9 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using UnityEditor;
+using UnityEngine;
 
 namespace NaughtyAttributes.Editor
 {
@@ -27,9 +28,7 @@ namespace NaughtyAttributes.Editor
             this.script = this.serializedObject.FindProperty("m_Script");
 
             // Cache serialized fields
-            this.fields = this.target.GetType()
-                .GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
-                .Where(f => this.serializedObject.FindProperty(f.Name) != null);
+            this.fields = this.GetFields(f => this.serializedObject.FindProperty(f.Name) != null);
 
             // If there are no NaughtyAttributes use default inspector
             if (this.fields.All(f => f.GetCustomAttributes(typeof(NaughtyAttribute), true).Length == 0))
@@ -71,14 +70,11 @@ namespace NaughtyAttributes.Editor
             }
 
             // Cache non-serialized fields
-            this.nonSerializedFields = this.target.GetType()
-                .GetFields(BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public)
-                .Where(f => f.GetCustomAttributes(typeof(DrawerAttribute), true).Length > 0 && this.serializedObject.FindProperty(f.Name) == null);
+            this.nonSerializedFields = this.GetFields(
+                f => f.GetCustomAttributes(typeof(DrawerAttribute), true).Length > 0 && this.serializedObject.FindProperty(f.Name) == null);
 
             // Cache methods with DrawerAttribute
-            this.methods = this.target.GetType()
-                .GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public)
-                .Where(m => m.GetCustomAttributes(typeof(DrawerAttribute), true).Length > 0);
+            this.methods = this.GetMethods(m => m.GetCustomAttributes(typeof(DrawerAttribute), true).Length > 0);
         }
 
         private void OnDisable()
@@ -309,6 +305,56 @@ namespace NaughtyAttributes.Editor
             {
                 return null;
             }
+        }
+
+        private List<FieldInfo> GetFields(Func<FieldInfo, bool> predicate)
+        {
+            List<Type> types = new List<Type>()
+            {
+                this.target.GetType()
+            };
+
+            while (types.Last().BaseType != null)
+            {
+                types.Add(types.Last().BaseType);
+            }
+
+            List<FieldInfo> fields = new List<FieldInfo>();
+            for (int i = types.Count - 1; i >= 0; i--)
+            {
+                IEnumerable<FieldInfo> fieldInfos = types[i]
+                    .GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                    .Where(predicate);
+
+                fields.AddRange(fieldInfos);
+            }
+
+            return fields;
+        }
+
+        private List<MethodInfo> GetMethods(Func<MethodInfo, bool> predicate)
+        {
+            List<Type> types = new List<Type>()
+            {
+                this.target.GetType()
+            };
+
+            while (types.Last().BaseType != null)
+            {
+                types.Add(types.Last().BaseType);
+            }
+
+            List<MethodInfo> methods = new List<MethodInfo>();
+            for (int i = types.Count - 1; i >= 0; i--)
+            {
+                IEnumerable<MethodInfo> methodInfos = types[i]
+                    .GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                    .Where(predicate);
+
+                methods.AddRange(methodInfos);
+            }
+
+            return methods;
         }
     }
 }
