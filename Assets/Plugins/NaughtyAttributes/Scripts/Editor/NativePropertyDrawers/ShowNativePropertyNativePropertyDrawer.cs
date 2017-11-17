@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Reflection;
-using System.Collections;
 using UnityEditor;
 
 namespace NaughtyAttributes.Editor
@@ -10,19 +9,17 @@ namespace NaughtyAttributes.Editor
     {
         public override void DrawNativeProperty(UnityEngine.Object target, PropertyInfo property)
         {
-            bool isPropertyACollection =
-                !typeof(string).Equals(property.PropertyType) &&
-                typeof(IEnumerable).IsAssignableFrom(property.PropertyType);
+            object value = property.GetValue(target, null);
 
-            if (!isPropertyACollection)
+            if (value == null)
             {
-                GUI.enabled = false;
-                EditorDrawUtility.DrawLayoutField(property.GetValue(target, null), property.Name);
-                GUI.enabled = true;
+                string warning = string.Format("{0} doesn't support {1} types", typeof(ShowNativePropertyNativePropertyDrawer).Name, "Reference");
+                EditorGUILayout.HelpBox(warning, MessageType.Warning);
+                Debug.LogWarning(warning, target);
             }
-            else
+            else if (!EditorDrawUtility.DrawLayoutField(value, property.Name))
             {
-                string warning = "Can't draw collection types";
+                string warning = string.Format("{0} doesn't support {1} types", typeof(ShowNativePropertyNativePropertyDrawer).Name, property.PropertyType.Name);
                 EditorGUILayout.HelpBox(warning, MessageType.Warning);
                 Debug.LogWarning(warning, target);
             }

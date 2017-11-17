@@ -7,11 +7,29 @@ public class NaughtyComponent : MonoBehaviour
     public List<Transform> transforms;
 
     [ShowNativeProperty]
-    public string TransformsCount
+    public string StringProperty
     {
         get
         {
             return this.transforms.Count.ToString() + " Count";
+        }
+    }
+
+    [ShowNativeProperty]
+    public List<float> FloatsProperty
+    {
+        get
+        {
+            return null;
+        }
+    }
+
+    [ShowNativeProperty]
+    public Transform TransProperty
+    {
+        get
+        {
+            return this.transform;
         }
     }
 }
