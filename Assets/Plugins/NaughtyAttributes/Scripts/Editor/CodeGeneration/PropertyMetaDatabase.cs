@@ -31,14 +31,6 @@ metasByAttributeType[typeof(SectionAttribute)] = new SectionPropertyMeta();
                 return null;
             }
         }
-
-        public static void ClearCache()
-        {
-            foreach (var kvp in metasByAttributeType)
-            {
-                kvp.Value.ClearCache();
-            }
-        }
     }
 }
 

@@ -323,13 +323,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2033251972}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d39b3aa674fea8a4199d47c627d626c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c928ea15ae74a44089beb2e534c1a35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intSlider: 0
-  floatSlider: 0
-  minMaxSlider: {x: 0, y: 0}
-  list: 010000000200000003000000
+  transforms:
+  - {fileID: 1591883666}
+  - {fileID: 1444377591}
 --- !u!4 &2033251974
 Transform:
   m_ObjectHideFlags: 0

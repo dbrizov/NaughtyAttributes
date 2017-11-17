@@ -28,14 +28,6 @@ namespace NaughtyAttributes.Editor
                 return null;
             }
         }
-
-        public static void ClearCache()
-        {
-            foreach (var kvp in drawersByAttributeType)
-            {
-                kvp.Value.ClearCache();
-            }
-        }
     }
 }
 

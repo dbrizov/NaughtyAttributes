@@ -17,6 +17,7 @@ namespace NaughtyAttributes.Editor
         private HashSet<FieldInfo> groupedFields;
         private Dictionary<string, List<FieldInfo>> groupedFieldsByGroupName;
         private IEnumerable<FieldInfo> nonSerializedFields;
+        private IEnumerable<PropertyInfo> nativeProperties;
         private IEnumerable<MethodInfo> methods;
 
         private Dictionary<string, SerializedProperty> serializedPropertiesByFieldName;
@@ -73,20 +74,17 @@ namespace NaughtyAttributes.Editor
             this.nonSerializedFields = this.GetFields(
                 f => f.GetCustomAttributes(typeof(DrawerAttribute), true).Length > 0 && this.serializedObject.FindProperty(f.Name) == null);
 
+            // Cache the native properties
+            this.nativeProperties = this.GetProperties(
+                p => p.GetCustomAttributes(typeof(DrawerAttribute), true).Length > 0);
+
             // Cache methods with DrawerAttribute
             this.methods = this.GetMethods(m => m.GetCustomAttributes(typeof(DrawerAttribute), true).Length > 0);
         }
 
         private void OnDisable()
         {
-            PropertyMetaDatabase.ClearCache();
             PropertyDrawerDatabase.ClearCache();
-            PropertyGrouperDatabase.ClearCache();
-            PropertyValidatorDatabase.ClearCache();
-            PropertyDrawConditionDatabase.ClearCache();
-
-            FieldDrawerDatabase.ClearCache();
-            MethodDrawerDatabase.ClearCache();
         }
 
         public override void OnInspectorGUI()
@@ -151,6 +149,17 @@ namespace NaughtyAttributes.Editor
                 if (drawer != null)
                 {
                     drawer.DrawField(this.target, field);
+                }
+            }
+
+            // Draw native properties
+            foreach (var property in this.nativeProperties)
+            {
+                DrawerAttribute drawerAttribute = (DrawerAttribute)property.GetCustomAttributes(typeof(DrawerAttribute), true)[0];
+                NativePropertyDrawer drawer = NativePropertyDrawerDatabase.GetDrawerForAttribute(drawerAttribute.GetType());
+                if (drawer != null)
+                {
+                    drawer.DrawNativeProperty(this.target, property);
                 }
             }
 
@@ -330,6 +339,31 @@ namespace NaughtyAttributes.Editor
             }
 
             return fields;
+        }
+
+        private List<PropertyInfo> GetProperties(Func<PropertyInfo, bool> predicate)
+        {
+            List<Type> types = new List<Type>()
+            {
+                this.target.GetType()
+            };
+
+            while (types.Last().BaseType != null)
+            {
+                types.Add(types.Last().BaseType);
+            }
+
+            List<PropertyInfo> properties = new List<PropertyInfo>();
+            for (int i = types.Count - 1; i >= 0; i--)
+            {
+                IEnumerable<PropertyInfo> propertyInfos = types[i]
+                    .GetProperties(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                    .Where(predicate);
+
+                properties.AddRange(propertyInfos);
+            }
+
+            return properties;
         }
 
         private List<MethodInfo> GetMethods(Func<MethodInfo, bool> predicate)

@@ -35,6 +35,7 @@ namespace NaughtyAttributes.Editor
 
             GenerateScript<FieldDrawer, FieldDrawerAttribute>("FieldDrawerDatabase", "FieldDrawerDatabaseTemplate", DRAWER_ENTRY_FORMAT);
             GenerateScript<MethodDrawer, MethodDrawerAttribute>("MethodDrawerDatabase", "MethodDrawerDatabaseTemplate", DRAWER_ENTRY_FORMAT);
+            GenerateScript<NativePropertyDrawer, NativePropertyDrawerAttribute>("NativePropertyDrawerDatabase", "NativePropertyDrawerDbTemplate", DRAWER_ENTRY_FORMAT);
 
             AssetDatabase.Refresh();
         }

@@ -7,17 +7,17 @@ namespace NaughtyAttributes.Editor
 {
     public static class __classname__
     {
-        private static Dictionary<Type, FieldDrawer> drawersByAttributeType;
+        private static Dictionary<Type, NativePropertyDrawer> drawersByAttributeType;
 
         static __classname__()
         {
-            drawersByAttributeType = new Dictionary<Type, FieldDrawer>();
+            drawersByAttributeType = new Dictionary<Type, NativePropertyDrawer>();
             __entries__
         }
 
-        public static FieldDrawer GetDrawerForAttribute(Type attributeType)
+        public static NativePropertyDrawer GetDrawerForAttribute(Type attributeType)
         {
-            FieldDrawer drawer;
+            NativePropertyDrawer drawer;
             if (drawersByAttributeType.TryGetValue(attributeType, out drawer))
             {
                 return drawer;

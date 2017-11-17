@@ -5,10 +5,5 @@ namespace NaughtyAttributes.Editor
     public abstract class FieldDrawer
     {
         public abstract void DrawField(UnityEngine.Object target, FieldInfo field);
-
-        public virtual void ClearCache()
-        {
-
-        }
     }
 }

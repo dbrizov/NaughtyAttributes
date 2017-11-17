@@ -29,14 +29,6 @@ drawConditionsByAttributeType[typeof(ShowIfAttribute)] = new ShowIfPropertyDrawC
                 return null;
             }
         }
-
-        public static void ClearCache()
-        {
-            foreach (var kvp in drawConditionsByAttributeType)
-            {
-                kvp.Value.ClearCache();
-            }
-        }
     }
 }
 

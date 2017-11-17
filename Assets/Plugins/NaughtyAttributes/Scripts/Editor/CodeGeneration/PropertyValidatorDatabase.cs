@@ -31,14 +31,6 @@ validatorsByAttributeType[typeof(ValidateInputAttribute)] = new ValidateInputPro
                 return null;
             }
         }
-
-        public static void ClearCache()
-        {
-            foreach (var kvp in validatorsByAttributeType)
-            {
-                kvp.Value.ClearCache();
-            }
-        }
     }
 }
 
