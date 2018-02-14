@@ -88,7 +88,7 @@ Shows the texture preview of a given asset (Sprite, Prefab...)
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowAssetPreview_Inspector.PNG)
 
 ### ProgressBar
-Thanks to ![Shinao](https://github.com/Shinao)
+Thanks to [Shinao](https://github.com/Shinao)
 
 ![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ProgressBar_Code.png)
 
