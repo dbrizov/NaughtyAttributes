@@ -1,35 +1,18 @@
-﻿using NaughtyAttributes;
+using NaughtyAttributes;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class NaughtyComponent : MonoBehaviour
 {
-    public List<Transform> transforms;
+    [ProgressBar]
+    [SerializeField]
+    private float Health = 42;
 
-    [ShowNativeProperty]
-    public string StringProperty
-    {
-        get
-        {
-            return this.transforms.Count.ToString() + " Count";
-        }
-    }
+    [ProgressBar("Couns found", 25, ProgressBarColor.Yellow)]
+    public int CoinsFound = 3;
 
-    [ShowNativeProperty]
-    public List<float> FloatsProperty
+    private void Update()
     {
-        get
-        {
-            return null;
-        }
-    }
-
-    [ShowNativeProperty]
-    public Transform TransProperty
-    {
-        get
-        {
-            return this.transform;
-        }
+        Health += Time.deltaTime * 3;
     }
 }
