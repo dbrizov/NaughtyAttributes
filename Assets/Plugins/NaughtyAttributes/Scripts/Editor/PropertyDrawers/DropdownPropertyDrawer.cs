@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 using System.Reflection;
 using System.Collections;
@@ -12,7 +12,9 @@ namespace NaughtyAttributes.Editor
     {
         public override void DrawProperty(SerializedProperty property)
         {
-            DropdownAttribute dropdownAttribute = PropertyUtility.GetAttributes<DropdownAttribute>(property)[0];
+            EditorDrawUtility.DrawHeader(property);
+
+            DropdownAttribute dropdownAttribute = PropertyUtility.GetAttribute<DropdownAttribute>(property);
             UnityEngine.Object target = PropertyUtility.GetTargetObject(property);
 
             FieldInfo fieldInfo = target.GetType().GetField(property.name,

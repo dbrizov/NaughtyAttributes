@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ namespace NaughtyAttributes.Editor
     {
         public override bool CanDrawProperty(SerializedProperty property)
         {
-            ShowIfAttribute showIfAttribute = PropertyUtility.GetAttributes<ShowIfAttribute>(property)[0];
+            ShowIfAttribute showIfAttribute = PropertyUtility.GetAttribute<ShowIfAttribute>(property);
             UnityEngine.Object target = PropertyUtility.GetTargetObject(property);
 
             FieldInfo conditionField = target.GetType().GetField(showIfAttribute.ConditionName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);

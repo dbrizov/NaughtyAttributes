@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 
 namespace NaughtyAttributes.Editor
@@ -8,7 +8,9 @@ namespace NaughtyAttributes.Editor
     {
         public override void DrawProperty(SerializedProperty property)
         {
-            SliderAttribute sliderAttribute = PropertyUtility.GetAttributes<SliderAttribute>(property)[0];
+            EditorDrawUtility.DrawHeader(property);
+
+            SliderAttribute sliderAttribute = PropertyUtility.GetAttribute<SliderAttribute>(property);
 
             if (property.propertyType == SerializedPropertyType.Integer)
             {
@@ -24,7 +26,7 @@ namespace NaughtyAttributes.Editor
                 EditorGUILayout.HelpBox(warning, MessageType.Warning);
                 Debug.LogWarning(warning, PropertyUtility.GetTargetObject(property));
 
-                EditorGUILayout.PropertyField(property, true);
+                EditorDrawUtility.DrawPropertyField(property);
             }
         }
     }

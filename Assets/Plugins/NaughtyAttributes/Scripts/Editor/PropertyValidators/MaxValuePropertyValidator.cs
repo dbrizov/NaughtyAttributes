@@ -1,4 +1,4 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEngine;
 
 namespace NaughtyAttributes.Editor
@@ -8,7 +8,7 @@ namespace NaughtyAttributes.Editor
     {
         public override void ValidateProperty(SerializedProperty property)
         {
-            MaxValueAttribute maxValueAttribute = PropertyUtility.GetAttributes<MaxValueAttribute>(property)[0];
+            MaxValueAttribute maxValueAttribute = PropertyUtility.GetAttribute<MaxValueAttribute>(property);
 
             if (property.propertyType == SerializedPropertyType.Integer)
             {

@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 
 namespace NaughtyAttributes.Editor
@@ -8,7 +8,7 @@ namespace NaughtyAttributes.Editor
     {
         public override void DrawProperty(SerializedProperty property)
         {
-            EditorGUILayout.PropertyField(property, true);
+            EditorDrawUtility.DrawPropertyField(property);
 
             if (property.propertyType == SerializedPropertyType.ObjectReference)
             {
@@ -17,7 +17,7 @@ namespace NaughtyAttributes.Editor
                     Texture2D previewTexture = AssetPreview.GetAssetPreview(property.objectReferenceValue);
                     if (previewTexture != null)
                     {
-                        ShowAssetPreviewAttribute showAssetPreviewAttribute = PropertyUtility.GetAttributes<ShowAssetPreviewAttribute>(property)[0];
+                        ShowAssetPreviewAttribute showAssetPreviewAttribute = PropertyUtility.GetAttribute<ShowAssetPreviewAttribute>(property);
                         int width = Mathf.Clamp(showAssetPreviewAttribute.Width, 0, previewTexture.width);
                         int height = Mathf.Clamp(showAssetPreviewAttribute.Height, 0, previewTexture.height);
 

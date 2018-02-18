@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 
 namespace NaughtyAttributes.Editor
@@ -8,6 +8,8 @@ namespace NaughtyAttributes.Editor
     {
         public override void DrawProperty(SerializedProperty property)
         {
+            EditorDrawUtility.DrawHeader(property);
+
             if (property.propertyType == SerializedPropertyType.String)
             {
                 EditorGUILayout.LabelField(property.displayName);
@@ -27,7 +29,7 @@ namespace NaughtyAttributes.Editor
                 EditorGUILayout.HelpBox(warning, MessageType.Warning);
                 Debug.LogWarning(warning, PropertyUtility.GetTargetObject(property));
 
-                EditorGUILayout.PropertyField(property, true);
+                EditorDrawUtility.DrawPropertyField(property);
             }
         }
     }

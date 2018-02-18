@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 using UnityEditorInternal;
 using System.Collections.Generic;
@@ -12,6 +12,8 @@ namespace NaughtyAttributes.Editor
 
         public override void DrawProperty(SerializedProperty property)
         {
+            EditorDrawUtility.DrawHeader(property);
+
             if (property.isArray)
             {
                 if (!this.reorderableListsByPropertyName.ContainsKey(property.name))
@@ -43,7 +45,7 @@ namespace NaughtyAttributes.Editor
                 EditorGUILayout.HelpBox(warning, MessageType.Warning);
                 Debug.LogWarning(warning, PropertyUtility.GetTargetObject(property));
 
-                EditorGUILayout.PropertyField(property, true);
+                EditorDrawUtility.DrawPropertyField(property);
             }
         }
 

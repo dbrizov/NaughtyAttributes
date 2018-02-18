@@ -1,6 +1,5 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
-using System.Collections;
 using System;
 
 namespace NaughtyAttributes.Editor
@@ -10,7 +9,10 @@ namespace NaughtyAttributes.Editor
     {
         public override void DrawProperty(SerializedProperty property)
         {
-            if (property.propertyType != SerializedPropertyType.Float && property.propertyType != SerializedPropertyType.Integer) {
+            EditorDrawUtility.DrawHeader(property);
+
+            if (property.propertyType != SerializedPropertyType.Float && property.propertyType != SerializedPropertyType.Integer)
+            {
                 EditorGUILayout.HelpBox("Field " + property.name + " is not a number", MessageType.Warning);
                 return;
             }
@@ -18,7 +20,7 @@ namespace NaughtyAttributes.Editor
             var value = property.propertyType == SerializedPropertyType.Integer ? property.intValue : property.floatValue;
             var valueFormatted = property.propertyType == SerializedPropertyType.Integer ? value.ToString() : String.Format("{0:0.00}", value);
 
-            ProgressBarAttribute progressBarAttribute = PropertyUtility.GetAttributes<ProgressBarAttribute>(property)[0];
+            ProgressBarAttribute progressBarAttribute = PropertyUtility.GetAttribute<ProgressBarAttribute>(property);
             var position = EditorGUILayout.GetControlRect();
             var maxValue = progressBarAttribute.MaxValue;
             float lineHight = EditorGUIUtility.singleLineHeight;
@@ -36,10 +38,12 @@ namespace NaughtyAttributes.Editor
         private void DrawBar(Rect position, float fillPercent, string label, Color barColor, Color labelColor)
         {
             if (Event.current.type != EventType.Repaint)
+            {
                 return;
+            }
 
             Color savedColor = GUI.color;
-            
+
             var fillRect = new Rect(position.x, position.y, position.width * fillPercent, position.height);
 
             EditorGUI.DrawRect(position, new Color(0.13f, 0.13f, 0.13f));

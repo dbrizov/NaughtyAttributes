@@ -1,4 +1,4 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEngine;
 
 namespace NaughtyAttributes.Editor
@@ -9,7 +9,7 @@ namespace NaughtyAttributes.Editor
         public override void DrawProperty(SerializedProperty property)
         {
             GUI.enabled = false;
-            EditorGUILayout.PropertyField(property, true);
+            EditorDrawUtility.DrawPropertyField(property);
             GUI.enabled = true;
         }
     }

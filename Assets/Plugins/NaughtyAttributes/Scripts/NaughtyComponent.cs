@@ -4,15 +4,40 @@ using UnityEngine;
 
 public class NaughtyComponent : MonoBehaviour
 {
+    [Header("integer")]
+    public int integer;
+
+    [Header("sprite")]
+    [ShowAssetPreview]
+    public Sprite sprite;
+
+    [Header("zero")]
+    [ReadOnly]
+    public Vector3 zero = Vector3.zero;
+
+    private int[] values = new int[] { 1, 2, 3, 4 };
+
+    [Header("dropdown")]
+    [Dropdown("values")]
+    public int dropdown;
+
+    [Header("minMaxSlider")]
+    [MinMaxSlider(0, 1)]
+    public Vector2 minMaxSlider;
+
+    [Header("slider")]
+    [Slider(0, 10)]
+    public int slider;
+
+    [Header("health")]
     [ProgressBar]
-    [SerializeField]
-    private float Health = 42;
+    public float health = 50;
 
-    [ProgressBar("Couns found", 25, ProgressBarColor.Yellow)]
-    public int CoinsFound = 3;
+    [Header("list")]
+    [ReorderableList]
+    public float[] list;
 
-    private void Update()
-    {
-        Health += Time.deltaTime * 3;
-    }
+    [Header("textArea")]
+    [ResizableTextArea]
+    public string textArea;
 }

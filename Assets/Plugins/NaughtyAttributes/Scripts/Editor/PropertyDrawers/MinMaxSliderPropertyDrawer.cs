@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 
 namespace NaughtyAttributes.Editor
@@ -8,7 +8,9 @@ namespace NaughtyAttributes.Editor
     {
         public override void DrawProperty(SerializedProperty property)
         {
-            MinMaxSliderAttribute minMaxSliderAttribute = PropertyUtility.GetAttributes<MinMaxSliderAttribute>(property)[0];
+            EditorDrawUtility.DrawHeader(property);
+
+            MinMaxSliderAttribute minMaxSliderAttribute = PropertyUtility.GetAttribute<MinMaxSliderAttribute>(property);
 
             if (property.propertyType == SerializedPropertyType.Vector2)
             {
@@ -68,7 +70,7 @@ namespace NaughtyAttributes.Editor
                 EditorGUILayout.HelpBox(warning, MessageType.Warning);
                 Debug.LogWarning(warning, PropertyUtility.GetTargetObject(property));
 
-                EditorGUILayout.PropertyField(property, true);
+                EditorDrawUtility.DrawPropertyField(property);
             }
         }
     }

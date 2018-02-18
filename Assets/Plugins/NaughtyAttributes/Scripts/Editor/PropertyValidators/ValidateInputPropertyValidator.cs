@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
@@ -10,7 +10,7 @@ namespace NaughtyAttributes.Editor
     {
         public override void ValidateProperty(SerializedProperty property)
         {
-            ValidateInputAttribute validateInputAttribute = PropertyUtility.GetAttributes<ValidateInputAttribute>(property)[0];
+            ValidateInputAttribute validateInputAttribute = PropertyUtility.GetAttribute<ValidateInputAttribute>(property);
             UnityEngine.Object target = PropertyUtility.GetTargetObject(property);
 
             MethodInfo validationCallback =

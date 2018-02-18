@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 
 namespace NaughtyAttributes.Editor
@@ -8,7 +8,7 @@ namespace NaughtyAttributes.Editor
     {
         public override void ValidateProperty(SerializedProperty property)
         {
-            RequiredAttribute requiredAttribute = PropertyUtility.GetAttributes<RequiredAttribute>(property)[0];
+            RequiredAttribute requiredAttribute = PropertyUtility.GetAttribute<RequiredAttribute>(property);
 
             if (property.propertyType == SerializedPropertyType.ObjectReference)
             {

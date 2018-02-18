@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEditor;
 using System;
 
@@ -6,6 +6,29 @@ namespace NaughtyAttributes.Editor
 {
     public static class EditorDrawUtility
     {
+        public static void DrawHeader(string header)
+        {
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField(header, EditorStyles.boldLabel);
+        }
+
+        public static bool DrawHeader(SerializedProperty property)
+        {
+            HeaderAttribute headerAttr = PropertyUtility.GetAttribute<HeaderAttribute>(property);
+            if (headerAttr != null)
+            {
+                DrawHeader(headerAttr.header);
+                return true;
+            }
+
+            return false;
+        }
+
+        public static void DrawPropertyField(SerializedProperty property, bool includeChildren = true)
+        {
+            EditorGUILayout.PropertyField(property, includeChildren);
+        }
+
         public static bool DrawLayoutField(object value, string label)
         {
             GUI.enabled = false;

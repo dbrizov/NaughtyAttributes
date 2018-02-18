@@ -1,4 +1,4 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEngine;
 
 namespace NaughtyAttributes.Editor
@@ -8,7 +8,7 @@ namespace NaughtyAttributes.Editor
     {
         public override void ValidateProperty(SerializedProperty property)
         {
-            MinValueAttribute minValueAttribute = PropertyUtility.GetAttributes<MinValueAttribute>(property)[0];
+            MinValueAttribute minValueAttribute = PropertyUtility.GetAttribute<MinValueAttribute>(property);
 
             if (property.propertyType == SerializedPropertyType.Integer)
             {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -233,7 +233,7 @@ namespace NaughtyAttributes.Editor
             }
             else
             {
-                EditorGUILayout.PropertyField(this.serializedPropertiesByFieldName[field.Name], true);
+                EditorDrawUtility.DrawPropertyField(this.serializedPropertiesByFieldName[field.Name]);
             }
 
             if (EditorGUI.EndChangeCheck())
@@ -259,7 +259,7 @@ namespace NaughtyAttributes.Editor
                 .Select(obj => obj as MetaAttribute)
                 .ToArray();
 
-            System.Array.Sort(metaAttributes, (x, y) =>
+            Array.Sort(metaAttributes, (x, y) =>
             {
                 return x.Order - y.Order;
             });

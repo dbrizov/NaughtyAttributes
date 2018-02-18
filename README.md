@@ -140,22 +140,6 @@ The most powerful ValidatorAttribute.
 ## Meta Attributes
 Give the fields meta data. A field can have infinite number of meta attributes.
 
-### Section
-Can be used for grouping fields. The same as Unity's **Header** attribute.
-There is no difference between the two, you can use whatever you like, I just wanted to support a custom header attribute.
-
-![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/Section_Code.PNG)
-
-![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/Section_Inspector.PNG)
-
-### BlankSpace
-The same as Unity's **Space** attribute.
-There is no difference between the two, you can use whatever you like, I just wanted to support a custom space attribute.
-
-![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/BlankSpace_Code.PNG)
-
-![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/BlankSpace_Inspector.PNG)
-
 ### InfoBox
 Used for providing additional information.
 
