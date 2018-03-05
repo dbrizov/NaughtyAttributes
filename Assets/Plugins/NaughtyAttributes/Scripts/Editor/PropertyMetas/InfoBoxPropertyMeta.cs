@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
@@ -14,7 +14,7 @@ namespace NaughtyAttributes.Editor
 
             if (!string.IsNullOrEmpty(infoBoxAttribute.VisibleIf))
             {
-                FieldInfo conditionField = target.GetType().GetField(infoBoxAttribute.VisibleIf, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                FieldInfo conditionField = ReflectionUtility.GetField(target, infoBoxAttribute.VisibleIf);
                 if (conditionField != null &&
                     conditionField.FieldType == typeof(bool))
                 {
@@ -26,7 +26,7 @@ namespace NaughtyAttributes.Editor
                     return;
                 }
 
-                MethodInfo conditionMethod = target.GetType().GetMethod(infoBoxAttribute.VisibleIf, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                MethodInfo conditionMethod = ReflectionUtility.GetMethod(target, infoBoxAttribute.VisibleIf);
                 if (conditionMethod != null &&
                     conditionMethod.ReturnType == typeof(bool) &&
                     conditionMethod.GetParameters().Length == 0)

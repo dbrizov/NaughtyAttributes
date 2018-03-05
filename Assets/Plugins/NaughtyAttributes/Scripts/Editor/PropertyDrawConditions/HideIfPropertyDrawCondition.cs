@@ -12,14 +12,14 @@ namespace NaughtyAttributes.Editor
             HideIfAttribute hideIfAttribute = PropertyUtility.GetAttribute<HideIfAttribute>(property);
             UnityEngine.Object target = PropertyUtility.GetTargetObject(property);
 
-            FieldInfo conditionField = target.GetType().GetField(hideIfAttribute.ConditionName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+            FieldInfo conditionField = ReflectionUtility.GetField(target, hideIfAttribute.ConditionName);
             if (conditionField != null &&
                 conditionField.FieldType == typeof(bool))
             {
                 return !(bool)conditionField.GetValue(target);
             }
 
-            MethodInfo conditionMethod = target.GetType().GetMethod(hideIfAttribute.ConditionName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+            MethodInfo conditionMethod = ReflectionUtility.GetMethod(target, hideIfAttribute.ConditionName);
             if (conditionMethod != null &&
                 conditionMethod.ReturnType == typeof(bool) &&
                 conditionMethod.GetParameters().Length == 0)

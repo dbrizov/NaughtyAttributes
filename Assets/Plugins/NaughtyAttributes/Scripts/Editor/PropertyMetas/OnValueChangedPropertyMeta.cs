@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,7 +12,7 @@ namespace NaughtyAttributes.Editor
             OnValueChangedAttribute onValueChangedAttribute = (OnValueChangedAttribute)metaAttribute;
             UnityEngine.Object target = PropertyUtility.GetTargetObject(property);
 
-            MethodInfo callbackMethod = target.GetType().GetMethod(onValueChangedAttribute.CallbackName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+            MethodInfo callbackMethod = ReflectionUtility.GetMethod(target, onValueChangedAttribute.CallbackName);
             if (callbackMethod != null &&
                 callbackMethod.ReturnType == typeof(void) &&
                 callbackMethod.GetParameters().Length == 0)

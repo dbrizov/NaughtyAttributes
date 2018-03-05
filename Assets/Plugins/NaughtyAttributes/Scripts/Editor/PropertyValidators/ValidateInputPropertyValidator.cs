@@ -13,14 +13,13 @@ namespace NaughtyAttributes.Editor
             ValidateInputAttribute validateInputAttribute = PropertyUtility.GetAttribute<ValidateInputAttribute>(property);
             UnityEngine.Object target = PropertyUtility.GetTargetObject(property);
 
-            MethodInfo validationCallback =
-                target.GetType().GetMethod(validateInputAttribute.CallbackName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+            MethodInfo validationCallback = ReflectionUtility.GetMethod(target, validateInputAttribute.CallbackName);
 
             if (validationCallback != null &&
                 validationCallback.ReturnType == typeof(bool) &&
                 validationCallback.GetParameters().Length == 1)
             {
-                FieldInfo fieldInfo = target.GetType().GetField(property.name, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                FieldInfo fieldInfo = ReflectionUtility.GetField(target, property.name);
                 Type fieldType = fieldInfo.FieldType;
                 Type parameterType = validationCallback.GetParameters()[0].ParameterType;
 

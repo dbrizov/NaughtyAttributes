@@ -29,7 +29,7 @@ namespace NaughtyAttributes.Editor
             this.script = this.serializedObject.FindProperty("m_Script");
 
             // Cache serialized fields
-            this.fields = this.GetFields(f => this.serializedObject.FindProperty(f.Name) != null);
+            this.fields = ReflectionUtility.GetAllFields(this.target, f => this.serializedObject.FindProperty(f.Name) != null);
 
             // If there are no NaughtyAttributes use default inspector
             if (this.fields.All(f => f.GetCustomAttributes(typeof(NaughtyAttribute), true).Length == 0))
@@ -71,15 +71,16 @@ namespace NaughtyAttributes.Editor
             }
 
             // Cache non-serialized fields
-            this.nonSerializedFields = this.GetFields(
-                f => f.GetCustomAttributes(typeof(DrawerAttribute), true).Length > 0 && this.serializedObject.FindProperty(f.Name) == null);
+            this.nonSerializedFields = ReflectionUtility.GetAllFields(
+                this.target, f => f.GetCustomAttributes(typeof(DrawerAttribute), true).Length > 0 && this.serializedObject.FindProperty(f.Name) == null);
 
             // Cache the native properties
-            this.nativeProperties = this.GetProperties(
-                p => p.GetCustomAttributes(typeof(DrawerAttribute), true).Length > 0);
+            this.nativeProperties = ReflectionUtility.GetAllProperties(
+                this.target, p => p.GetCustomAttributes(typeof(DrawerAttribute), true).Length > 0);
 
             // Cache methods with DrawerAttribute
-            this.methods = this.GetMethods(m => m.GetCustomAttributes(typeof(DrawerAttribute), true).Length > 0);
+            this.methods = ReflectionUtility.GetAllMethods(
+                this.target, m => m.GetCustomAttributes(typeof(DrawerAttribute), true).Length > 0);
         }
 
         private void OnDisable()
@@ -314,81 +315,6 @@ namespace NaughtyAttributes.Editor
             {
                 return null;
             }
-        }
-
-        private List<FieldInfo> GetFields(Func<FieldInfo, bool> predicate)
-        {
-            List<Type> types = new List<Type>()
-            {
-                this.target.GetType()
-            };
-
-            while (types.Last().BaseType != null)
-            {
-                types.Add(types.Last().BaseType);
-            }
-
-            List<FieldInfo> fields = new List<FieldInfo>();
-            for (int i = types.Count - 1; i >= 0; i--)
-            {
-                IEnumerable<FieldInfo> fieldInfos = types[i]
-                    .GetFields(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly)
-                    .Where(predicate);
-
-                fields.AddRange(fieldInfos);
-            }
-
-            return fields;
-        }
-
-        private List<PropertyInfo> GetProperties(Func<PropertyInfo, bool> predicate)
-        {
-            List<Type> types = new List<Type>()
-            {
-                this.target.GetType()
-            };
-
-            while (types.Last().BaseType != null)
-            {
-                types.Add(types.Last().BaseType);
-            }
-
-            List<PropertyInfo> properties = new List<PropertyInfo>();
-            for (int i = types.Count - 1; i >= 0; i--)
-            {
-                IEnumerable<PropertyInfo> propertyInfos = types[i]
-                    .GetProperties(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly)
-                    .Where(predicate);
-
-                properties.AddRange(propertyInfos);
-            }
-
-            return properties;
-        }
-
-        private List<MethodInfo> GetMethods(Func<MethodInfo, bool> predicate)
-        {
-            List<Type> types = new List<Type>()
-            {
-                this.target.GetType()
-            };
-
-            while (types.Last().BaseType != null)
-            {
-                types.Add(types.Last().BaseType);
-            }
-
-            List<MethodInfo> methods = new List<MethodInfo>();
-            for (int i = types.Count - 1; i >= 0; i--)
-            {
-                IEnumerable<MethodInfo> methodInfos = types[i]
-                    .GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly)
-                    .Where(predicate);
-
-                methods.AddRange(methodInfos);
-            }
-
-            return methods;
         }
     }
 }

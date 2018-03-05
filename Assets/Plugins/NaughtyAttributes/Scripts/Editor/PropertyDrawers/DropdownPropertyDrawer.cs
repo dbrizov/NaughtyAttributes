@@ -17,11 +17,8 @@ namespace NaughtyAttributes.Editor
             DropdownAttribute dropdownAttribute = PropertyUtility.GetAttribute<DropdownAttribute>(property);
             UnityEngine.Object target = PropertyUtility.GetTargetObject(property);
 
-            FieldInfo fieldInfo = target.GetType().GetField(property.name,
-                BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
-
-            FieldInfo valuesFieldInfo = target.GetType().GetField(dropdownAttribute.ValuesFieldName,
-                BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public);
+            FieldInfo fieldInfo = ReflectionUtility.GetField(target, property.name);
+            FieldInfo valuesFieldInfo = ReflectionUtility.GetField(target, dropdownAttribute.ValuesFieldName);
 
             if (valuesFieldInfo == null)
             {

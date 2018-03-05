@@ -12,14 +12,14 @@ namespace NaughtyAttributes.Editor
             ShowIfAttribute showIfAttribute = PropertyUtility.GetAttribute<ShowIfAttribute>(property);
             UnityEngine.Object target = PropertyUtility.GetTargetObject(property);
 
-            FieldInfo conditionField = target.GetType().GetField(showIfAttribute.ConditionName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+            FieldInfo conditionField = ReflectionUtility.GetField(target, showIfAttribute.ConditionName);
             if (conditionField != null &&
                 conditionField.FieldType == typeof(bool))
             {
                 return (bool)conditionField.GetValue(target);
             }
 
-            MethodInfo conditionMethod = target.GetType().GetMethod(showIfAttribute.ConditionName, BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+            MethodInfo conditionMethod = ReflectionUtility.GetMethod(target, showIfAttribute.ConditionName);
             if (conditionMethod != null &&
                 conditionMethod.ReturnType == typeof(bool) &&
                 conditionMethod.GetParameters().Length == 0)
