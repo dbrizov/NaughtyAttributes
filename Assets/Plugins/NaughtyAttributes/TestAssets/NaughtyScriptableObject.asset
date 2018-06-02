@@ -11,3 +11,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 753bdb918c6038142acddbd7aae6958f, type: 3}
   m_Name: NaughtyScriptableObject
   m_EditorClassIdentifier: 
+  integer: 0
+  sprite: {fileID: 21300000, guid: 005888ede18a58e4db8d069cfa3007cb, type: 3}
+  zero: {x: 0, y: 0, z: 0}
+  dropdown: 0
+  minMaxSlider: {x: 0, y: 0}
+  slider: 0
+  health: 50
+  list:
+  - 1
+  - 3
+  - 2
+  textArea: 
