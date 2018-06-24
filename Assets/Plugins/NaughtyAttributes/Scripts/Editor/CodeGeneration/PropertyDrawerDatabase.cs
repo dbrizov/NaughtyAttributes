@@ -12,7 +12,9 @@ namespace NaughtyAttributes.Editor
         static PropertyDrawerDatabase()
         {
             drawersByAttributeType = new Dictionary<Type, PropertyDrawer>();
-            drawersByAttributeType[typeof(DropdownAttribute)] = new DropdownPropertyDrawer();
+            drawersByAttributeType[typeof(DisableIfAttribute)] = new DisableIfPropertyDrawer();
+drawersByAttributeType[typeof(DropdownAttribute)] = new DropdownPropertyDrawer();
+drawersByAttributeType[typeof(EnableIfAttribute)] = new EnableIfPropertyDrawer();
 drawersByAttributeType[typeof(MinMaxSliderAttribute)] = new MinMaxSliderPropertyDrawer();
 drawersByAttributeType[typeof(ProgressBarAttribute)] = new ProgressBarPropertyDrawer();
 drawersByAttributeType[typeof(ReadOnlyAttribute)] = new ReadOnlyPropertyDrawer();
