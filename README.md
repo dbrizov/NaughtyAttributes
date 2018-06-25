@@ -81,6 +81,8 @@ Makes a field read only.
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ReadOnly_Inspector.PNG)
 
 ### EnableIf / DisableIf
+Thanks to [Chris Lewis](https://github.com/cmlewis89)
+
 ![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/EnableIf_Code.PNG)
 
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/EnableIf_Inspector.gif)
