@@ -83,7 +83,7 @@ Makes a field read only.
 ### EnableIf / DisableIf
 ![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/EnableIf_Code.PNG)
 
-![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/EnableIf_Inspector.PNG)
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/EnableIf_Inspector.gif)
 
 ### ShowAssetPreview
 Shows the texture preview of a given asset (Sprite, Prefab...)
