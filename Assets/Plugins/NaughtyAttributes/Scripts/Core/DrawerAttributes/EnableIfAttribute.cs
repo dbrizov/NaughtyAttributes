@@ -1,9 +1,9 @@
-﻿using System;
+using System;
 
 namespace NaughtyAttributes
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-	public class EnableIfAttribute : DrawerAttribute
+    public class EnableIfAttribute : DrawerAttribute
     {
         private string conditionName;
 

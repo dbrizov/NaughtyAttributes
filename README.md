@@ -2,7 +2,7 @@
 Attribute Extensions for Unity
 
 ## System Requirements
-Unity 2017.1.0 or later versions. Feel free to try older version
+Unity 2017.1.0 or later versions. Feel free to try older version. Don't forget to include the NaughtyAttributes namespace.
 
 ## Drawer Attributes
 Provide special draw options to serialized fields.
@@ -79,6 +79,11 @@ Makes a field read only.
 ![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ReadOnly_Code.PNG)
 
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ReadOnly_Inspector.PNG)
+
+### EnableIf / DisableIf
+![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/EnableIf_Code.PNG)
+
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/EnableIf_Inspector.PNG)
 
 ### ShowAssetPreview
 Shows the texture preview of a given asset (Sprite, Prefab...)

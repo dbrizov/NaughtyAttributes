@@ -4,8 +4,19 @@ using UnityEngine;
 
 public class NaughtyComponent : MonoBehaviour
 {
-    [Header("integer")]
-    public int integer;
+    [Header("myInt")]
+    [ShowIf("showMyInt")]
+    [EnableIf("enableMyInt")]
+    public int myInt;
+    public bool showMyInt = true;
+    public bool enableMyInt = true;
+
+    [Header("myFloat")]
+    [HideIf("HideMyFloat")]
+    [DisableIf("DisabledMyFloat")]
+    public float myFloat;
+    public bool hideMyFloat = false;
+    public bool disableMyFloat = false;
 
     [Header("sprite")]
     [ShowAssetPreview]
@@ -40,4 +51,14 @@ public class NaughtyComponent : MonoBehaviour
     [Header("textArea")]
     [ResizableTextArea]
     public string textArea;
+
+    private bool HideMyFloat()
+    {
+        return this.hideMyFloat;
+    }
+
+    private bool DisabledMyFloat()
+    {
+        return this.disableMyFloat;
+    }
 }
