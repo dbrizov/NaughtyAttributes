@@ -61,7 +61,8 @@ namespace NaughtyAttributes.Editor
                 isDrawn = true;
                 EditorGUILayout.TextField(label, (string)value);
             }
-            else if (valueType == typeof(bool)) {
+            else if (valueType == typeof(bool))
+            {
                 isDrawn = true;
                 EditorGUILayout.Toggle(label, (bool)value);
             }
