@@ -85,7 +85,7 @@ namespace NaughtyAttributes.Editor
                 EditorGUILayout.RectField(label, (Rect)value);
             }
             else if (typeof(UnityEngine.Object).IsAssignableFrom(valueType)) 
-	    {
+            {
                 EditorGUILayout.ObjectField(label, (UnityEngine.Object) value, valueType, true);
             }
             else
