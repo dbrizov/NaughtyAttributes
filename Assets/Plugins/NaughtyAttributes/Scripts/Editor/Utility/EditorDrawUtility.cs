@@ -96,6 +96,10 @@ namespace NaughtyAttributes.Editor
                 isDrawn = true;
                 EditorGUILayout.RectField(label, (Rect)value);
             }
+			else if (typeof(UnityEngine.Object).IsAssignableFrom(valueType)) {
+                isDrawn = true;
+                EditorGUILayout.ObjectField(label, (UnityEngine.Object) value, valueType, true);
+            }
             else
             {
                 isDrawn = false;
