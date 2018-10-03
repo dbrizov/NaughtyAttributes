@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
@@ -24,7 +24,7 @@ namespace NaughtyAttributes.Editor
         private static readonly string DRAW_CONDITION_ENTRY_FORMAT = "drawConditionsByAttributeType[typeof({0})] = new {1}();" + Environment.NewLine;
 
         //[UnityEditor.Callbacks.DidReloadScripts]
-        [MenuItem("NaughtyAttributes/Update Attributes Database")]
+        [MenuItem("Tools/NaughtyAttributes/Update Attributes Database")]
         private static void GenerateCode()
         {
             GenerateScript<PropertyMeta, PropertyMetaAttribute>("PropertyMetaDatabase", "PropertyMetaDatabaseTemplate", META_ENTRY_FORMAT);
