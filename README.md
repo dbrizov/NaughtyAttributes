@@ -186,7 +186,7 @@ public class ReadOnlyPropertyDrawer : PropertyDrawer
 }
 ```
 
-Last, in order for the editor to recognize the drawer for this attribute, you have to press the **NaughtyAttributes/Update Attributes Database** menu item in the editor.
+Last, in order for the editor to recognize the drawer for this attribute, you have to press the **Tools/NaughtyAttributes/Update Attributes Database** menu item in the editor.
 
 ## License
 MIT License
