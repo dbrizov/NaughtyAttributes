@@ -1142,14 +1142,14 @@ Unlike Unity's <strong>Multiline</strong> and <strong>TextArea</strong> attribut
 All non-serialized fields are displayed at the botton of the inspector before the method buttons.
 Keep in mind that if you change a non-static non-serialized field in the code - the value in the inspector will be updated after you press <strong>Play</strong> in the editor.
 There is no such issue with static non-serialized fields because their values are updated at compile time.
-It also supports only value types and string <strong>(int, long, float, double, string, Vector2, Vector3, Vector4, Color, Bounds, Rect)</strong>.</p>
+It supports only certain types <strong>(bool, int, long, float, double, string, Vector2, Vector3, Vector4, Color, Bounds, Rect, UnityEngine.Object)</strong>.</p>
 <p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowNonSerializedField_Code.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowNonSerializedField_Code.PNG" alt="code" style="max-width:100%;"></a></p>
 <p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowNonSerializedField_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowNonSerializedField_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-shownativeproperty" class="anchor" href="#shownativeproperty" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ShowNativeProperty</h3>
 <p>Shows native C# properties in the inspector.
 All native properties are displayed at the bottom of the inspector after the non-serialized fields and before the method buttons.
-It also supports only value types and string <strong>(int, long, float, double, string, Vector2, Vector3, Vector4, Color, Bounds, Rect)</strong>.</p>
+It supports only certain types <strong>(bool, int, long, float, double, string, Vector2, Vector3, Vector4, Color, Bounds, Rect, UnityEngine.Object)</strong>.</p>
 <p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowNativeProperty_Code.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowNativeProperty_Code.PNG" alt="code" style="max-width:100%;"></a></p>
 <p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowNativeProperty_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowNativeProperty_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
@@ -1241,7 +1241,7 @@ public class ReadOnlyPropertyDrawer : PropertyDrawer
 	}
 }
 </code></pre>
-<p>Last, in order for the editor to recognize the drawer for this attribute, you have to press the <strong>NaughtyAttributes/Update Attributes Database</strong> menu item in the editor.</p>
+<p>Last, in order for the editor to recognize the drawer for this attribute, you have to press the <strong>Tools/NaughtyAttributes/Update Attributes Database</strong> menu item in the editor.</p>
 <h2>
 <a id="user-content-license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
 <p>MIT License</p>
