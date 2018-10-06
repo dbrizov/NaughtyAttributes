@@ -1,6 +1,5 @@
 using System.Reflection;
 using UnityEditor;
-using UnityEngine;
 
 namespace NaughtyAttributes.Editor
 {
@@ -40,8 +39,7 @@ namespace NaughtyAttributes.Editor
                 }
 
                 string warning = infoBoxAttribute.GetType().Name + " needs a valid boolean condition field or method name to work";
-                EditorGUILayout.HelpBox(warning, MessageType.Warning);
-                Debug.LogWarning(warning, PropertyUtility.GetTargetObject(property));
+                EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, logToConsole: true, context: PropertyUtility.GetTargetObject(property));
             }
             else
             {

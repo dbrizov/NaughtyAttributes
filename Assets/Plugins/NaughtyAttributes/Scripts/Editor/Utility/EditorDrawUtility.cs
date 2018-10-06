@@ -24,6 +24,28 @@ namespace NaughtyAttributes.Editor
             return false;
         }
 
+        public static void DrawHelpBox(string message, MessageType type, bool logToConsole = false, UnityEngine.Object context = null)
+        {
+            EditorGUILayout.HelpBox(message, type);
+
+            if (logToConsole)
+            {
+                switch (type)
+                {
+                    case MessageType.None:
+                    case MessageType.Info:
+                        Debug.Log(message, context);
+                        break;
+                    case MessageType.Warning:
+                        Debug.LogWarning(message, context);
+                        break;
+                    case MessageType.Error:
+                        Debug.LogError(message, context);
+                        break;
+                }
+            }
+        }
+
         public static void DrawPropertyField(SerializedProperty property, bool includeChildren = true)
         {
             EditorGUILayout.PropertyField(property, includeChildren);
@@ -84,9 +106,9 @@ namespace NaughtyAttributes.Editor
             {
                 EditorGUILayout.RectField(label, (Rect)value);
             }
-            else if (typeof(UnityEngine.Object).IsAssignableFrom(valueType)) 
+            else if (typeof(UnityEngine.Object).IsAssignableFrom(valueType))
             {
-                EditorGUILayout.ObjectField(label, (UnityEngine.Object) value, valueType, true);
+                EditorGUILayout.ObjectField(label, (UnityEngine.Object)value, valueType, true);
             }
             else
             {

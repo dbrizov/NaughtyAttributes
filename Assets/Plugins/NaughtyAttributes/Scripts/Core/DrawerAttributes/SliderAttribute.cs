@@ -1,39 +1,23 @@
-﻿using System;
+using System;
 
 namespace NaughtyAttributes
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class SliderAttribute : DrawerAttribute
     {
-        private float minValue;
-        private float maxValue;
+        public float MinValue { get; private set; }
+        public float MaxValue { get; private set; }
 
         public SliderAttribute(float minValue, float maxValue)
         {
-            this.minValue = minValue;
-            this.maxValue = maxValue;
+            this.MinValue = minValue;
+            this.MaxValue = maxValue;
         }
 
         public SliderAttribute(int minValue, int maxValue)
         {
-            this.minValue = minValue;
-            this.maxValue = maxValue;
-        }
-
-        public float MinValue
-        {
-            get
-            {
-                return this.minValue;
-            }
-        }
-
-        public float MaxValue
-        {
-            get
-            {
-                return this.maxValue;
-            }
+            this.MaxValue = minValue;
+            this.MaxValue = maxValue;
         }
     }
 }

@@ -1,4 +1,3 @@
-using UnityEngine;
 using UnityEditor;
 
 namespace NaughtyAttributes.Editor
@@ -20,15 +19,13 @@ namespace NaughtyAttributes.Editor
                         errorMessage = requiredAttribute.Message;
                     }
 
-                    EditorGUILayout.HelpBox(errorMessage, MessageType.Error);
-                    Debug.LogError(errorMessage, PropertyUtility.GetTargetObject(property));
+                    EditorDrawUtility.DrawHelpBox(errorMessage, MessageType.Error, logToConsole: true, context: PropertyUtility.GetTargetObject(property));
                 }
             }
             else
             {
                 string warning = requiredAttribute.GetType().Name + " works only on reference types";
-                EditorGUILayout.HelpBox(warning, MessageType.Warning);
-                Debug.LogWarning(warning, PropertyUtility.GetTargetObject(property));
+                EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, logToConsole: true, context: PropertyUtility.GetTargetObject(property));
             }
         }
     }

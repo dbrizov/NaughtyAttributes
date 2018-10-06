@@ -1,7 +1,6 @@
 using System;
 using System.Reflection;
 using UnityEditor;
-using UnityEngine;
 
 namespace NaughtyAttributes.Editor
 {
@@ -29,43 +28,27 @@ namespace NaughtyAttributes.Editor
                     {
                         if (string.IsNullOrEmpty(validateInputAttribute.Message))
                         {
-                            this.DrawHelpBox(property.name + " is not valid", target, MessageType.Error);
+                            EditorDrawUtility.DrawHelpBox(property.name + " is not valid", MessageType.Error, logToConsole: true, context: target);
                         }
                         else
                         {
-                            this.DrawHelpBox(validateInputAttribute.Message, target, MessageType.Error);
+                            EditorDrawUtility.DrawHelpBox(validateInputAttribute.Message, MessageType.Error, logToConsole: true, context: target);
                         }
                     }
                 }
                 else
                 {
-                    this.DrawHelpBox("The field type is not the same as the callback's parameter type", target, MessageType.Warning);
+                    string warning = "The field type is not the same as the callback's parameter type";
+                    EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, logToConsole: true, context: target);
                 }
             }
             else
             {
-                this.DrawHelpBox(validateInputAttribute.GetType().Name +
-                    " needs a callback with boolean return type and a single parameter of the same type as the field", target, MessageType.Warning);
-            }
-        }
+                string warning =
+                    validateInputAttribute.GetType().Name +
+                    " needs a callback with boolean return type and a single parameter of the same type as the field";
 
-        private void DrawHelpBox(string message, UnityEngine.Object target, MessageType messageType)
-        {
-            EditorGUILayout.HelpBox(message, messageType);
-
-            switch (messageType)
-            {
-                case MessageType.Warning:
-                    Debug.LogWarning(message, target);
-                    break;
-
-                case MessageType.Error:
-                    Debug.LogError(message, target);
-                    break;
-
-                default:
-                    Debug.Log(message, target);
-                    break;
+                EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, logToConsole: true, context: target);
             }
         }
     }

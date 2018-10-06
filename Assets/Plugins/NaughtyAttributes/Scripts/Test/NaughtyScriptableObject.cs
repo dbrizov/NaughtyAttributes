@@ -1,44 +1,157 @@
 using UnityEngine;
-using System.Collections;
 using NaughtyAttributes;
+using System.Collections.Generic;
 
 [CreateAssetMenu(fileName = "NaughtyScriptableObject", menuName = "NaughtyAttributes/NaughtyScriptableObject")]
 public class NaughtyScriptableObject : ScriptableObject
 {
-    [Header("integer")]
-    public int integer;
+    [BoxGroup("Sliders")]
+    [Slider(0, 10)]
+    public int intSlider;
 
-    [Header("sprite")]
+    [BoxGroup("Sliders")]
+    [Slider(0.0f, 10.0f)]
+    public float floatSlider;
+
+    [BoxGroup("Sliders")]
+    [MinMaxSlider(0.0f, 100.0f)]
+    public Vector2 minMaxSlider;
+
+    [BoxGroup("Reorderable Lists")]
+    [ReorderableList]
+    public int[] intArray;
+
+    [BoxGroup("Reorderable Lists")]
+    [ReorderableList]
+    public List<Vector3> vectorList;
+
+    [BoxGroup("Dropdowns")]
+    [Dropdown("intValues")]
+    public int intValue;
+
+    [BoxGroup("Dropdowns")]
+    [Dropdown("stringValues")]
+    public string stringValue;
+
+    [BoxGroup("Dropdowns")]
+    [Dropdown("vectorValues")]
+    public Vector3 vectorValue;
+
+#pragma warning disable 414
+    private int[] intValues = new int[] { 1, 2, 3 };
+
+    private List<string> stringValues = new List<string>() { "A", "B", "C" };
+
+    private DropdownList<Vector3> vectorValues = new DropdownList<Vector3>()
+    {
+        { "Right", Vector3.right },
+        { "Up", Vector3.up },
+        { "Forward", Vector3.forward }
+    };
+#pragma warning restore 414
+
+    [ResizableTextArea]
+    public string textArea;
+
+#pragma warning disable 414
+    [ShowNonSerializedField]
+    private int myInt = 10;
+
+    [ShowNonSerializedField]
+    private const float PI = 3.14159f;
+
+    [ShowNonSerializedField]
+    private static readonly Vector3 CONST_VECTOR = Vector3.one;
+#pragma warning restore 414
+
+    [ShowNativeProperty]
+    public ScriptableObject Transform
+    {
+        get
+        {
+            return this;
+        }
+    }
+
+    [ReadOnly]
+    public int readOnlyInt = 5;
+
+    public bool enableInt = true;
+
+    [EnableIf("enableInt")]
+    public int enableIf;
+
+    [DisableIf("enableInt")]
+    public int disabledIf;
+
+    [EnableIf("ReturnTrue")]
+    public int enabledInt;
+
+    [DisableIf("ReturnTrue")]
+    public int disabledInt;
+
+    public bool showInt = true;
+
+    [ShowIf("showInt")]
+    public int showIf;
+
+    [HideIf("showInt")]
+    public int hideIf;
+
+    [ShowIf("ReturnTrue")]
+    public int shownInt;
+
+    [HideIf("ReturnTrue")]
+    public int hiddenInt;
+
     [ShowAssetPreview]
     public Sprite sprite;
 
-    [Header("zero")]
-    [ReadOnly]
-    public Vector3 zero = Vector3.zero;
+    [ShowAssetPreview(96, 96)]
+    public GameObject prefab;
 
-    private int[] values = new int[] { 1, 2, 3, 4 };
-
-    [Header("dropdown")]
-    [Dropdown("values")]
-    public int dropdown;
-
-    [Header("minMaxSlider")]
-    [MinMaxSlider(0, 1)]
-    public Vector2 minMaxSlider;
-
-    [Header("slider")]
-    [Slider(0, 10)]
-    public int slider;
-
-    [Header("health")]
-    [ProgressBar]
+    [ProgressBar("Health", 100, ProgressBarColor.Orange)]
     public float health = 50;
 
-    [Header("list")]
-    [ReorderableList]
-    public float[] list;
+    [MinValue(0.0f), MaxValue(1.0f)]
+    public float minMaxValidated;
 
-    [Header("textArea")]
-    [ResizableTextArea]
-    public string textArea;
+    [Required]
+    public GameObject requiredPrefab;
+
+    [InfoBox("Has onValueChanged callback")]
+    [OnValueChanged("OnValueChanged")]
+    public int onValueChanged;
+
+    [Button]
+    public void MethodOne()
+    {
+        Debug.Log("MethodOne()");
+    }
+
+    [Button("Button Text")]
+    private void MethodTwo()
+    {
+        Debug.Log("MethodTwo()");
+    }
+
+    private bool ReturnTrue()
+    {
+        return true;
+    }
+
+    private bool ReturnFalse()
+    {
+        return false;
+    }
+
+    private bool IsNotNull(Sprite sprite)
+    {
+        return sprite != null;
+    }
+
+    private void OnValueChanged()
+    {
+        Debug.Log(this.onValueChanged);
+    }
 }

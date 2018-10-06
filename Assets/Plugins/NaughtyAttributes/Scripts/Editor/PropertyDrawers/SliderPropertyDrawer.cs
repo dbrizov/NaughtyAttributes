@@ -1,4 +1,3 @@
-using UnityEngine;
 using UnityEditor;
 
 namespace NaughtyAttributes.Editor
@@ -23,8 +22,7 @@ namespace NaughtyAttributes.Editor
             else
             {
                 string warning = sliderAttribute.GetType().Name + " can be used only on int or float fields";
-                EditorGUILayout.HelpBox(warning, MessageType.Warning);
-                Debug.LogWarning(warning, PropertyUtility.GetTargetObject(property));
+                EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, logToConsole: true, context: PropertyUtility.GetTargetObject(property));
 
                 EditorDrawUtility.DrawPropertyField(property);
             }

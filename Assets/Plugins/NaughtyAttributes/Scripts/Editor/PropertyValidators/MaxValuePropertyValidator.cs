@@ -1,5 +1,4 @@
 using UnityEditor;
-using UnityEngine;
 
 namespace NaughtyAttributes.Editor
 {
@@ -27,8 +26,7 @@ namespace NaughtyAttributes.Editor
             else
             {
                 string warning = maxValueAttribute.GetType().Name + " can be used only on int or float fields";
-                EditorGUILayout.HelpBox(warning, MessageType.Warning);
-                Debug.LogWarning(warning, PropertyUtility.GetTargetObject(property));
+                EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, logToConsole: true, context: PropertyUtility.GetTargetObject(property));
             }
         }
     }

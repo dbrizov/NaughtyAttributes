@@ -1,22 +1,14 @@
-﻿using System;
+using System;
 
 namespace NaughtyAttributes
 {
     public abstract class GroupAttribute : NaughtyAttribute
     {
-        private string name;
+        public string Name { get; private set; }
 
         public GroupAttribute(string name)
         {
-            this.name = name;
-        }
-
-        public string Name
-        {
-            get
-            {
-                return this.name;
-            }
+            this.Name = name;
         }
     }
 }

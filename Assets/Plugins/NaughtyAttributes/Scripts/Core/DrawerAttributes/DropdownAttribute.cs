@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,19 +7,11 @@ namespace NaughtyAttributes
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class DropdownAttribute : DrawerAttribute
     {
-        private string valuesFieldName;
+        public string ValuesFieldName { get; private set; }
 
         public DropdownAttribute(string valuesFieldName)
         {
-            this.valuesFieldName = valuesFieldName;
-        }
-
-        public string ValuesFieldName
-        {
-            get
-            {
-                return this.valuesFieldName;
-            }
+            this.ValuesFieldName = valuesFieldName;
         }
     }
 

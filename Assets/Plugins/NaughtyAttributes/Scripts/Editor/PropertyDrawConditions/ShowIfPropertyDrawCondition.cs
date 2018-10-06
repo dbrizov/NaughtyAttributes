@@ -1,6 +1,5 @@
 using System.Reflection;
 using UnityEditor;
-using UnityEngine;
 
 namespace NaughtyAttributes.Editor
 {
@@ -28,8 +27,7 @@ namespace NaughtyAttributes.Editor
             }
 
             string warning = showIfAttribute.GetType().Name + " needs a valid boolean condition field or method name to work";
-            EditorGUILayout.HelpBox(warning, MessageType.Warning);
-            Debug.LogWarning(warning, target);
+            EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, logToConsole: true, context: target);
 
             return true;
         }

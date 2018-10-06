@@ -25,20 +25,16 @@ namespace NaughtyAttributes.Editor
                     }
                     else
                     {
-                        this.DrawWarningBox(property.name + " doesn't have an asset preview", property);
+                        string warning = property.name + " doesn't have an asset preview";
+                        EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, logToConsole: true, context: PropertyUtility.GetTargetObject(property));
                     }
                 }
             }
             else
             {
-                this.DrawWarningBox(property.name + " doesn't have an asset preview", property);
+                string warning = property.name + " doesn't have an asset preview";
+                EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, logToConsole: true, context: PropertyUtility.GetTargetObject(property));
             }
-        }
-
-        private void DrawWarningBox(string warningText, SerializedProperty property)
-        {
-            EditorGUILayout.HelpBox(warningText, MessageType.Warning);
-            Debug.LogWarning(warningText, PropertyUtility.GetTargetObject(property));
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
@@ -22,8 +22,7 @@ namespace NaughtyAttributes.Editor
             else
             {
                 string warning = typeof(ButtonAttribute).Name + " works only on methods with no parameters";
-                EditorGUILayout.HelpBox(warning, MessageType.Warning);
-                Debug.LogWarning(warning, target);
+                EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, logToConsole: true, context: target);
             }
         }
     }

@@ -25,9 +25,8 @@ namespace NaughtyAttributes.Editor
             }
             else
             {
-                string warning = PropertyUtility.GetAttributes<ResizableTextAreaAttribute>(property)[0].GetType().Name + " can only be used on string fields";
-                EditorGUILayout.HelpBox(warning, MessageType.Warning);
-                Debug.LogWarning(warning, PropertyUtility.GetTargetObject(property));
+                string warning = PropertyUtility.GetAttribute<ResizableTextAreaAttribute>(property).GetType().Name + " can only be used on string fields";
+                EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, logToConsole: true, context: PropertyUtility.GetTargetObject(property));
 
                 EditorDrawUtility.DrawPropertyField(property);
             }

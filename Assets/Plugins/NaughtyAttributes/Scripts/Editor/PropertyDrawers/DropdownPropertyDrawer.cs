@@ -25,7 +25,8 @@ namespace NaughtyAttributes.Editor
                 this.DrawWarningBox(string.Format("{0} cannot find a values field with name \"{1}\"", dropdownAttribute.GetType().Name, dropdownAttribute.ValuesFieldName));
                 EditorGUILayout.PropertyField(property, true);
             }
-            else if (fieldInfo.FieldType == valuesFieldInfo.FieldType.GetElementType())
+            else if (valuesFieldInfo.GetValue(target) is IList &&
+                     fieldInfo.FieldType == this.GetElementType(valuesFieldInfo))
             {
                 // Selected value
                 object selectedValue = fieldInfo.GetValue(target);
@@ -92,6 +93,18 @@ namespace NaughtyAttributes.Editor
             {
                 this.DrawWarningBox(typeof(DropdownAttribute).Name + " works only when the type of the field is equal to the element type of the array");
                 EditorGUILayout.PropertyField(property, true);
+            }
+        }
+
+        private Type GetElementType(FieldInfo listFieldInfo)
+        {
+            if (listFieldInfo.FieldType.IsGenericType)
+            {
+                return listFieldInfo.FieldType.GetGenericArguments()[0];
+            }
+            else
+            {
+                return listFieldInfo.FieldType.GetElementType();
             }
         }
 
