@@ -58,7 +58,7 @@ Shows non-serialized fields in the inspector.
 All non-serialized fields are displayed at the botton of the inspector before the method buttons.
 Keep in mind that if you change a non-static non-serialized field in the code - the value in the inspector will be updated after you press **Play** in the editor.
 There is no such issue with static non-serialized fields because their values are updated at compile time.
-It also supports certain types **(bool, int, long, float, double, string, Vector2, Vector3, Vector4, Color, Bounds, Rect, UnityEngine.Object)**.
+It supports only certain types **(bool, int, long, float, double, string, Vector2, Vector3, Vector4, Color, Bounds, Rect, UnityEngine.Object)**.
 
 ![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowNonSerializedField_Code.PNG)
 
@@ -67,7 +67,7 @@ It also supports certain types **(bool, int, long, float, double, string, Vector
 ### ShowNativeProperty
 Shows native C# properties in the inspector.
 All native properties are displayed at the bottom of the inspector after the non-serialized fields and before the method buttons.
-It also supports certain types **(bool, int, long, float, double, string, Vector2, Vector3, Vector4, Color, Bounds, Rect, UnityEngine.Object)**.
+It supports only certain types **(bool, int, long, float, double, string, Vector2, Vector3, Vector4, Color, Bounds, Rect, UnityEngine.Object)**.
 
 ![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowNativeProperty_Code.PNG)
 

@@ -58,7 +58,11 @@ namespace NaughtyAttributes.Editor
             bool isDrawn = true;
             Type valueType = value.GetType();
 
-            if (valueType == typeof(int))
+            if (valueType == typeof(bool))
+            {
+                EditorGUILayout.Toggle(label, (bool)value);
+            }
+            else if (valueType == typeof(int))
             {
                 EditorGUILayout.IntField(label, (int)value);
             }
@@ -77,10 +81,6 @@ namespace NaughtyAttributes.Editor
             else if (valueType == typeof(string))
             {
                 EditorGUILayout.TextField(label, (string)value);
-            }
-            else if (valueType == typeof(bool))
-            {
-                EditorGUILayout.Toggle(label, (bool)value);
             }
             else if (valueType == typeof(Vector2))
             {
