@@ -1,5 +1,9 @@
 # NaughtyAttributes
-Attribute Extensions for Unity
+NaughtyAttributes is an extension for the Unity Inspector.
+
+It expands the range of attributes that Unity provides so that you can create powerful inspectors without the need of custom editors or property drawers. It also provides attributes that can be applied to non-serialized fields or functions.
+
+It is implemented by replacing the default Unity Inspector. This means that if you have any custom editors, NaughtyAttributes will not work with them. All of your custom editors and property drawers are not affected in any way.
 
 ## System Requirements
 Unity 2017.1.0 or later versions. Feel free to try older version. Don't forget to include the NaughtyAttributes namespace.
