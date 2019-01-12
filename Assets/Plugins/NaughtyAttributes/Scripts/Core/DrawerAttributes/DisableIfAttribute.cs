@@ -3,13 +3,18 @@ using System;
 namespace NaughtyAttributes
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    public class DisableIfAttribute : DrawerAttribute
+    public class DisableIfAttribute : EnableIfAttribute
     {
-        public string ConditionName { get; private set; }
-
-        public DisableIfAttribute(string conditionName)
+        public DisableIfAttribute(string condition)
+            : base(condition)
         {
-            this.ConditionName = conditionName;
+            Reversed = true;
+        }
+
+        public DisableIfAttribute(ConditionOperator conditionOperator, params string[] conditions)
+            : base(conditionOperator, conditions)
+        {
+            Reversed = true;
         }
     }
 }

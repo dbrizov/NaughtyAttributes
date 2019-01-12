@@ -42,7 +42,7 @@ namespace NaughtyAttributes.Editor
             else
             {
                 string warning = typeof(ReorderableListAttribute).Name + " can be used only on arrays or lists";
-                EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, logToConsole: true, context: PropertyUtility.GetTargetObject(property));
+                EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, context: PropertyUtility.GetTargetObject(property));
 
                 EditorDrawUtility.DrawPropertyField(property);
             }

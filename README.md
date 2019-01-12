@@ -85,11 +85,12 @@ Makes a field read only.
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ReadOnly_Inspector.PNG)
 
 ### EnableIf / DisableIf
-Thanks to [Chris Lewis](https://github.com/cmlewis89)
-
 ![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/EnableIf_Code.PNG)
 
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/EnableIf_Inspector.gif)
+
+You can have more than one condition.
+![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/EnableIf_Code2.PNG)
 
 ### ShowAssetPreview
 Shows the texture preview of a given asset (Sprite, Prefab...)
@@ -99,8 +100,6 @@ Shows the texture preview of a given asset (Sprite, Prefab...)
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowAssetPreview_Inspector.PNG)
 
 ### ProgressBar
-Thanks to [Shinao](https://github.com/Shinao)
-
 ![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ProgressBar_Code.png)
 
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ProgressBar_Inspector.gif)
@@ -112,6 +111,9 @@ Can be used to specify when a given serialized field is visible, and when not. A
 ![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowIf_Code.PNG)
 
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowIf_Inspector.gif)
+
+You can have more than one condition.
+![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowIf_Code2.PNG)
 
 ## Group Attributes
 Serialized fields can be grouped in different groups.

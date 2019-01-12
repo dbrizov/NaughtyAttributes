@@ -24,7 +24,7 @@ namespace NaughtyAttributes.Editor
             return false;
         }
 
-        public static void DrawHelpBox(string message, MessageType type, bool logToConsole = false, UnityEngine.Object context = null)
+        public static void DrawHelpBox(string message, MessageType type, UnityEngine.Object context = null, bool logToConsole = true)
         {
             EditorGUILayout.HelpBox(message, type);
 

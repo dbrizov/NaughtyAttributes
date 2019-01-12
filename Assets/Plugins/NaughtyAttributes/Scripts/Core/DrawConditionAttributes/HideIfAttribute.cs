@@ -3,13 +3,18 @@ using System;
 namespace NaughtyAttributes
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    public class HideIfAttribute : DrawConditionAttribute
+    public class HideIfAttribute : ShowIfAttribute
     {
-        public string ConditionName { get; private set; }
-
-        public HideIfAttribute(string conditionName)
+        public HideIfAttribute(string condition)
+            : base(condition)
         {
-            this.ConditionName = conditionName;
+            Reversed = true;
+        }
+
+        public HideIfAttribute(ConditionOperator conditionOperator, params string[] conditions)
+            : base(conditionOperator, conditions)
+        {
+            Reversed = true;
         }
     }
 }

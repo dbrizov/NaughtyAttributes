@@ -22,7 +22,7 @@ namespace NaughtyAttributes.Editor
             else
             {
                 string warning = typeof(ButtonAttribute).Name + " works only on methods with no parameters";
-                EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, logToConsole: true, context: target);
+                EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, context: target);
             }
         }
     }

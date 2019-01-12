@@ -67,7 +67,7 @@ namespace NaughtyAttributes.Editor
             else
             {
                 string warning = minMaxSliderAttribute.GetType().Name + " can be used only on Vector2 fields";
-                EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, logToConsole: true, context: PropertyUtility.GetTargetObject(property));
+                EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, context: PropertyUtility.GetTargetObject(property));
 
                 EditorDrawUtility.DrawPropertyField(property);
             }

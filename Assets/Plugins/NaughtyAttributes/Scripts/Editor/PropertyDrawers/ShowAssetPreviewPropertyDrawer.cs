@@ -26,14 +26,14 @@ namespace NaughtyAttributes.Editor
                     else
                     {
                         string warning = property.name + " doesn't have an asset preview";
-                        EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, logToConsole: true, context: PropertyUtility.GetTargetObject(property));
+                        EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, context: PropertyUtility.GetTargetObject(property));
                     }
                 }
             }
             else
             {
                 string warning = property.name + " doesn't have an asset preview";
-                EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, logToConsole: true, context: PropertyUtility.GetTargetObject(property));
+                EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, context: PropertyUtility.GetTargetObject(property));
             }
         }
     }

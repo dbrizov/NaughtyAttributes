@@ -13,12 +13,12 @@ namespace NaughtyAttributes.Editor
             if (value == null)
             {
                 string warning = string.Format("{0} doesn't support {1} types", typeof(ShowNonSerializedFieldFieldDrawer).Name, "Reference");
-                EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, logToConsole: true, context: target);
+                EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, context: target);
             }
             else if (!EditorDrawUtility.DrawLayoutField(value, field.Name))
             {
                 string warning = string.Format("{0} doesn't support {1} types", typeof(ShowNonSerializedFieldFieldDrawer).Name, field.FieldType.Name);
-                EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, logToConsole: true, context: target);
+                EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, context: target);
             }
         }
     }

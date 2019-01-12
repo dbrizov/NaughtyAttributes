@@ -28,18 +28,18 @@ namespace NaughtyAttributes.Editor
                     {
                         if (string.IsNullOrEmpty(validateInputAttribute.Message))
                         {
-                            EditorDrawUtility.DrawHelpBox(property.name + " is not valid", MessageType.Error, logToConsole: true, context: target);
+                            EditorDrawUtility.DrawHelpBox(property.name + " is not valid", MessageType.Error, context: target);
                         }
                         else
                         {
-                            EditorDrawUtility.DrawHelpBox(validateInputAttribute.Message, MessageType.Error, logToConsole: true, context: target);
+                            EditorDrawUtility.DrawHelpBox(validateInputAttribute.Message, MessageType.Error, context: target);
                         }
                     }
                 }
                 else
                 {
                     string warning = "The field type is not the same as the callback's parameter type";
-                    EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, logToConsole: true, context: target);
+                    EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, context: target);
                 }
             }
             else
@@ -48,7 +48,7 @@ namespace NaughtyAttributes.Editor
                     validateInputAttribute.GetType().Name +
                     " needs a callback with boolean return type and a single parameter of the same type as the field";
 
-                EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, logToConsole: true, context: target);
+                EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, context: target);
             }
         }
     }

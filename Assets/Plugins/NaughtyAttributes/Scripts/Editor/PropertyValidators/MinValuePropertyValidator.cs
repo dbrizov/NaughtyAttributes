@@ -26,7 +26,7 @@ namespace NaughtyAttributes.Editor
             else
             {
                 string warning = minValueAttribute.GetType().Name + " can be used only on int or float fields";
-                EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, logToConsole: true, context: PropertyUtility.GetTargetObject(property));
+                EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, context: PropertyUtility.GetTargetObject(property));
             }
         }
     }

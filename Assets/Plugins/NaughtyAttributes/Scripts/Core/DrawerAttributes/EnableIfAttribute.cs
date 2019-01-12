@@ -5,11 +5,20 @@ namespace NaughtyAttributes
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class EnableIfAttribute : DrawerAttribute
     {
-        public string ConditionName { get; private set; }
+        public string[] Conditions { get; private set; }
+        public ConditionOperator ConditionOperator { get; private set; }
+        public bool Reversed { get; protected set; }
 
-        public EnableIfAttribute(string conditionName)
+        public EnableIfAttribute(string condition)
         {
-            this.ConditionName = conditionName;
+            ConditionOperator = ConditionOperator.And;
+            Conditions = new string[1] { condition };
+        }
+
+        public EnableIfAttribute(ConditionOperator conditionOperator, params string[] conditions)
+        {
+            ConditionOperator = conditionOperator;
+            Conditions = conditions;
         }
     }
 }

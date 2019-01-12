@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
@@ -9,39 +10,61 @@ namespace NaughtyAttributes.Editor
     {
         public override void DrawProperty(SerializedProperty property)
         {
-            bool drawEnabled = false;
-            bool validCondition = false;
-
             EnableIfAttribute enableIfAttribute = PropertyUtility.GetAttribute<EnableIfAttribute>(property);
             UnityEngine.Object target = PropertyUtility.GetTargetObject(property);
 
-            FieldInfo conditionField = ReflectionUtility.GetField(target, enableIfAttribute.ConditionName);
-            if (conditionField != null &&
-                conditionField.FieldType == typeof(bool))
+            List<bool> conditionValues = new List<bool>();
+            foreach (var condition in enableIfAttribute.Conditions)
             {
-                drawEnabled = (bool)conditionField.GetValue(target);
-                validCondition = true;
+                FieldInfo conditionField = ReflectionUtility.GetField(target, condition);
+                if (conditionField != null &&
+                    conditionField.FieldType == typeof(bool))
+                {
+                    conditionValues.Add((bool)conditionField.GetValue(target));
+                }
+
+                MethodInfo conditionMethod = ReflectionUtility.GetMethod(target, condition);
+                if (conditionMethod != null &&
+                    conditionMethod.ReturnType == typeof(bool) &&
+                    conditionMethod.GetParameters().Length == 0)
+                {
+                    conditionValues.Add((bool)conditionMethod.Invoke(target, null));
+                }
             }
 
-            MethodInfo conditionMethod = ReflectionUtility.GetMethod(target, enableIfAttribute.ConditionName);
-            if (conditionMethod != null &&
-                conditionMethod.ReturnType == typeof(bool) &&
-                conditionMethod.GetParameters().Length == 0)
+            if (conditionValues.Count > 0)
             {
-                drawEnabled = (bool)conditionMethod.Invoke(target, null);
-                validCondition = true;
-            }
+                bool enabled;
+                if (enableIfAttribute.ConditionOperator == ConditionOperator.And)
+                {
+                    enabled = true;
+                    foreach (var value in conditionValues)
+                    {
+                        enabled = enabled && value;
+                    }
+                }
+                else
+                {
+                    enabled = false;
+                    foreach (var value in conditionValues)
+                    {
+                        enabled = enabled || value;
+                    }
+                }
 
-            if (validCondition)
-            {
-                GUI.enabled = drawEnabled;
+                if (enableIfAttribute.Reversed)
+                {
+                    enabled = !enabled;
+                }
+
+                GUI.enabled = enabled;
                 EditorDrawUtility.DrawPropertyField(property);
                 GUI.enabled = true;
             }
             else
             {
                 string warning = enableIfAttribute.GetType().Name + " needs a valid boolean condition field or method name to work";
-                EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, logToConsole: true, context: target);
+                EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, context: target);
             }
         }
     }
