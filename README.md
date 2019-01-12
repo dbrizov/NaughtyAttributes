@@ -90,6 +90,7 @@ Makes a field read only.
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/EnableIf_Inspector.gif)
 
 You can have more than one condition.
+
 ![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/EnableIf_Code2.PNG)
 
 ### ShowAssetPreview
@@ -113,6 +114,7 @@ Can be used to specify when a given serialized field is visible, and when not. A
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowIf_Inspector.gif)
 
 You can have more than one condition.
+
 ![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowIf_Code2.PNG)
 
 ## Group Attributes
