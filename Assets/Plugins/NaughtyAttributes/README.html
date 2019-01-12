@@ -1095,7 +1095,9 @@ table.capped-list td.middle{text-align:center}table.capped-list .favicon{width:1
               <article class="markdown-body entry-content" itemprop="text" id="grip-content">
                 <h1>
 <a id="user-content-naughtyattributes" class="anchor" href="#naughtyattributes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>NaughtyAttributes</h1>
-<p>Attribute Extensions for Unity</p>
+<p>NaughtyAttributes is an extension for the Unity Inspector.</p>
+<p>It expands the range of attributes that Unity provides so that you can create powerful inspectors without the need of custom editors or property drawers. It also provides attributes that can be applied to non-serialized fields or functions.</p>
+<p>It is implemented by replacing the default Unity Inspector. This means that if you have any custom editors, NaughtyAttributes will not work with them. All of your custom editors and property drawers are not affected in any way.</p>
 <h2>
 <a id="user-content-system-requirements" class="anchor" href="#system-requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>System Requirements</h2>
 <p>Unity 2017.1.0 or later versions. Feel free to try older version. Don't forget to include the NaughtyAttributes namespace.</p>
@@ -1159,9 +1161,10 @@ It supports only certain types <strong>(bool, int, long, float, double, string, 
 <p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ReadOnly_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/Plugins/NaughtyAttributes/Documentation/ReadOnly_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-enableif--disableif" class="anchor" href="#enableif--disableif" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>EnableIf / DisableIf</h3>
-<p>Thanks to <a href="https://github.com/cmlewis89">Chris Lewis</a></p>
 <p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/EnableIf_Code.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/Plugins/NaughtyAttributes/Documentation/EnableIf_Code.PNG" alt="code" style="max-width:100%;"></a></p>
 <p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/EnableIf_Inspector.gif" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/Plugins/NaughtyAttributes/Documentation/EnableIf_Inspector.gif" alt="inspector" style="max-width:100%;"></a></p>
+<p>You can have more than one condition.</p>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/EnableIf_Code2.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/Plugins/NaughtyAttributes/Documentation/EnableIf_Code2.PNG" alt="code" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-showassetpreview" class="anchor" href="#showassetpreview" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ShowAssetPreview</h3>
 <p>Shows the texture preview of a given asset (Sprite, Prefab...)</p>
@@ -1169,7 +1172,6 @@ It supports only certain types <strong>(bool, int, long, float, double, string, 
 <p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowAssetPreview_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowAssetPreview_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-progressbar" class="anchor" href="#progressbar" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ProgressBar</h3>
-<p>Thanks to <a href="https://github.com/Shinao">Shinao</a></p>
 <p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ProgressBar_Code.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/Plugins/NaughtyAttributes/Documentation/ProgressBar_Code.png" alt="code" style="max-width:100%;"></a></p>
 <p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ProgressBar_Inspector.gif" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/Plugins/NaughtyAttributes/Documentation/ProgressBar_Inspector.gif" alt="inspector" style="max-width:100%;"></a></p>
 <h2>
@@ -1179,6 +1181,8 @@ It supports only certain types <strong>(bool, int, long, float, double, string, 
 <a id="user-content-showif--hideif" class="anchor" href="#showif--hideif" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ShowIf / HideIf</h3>
 <p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowIf_Code.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowIf_Code.PNG" alt="code" style="max-width:100%;"></a></p>
 <p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowIf_Inspector.gif" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowIf_Inspector.gif" alt="inspector" style="max-width:100%;"></a></p>
+<p>You can have more than one condition.</p>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowIf_Code2.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/Plugins/NaughtyAttributes/Documentation/ShowIf_Code2.PNG" alt="code" style="max-width:100%;"></a></p>
 <h2>
 <a id="user-content-group-attributes" class="anchor" href="#group-attributes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Group Attributes</h2>
 <p>Serialized fields can be grouped in different groups.
