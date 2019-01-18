@@ -6,7 +6,7 @@ namespace NaughtyAttributes.Editor
     [PropertyMeta(typeof(InfoBoxAttribute))]
     public class InfoBoxPropertyMeta : PropertyMeta
     {
-        public override void ApplyPropertyMeta(SerializedProperty property, MetaAttribute metaAttribute)
+        public override void ApplyPropertyMeta(SerializedProperty property, MetaAttribute metaAttribute, bool drawField)
         {
             InfoBoxAttribute infoBoxAttribute = (InfoBoxAttribute)metaAttribute;
             UnityEngine.Object target = PropertyUtility.GetTargetObject(property);
@@ -41,7 +41,8 @@ namespace NaughtyAttributes.Editor
                 string warning = infoBoxAttribute.GetType().Name + " needs a valid boolean condition field or method name to work";
                 EditorDrawUtility.DrawHelpBox(warning, MessageType.Warning, logToConsole: true, context: PropertyUtility.GetTargetObject(property));
             }
-            else
+            else if (!infoBoxAttribute.HideWithField ||
+                        (drawField && infoBoxAttribute.HideWithField))
             {
                 this.DrawInfoBox(infoBoxAttribute.Text, infoBoxAttribute.Type);
             }

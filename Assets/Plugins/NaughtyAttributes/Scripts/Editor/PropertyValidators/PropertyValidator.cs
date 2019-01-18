@@ -4,6 +4,6 @@ namespace NaughtyAttributes.Editor
 {
     public abstract class PropertyValidator
     {
-        public abstract void ValidateProperty(SerializedProperty property);
+        public abstract void ValidateProperty(SerializedProperty property, bool drawField);
     }
 }

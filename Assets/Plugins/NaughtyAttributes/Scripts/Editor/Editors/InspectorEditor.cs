@@ -186,12 +186,16 @@ namespace NaughtyAttributes.Editor
 
         private void ValidateAndDrawField(FieldInfo field)
         {
-            this.ValidateField(field);
-            this.ApplyFieldMeta(field);
-            this.DrawField(field);
+            bool drawField = IfDrawField(field);
+            this.ValidateField(field, drawField);
+            this.ApplyFieldMeta(field, drawField);
+            if (drawField)
+            {
+                this.DrawField(field);
+            }
         }
 
-        private void ValidateField(FieldInfo field)
+        private void ValidateField(FieldInfo field, bool drawField)
         {
             ValidatorAttribute[] validatorAttributes = (ValidatorAttribute[])field.GetCustomAttributes(typeof(ValidatorAttribute), true);
 
@@ -200,12 +204,12 @@ namespace NaughtyAttributes.Editor
                 PropertyValidator validator = PropertyValidatorDatabase.GetValidatorForAttribute(attribute.GetType());
                 if (validator != null)
                 {
-                    validator.ValidateProperty(this.serializedPropertiesByFieldName[field.Name]);
+                    validator.ValidateProperty(this.serializedPropertiesByFieldName[field.Name], drawField);
                 }
             }
         }
 
-        private void DrawField(FieldInfo field)
+        private bool IfDrawField(FieldInfo field)
         {
             // Check if the field has draw conditions
             PropertyDrawCondition drawCondition = this.GetPropertyDrawConditionForField(field);
@@ -214,7 +218,7 @@ namespace NaughtyAttributes.Editor
                 bool canDrawProperty = drawCondition.CanDrawProperty(this.serializedPropertiesByFieldName[field.Name]);
                 if (!canDrawProperty)
                 {
-                    return;
+                    return false;
                 }
             }
 
@@ -222,9 +226,14 @@ namespace NaughtyAttributes.Editor
             HideInInspector[] hideInInspectorAttributes = (HideInInspector[])field.GetCustomAttributes(typeof(HideInInspector), true);
             if (hideInInspectorAttributes.Length > 0)
             {
-                return;
+                return false;
             }
 
+            return true;
+        }
+
+        private void DrawField(FieldInfo field)
+        {
             // Draw the field
             EditorGUI.BeginChangeCheck();
             PropertyDrawer drawer = this.GetPropertyDrawerForField(field);
@@ -245,13 +254,13 @@ namespace NaughtyAttributes.Editor
                     PropertyMeta meta = PropertyMetaDatabase.GetMetaForAttribute(onValueChangedAttribute.GetType());
                     if (meta != null)
                     {
-                        meta.ApplyPropertyMeta(this.serializedPropertiesByFieldName[field.Name], onValueChangedAttribute);
+                        meta.ApplyPropertyMeta(this.serializedPropertiesByFieldName[field.Name], onValueChangedAttribute, true);
                     }
                 }
             }
         }
 
-        private void ApplyFieldMeta(FieldInfo field)
+        private void ApplyFieldMeta(FieldInfo field, bool drawField)
         {
             // Apply custom meta attributes
             MetaAttribute[] metaAttributes = field
@@ -270,7 +279,7 @@ namespace NaughtyAttributes.Editor
                 PropertyMeta meta = PropertyMetaDatabase.GetMetaForAttribute(metaAttribute.GetType());
                 if (meta != null)
                 {
-                    meta.ApplyPropertyMeta(this.serializedPropertiesByFieldName[field.Name], metaAttribute);
+                    meta.ApplyPropertyMeta(this.serializedPropertiesByFieldName[field.Name], metaAttribute, drawField);
                 }
             }
         }

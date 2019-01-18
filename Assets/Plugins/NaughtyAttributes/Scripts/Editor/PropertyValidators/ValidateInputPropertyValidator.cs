@@ -7,9 +7,15 @@ namespace NaughtyAttributes.Editor
     [PropertyValidator(typeof(ValidateInputAttribute))]
     public class ValidateInputPropertyValidator : PropertyValidator
     {
-        public override void ValidateProperty(SerializedProperty property)
+        public override void ValidateProperty(SerializedProperty property, bool drawField)
         {
             ValidateInputAttribute validateInputAttribute = PropertyUtility.GetAttribute<ValidateInputAttribute>(property);
+
+            if (validateInputAttribute.HideWithField && !drawField)
+            {
+                return;
+            }
+
             UnityEngine.Object target = PropertyUtility.GetTargetObject(property);
 
             MethodInfo validationCallback = ReflectionUtility.GetMethod(target, validateInputAttribute.CallbackName);

@@ -5,9 +5,14 @@ namespace NaughtyAttributes.Editor
     [PropertyValidator(typeof(RequiredAttribute))]
     public class RequiredPropertyValidator : PropertyValidator
     {
-        public override void ValidateProperty(SerializedProperty property)
+        public override void ValidateProperty(SerializedProperty property, bool drawField)
         {
             RequiredAttribute requiredAttribute = PropertyUtility.GetAttribute<RequiredAttribute>(property);
+
+            if (requiredAttribute.HideWithField && !drawField)
+            {
+                return;
+            }
 
             if (property.propertyType == SerializedPropertyType.ObjectReference)
             {

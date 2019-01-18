@@ -7,7 +7,7 @@ namespace NaughtyAttributes.Editor
     [PropertyMeta(typeof(OnValueChangedAttribute))]
     public class OnValueChangedPropertyMeta : PropertyMeta
     {
-        public override void ApplyPropertyMeta(SerializedProperty property, MetaAttribute metaAttribute)
+        public override void ApplyPropertyMeta(SerializedProperty property, MetaAttribute metaAttribute, bool drawField)
         {
             OnValueChangedAttribute onValueChangedAttribute = (OnValueChangedAttribute)metaAttribute;
             UnityEngine.Object target = PropertyUtility.GetTargetObject(property);
