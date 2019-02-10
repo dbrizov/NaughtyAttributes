@@ -104,6 +104,21 @@ Shows the texture preview of a given asset (Sprite, Prefab...)
 ![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ProgressBar_Code.png)
 
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ProgressBar_Inspector.gif)
+</details>
+
+### Label
+Override default field label
+
+![code](https://user-images.githubusercontent.com/20757517/52529286-116b1580-2ca4-11e9-86e6-06911ead2ca1.png)
+
+![inspector](https://user-images.githubusercontent.com/20757517/52529310-6444cd00-2ca4-11e9-8f41-2409779eb88b.png)
+
+### Tag
+Enable Tag selection with string field
+
+![code](https://user-images.githubusercontent.com/20757517/52529328-9bb37980-2ca4-11e9-9aea-facaa66903ea.png)
+
+![inspector](https://user-images.githubusercontent.com/20757517/52529363-28f6ce00-2ca5-11e9-8457-b5703f309b21.png)
 
 ## DrawCondition Attributes
 Can be used to specify when a given serialized field is visible, and when not. A field can have only one DrawConditionAttribute.
