@@ -104,7 +104,7 @@ Shows the texture preview of a given asset (Sprite, Prefab...)
 ![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ProgressBar_Code.png)
 
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/Plugins/NaughtyAttributes/Documentation/ProgressBar_Inspector.gif)
-</details>
+
 
 ### Label
 Override default field label
