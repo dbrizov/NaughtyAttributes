@@ -1,11 +1,11 @@
-﻿using UnityEngine;
+using System;
 
 namespace NaughtyAttributes
 {
     /// <summary>
     /// Make tags appear as tag popup fields 
     /// </summary>
-    [System.AttributeUsage(System.AttributeTargets.Field, AllowMultiple = false)]
+    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class TagAttribute : DrawerAttribute
     {
     }

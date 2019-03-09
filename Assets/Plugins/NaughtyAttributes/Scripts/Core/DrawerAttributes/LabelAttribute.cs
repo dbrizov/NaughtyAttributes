@@ -1,20 +1,18 @@
-﻿using System;
-using UnityEngine;
+using System;
 
 namespace NaughtyAttributes
 {
     /// <summary>
     /// Override default label
     /// </summary>
-    [AttributeUsage(AttributeTargets.Field,
-    AllowMultiple = false, Inherited = true)]
+    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
     public class LabelAttribute : DrawerAttribute
     {
-        public string label { get; private set; }
+        public string Label { get; private set; }
+
         public LabelAttribute(string label)
         {
-            this.label = label;
+            this.Label = label;
         }
     }
-
 }

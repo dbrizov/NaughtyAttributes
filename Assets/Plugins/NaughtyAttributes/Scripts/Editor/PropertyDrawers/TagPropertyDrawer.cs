@@ -1,4 +1,3 @@
-﻿using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
 
@@ -13,8 +12,6 @@ namespace NaughtyAttributes.Editor
     {
         public override void DrawProperty(SerializedProperty property)
         {
-            UnityEngine.Object target = PropertyUtility.GetTargetObject(property);
-
             if (property.propertyType == SerializedPropertyType.String)
             {
                 // generate the taglist + custom tags
