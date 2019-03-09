@@ -10,13 +10,20 @@ namespace NaughtyAttributes.Editor
     {
         private Dictionary<string, ReorderableList> reorderableListsByPropertyName = new Dictionary<string, ReorderableList>();
 
+        string GetPropertyKeyName(SerializedProperty property)
+        {
+            return property.serializedObject.targetObject.GetInstanceID() + "/" + property.name;
+        }
+
         public override void DrawProperty(SerializedProperty property)
         {
             EditorDrawUtility.DrawHeader(property);
 
             if (property.isArray)
             {
-                if (!this.reorderableListsByPropertyName.ContainsKey(property.name))
+                var key = GetPropertyKeyName(property);
+
+                if (!this.reorderableListsByPropertyName.ContainsKey(key))
                 {
                     ReorderableList reorderableList = new ReorderableList(property.serializedObject, property, true, true, true, true)
                     {
@@ -34,10 +41,10 @@ namespace NaughtyAttributes.Editor
                         }
                     };
 
-                    this.reorderableListsByPropertyName[property.name] = reorderableList;
+                    this.reorderableListsByPropertyName[key] = reorderableList;
                 }
 
-                this.reorderableListsByPropertyName[property.name].DoLayoutList();
+                this.reorderableListsByPropertyName[key].DoLayoutList();
             }
             else
             {
