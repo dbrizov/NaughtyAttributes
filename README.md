@@ -59,7 +59,7 @@ Unlike Unity's **Multiline** and **TextArea** attributes where you can see only 
 
 ### ShowNonSerializedField
 Shows non-serialized fields in the inspector.
-All non-serialized fields are displayed at the botton of the inspector before the method buttons.
+All non-serialized fields are displayed at the bottom of the inspector before the method buttons.
 Keep in mind that if you change a non-static non-serialized field in the code - the value in the inspector will be updated after you press **Play** in the editor.
 There is no such issue with static non-serialized fields because their values are updated at compile time.
 It supports only certain types **(bool, int, long, float, double, string, Vector2, Vector3, Vector4, Color, Bounds, Rect, UnityEngine.Object)**.

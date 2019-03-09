@@ -186,6 +186,11 @@ namespace NaughtyAttributes.Editor
 
         private void ValidateAndDrawField(FieldInfo field)
         {
+            if (!ShouldDrawField(field))
+            {
+                return;
+            }
+
             this.ValidateField(field);
             this.ApplyFieldMeta(field);
             this.DrawField(field);
@@ -205,7 +210,7 @@ namespace NaughtyAttributes.Editor
             }
         }
 
-        private void DrawField(FieldInfo field)
+        private bool ShouldDrawField(FieldInfo field)
         {
             // Check if the field has draw conditions
             PropertyDrawCondition drawCondition = this.GetPropertyDrawConditionForField(field);
@@ -214,7 +219,7 @@ namespace NaughtyAttributes.Editor
                 bool canDrawProperty = drawCondition.CanDrawProperty(this.serializedPropertiesByFieldName[field.Name]);
                 if (!canDrawProperty)
                 {
-                    return;
+                    return false;
                 }
             }
 
@@ -222,10 +227,14 @@ namespace NaughtyAttributes.Editor
             HideInInspector[] hideInInspectorAttributes = (HideInInspector[])field.GetCustomAttributes(typeof(HideInInspector), true);
             if (hideInInspectorAttributes.Length > 0)
             {
-                return;
+                return false;
             }
 
-            // Draw the field
+            return true;
+        }
+
+        private void DrawField(FieldInfo field)
+        {        
             EditorGUI.BeginChangeCheck();
             PropertyDrawer drawer = this.GetPropertyDrawerForField(field);
             if (drawer != null)
