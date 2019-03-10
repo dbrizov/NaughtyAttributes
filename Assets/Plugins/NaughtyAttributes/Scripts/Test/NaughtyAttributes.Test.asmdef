@@ -1,0 +1,14 @@
+{
+    "name": "NaughtyAttributes.Test",
+    "references": [
+        "NaughtyAttributes.Core"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}
