@@ -1,5 +1,7 @@
 using System.Reflection;
 using UnityEditor;
+using UnityEditor.SceneManagement;
+using UnityEditor.Experimental.SceneManagement;
 using UnityEngine;
 
 namespace NaughtyAttributes.Editor
@@ -17,6 +19,12 @@ namespace NaughtyAttributes.Editor
                 if (GUILayout.Button(buttonText))
                 {
                     methodInfo.Invoke(target, null);
+                    
+                    // set prefab scene as dirty to flush changes in prefab mode
+                    var stage = PrefabStageUtility.GetCurrentPrefabStage();
+                    if (stage != null) {
+                        EditorSceneManager.MarkSceneDirty(stage.scene);
+                    }
                 }
             }
             else
