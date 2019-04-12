@@ -18,21 +18,20 @@ namespace NaughtyAttributes.Editor
             UnityEngine.Object target = PropertyUtility.GetTargetObject(property);
 
             FieldInfo fieldInfo = ReflectionUtility.GetField(target, property.name);
-            FieldInfo valuesFieldInfo = ReflectionUtility.GetField(target, dropdownAttribute.ValuesFieldName);
+            var list = FindValues(target, dropdownAttribute.ValuesFieldName);
 
-            if (valuesFieldInfo == null)
+            if (list == null)
             {
-                this.DrawWarningBox(string.Format("{0} cannot find a values field with name \"{1}\"", dropdownAttribute.GetType().Name, dropdownAttribute.ValuesFieldName));
+                DrawWarningBox(string.Format("{0} cannot find a member with name \"{1}\"", dropdownAttribute.GetType().Name, dropdownAttribute.ValuesFieldName));
                 EditorGUILayout.PropertyField(property, true);
             }
-            else if (valuesFieldInfo.GetValue(target) is IList &&
-                     fieldInfo.FieldType == this.GetElementType(valuesFieldInfo))
+            else if (list is IList)
             {
                 // Selected value
                 object selectedValue = fieldInfo.GetValue(target);
 
                 // Values and display options
-                IList valuesList = (IList)valuesFieldInfo.GetValue(target);
+                IList valuesList = list as IList;
                 object[] values = new object[valuesList.Count];
                 string[] displayOptions = new string[valuesList.Count];
 
@@ -53,13 +52,13 @@ namespace NaughtyAttributes.Editor
                 // Draw the dropdown
                 this.DrawDropdown(target, fieldInfo, property.displayName, selectedValueIndex, values, displayOptions);
             }
-            else if (valuesFieldInfo.GetValue(target) is IDropdownList)
+            else if (list is IDropdownList)
             {
                 // Current value
                 object selectedValue = fieldInfo.GetValue(target);
 
                 // Current value index, values and display options
-                IDropdownList dropdown = (IDropdownList)valuesFieldInfo.GetValue(target);
+                IDropdownList dropdown = list as IDropdownList;
                 IEnumerator<KeyValuePair<string, object>> dropdownEnumerator = dropdown.GetEnumerator();
 
                 int index = -1;
@@ -87,11 +86,11 @@ namespace NaughtyAttributes.Editor
                 }
 
                 // Draw the dropdown
-                this.DrawDropdown(target, fieldInfo, property.displayName, selectedValueIndex, values.ToArray(), displayOptions.ToArray());
+                DrawDropdown(target, fieldInfo, property.displayName, selectedValueIndex, values.ToArray(), displayOptions.ToArray());
             }
             else
             {
-                this.DrawWarningBox(typeof(DropdownAttribute).Name + " works only when the type of the field is equal to the element type of the array");
+                DrawWarningBox(typeof(DropdownAttribute).Name + " works only when the type of the field is equal to the element type of the array");
                 EditorGUILayout.PropertyField(property, true);
             }
         }
@@ -125,6 +124,35 @@ namespace NaughtyAttributes.Editor
         {
             EditorGUILayout.HelpBox(message, MessageType.Warning);
             Debug.LogWarning(message);
+        }
+
+        private object FindValues(object target, string fieldName)
+        {
+            var type = target.GetType();
+            var bindingFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
+            var memberTypes = MemberTypes.Field | MemberTypes.Property | MemberTypes.Method;
+            var members = type.GetMember(fieldName, memberTypes, bindingFlags);
+
+            if (members.Length > 0)
+            {
+                var member = members[0];
+                switch (member.MemberType)
+                {
+                    case MemberTypes.Field:
+                        return ((FieldInfo)member).GetValue(target);
+                    case MemberTypes.Property:
+                        return ((PropertyInfo)member).GetValue(target);
+                    case MemberTypes.Method:
+                        return ((MethodInfo)member).Invoke(target, null);
+                    default:
+                        throw new NotSupportedException(string.Format(
+                            "The membertype {0} is unsupported!",
+                            member.MemberType
+                        ));
+                }
+            }
+
+            return null;
         }
     }
 }
