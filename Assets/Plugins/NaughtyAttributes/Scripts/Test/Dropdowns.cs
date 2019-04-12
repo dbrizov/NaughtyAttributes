@@ -18,11 +18,17 @@ public class Dropdowns : MonoBehaviour
 
     private List<string> stringValues = new List<string>() { "A", "B", "C" };
 
-    private DropdownList<Vector3> vectorValues = new DropdownList<Vector3>()
+    private DropdownList<Vector3> vectorValues
     {
-        { "Right", Vector3.right },
-        { "Up", Vector3.up },
-        { "Forward", Vector3.forward }
-    };
+        get
+        {
+            return new DropdownList<Vector3>()
+            {
+                { "Right", Vector3.right },
+                { "Up", Vector3.up },
+                { "Forward", Vector3.forward }
+            };
+        }
+    }
 #pragma warning restore 414
 }
