@@ -13,10 +13,5 @@
 		"name": "Denis Rizov",
 		"email": "d.b.rizov@gmail.com",
 		"url": "https://www.denisrizov.com"
-	},
-	"files": [
-		"/Assets",
-        "/LICENSE",
-        "/README.md"
-    ]
+	}
 }
