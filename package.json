@@ -1,6 +1,6 @@
 {
     "name": "com.denisrizov.naughty-attributes",
-    "displayName": "Naughty Attributes",
+    "displayName": "NaughtyAttributes",
     "version": "1.0.3",
     "unity": "2018.3",
     "description": "NaughtyAttributes is an extension for the Unity Inspector.\n\nIt expands the range of attributes that Unity provides so that you can create powerful inspectors without the need of custom editors or property drawers. It also provides attributes that can be applied to non-serialized fields or functions.\n\nIt is implemented by replacing the default Unity Inspector. This means that if you have any custom editors, NaughtyAttributes will not work with them. All of your custom editors and property drawers are not affected in any way.",
@@ -15,8 +15,8 @@
 		"url": "https://www.denisrizov.com"
 	},
 	"files": [
-		"/Assets/Plugins",
-		"/Assets/Plugins.meta",
+		"/Assets",
+		"/Assets.meta",
         "/LICENSE",
         "/LICENSE.meta",
         "/README.md",
