@@ -16,10 +16,7 @@
 	},
 	"files": [
 		"/Assets",
-		"/Assets.meta",
         "/LICENSE",
-        "/LICENSE.meta",
-        "/README.md",
-        "/README.md.meta"
+        "/README.md"
     ]
 }
