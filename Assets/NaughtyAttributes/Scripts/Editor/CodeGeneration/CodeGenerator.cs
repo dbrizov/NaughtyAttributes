@@ -12,8 +12,11 @@ namespace NaughtyAttributes.Editor
     {
         private static readonly string GENERATED_CODE_TARGET_FOLDER =
             (Application.dataPath.Replace("Assets", string.Empty) + AssetDatabase.GUIDToAssetPath(AssetDatabase.FindAssets("CodeGenerator")[0]))
-            .Replace("CodeGenerator.cs", string.Empty)
-            .Replace("/", "\\");
+#if UNITY_EDITOR_WIN
+            .Replace("CodeGenerator.cs", string.Empty).Replace("/", "\\");
+#else 
+            .Replace("CodeGenerator.cs", string.Empty);
+#endif 
 
         private static readonly string CLASS_NAME_PLACEHOLDER = "__classname__";
         private static readonly string ENTRIES_PLACEHOLDER = "__entries__";
