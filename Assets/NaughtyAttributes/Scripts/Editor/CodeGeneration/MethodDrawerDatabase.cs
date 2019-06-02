@@ -12,6 +12,7 @@ namespace NaughtyAttributes.Editor
         static MethodDrawerDatabase()
         {
             drawersByAttributeType = new Dictionary<Type, MethodDrawer>();
+            drawersByAttributeType[typeof(ButtonIfAttribute)] = new ButtonIfMethodDrawer();
             drawersByAttributeType[typeof(ButtonAttribute)] = new ButtonMethodDrawer();
 
         }
