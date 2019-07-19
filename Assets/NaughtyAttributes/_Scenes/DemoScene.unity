@@ -328,6 +328,7 @@ GameObject:
   - component: {fileID: 2033251975}
   - component: {fileID: 2033251989}
   - component: {fileID: 2033251988}
+  - component: {fileID: 2033251991}
   - component: {fileID: 2033251990}
   m_Layer: 0
   m_Name: TestObject
@@ -618,3 +619,16 @@ MonoBehaviour:
   _MyFloat: 3
   _MyString: sdfgsdfg
   _MyVector3: {x: 4, y: 5, z: 6}
+--- !u!114 &2033251991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033251972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea96e390ca028174dab76eed6ccfdff7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _MyInt: -39
