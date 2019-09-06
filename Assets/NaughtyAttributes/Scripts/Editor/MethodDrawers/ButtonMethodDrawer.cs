@@ -14,10 +14,23 @@ namespace NaughtyAttributes.Editor
                 ButtonAttribute buttonAttribute = (ButtonAttribute)methodInfo.GetCustomAttributes(typeof(ButtonAttribute), true)[0];
                 string buttonText = string.IsNullOrEmpty(buttonAttribute.Text) ? methodInfo.Name : buttonAttribute.Text;
 
+                // Check are we selecting im project folder or in hierarchy window.
+                var IsAssetSelection = Selection.activeTransform == null;
+                var activeInPlayMode = EditorApplication.isPlaying && !buttonAttribute.activeInPlayMode;
+                var activeInEditMode = !EditorApplication.isPlaying && !buttonAttribute.activeInEditMode;
+
+                var enabled = activeInPlayMode ? false : activeInEditMode ? false : true;
+
+                if (enabled)
+                    if (!activeInEditMode && IsAssetSelection) // Disable button if we select an asset (like prefab). It does not matter if we are in playMode.
+                        enabled = false;
+
+                GUI.enabled = enabled;
                 if (GUILayout.Button(buttonText))
                 {
                     methodInfo.Invoke(target, null);
                 }
+                GUI.enabled = true;
             }
             else
             {
