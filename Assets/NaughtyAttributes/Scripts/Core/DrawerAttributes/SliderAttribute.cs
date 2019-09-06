@@ -16,7 +16,7 @@ namespace NaughtyAttributes
 
         public SliderAttribute(int minValue, int maxValue)
         {
-            this.MaxValue = minValue;
+            this.MinValue = minValue;
             this.MaxValue = maxValue;
         }
     }
