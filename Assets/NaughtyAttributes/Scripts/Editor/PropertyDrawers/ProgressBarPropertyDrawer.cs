@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 using System;
+using System.Reflection;
 
 namespace NaughtyAttributes.Editor
 {
@@ -18,14 +19,54 @@ namespace NaughtyAttributes.Editor
             }
 
             var value = property.propertyType == SerializedPropertyType.Integer ? property.intValue : property.floatValue;
-            var valueFormatted = property.propertyType == SerializedPropertyType.Integer ? value.ToString() : String.Format("{0:0.00}", value);
+            var valueFormatted = property.propertyType == SerializedPropertyType.Integer ? value.ToString() : String.Format("{0:0.##}", value);
 
             ProgressBarAttribute progressBarAttribute = PropertyUtility.GetAttribute<ProgressBarAttribute>(property);
             var position = EditorGUILayout.GetControlRect();
             var maxValue = progressBarAttribute.MaxValue;
+            
             float lineHight = EditorGUIUtility.singleLineHeight;
             float padding = EditorGUIUtility.standardVerticalSpacing;
             var barPosition = new Rect(position.position.x, position.position.y, position.size.x, lineHight);
+
+            UnityEngine.Object target = PropertyUtility.GetTargetObject(property);
+
+            // maxValueVar - if found so override maxValue
+            var maxValueVar = progressBarAttribute.maxValueVar;
+
+            if (maxValueVar.Trim().Length > 0)
+            {
+                // try to get field first
+                FieldInfo maxValueFieldInfo = ReflectionUtility.GetField(target, maxValueVar);
+                if (maxValueFieldInfo != null)
+                {
+                    if (maxValueFieldInfo.FieldType == typeof(int))
+                    {
+                        maxValue = (int)maxValueFieldInfo.GetValue(target);
+                    }
+
+                    if (maxValueFieldInfo.FieldType == typeof(float))
+                    {
+                        maxValue = (float)maxValueFieldInfo.GetValue(target);
+                    }
+                } else
+                {
+                    // if not get the property
+                    PropertyInfo maxValuePropertyInfo = ReflectionUtility.GetProperty(target, maxValueVar);
+                    if (maxValuePropertyInfo != null)
+                    {
+                        if (maxValuePropertyInfo.PropertyType == typeof(int))
+                        {
+                            maxValue = (int)maxValuePropertyInfo.GetValue(target);
+                        }
+
+                        if (maxValuePropertyInfo.PropertyType == typeof(float))
+                        {
+                            maxValue = (float)maxValuePropertyInfo.GetValue(target);
+                        }
+                    }
+                }
+            }
 
             var fillPercentage = value / maxValue;
             var barLabel = (!string.IsNullOrEmpty(progressBarAttribute.Name) ? "[" + progressBarAttribute.Name + "] " : "") + valueFormatted + "/" + maxValue;
