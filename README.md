@@ -23,7 +23,7 @@ Original **Button** looks like so
 
 ![inspector](https://github.com/MaZyGer/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation/Button_Inspector.PNG)
 
-New features: You can add **activeInEditMode** or **activeInPlayMode**. By default they are *true*. You can use them to make Buttons enabled in editmode or/and playmode. This will help to avoid some errors if is only possible in editor or playmode.
+New features: You can add **activeInEditMode** or **activeInPlayMode**. By default there are *true*. You can use them to make Buttons enabled in editmode or/and playmode. This will help to avoid some errors if is only possible in editor or playmode.
 If **activeInEditMode** = false so prefabs will also disabled Button.
 
 ![code](https://i.imgur.com/CHYI860.png)
