@@ -23,6 +23,18 @@ namespace NaughtyAttributes.Editor
             ProgressBarAttribute progressBarAttribute = PropertyUtility.GetAttribute<ProgressBarAttribute>(property);
             var position = EditorGUILayout.GetControlRect();
             var maxValue = progressBarAttribute.MaxValue;
+            if (!string.IsNullOrEmpty(progressBarAttribute.MaxValueFieldName))
+            {
+                var maxValueField = property.serializedObject.FindProperty(progressBarAttribute.MaxValueFieldName);
+                if (maxValueField != null)
+                {
+                    if (maxValueField.propertyType == SerializedPropertyType.Integer)
+                        maxValue = maxValueField.intValue;
+                    else if (maxValueField.propertyType == SerializedPropertyType.Float)
+                        maxValue = maxValueField.floatValue;
+                }
+            }
+
             float lineHight = EditorGUIUtility.singleLineHeight;
             float padding = EditorGUIUtility.standardVerticalSpacing;
             var barPosition = new Rect(position.position.x, position.position.y, position.size.x, lineHight);
