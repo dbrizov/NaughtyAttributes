@@ -1,7 +1,6 @@
-﻿using UnityEditor;
+using UnityEditor;
 using UnityEngine;
 using System.Reflection;
-using System;
 using System.Collections.Generic;
 
 
@@ -20,34 +19,31 @@ namespace NaughtyAttributes.Editor
                 FieldInfo fieldInfo = ReflectionUtility.GetField(target, property.name);
                 FieldInfo animatorInfo = ReflectionUtility.GetField(target, typeAttribute.FieldName);
 
+                Animator animator = (Animator)animatorInfo.GetValue(target);
 
-                if (animatorInfo == null)
+                if (animatorInfo == null || !animator)
                 {
                     this.DrawWarningBox(string.Format("Cannot find a values field with given name"));
                     EditorGUILayout.PropertyField(property, true);
-                } else
+                } 
+                    else
                 {
-                    Animator animator = (Animator)animatorInfo.GetValue(target);
 
                     List<string> allNames = new List<string>();
+
+                    string propertyValue = property.stringValue;
+                    int index = 0;
+
                     for (int i = 0; i < animator.parameters.Length; i++)
                     {
                         if (animator.parameters[i].type == typeAttribute.Type)
                         {
                             allNames.Add(animator.parameters[i].name);
-                        }
-                    }
 
-                    string propertyValue = property.stringValue;
-
-                    int index = 0;
-
-                    for(int i = 0; i < allNames.Count; i++)
-                    {
-                        if(allNames[i] == propertyValue)
-                        {
-                            index = i;
-                            break;
+                            if (animator.parameters[i].name == propertyValue)
+                            {
+                                index = allNames.Count - 1;
+                            }
                         }
                     }
 
