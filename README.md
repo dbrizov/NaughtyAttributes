@@ -6,7 +6,15 @@ It expands the range of attributes that Unity provides so that you can create po
 It is implemented by replacing the default Unity Inspector. This means that if you have any custom editors, NaughtyAttributes will not work with them. All of your custom editors and property drawers are not affected in any way.
 
 ## System Requirements
-Unity 2017.1.0 or later versions. Feel free to try older version. Don't forget to include the NaughtyAttributes namespace.
+Unity 2017.3.0 or later versions. Feel free to try older version. Don't forget to include the NaughtyAttributes namespace.
+
+## Installation
+1. The easiest way is to add this entry in your **manifest.json**
+```
+"com.dbrizov.naughtyattributes": "https://github.com/dbrizov/NaughtyAttributes.git#upm"
+```
+2. You can also download it from the [Asset Store](https://assetstore.unity.com/packages/tools/utilities/naughtyattributes-129996)
+3. Or you can download the latest **.unitypackage** from [here](https://github.com/dbrizov/NaughtyAttributes/releases)
 
 ## Drawer Attributes
 Provide special draw options to serialized fields.
