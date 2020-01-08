@@ -14,7 +14,6 @@ Unity 2017.3.0 or later versions. Feel free to try older version. Don't forget t
 "com.dbrizov.naughtyattributes": "https://github.com/dbrizov/NaughtyAttributes.git#upm"
 ```
 2. You can also download it from the [Asset Store](https://assetstore.unity.com/packages/tools/utilities/naughtyattributes-129996)
-3. Or you can download the latest **.unitypackage** from [here](https://github.com/dbrizov/NaughtyAttributes/releases)
 
 ## Drawer Attributes
 Provide special draw options to serialized fields.
