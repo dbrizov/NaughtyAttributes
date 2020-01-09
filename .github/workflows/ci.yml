@@ -1,0 +1,19 @@
+name: CI
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  split-upm:
+    name: split upm branch
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: git subtree
+      run: git subtree push -P $SPLIT_PATH origin upm
+      env:
+        SPLIT_PATH: Assets/NaughtyAttributes
