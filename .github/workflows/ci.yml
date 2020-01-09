@@ -33,7 +33,7 @@ jobs:
 
         if [[ -d "Samples" ]]; then
           echo '### move Samples => Samples~'
-          mv Samples Samples~
+          git mv Samples Samples~
           rm -f Samples.meta
           git config --global user.name 'github-bot'
           git config --global user.email 'github-bot@users.noreply.github.com'
