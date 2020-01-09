@@ -1,7 +1,10 @@
 using UnityEngine;
 
-public class ReadOnly : MonoBehaviour
+namespace NaughtyAttributes.Test
 {
-    [NaughtyAttributes.ReadOnly]
-    public int readOnlyInt = 5;
+	public class ReadOnly : MonoBehaviour
+	{
+		[ReadOnly]
+		public int readOnlyInt = 5;
+	}
 }

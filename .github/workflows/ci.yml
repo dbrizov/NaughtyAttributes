@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  split-upm:
+    name: split upm branch (force)
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+    - name: split upm branch
+      run: |
+        echo '### head info'
+        git log -1
+
+        echo '### delete local upm branch'
+        git branch -d upm &> /dev/null || echo local upm branch not found
+        echo
+
+        echo '### split upm branch'
+        git subtree split -P "$PKG_ROOT" -b upm
+
+        echo '### checkout upm branch'
+        git checkout upm
+
+        echo '### list files'
+        ls -l
+
+        if [[ -d "Samples" ]]; then
+          echo '### move Samples => Samples~'
+          git mv Samples Samples~
+          rm -f Samples.meta
+          git config --global user.name 'github-bot'
+          git config --global user.email 'github-bot@users.noreply.github.com'
+          git commit -am "fix: Samples => Samples~"
+        fi
+
+        echo '### force overwrite remote upm branch'
+        git push -f -u origin upm
+      env:
+        PKG_ROOT: Assets/NaughtyAttributes
