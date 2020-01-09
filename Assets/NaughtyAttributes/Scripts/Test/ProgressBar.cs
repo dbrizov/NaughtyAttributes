@@ -1,7 +1,10 @@
 using UnityEngine;
 
-public class ProgressBar : MonoBehaviour
+namespace NaughtyAttributes.Test
 {
-    [NaughtyAttributes.ProgressBar("Health", 100, NaughtyAttributes.ProgressBarColor.Orange)]
-    public float health = 50;
+	public class ProgressBar : MonoBehaviour
+	{
+		[ProgressBar("Health", 100, ProgressBarColor.Orange)]
+		public float health = 50;
+	}
 }

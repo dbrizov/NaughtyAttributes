@@ -1,10 +1,13 @@
 using UnityEngine;
 
-public class ShowAssetPreview : MonoBehaviour
+namespace NaughtyAttributes.Test
 {
-    [NaughtyAttributes.ShowAssetPreview]
-    public Sprite sprite;
+	public class ShowAssetPreview : MonoBehaviour
+	{
+		[ShowAssetPreview]
+		public Sprite sprite;
 
-    [NaughtyAttributes.ShowAssetPreview(96, 96)]
-    public GameObject prefab;
+		[ShowAssetPreview(96, 96)]
+		public GameObject prefab;
+	}
 }

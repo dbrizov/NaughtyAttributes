@@ -1,9 +1,10 @@
 using UnityEngine;
-using NaughtyAttributes;
 
-public class Tag : MonoBehaviour
+namespace NaughtyAttributes.Test
 {
-    [Tag]
-    public string tagField;
+	public class Tag : MonoBehaviour
+	{
+		[Tag]
+		public string tagField;
+	}
 }
-

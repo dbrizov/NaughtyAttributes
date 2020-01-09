@@ -1,12 +1,15 @@
 using UnityEngine;
 
-public class OnValueChanged : MonoBehaviour
+namespace NaughtyAttributes.Test
 {
-    [NaughtyAttributes.OnValueChanged("OnValueChangedMethod")]
-    public int onValueChanged;
+	public class OnValueChanged : MonoBehaviour
+	{
+		[OnValueChanged("OnValueChangedMethod")]
+		public int onValueChanged;
 
-    private void OnValueChangedMethod()
-    {
-        Debug.Log(this.onValueChanged);
-    }
+		private void OnValueChangedMethod()
+		{
+			Debug.Log(this.onValueChanged);
+		}
+	}
 }
