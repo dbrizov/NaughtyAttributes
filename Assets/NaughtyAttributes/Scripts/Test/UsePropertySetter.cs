@@ -2,10 +2,17 @@
 
 namespace NaughtyAttributes.Test
 {
-    [ExecuteAlways]
     public class UsePropertySetter : MonoBehaviour
     {
-        public int MyPositiveProperty
+        public string TestString { get => _testString; set
+            {
+                print($"Previous: {_testString}, New: {value}");
+                _testString = value;
+            }
+        }
+        [SerializeField, UsePropertySetter, TextArea] private string _testString;
+
+        public float MyPositiveProperty
         {
             get => _myPositiveProperty;
             set
@@ -18,9 +25,11 @@ namespace NaughtyAttributes.Test
                 else Debug.Log("Negative! Not setting that.");
             }
         }
-        [SerializeField, UsePropertySetter, Tooltip("This is a working tooltip."), Delayed] private int _myPositiveProperty;
+        [SerializeField, UsePropertySetter("MyPositiveProperty"), Tooltip("This is a working tooltip.")]
+        private float _myPositiveProperty;
 
-        public event System.Action<int> OnNewValue;
+
+        public event System.Action<float> OnNewValue;
 
         private void OnEnable()
         {
@@ -28,7 +37,7 @@ namespace NaughtyAttributes.Test
             OnNewValue += PrintValue;
         }
 
-        private void PrintValue(int a)
+        private void PrintValue(float a)
         {
             print($"New value: {a}!");
         }

@@ -614,4 +614,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27220a12cecf79e4ab3eb9a68f8b988c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _myPositiveProperty: 42
+  _myPositiveProperty: 2648
