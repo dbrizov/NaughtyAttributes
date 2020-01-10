@@ -1,4 +1,6 @@
 # NaughtyAttributes
+[![openupm](https://img.shields.io/npm/v/com.dbrizov.naughtyattributes?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.dbrizov.naughtyattributes/)
+
 NaughtyAttributes is an extension for the Unity Inspector.
 
 It expands the range of attributes that Unity provides so that you can create powerful inspectors without the need of custom editors or property drawers. It also provides attributes that can be applied to non-serialized fields or functions.
@@ -9,11 +11,15 @@ It is implemented by replacing the default Unity Inspector. This means that if y
 Unity 2017.3.0 or later versions. Feel free to try older version. Don't forget to include the NaughtyAttributes namespace.
 
 ## Installation
-1. The easiest way is to add this entry in your **manifest.json**
+1. The package is available on the [openupm registry](https://openupm.com). You can install it via [openupm-cli](https://github.com/openupm/openupm-cli).
+```
+openupm add com.dbrizov.naughtyattributes
+```
+2. You can also install via git url by adding this entry in your **manifest.json**
 ```
 "com.dbrizov.naughtyattributes": "https://github.com/dbrizov/NaughtyAttributes.git#upm"
 ```
-2. You can also download it from the [Asset Store](https://assetstore.unity.com/packages/tools/utilities/naughtyattributes-129996)
+3. You can also download it from the [Asset Store](https://assetstore.unity.com/packages/tools/utilities/naughtyattributes-129996)
 
 ## Drawer Attributes
 Provide special draw options to serialized fields.
