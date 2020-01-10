@@ -24,6 +24,7 @@ drawersByAttributeType[typeof(ResizableTextAreaAttribute)] = new ResizableTextAr
 drawersByAttributeType[typeof(ShowAssetPreviewAttribute)] = new ShowAssetPreviewPropertyDrawer();
 drawersByAttributeType[typeof(SliderAttribute)] = new SliderPropertyDrawer();
 drawersByAttributeType[typeof(TagAttribute)] = new TagPropertyDrawer();
+drawersByAttributeType[typeof(UsePropertySetterAttribute)] = new UsePropertySetterDrawer();
 
         }
 
