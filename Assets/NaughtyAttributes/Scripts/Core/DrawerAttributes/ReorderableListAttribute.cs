@@ -2,8 +2,8 @@
 
 namespace NaughtyAttributes
 {
-    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    public class ReorderableListAttribute : DrawerAttribute
-    {
-    }
+	[AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
+	public class ReorderableListAttribute : DrawerAttribute
+	{
+	}
 }

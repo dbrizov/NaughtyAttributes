@@ -5,29 +5,29 @@ using System.Collections.Generic;
 
 namespace NaughtyAttributes.Editor
 {
-    public static class MethodDrawerDatabase
-    {
-        private static Dictionary<Type, MethodDrawer> drawersByAttributeType;
+	public static class MethodDrawerDatabase
+	{
+		private static Dictionary<Type, MethodDrawer> _drawersByAttributeType;
 
-        static MethodDrawerDatabase()
-        {
-            drawersByAttributeType = new Dictionary<Type, MethodDrawer>();
-            drawersByAttributeType[typeof(ButtonAttribute)] = new ButtonMethodDrawer();
+		static MethodDrawerDatabase()
+		{
+			_drawersByAttributeType = new Dictionary<Type, MethodDrawer>();
+			_drawersByAttributeType[typeof(ButtonAttribute)] = new ButtonMethodDrawer();
 
-        }
+		}
 
-        public static MethodDrawer GetDrawerForAttribute(Type attributeType)
-        {
-            MethodDrawer drawer;
-            if (drawersByAttributeType.TryGetValue(attributeType, out drawer))
-            {
-                return drawer;
-            }
-            else
-            {
-                return null;
-            }
-        }
-    }
+		public static MethodDrawer GetDrawerForAttribute(Type attributeType)
+		{
+			MethodDrawer drawer;
+			if (_drawersByAttributeType.TryGetValue(attributeType, out drawer))
+			{
+				return drawer;
+			}
+			else
+			{
+				return null;
+			}
+		}
+	}
 }
 

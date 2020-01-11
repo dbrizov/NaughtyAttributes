@@ -5,27 +5,27 @@ using System.Collections.Generic;
 
 namespace NaughtyAttributes.Editor
 {
-    public static class __classname__
-    {
-        private static Dictionary<Type, PropertyDrawCondition> drawConditionsByAttributeType;
+	public static class __classname__
+	{
+		private static Dictionary<Type, PropertyDrawCondition> _drawConditionsByAttributeType;
 
-        static __classname__()
-        {
-            drawConditionsByAttributeType = new Dictionary<Type, PropertyDrawCondition>();
-            __entries__
-        }
+		static __classname__()
+		{
+			_drawConditionsByAttributeType = new Dictionary<Type, PropertyDrawCondition>();
+			__entries__
+		}
 
-        public static PropertyDrawCondition GetDrawConditionForAttribute(Type attributeType)
-        {
-            PropertyDrawCondition drawCondition;
-            if (drawConditionsByAttributeType.TryGetValue(attributeType, out drawCondition))
-            {
-                return drawCondition;
-            }
-            else
-            {
-                return null;
-            }
-        }
-    }
+		public static PropertyDrawCondition GetDrawConditionForAttribute(Type attributeType)
+		{
+			PropertyDrawCondition drawCondition;
+			if (_drawConditionsByAttributeType.TryGetValue(attributeType, out drawCondition))
+			{
+				return drawCondition;
+			}
+			else
+			{
+				return null;
+			}
+		}
+	}
 }

@@ -2,22 +2,22 @@
 
 namespace NaughtyAttributes.Editor
 {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-    public abstract class BaseAttribute : Attribute, IAttribute
-    {
-        private Type targetAttributeType;
+	[AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
+	public abstract class BaseAttribute : Attribute, IAttribute
+	{
+		private Type _targetAttributeType;
 
-        public BaseAttribute(Type targetAttributeType)
-        {
-            this.targetAttributeType = targetAttributeType;
-        }
+		public BaseAttribute(Type targetAttributeType)
+		{
+			_targetAttributeType = targetAttributeType;
+		}
 
-        public Type TargetAttributeType
-        {
-            get
-            {
-                return this.targetAttributeType;
-            }
-        }
-    }
+		public Type TargetAttributeType
+		{
+			get
+			{
+				return _targetAttributeType;
+			}
+		}
+	}
 }

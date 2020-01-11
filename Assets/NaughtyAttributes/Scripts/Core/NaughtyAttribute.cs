@@ -2,8 +2,8 @@
 
 namespace NaughtyAttributes
 {
-    // The base class for all naughty attributes
-    public class NaughtyAttribute : Attribute
-    {
-    }
+	// The base class for all naughty attributes
+	public class NaughtyAttribute : Attribute
+	{
+	}
 }
