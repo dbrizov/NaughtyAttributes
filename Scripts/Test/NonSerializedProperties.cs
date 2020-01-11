@@ -20,7 +20,7 @@ namespace NaughtyAttributes.Test
 		{
 			get
 			{
-				return this.transform;
+				return transform;
 			}
 		}
 	}

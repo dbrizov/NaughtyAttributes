@@ -5,27 +5,27 @@ using System.Collections.Generic;
 
 namespace NaughtyAttributes.Editor
 {
-    public static class __classname__
-    {
-        private static Dictionary<Type, FieldDrawer> drawersByAttributeType;
+	public static class __classname__
+	{
+		private static Dictionary<Type, FieldDrawer> _drawersByAttributeType;
 
-        static __classname__()
-        {
-            drawersByAttributeType = new Dictionary<Type, FieldDrawer>();
-            __entries__
-        }
+		static __classname__()
+		{
+			_drawersByAttributeType = new Dictionary<Type, FieldDrawer>();
+			__entries__
+		}
 
-        public static FieldDrawer GetDrawerForAttribute(Type attributeType)
-        {
-            FieldDrawer drawer;
-            if (drawersByAttributeType.TryGetValue(attributeType, out drawer))
-            {
-                return drawer;
-            }
-            else
-            {
-                return null;
-            }
-        }
-    }
+		public static FieldDrawer GetDrawerForAttribute(Type attributeType)
+		{
+			FieldDrawer drawer;
+			if (_drawersByAttributeType.TryGetValue(attributeType, out drawer))
+			{
+				return drawer;
+			}
+			else
+			{
+				return null;
+			}
+		}
+	}
 }

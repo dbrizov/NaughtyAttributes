@@ -9,7 +9,7 @@ namespace NaughtyAttributes.Test
 
 		private void OnValueChangedMethod()
 		{
-			Debug.Log(this.onValueChanged);
+			Debug.Log(onValueChanged);
 		}
 	}
 }

@@ -2,8 +2,8 @@
 
 namespace NaughtyAttributes
 {
-    public class DrawConditionAttribute : NaughtyAttribute
-    {
+	public class DrawConditionAttribute : NaughtyAttribute
+	{
 
-    }
+	}
 }

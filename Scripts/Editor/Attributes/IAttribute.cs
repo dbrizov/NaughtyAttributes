@@ -2,8 +2,8 @@
 
 namespace NaughtyAttributes.Editor
 {
-    public interface IAttribute
-    {
-        Type TargetAttributeType { get; }
-    }
+	public interface IAttribute
+	{
+		Type TargetAttributeType { get; }
+	}
 }
