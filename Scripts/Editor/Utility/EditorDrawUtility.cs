@@ -6,27 +6,9 @@ namespace NaughtyAttributes.Editor
 {
 	public static class EditorDrawUtility
 	{
-		public static void DrawHeader(string header)
+		public static void DrawHelpBox(Rect position, string message, MessageType type, UnityEngine.Object context = null, bool logToConsole = true)
 		{
-			EditorGUILayout.Space();
-			EditorGUILayout.LabelField(header, EditorStyles.boldLabel);
-		}
-
-		public static bool DrawHeader(SerializedProperty property)
-		{
-			HeaderAttribute headerAttr = PropertyUtility.GetAttribute<HeaderAttribute>(property);
-			if (headerAttr != null)
-			{
-				DrawHeader(headerAttr.header);
-				return true;
-			}
-
-			return false;
-		}
-
-		public static void DrawHelpBox(string message, MessageType type, UnityEngine.Object context = null, bool logToConsole = true)
-		{
-			EditorGUILayout.HelpBox(message, type);
+			EditorGUI.HelpBox(position, message, type);
 
 			if (logToConsole)
 			{
@@ -46,9 +28,9 @@ namespace NaughtyAttributes.Editor
 			}
 		}
 
-		public static void DrawPropertyField(SerializedProperty property, bool includeChildren = true)
+		public static void DrawPropertyField(Rect position, SerializedProperty property, bool includeChildren = true)
 		{
-			EditorGUILayout.PropertyField(property, includeChildren);
+			EditorGUI.PropertyField(position, property, includeChildren);
 		}
 
 		public static bool DrawLayoutField(object value, string label)
