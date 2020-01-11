@@ -163,9 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c928ea15ae74a44089beb2e534c1a35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intSlider: {x: 18.078234, y: 83.36926}
-  floatSlider: {x: 0.2587003, y: 0.75870025}
-  invalidSlider: 0
+  myStruct:
+    minMaxSlider: {x: 0.25788936, y: 0.7578893}
 --- !u!1 &1444377589
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,7 +378,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2033251974
 Transform:
   m_ObjectHideFlags: 0
@@ -437,8 +436,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd67fbde6acdd6a44944f12e507067c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intSlider: {x: 0, y: 0}
-  floatSlider: {x: 0, y: 0}
+  minMaxSlider: {x: 0.25, y: 0.75}
 --- !u!114 &2033251978
 MonoBehaviour:
   m_ObjectHideFlags: 0
