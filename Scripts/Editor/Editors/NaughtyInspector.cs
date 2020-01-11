@@ -9,7 +9,7 @@ namespace NaughtyAttributes.Editor
 {
 	[CanEditMultipleObjects]
 	[CustomEditor(typeof(UnityEngine.Object), true)]
-	public class InspectorEditor : UnityEditor.Editor
+	public class NaughtyInspector : UnityEditor.Editor
 	{
 		private SerializedProperty _script;
 
