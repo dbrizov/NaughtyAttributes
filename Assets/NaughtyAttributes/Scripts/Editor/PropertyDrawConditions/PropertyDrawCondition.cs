@@ -2,8 +2,8 @@
 
 namespace NaughtyAttributes.Editor
 {
-    public abstract class PropertyDrawCondition
-    {
-        public abstract bool CanDrawProperty(SerializedProperty property);
-    }
+	public abstract class PropertyDrawCondition
+	{
+		public abstract bool CanDrawProperty(SerializedProperty property);
+	}
 }

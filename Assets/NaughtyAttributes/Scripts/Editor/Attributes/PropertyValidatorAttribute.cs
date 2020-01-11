@@ -2,10 +2,10 @@
 
 namespace NaughtyAttributes.Editor
 {
-    public class PropertyValidatorAttribute : BaseAttribute
-    {
-        public PropertyValidatorAttribute(Type targetAttributeType) : base(targetAttributeType)
-        {
-        }
-    }
+	public class PropertyValidatorAttribute : BaseAttribute
+	{
+		public PropertyValidatorAttribute(Type targetAttributeType) : base(targetAttributeType)
+		{
+		}
+	}
 }

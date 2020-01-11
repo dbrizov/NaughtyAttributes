@@ -5,35 +5,35 @@ using System.Collections.Generic;
 
 namespace NaughtyAttributes.Editor
 {
-    public static class __classname__
-    {
-        private static Dictionary<Type, PropertyDrawer> drawersByAttributeType;
+	public static class __classname__
+	{
+		private static Dictionary<Type, PropertyDrawer> _drawersByAttributeType;
 
-        static __classname__()
-        {
-            drawersByAttributeType = new Dictionary<Type, PropertyDrawer>();
-            __entries__
-        }
+		static __classname__()
+		{
+			_drawersByAttributeType = new Dictionary<Type, PropertyDrawer>();
+			__entries__
+		}
 
-        public static PropertyDrawer GetDrawerForAttribute(Type attributeType)
-        {
-            PropertyDrawer drawer;
-            if (drawersByAttributeType.TryGetValue(attributeType, out drawer))
-            {
-                return drawer;
-            }
-            else
-            {
-                return null;
-            }
-        }
+		public static PropertyDrawer GetDrawerForAttribute(Type attributeType)
+		{
+			PropertyDrawer drawer;
+			if (_drawersByAttributeType.TryGetValue(attributeType, out drawer))
+			{
+				return drawer;
+			}
+			else
+			{
+				return null;
+			}
+		}
 
-        public static void ClearCache()
-        {
-            foreach (var kvp in drawersByAttributeType)
-            {
-                kvp.Value.ClearCache();
-            }
-        }
-    }
+		public static void ClearCache()
+		{
+			foreach (var kvp in _drawersByAttributeType)
+			{
+				kvp.Value.ClearCache();
+			}
+		}
+	}
 }

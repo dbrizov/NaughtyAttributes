@@ -2,8 +2,8 @@ using UnityEditor;
 
 namespace NaughtyAttributes.Editor
 {
-    [PropertyDrawer(typeof(DisableIfAttribute))]
-    public class DisableIfPropertyDrawer : EnableIfPropertyDrawer
-    {
-    }
+	[PropertyDrawer(typeof(DisableIfAttribute))]
+	public class DisableIfPropertyDrawer : EnableIfPropertyDrawer
+	{
+	}
 }

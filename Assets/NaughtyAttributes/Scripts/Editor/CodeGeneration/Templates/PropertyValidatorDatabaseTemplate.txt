@@ -5,27 +5,27 @@ using System.Collections.Generic;
 
 namespace NaughtyAttributes.Editor
 {
-    public static class __classname__
-    {
-        private static Dictionary<Type, PropertyValidator> validatorsByAttributeType;
+	public static class __classname__
+	{
+		private static Dictionary<Type, PropertyValidator> _validatorsByAttributeType;
 
-        static __classname__()
-        {
-            validatorsByAttributeType = new Dictionary<Type, PropertyValidator>();
-            __entries__
-        }
+		static __classname__()
+		{
+			_validatorsByAttributeType = new Dictionary<Type, PropertyValidator>();
+			__entries__
+		}
 
-        public static PropertyValidator GetValidatorForAttribute(Type attributeType)
-        {
-            PropertyValidator validator;
-            if (validatorsByAttributeType.TryGetValue(attributeType, out validator))
-            {
-                return validator;
-            }
-            else
-            {
-                return null;
-            }
-        }
-    }
+		public static PropertyValidator GetValidatorForAttribute(Type attributeType)
+		{
+			PropertyValidator validator;
+			if (_validatorsByAttributeType.TryGetValue(attributeType, out validator))
+			{
+				return validator;
+			}
+			else
+			{
+				return null;
+			}
+		}
+	}
 }
