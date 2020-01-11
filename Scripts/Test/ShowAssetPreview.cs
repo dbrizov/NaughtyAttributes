@@ -4,10 +4,10 @@ namespace NaughtyAttributes.Test
 {
 	public class ShowAssetPreview : MonoBehaviour
 	{
-		[ShowAssetPreview]
+		//[ShowAssetPreview]
 		public Sprite sprite;
 
-		[ShowAssetPreview(96, 96)]
+		//[ShowAssetPreview(96, 96)]
 		public GameObject prefab;
 	}
 }

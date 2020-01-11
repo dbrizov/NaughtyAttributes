@@ -4,7 +4,7 @@ namespace NaughtyAttributes.Test
 {
 	public class Tag : MonoBehaviour
 	{
-		[Tag]
+		//[Tag]
 		public string tagField;
 	}
 }
