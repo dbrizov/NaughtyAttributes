@@ -4,7 +4,7 @@ namespace NaughtyAttributes.Test
 {
 	public class OnValueChanged : MonoBehaviour
 	{
-		[OnValueChanged("OnValueChangedMethod")]
+		//[OnValueChanged("OnValueChangedMethod")]
 		public int onValueChanged;
 
 		private void OnValueChangedMethod()

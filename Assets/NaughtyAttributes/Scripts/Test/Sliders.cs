@@ -4,16 +4,16 @@ namespace NaughtyAttributes.Test
 {
 	public class Sliders : MonoBehaviour
 	{
-		[BoxGroup("Sliders")]
-		[Slider(0, 10)]
+		//[BoxGroup("Sliders")]
+		//[Slider(0, 10)]
 		public int intSlider;
 
-		[BoxGroup("Sliders")]
-		[Slider(0.0f, 10.0f)]
+		//[BoxGroup("Sliders")]
+		//[Slider(0.0f, 10.0f)]
 		public float floatSlider;
 
-		[BoxGroup("Sliders")]
-		[MinMaxSlider(0.0f, 100.0f)]
+		//[BoxGroup("Sliders")]
+		//[MinMaxSlider(0.0f, 100.0f)]
 		public Vector2 minMaxSlider;
 	}
 }

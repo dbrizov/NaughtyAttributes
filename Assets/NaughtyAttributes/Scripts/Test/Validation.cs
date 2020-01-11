@@ -4,16 +4,16 @@ namespace NaughtyAttributes.Test
 {
 	public class Validation : MonoBehaviour
 	{
-		[MinValue(0.0f), MaxValue(1.0f)]
+		//[MinValue(0.0f), MaxValue(1.0f)]
 		public float minMaxValidated;
 
-		[Required]
+		//[Required]
 		public Transform requiredTransform;
 
-		[Required("Must not be null")]
+		//[Required("Must not be null")]
 		public GameObject requiredGameObject;
 
-		[ValidateInput("IsNotNull", "must not be null")]
+		//[ValidateInput("IsNotNull", "must not be null")]
 		public Sprite notNullSprite;
 
 		private bool IsNotNull(Sprite sprite)

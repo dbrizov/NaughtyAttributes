@@ -4,7 +4,7 @@ namespace NaughtyAttributes.Test
 {
 	public class ReadOnly : MonoBehaviour
 	{
-		[ReadOnly]
+		//[ReadOnly]
 		public int readOnlyInt = 5;
 	}
 }

@@ -5,19 +5,19 @@ namespace NaughtyAttributes.Test
 {
 	public class Label : MonoBehaviour
 	{
-		[Label("A Short Name")]
+		//[Label("A Short Name")]
 		public string aMoreSpecificName;
 
-		[Label("RGB")]
+		//[Label("RGB")]
 		public Vector3 vectorXYZ;
 
-		[Label("Agent")]
+		//[Label("Agent")]
 		public NavMeshAgent navMeshAgent;
 
-		[Label("Ints")]
+		//[Label("Ints")]
 		public int[] arrayOfInts;
 
-		[Label("Custom Class")]
+		//[Label("Custom Class")]
 		public MyClassExample myClass;
 
 		[System.Serializable]
