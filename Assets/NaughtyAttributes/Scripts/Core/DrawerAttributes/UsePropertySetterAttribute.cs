@@ -1,9 +1,10 @@
 ﻿namespace NaughtyAttributes
 {
     /// <summary>
-    /// Use this on a private serialized member that is exposed via a public property. 
-    /// When setting its value in the inspector, it will be done via the property setter instead of skipping it.
-    /// <para>If the property name matches the name displayed on the inspector without spaces, the name parameter can be omitted.</para>
+    /// Use this on a serialized field that is exposed through a property. 
+    /// When setting its value in the inspector, the setter will be used.
+    /// <para>If the property name matches the field's inspector display name, the name doesn't have to be provided.</para>
+    /// <para>[Delayed] use is recommended, as it avoids spamming the setter with half-written values.</para>
     /// </summary>
     public class UsePropertySetterAttribute : DrawerAttribute
     {

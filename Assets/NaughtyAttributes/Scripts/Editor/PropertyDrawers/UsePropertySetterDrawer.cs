@@ -38,10 +38,6 @@ namespace NaughtyAttributes.Editor
 
                 //Set the SerializedProperty value to the read value
                 ModifySerializedValue(serializedProperty, processedValue, ref warningMessage);
-                serializedProperty.serializedObject.ApplyModifiedProperties();
-
-                //Set the object dirty so that the editor picks up the changes on a prefab
-                EditorUtility.SetDirty(serializedProperty.serializedObject.targetObject);
             }
 
             //If we have a warning message, show it.
