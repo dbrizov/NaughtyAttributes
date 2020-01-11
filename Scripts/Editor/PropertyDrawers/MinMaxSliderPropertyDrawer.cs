@@ -4,7 +4,7 @@ using UnityEngine;
 namespace NaughtyAttributes.Editor
 {
 	[CustomPropertyDrawer(typeof(MinMaxSliderAttribute))]
-	public class MinMaxSliderPropertyDrawer : PropertyDrawer
+	public class MinMaxSliderPropertyDrawer : NaughtyPropertyDrawer
 	{
 		private static readonly float MinHeight = EditorGUIUtility.singleLineHeight;
 		private static readonly float MaxHeight = EditorGUIUtility.singleLineHeight * 4.0f;
@@ -25,7 +25,7 @@ namespace NaughtyAttributes.Editor
 		{
 			EditorGUI.BeginProperty(position, label, property);
 
-			MinMaxSliderAttribute minMaxSliderAttribute = PropertyUtility.GetAttribute<MinMaxSliderAttribute>(property);
+			MinMaxSliderAttribute minMaxSliderAttribute = (MinMaxSliderAttribute)attribute;
 
 			if (property.propertyType == SerializedPropertyType.Vector2)
 			{
@@ -91,7 +91,7 @@ namespace NaughtyAttributes.Editor
 					MaxHeight * 0.7f);
 
 				string warning = minMaxSliderAttribute.GetType().Name + " can be used only on Vector2 fields";
-				EditorDrawUtility.DrawHelpBox(warningRect, warning, MessageType.Warning, context: PropertyUtility.GetTargetObject(property));
+				EditorDrawUtility.DrawHelpBox(warningRect, warning, MessageType.Warning, context: GetTargetObject(property));
 
 				Rect propertyRect = new Rect(
 					position.x,
