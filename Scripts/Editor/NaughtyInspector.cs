@@ -42,7 +42,7 @@ namespace NaughtyAttributes.Editor
 			if (_methods.Any())
 			{
 				EditorGUIExtensions.HorizontalLine();
-				EditorGUILayout.LabelField("Methods", EditorStyles.boldLabel);
+				EditorGUILayout.LabelField("Buttons", EditorStyles.boldLabel);
 
 				foreach (var method in _methods)
 				{

@@ -588,7 +588,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   intValue: 2
   stringValue: B
-  vectorValue: {x: 0, y: 1, z: 0}
+  vectorValue: {x: 0, y: 0, z: -1}
 --- !u!114 &2033251987
 MonoBehaviour:
   m_ObjectHideFlags: 0

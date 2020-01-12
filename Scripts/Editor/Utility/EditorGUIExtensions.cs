@@ -21,6 +21,20 @@ namespace NaughtyAttributes.Editor
 			}
 		}
 
+		public static void Dropdown(
+			Rect rect, UnityEngine.Object target, FieldInfo fieldInfo, string label, int selectedValueIndex, object[] values, string[] displayOptions)
+		{
+			EditorGUI.BeginChangeCheck();
+
+			int newIndex = EditorGUI.Popup(rect, label, selectedValueIndex, displayOptions);
+
+			if (EditorGUI.EndChangeCheck())
+			{
+				Undo.RecordObject(target, "Dropdown");
+				fieldInfo.SetValue(target, values[newIndex]);
+			}
+		}
+
 		public static void Button(UnityEngine.Object target, MethodInfo methodInfo)
 		{
 			if (methodInfo.GetParameters().Length == 0)
