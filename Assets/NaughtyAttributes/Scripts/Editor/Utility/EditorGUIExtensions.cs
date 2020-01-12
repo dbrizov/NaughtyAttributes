@@ -4,9 +4,9 @@ using System;
 
 namespace NaughtyAttributes.Editor
 {
-	public static class EditorDrawUtility
+	public static class EditorGUIExtensions
 	{
-		public static void DrawHelpBox(Rect rect, string message, MessageType type, UnityEngine.Object context = null, bool logToConsole = true)
+		public static void HelpBox(Rect rect, string message, MessageType type, UnityEngine.Object context = null, bool logToConsole = true)
 		{
 			EditorGUI.HelpBox(rect, message, type);
 
@@ -28,12 +28,28 @@ namespace NaughtyAttributes.Editor
 			}
 		}
 
-		public static void DrawPropertyField(Rect rect, SerializedProperty property, bool includeChildren = true)
+		internal static void PropertyField_Internal(SerializedProperty property, bool includeChildren)
 		{
-			EditorGUI.PropertyField(rect, property, includeChildren);
+			if (property.isArray)
+			{
+				ReorderableListAttribute reorderableListAttribute = PropertyUtility.GetAttribute<ReorderableListAttribute>(property);
+				if (reorderableListAttribute != null)
+				{
+					ISpecialCasePropertyDrawer drawer = SpecialCasePropertyDrawerDatabase.GetDrawerForAttribute(reorderableListAttribute.GetType());
+					drawer.OnGUI_Custom(property);
+				}
+				else
+				{
+					EditorGUILayout.PropertyField(property, includeChildren);
+				}
+			}
+			else
+			{
+				EditorGUILayout.PropertyField(property, includeChildren);
+			}
 		}
 
-		public static bool DrawLayoutField(object value, string label)
+		public static bool LayoutField(object value, string label)
 		{
 			GUI.enabled = false;
 

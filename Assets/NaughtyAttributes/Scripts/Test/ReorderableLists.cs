@@ -13,16 +13,13 @@ namespace NaughtyAttributes.Test
 
 	public class ReorderableLists : MonoBehaviour
 	{
-		//[BoxGroup("Reorderable Lists")]
-		//[ReorderableList]
+		[ReorderableList]
 		public int[] intArray;
 
-		//[BoxGroup("Reorderable Lists")]
-		//[ReorderableList]
+		[ReorderableList]
 		public List<Vector3> vectorList;
 
-		//[BoxGroup("Reorderable Lists")]
-		//[ReorderableList]
+		[ReorderableList]
 		public List<SomeStruct> structList;
 	}
 }

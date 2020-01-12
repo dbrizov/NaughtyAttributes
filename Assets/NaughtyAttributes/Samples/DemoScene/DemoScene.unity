@@ -164,7 +164,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myStruct:
-    minMaxSlider: {x: 0.25788936, y: 0.7578893}
+    minMaxSlider: {x: 0.27883846, y: 0.6124126}
+    list: 
+  list: 010000000300000002000000
+  list2: 0
 --- !u!1 &1444377589
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,15 +472,15 @@ MonoBehaviour:
   - {x: 0, y: 1, z: 0}
   - {x: 0, y: 0, z: 1}
   structList:
-  - Int: 3
-    Float: 3.5
-    Vector: {x: 3, y: 3, z: 3}
   - Int: 1
     Float: 1.5
     Vector: {x: 1, y: 1, z: 1}
   - Int: 2
     Float: 2.5
     Vector: {x: 2, y: 2, z: 2}
+  - Int: 3
+    Float: 3.5
+    Vector: {x: 3, y: 3, z: 3}
 --- !u!114 &2033251980
 MonoBehaviour:
   m_ObjectHideFlags: 0
