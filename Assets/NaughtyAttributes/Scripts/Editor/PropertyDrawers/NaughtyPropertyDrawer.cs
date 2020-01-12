@@ -5,11 +5,6 @@ namespace NaughtyAttributes.Editor
 {
 	public class NaughtyPropertyDrawer : PropertyDrawer
 	{
-		public UnityEngine.Object GetTargetObject(SerializedProperty property)
-		{
-			return property.serializedObject.targetObject;
-		}
-
 		public float GetPropertyHeight(SerializedProperty property)
 		{
 			return EditorGUI.GetPropertyHeight(property, true);
@@ -28,7 +23,7 @@ namespace NaughtyAttributes.Editor
 					rect.width,
 					GetHelpBoxHeight() - 2.0f);
 
-			EditorGUIExtensions.HelpBox(helpBoxRect, message, MessageType.Warning, GetTargetObject(property));
+			EditorGUIExtensions.HelpBox(helpBoxRect, message, MessageType.Warning, property.serializedObject.targetObject);
 
 			Rect propertyRect = new Rect(
 				rect.x,

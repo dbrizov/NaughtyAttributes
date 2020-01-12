@@ -12,36 +12,44 @@ namespace NaughtyAttributes.Editor
 
 			if (logToConsole)
 			{
-				switch (type)
-				{
-					case MessageType.None:
-					case MessageType.Info:
-						Debug.Log(message, context);
-						break;
-					case MessageType.Warning:
-						Debug.LogWarning(message, context);
-						break;
-					case MessageType.Error:
-						Debug.LogError(message, context);
-						break;
-				}
+				DebugLogMessage(message, type, context);
 			}
 		}
 
-		internal static void PropertyField_Internal(SerializedProperty property, bool includeChildren)
+		public static void HelpBox_Layout(string message, MessageType type, UnityEngine.Object context = null, bool logToConsole = true)
 		{
-			if (property.isArray)
+			EditorGUILayout.HelpBox(message, type);
+
+			if (logToConsole)
 			{
-				ReorderableListAttribute reorderableListAttribute = PropertyUtility.GetAttribute<ReorderableListAttribute>(property);
-				if (reorderableListAttribute != null)
-				{
-					ISpecialCasePropertyDrawer drawer = SpecialCasePropertyDrawerDatabase.GetDrawerForAttribute(reorderableListAttribute.GetType());
-					drawer.OnGUI_Custom(property);
-				}
-				else
-				{
-					EditorGUILayout.PropertyField(property, includeChildren);
-				}
+				DebugLogMessage(message, type, context);
+			}
+		}
+
+		private static void DebugLogMessage(string message, MessageType type, UnityEngine.Object context)
+		{
+			switch (type)
+			{
+				case MessageType.None:
+				case MessageType.Info:
+					Debug.Log(message, context);
+					break;
+				case MessageType.Warning:
+					Debug.LogWarning(message, context);
+					break;
+				case MessageType.Error:
+					Debug.LogError(message, context);
+					break;
+			}
+		}
+
+		internal static void _PropertyField_Layout(SerializedProperty property, bool includeChildren)
+		{
+			ISpecialCaseDrawerAttribute specialCaseAttribute = PropertyUtility.GetAttribute<ISpecialCaseDrawerAttribute>(property);
+			if (specialCaseAttribute != null)
+			{
+				SpecialCasePropertyDrawer drawer = SpecialCasePropertyDrawerDatabase.GetDrawerForAttribute(specialCaseAttribute.GetType());
+				drawer.OnGUI(property);
 			}
 			else
 			{
