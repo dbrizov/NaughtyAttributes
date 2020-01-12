@@ -24,5 +24,11 @@ namespace NaughtyAttributes.Test
 
 		[ReorderableList]
 		public List<int> list;
+
+		[Button("Button")]
+		private void Method()
+		{
+			Debug.Log("Method");
+		}
 	}
 }
