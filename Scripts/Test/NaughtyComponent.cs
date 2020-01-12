@@ -15,12 +15,14 @@ namespace NaughtyAttributes.Test
 
 	public class NaughtyComponent : MonoBehaviour
 	{
+		[Header("Nesting")]
 		public MyStruct myStruct;
 
-		[ReorderableList]
-		public int[] list;
+		[Header("No Nesting")]
+		[MinMaxSlider(0.0f, 1.0f)]
+		public Vector2 minMaxSlider;
 
 		[ReorderableList]
-		public int list2;
+		public List<int> list;
 	}
 }

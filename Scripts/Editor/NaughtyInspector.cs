@@ -27,7 +27,7 @@ namespace NaughtyAttributes.Editor
 			foreach (var field in _serializedFields)
 			{
 				SerializedProperty property = serializedObject.FindProperty(field.Name);
-				EditorGUIExtensions.PropertyField_Internal(property, true);
+				EditorGUIExtensions._PropertyField_Layout(property, true);
 			}
 
 			serializedObject.ApplyModifiedProperties();

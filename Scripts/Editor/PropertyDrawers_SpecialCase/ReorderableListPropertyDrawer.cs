@@ -5,16 +5,16 @@ using System.Collections.Generic;
 
 namespace NaughtyAttributes.Editor
 {
-	public class ReorderableListPropertyDrawer : NaughtyPropertyDrawer, ISpecialCasePropertyDrawer
+	public class ReorderableListPropertyDrawer : SpecialCasePropertyDrawer
 	{
 		private Dictionary<string, ReorderableList> _reorderableListsByPropertyName = new Dictionary<string, ReorderableList>();
 
-		string GetPropertyKeyName(SerializedProperty property)
+		private string GetPropertyKeyName(SerializedProperty property)
 		{
 			return property.serializedObject.targetObject.GetInstanceID() + "/" + property.name;
 		}
 
-		public void OnGUI_Custom(SerializedProperty property)
+		public override void OnGUI(SerializedProperty property)
 		{
 			if (property.isArray)
 			{
@@ -53,12 +53,12 @@ namespace NaughtyAttributes.Editor
 			else
 			{
 				string message = typeof(ReorderableListAttribute).Name + " can be used only on arrays or lists";
-				EditorGUILayout.HelpBox(message, MessageType.Warning);
+				EditorGUIExtensions.HelpBox_Layout(message, MessageType.Warning, property.serializedObject.targetObject);
 				EditorGUILayout.PropertyField(property, true);
 			}
 		}
 
-		public void ClearCache()
+		public override void ClearCache()
 		{
 			_reorderableListsByPropertyName.Clear();
 		}

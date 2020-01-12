@@ -166,8 +166,8 @@ MonoBehaviour:
   myStruct:
     minMaxSlider: {x: 0.27883846, y: 0.6124126}
     list: 
+  minMaxSlider: {x: 0.20326455, y: 0.79457957}
   list: 010000000300000002000000
-  list2: 0
 --- !u!1 &1444377589
 GameObject:
   m_ObjectHideFlags: 0

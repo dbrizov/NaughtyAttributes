@@ -5,17 +5,17 @@ namespace NaughtyAttributes.Editor
 {
 	public static class SpecialCasePropertyDrawerDatabase
 	{
-		private static Dictionary<Type, ISpecialCasePropertyDrawer> _drawersByAttributeType;
+		private static Dictionary<Type, SpecialCasePropertyDrawer> _drawersByAttributeType;
 
 		static SpecialCasePropertyDrawerDatabase()
 		{
-			_drawersByAttributeType = new Dictionary<Type, ISpecialCasePropertyDrawer>();
+			_drawersByAttributeType = new Dictionary<Type, SpecialCasePropertyDrawer>();
 			_drawersByAttributeType[typeof(ReorderableListAttribute)] = new ReorderableListPropertyDrawer();
 		}
 
-		public static ISpecialCasePropertyDrawer GetDrawerForAttribute(Type attributeType)
+		public static SpecialCasePropertyDrawer GetDrawerForAttribute(Type attributeType)
 		{
-			ISpecialCasePropertyDrawer drawer;
+			SpecialCasePropertyDrawer drawer;
 			if (_drawersByAttributeType.TryGetValue(attributeType, out drawer))
 			{
 				return drawer;
