@@ -6,19 +6,11 @@ namespace NaughtyAttributes.Editor
 	[CustomPropertyDrawer(typeof(MinMaxSliderAttribute))]
 	public class MinMaxSliderPropertyDrawer : NaughtyPropertyDrawer
 	{
-		private static readonly float MinHeight = EditorGUIUtility.singleLineHeight;
-		private static readonly float MaxHeight = EditorGUIUtility.singleLineHeight * 4.0f;
-
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
 		{
-			if (property.propertyType == SerializedPropertyType.Vector2)
-			{
-				return MinHeight;
-			}
-			else
-			{
-				return MaxHeight;
-			}
+			return (property.propertyType == SerializedPropertyType.Vector2)
+				? GetPropertyHeight(property)
+				: GetPropertyHeight(property) + GetHelpBoxHeight();
 		}
 
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -84,22 +76,8 @@ namespace NaughtyAttributes.Editor
 			}
 			else
 			{
-				Rect warningRect = new Rect(
-					position.x,
-					position.y,
-					position.width,
-					MaxHeight * 0.7f);
-
-				string warning = minMaxSliderAttribute.GetType().Name + " can be used only on Vector2 fields";
-				EditorDrawUtility.DrawHelpBox(warningRect, warning, MessageType.Warning, context: GetTargetObject(property));
-
-				Rect propertyRect = new Rect(
-					position.x,
-					position.y + MaxHeight * 0.75f,
-					position.width,
-					MaxHeight * 0.25f);
-
-				EditorDrawUtility.DrawPropertyField(propertyRect, property);
+				string message = minMaxSliderAttribute.GetType().Name + " can be used only on Vector2 fields";
+				DrawDefaultPropertyAndHelpBox(position, property, message, MessageType.Warning);
 			}
 
 			EditorGUI.EndProperty();
