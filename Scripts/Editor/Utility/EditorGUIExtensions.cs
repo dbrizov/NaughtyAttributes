@@ -1,11 +1,50 @@
 using UnityEngine;
 using UnityEditor;
 using System;
+using System.Reflection;
 
 namespace NaughtyAttributes.Editor
 {
 	public static class EditorGUIExtensions
 	{
+		internal static void _PropertyField_Layout(SerializedProperty property, bool includeChildren)
+		{
+			ISpecialCaseDrawerAttribute specialCaseAttribute = PropertyUtility.GetAttribute<ISpecialCaseDrawerAttribute>(property);
+			if (specialCaseAttribute != null)
+			{
+				SpecialCasePropertyDrawer drawer = SpecialCasePropertyDrawerDatabase.GetDrawerForAttribute(specialCaseAttribute.GetType());
+				drawer.OnGUI(property);
+			}
+			else
+			{
+				EditorGUILayout.PropertyField(property, includeChildren);
+			}
+		}
+
+		public static void Button(UnityEngine.Object target, MethodInfo methodInfo)
+		{
+			if (methodInfo.GetParameters().Length == 0)
+			{
+				ButtonAttribute buttonAttribute = (ButtonAttribute)methodInfo.GetCustomAttributes(typeof(ButtonAttribute), true)[0];
+				string buttonText = string.IsNullOrEmpty(buttonAttribute.Text) ? methodInfo.Name : buttonAttribute.Text;
+
+				if (GUILayout.Button(buttonText))
+				{
+					methodInfo.Invoke(target, null);
+				}
+			}
+			else
+			{
+				string warning = typeof(ButtonAttribute).Name + " works only on methods with no parameters";
+				HelpBox_Layout(warning, MessageType.Warning, context: target);
+			}
+		}
+
+		public static void HorizontalLine()
+		{
+			EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+		}
+
 		public static void HelpBox(Rect rect, string message, MessageType type, UnityEngine.Object context = null, bool logToConsole = true)
 		{
 			EditorGUI.HelpBox(rect, message, type);
@@ -23,37 +62,6 @@ namespace NaughtyAttributes.Editor
 			if (logToConsole)
 			{
 				DebugLogMessage(message, type, context);
-			}
-		}
-
-		private static void DebugLogMessage(string message, MessageType type, UnityEngine.Object context)
-		{
-			switch (type)
-			{
-				case MessageType.None:
-				case MessageType.Info:
-					Debug.Log(message, context);
-					break;
-				case MessageType.Warning:
-					Debug.LogWarning(message, context);
-					break;
-				case MessageType.Error:
-					Debug.LogError(message, context);
-					break;
-			}
-		}
-
-		internal static void _PropertyField_Layout(SerializedProperty property, bool includeChildren)
-		{
-			ISpecialCaseDrawerAttribute specialCaseAttribute = PropertyUtility.GetAttribute<ISpecialCaseDrawerAttribute>(property);
-			if (specialCaseAttribute != null)
-			{
-				SpecialCasePropertyDrawer drawer = SpecialCasePropertyDrawerDatabase.GetDrawerForAttribute(specialCaseAttribute.GetType());
-				drawer.OnGUI(property);
-			}
-			else
-			{
-				EditorGUILayout.PropertyField(property, includeChildren);
 			}
 		}
 
@@ -124,6 +132,23 @@ namespace NaughtyAttributes.Editor
 			GUI.enabled = true;
 
 			return isDrawn;
+		}
+
+		private static void DebugLogMessage(string message, MessageType type, UnityEngine.Object context)
+		{
+			switch (type)
+			{
+				case MessageType.None:
+				case MessageType.Info:
+					Debug.Log(message, context);
+					break;
+				case MessageType.Warning:
+					Debug.LogWarning(message, context);
+					break;
+				case MessageType.Error:
+					Debug.LogError(message, context);
+					break;
+			}
 		}
 	}
 }

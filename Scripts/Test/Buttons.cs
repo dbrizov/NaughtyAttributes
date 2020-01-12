@@ -4,13 +4,13 @@ namespace NaughtyAttributes.Test
 {
 	public class Buttons : MonoBehaviour
 	{
-		//[Button]
+		[Button]
 		public void MethodOne()
 		{
 			Debug.Log("MethodOne()");
 		}
 
-		//[Button("Button Text")]
+		[Button("Button Text")]
 		private void MethodTwo()
 		{
 			Debug.Log("MethodTwo()");
