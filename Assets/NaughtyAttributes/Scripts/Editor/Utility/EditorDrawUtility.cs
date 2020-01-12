@@ -6,9 +6,9 @@ namespace NaughtyAttributes.Editor
 {
 	public static class EditorDrawUtility
 	{
-		public static void DrawHelpBox(Rect position, string message, MessageType type, UnityEngine.Object context = null, bool logToConsole = true)
+		public static void DrawHelpBox(Rect rect, string message, MessageType type, UnityEngine.Object context = null, bool logToConsole = true)
 		{
-			EditorGUI.HelpBox(position, message, type);
+			EditorGUI.HelpBox(rect, message, type);
 
 			if (logToConsole)
 			{
@@ -28,9 +28,9 @@ namespace NaughtyAttributes.Editor
 			}
 		}
 
-		public static void DrawPropertyField(Rect position, SerializedProperty property, bool includeChildren = true)
+		public static void DrawPropertyField(Rect rect, SerializedProperty property, bool includeChildren = true)
 		{
-			EditorGUI.PropertyField(position, property, includeChildren);
+			EditorGUI.PropertyField(rect, property, includeChildren);
 		}
 
 		public static bool DrawLayoutField(object value, string label)
