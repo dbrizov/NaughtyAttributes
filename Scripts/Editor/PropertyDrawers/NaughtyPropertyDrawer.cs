@@ -28,7 +28,7 @@ namespace NaughtyAttributes.Editor
 					rect.width,
 					GetHelpBoxHeight() - 2.0f);
 
-			EditorDrawUtility.DrawHelpBox(helpBoxRect, message, MessageType.Warning, GetTargetObject(property));
+			EditorGUIExtensions.HelpBox(helpBoxRect, message, MessageType.Warning, GetTargetObject(property));
 
 			Rect propertyRect = new Rect(
 				rect.x,
@@ -36,7 +36,7 @@ namespace NaughtyAttributes.Editor
 				rect.width,
 				GetPropertyHeight(property));
 
-			EditorDrawUtility.DrawPropertyField(propertyRect, property);
+			EditorGUI.PropertyField(propertyRect, property, true);
 		}
 	}
 }
