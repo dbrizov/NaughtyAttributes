@@ -23,12 +23,12 @@ namespace NaughtyAttributes.Test
 		private DropdownList<Vector3> GetVectorValues()
 		{
 			return new DropdownList<Vector3>()
-				{
-					{ "Right", Vector3.right },
-					{ "Up", Vector3.up },
-					{ "Forward", Vector3.forward },
-					{ "Back", Vector3.back }
-				};
+			{
+				{ "Right", Vector3.right },
+				{ "Up", Vector3.up },
+				{ "Forward", Vector3.forward },
+				{ "Back", Vector3.back }
+			};
 		}
 	}
 }

@@ -163,10 +163,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c928ea15ae74a44089beb2e534c1a35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  myStruct:
-    minMaxSlider: {x: 0.27883846, y: 0.6124126}
-    list: 
-  minMaxSlider: {x: 0.20326455, y: 0.79457957}
+  myClass:
+    myStruct:
+      vectorValue: {x: 0, y: 0, z: 0}
+    intValues: 1
+  vectorValue: {x: 0, y: 0, z: 1}
+  minMaxSlider: {x: 0.289498, y: 0.66522944}
   list: 010000000300000002000000
 --- !u!1 &1444377589
 GameObject:
@@ -586,9 +588,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3855e37cd6b01194e8166573c7c4b37d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intValue: 2
-  stringValue: B
-  vectorValue: {x: 0, y: 0, z: -1}
+  intValue: 1
+  stringValue: C
+  vectorValue: {x: 0, y: 1, z: 0}
 --- !u!114 &2033251987
 MonoBehaviour:
   m_ObjectHideFlags: 0

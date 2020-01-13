@@ -16,9 +16,11 @@ namespace NaughtyAttributes.Editor
 			object values = GetValues(property, dropdownAttribute.ValuesName);
 			FieldInfo fieldInfo = ReflectionUtility.GetField(property.serializedObject.targetObject, property.name);
 
-			return AreValuesValid(values, fieldInfo)
+			float propertyHeight = AreValuesValid(values, fieldInfo)
 				? GetPropertyHeight(property)
 				: GetPropertyHeight(property) + GetHelpBoxHeight();
+
+			return propertyHeight;
 		}
 
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -26,17 +28,17 @@ namespace NaughtyAttributes.Editor
 			EditorGUI.BeginProperty(position, label, property);
 
 			DropdownAttribute dropdownAttribute = (DropdownAttribute)attribute;
-			UnityEngine.Object target = property.serializedObject.targetObject;
+			object target = PropertyUtility.GetTargetObjectWithProperty(property);
 
 			object valuesObject = GetValues(property, dropdownAttribute.ValuesName);
-			FieldInfo fieldInfo = ReflectionUtility.GetField(target, property.name);
+			FieldInfo dropdownField = ReflectionUtility.GetField(target, property.name);
 
-			if (AreValuesValid(valuesObject, fieldInfo))
+			if (AreValuesValid(valuesObject, dropdownField))
 			{
-				if (valuesObject is IList && fieldInfo.FieldType == GetElementType(valuesObject))
+				if (valuesObject is IList && dropdownField.FieldType == GetElementType(valuesObject))
 				{
 					// Selected value
-					object selectedValue = fieldInfo.GetValue(target);
+					object selectedValue = dropdownField.GetValue(target);
 
 					// Values and display options
 					IList valuesList = (IList)valuesObject;
@@ -57,12 +59,13 @@ namespace NaughtyAttributes.Editor
 						selectedValueIndex = 0;
 					}
 
-					EditorGUIExtensions.Dropdown(position, target, fieldInfo, property.displayName, selectedValueIndex, values, displayOptions);
+					EditorGUIExtensions.Dropdown(
+						position, property.serializedObject, target, dropdownField, property.displayName, selectedValueIndex, values, displayOptions);
 				}
 				else if (valuesObject is IDropdownList)
 				{
 					// Current value
-					object selectedValue = fieldInfo.GetValue(target);
+					object selectedValue = dropdownField.GetValue(target);
 
 					// Current value index, values and display options
 					IDropdownList dropdown = (IDropdownList)valuesObject;
@@ -93,7 +96,7 @@ namespace NaughtyAttributes.Editor
 					}
 
 					EditorGUIExtensions.Dropdown(
-						position, target, fieldInfo, property.displayName, selectedValueIndex, values.ToArray(), displayOptions.ToArray());
+						position, property.serializedObject, target, dropdownField, property.displayName, selectedValueIndex, values.ToArray(), displayOptions.ToArray());
 				}
 			}
 			else
@@ -109,7 +112,7 @@ namespace NaughtyAttributes.Editor
 
 		private object GetValues(SerializedProperty property, string valuesName)
 		{
-			UnityEngine.Object target = property.serializedObject.targetObject;
+			object target = PropertyUtility.GetTargetObjectWithProperty(property);
 
 			FieldInfo valuesFieldInfo = ReflectionUtility.GetField(target, valuesName);
 			if (valuesFieldInfo != null)
@@ -134,14 +137,14 @@ namespace NaughtyAttributes.Editor
 			return null;
 		}
 
-		private bool AreValuesValid(object values, FieldInfo targetFieldInfo)
+		private bool AreValuesValid(object values, FieldInfo dropdownField)
 		{
-			if (values == null || targetFieldInfo == null)
+			if (values == null || dropdownField == null)
 			{
 				return false;
 			}
 
-			if ((values is IList && targetFieldInfo.FieldType == GetElementType(values)) ||
+			if ((values is IList && dropdownField.FieldType == GetElementType(values)) ||
 				(values is IDropdownList))
 			{
 				return true;
