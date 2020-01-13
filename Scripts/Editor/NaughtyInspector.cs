@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
+using UnityEngine;
 
 namespace NaughtyAttributes.Editor
 {
@@ -9,11 +10,14 @@ namespace NaughtyAttributes.Editor
 	[CustomEditor(typeof(UnityEngine.Object), true)]
 	public class NaughtyInspector : UnityEditor.Editor
 	{
+		private SerializedProperty _script;
 		private IEnumerable<FieldInfo> _serializedFields;
 		private IEnumerable<MethodInfo> _methods;
 
 		private void OnEnable()
 		{
+			_script = serializedObject.FindProperty("m_Script");
+
 			_serializedFields = ReflectionUtility.GetAllFields(
 				target, f => serializedObject.FindProperty(f.Name) != null);
 
@@ -29,6 +33,10 @@ namespace NaughtyAttributes.Editor
 		public override void OnInspectorGUI()
 		{
 			serializedObject.Update();
+
+			GUI.enabled = false;
+			EditorGUILayout.PropertyField(_script);
+			GUI.enabled = true;
 
 			foreach (var field in _serializedFields)
 			{
