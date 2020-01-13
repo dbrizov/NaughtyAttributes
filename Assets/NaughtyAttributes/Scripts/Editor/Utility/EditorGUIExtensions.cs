@@ -21,8 +21,20 @@ namespace NaughtyAttributes.Editor
 			}
 		}
 
+		/// <summary>
+		/// Creates a dropdown
+		/// </summary>
+		/// <param name="rect">The rect the defines the position and size of the dropdown in the inspector/param>
+		/// <param name="serializedObject">The serialized object that is being updated</param>
+		/// <param name="target">The target object that contains the dropdown</param>
+		/// <param name="dropdownField">The field of the target object that holds the currently selected dropdown value</param>
+		/// <param name="label">The label of the dropdown</param>
+		/// <param name="selectedValueIndex">The index of the value from the values array</param>
+		/// <param name="values">The values of the dropdown</param>
+		/// <param name="displayOptions">The display options for the values</param>
 		public static void Dropdown(
-			Rect rect, UnityEngine.Object target, FieldInfo fieldInfo, string label, int selectedValueIndex, object[] values, string[] displayOptions)
+			Rect rect, SerializedObject serializedObject, object target, FieldInfo dropdownField,
+			string label, int selectedValueIndex, object[] values, string[] displayOptions)
 		{
 			EditorGUI.BeginChangeCheck();
 
@@ -30,8 +42,11 @@ namespace NaughtyAttributes.Editor
 
 			if (EditorGUI.EndChangeCheck())
 			{
-				Undo.RecordObject(target, "Dropdown");
-				fieldInfo.SetValue(target, values[newIndex]);
+				Undo.RecordObject(serializedObject.targetObject, "Dropdown");
+
+				// TODO: Problem with structs, because they are value type.
+				// The solution is to make boxing/unboxing but unfortunately I don't know the compile time type of the target object
+				dropdownField.SetValue(target, values[newIndex]);
 			}
 		}
 
