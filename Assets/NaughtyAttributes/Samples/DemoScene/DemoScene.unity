@@ -166,10 +166,9 @@ MonoBehaviour:
   myClass:
     myStruct:
       vectorValue: {x: 0, y: 0, z: 0}
-    intValues: 1
-  vectorValue: {x: 0, y: 0, z: 1}
+    intValues: 0
   minMaxSlider: {x: 0.289498, y: 0.66522944}
-  list: 010000000300000002000000
+  list: 030000000100000002000000
 --- !u!1 &1444377589
 GameObject:
   m_ObjectHideFlags: 0

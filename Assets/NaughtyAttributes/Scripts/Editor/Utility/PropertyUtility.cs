@@ -62,6 +62,7 @@ namespace NaughtyAttributes.Editor
 			string path = property.propertyPath.Replace(".Array.data[", "[");
 			object obj = property.serializedObject.targetObject;
 			string[] elements = path.Split('.');
+
 			for (int i = 0; i < elements.Length - 1; i++)
 			{
 				string element = elements[i];
