@@ -167,7 +167,7 @@ MonoBehaviour:
   myClass:
     level2: {x: 0.41884816, y: 0.880813}
     myStruct:
-      level3: {x: 0.123190634, y: 0.44964582}
+      level3: {x: 0.3695719, y: 0.69602704}
 --- !u!1 &1444377589
 GameObject:
   m_ObjectHideFlags: 0

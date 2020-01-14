@@ -8,8 +8,13 @@ namespace NaughtyAttributes.Test
 	{
 		[HorizontalLine(color: EColor.Orange)]
 		[Header("Orange")]
-		[MinMaxSlider(0, 1)]
-		public Vector2 level3;
+		[Dropdown("GetValues")]
+		public int level3;
+
+		private int[] GetValues()
+		{
+			return new int[] { 1, 2, 3 };
+		}
 	}
 
 	[System.Serializable]
@@ -17,19 +22,29 @@ namespace NaughtyAttributes.Test
 	{
 		[HorizontalLine(color: EColor.Red)]
 		[Header("Red")]
-		[MinMaxSlider(0, 1)]
-		public Vector2 level2;
+		[Dropdown("GetValues")]
+		public int level2;
 
 		public MyStruct myStruct;
+
+		private int[] GetValues()
+		{
+			return new int[] { 1, 2, 3 };
+		}
 	}
 
 	public class NaughtyComponent : MonoBehaviour
 	{
 		[HorizontalLine(color: EColor.Black)]
 		[Header("Black")]
-		[MinMaxSlider(0, 1)]
-		public Vector2 level1;
+		[Dropdown("GetValues")]
+		public int level1;
 
 		public MyClass myClass;
+
+		private int[] GetValues()
+		{
+			return new int[] { 1, 2, 3 };
+		}
 	}
 }
