@@ -49,8 +49,9 @@ namespace NaughtyAttributes.Editor
 			// Draw methods
 			if (_methods.Any())
 			{
-				EditorGUIExtensions.HorizontalLine();
 				EditorGUILayout.LabelField("Buttons", EditorStyles.boldLabel);
+				EditorGUIExtensions.HorizontalLine(
+					EditorGUILayout.GetControlRect(false), HorizontalLineAttribute.DefaultHeight, HorizontalLineAttribute.DefaultColor.GetColor());
 
 				foreach (var method in _methods)
 				{
