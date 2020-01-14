@@ -14,7 +14,7 @@ namespace NaughtyAttributes.Editor
 		{
 			DropdownAttribute dropdownAttribute = (DropdownAttribute)attribute;
 			object values = GetValues(property, dropdownAttribute.ValuesName);
-			FieldInfo fieldInfo = ReflectionUtility.GetField(property.serializedObject.targetObject, property.name);
+			FieldInfo fieldInfo = ReflectionUtility.GetField(PropertyUtility.GetTargetObjectWithProperty(property), property.name);
 
 			float propertyHeight = AreValuesValid(values, fieldInfo)
 				? GetPropertyHeight(property)

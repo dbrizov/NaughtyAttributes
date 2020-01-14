@@ -2,7 +2,7 @@
 
 namespace NaughtyAttributes.Test
 {
-	public class HorizontalLineTest : MonoBehaviour
+	public class HorizontalLine : MonoBehaviour
 	{
 		[HorizontalLine(color: EColor.Black)]
 		[Header("Black")]
