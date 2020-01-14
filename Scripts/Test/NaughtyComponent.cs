@@ -9,7 +9,7 @@ namespace NaughtyAttributes.Test
 		[HorizontalLine(color: EColor.Orange)]
 		[Header("Orange")]
 		[MinMaxSlider(0, 1)]
-		public Vector2 minMaxSlider;
+		public Vector2 level3;
 	}
 
 	[System.Serializable]
@@ -17,16 +17,19 @@ namespace NaughtyAttributes.Test
 	{
 		[HorizontalLine(color: EColor.Red)]
 		[Header("Red")]
+		[MinMaxSlider(0, 1)]
+		public Vector2 level2;
+
 		public MyStruct myStruct;
 	}
 
 	public class NaughtyComponent : MonoBehaviour
 	{
-		[HorizontalLine]
-		public MyClass myClass;
-
 		[HorizontalLine(color: EColor.Black)]
 		[Header("Black")]
-		public int dummy;
+		[MinMaxSlider(0, 1)]
+		public Vector2 level1;
+
+		public MyClass myClass;
 	}
 }
