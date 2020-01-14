@@ -163,12 +163,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c928ea15ae74a44089beb2e534c1a35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  level1: {x: 0.19094548, y: 0.9076071}
   myClass:
+    level2: {x: 0.41884816, y: 0.880813}
     myStruct:
-      vectorValue: {x: 0, y: 0, z: 0}
-    intValues: 0
-  minMaxSlider: {x: 0.289498, y: 0.66522944}
-  list: 030000000100000002000000
+      level3: {x: 0.123190634, y: 0.44964582}
 --- !u!1 &1444377589
 GameObject:
   m_ObjectHideFlags: 0
@@ -376,6 +375,7 @@ GameObject:
   - component: {fileID: 2033251975}
   - component: {fileID: 2033251989}
   - component: {fileID: 2033251988}
+  - component: {fileID: 2033251973}
   m_Layer: 0
   m_Name: TestObject
   m_TagString: Untagged
@@ -383,6 +383,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2033251973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2033251972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cc6d3f8d4a53374887b3d620a6972e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dummy: 0
 --- !u!4 &2033251974
 Transform:
   m_ObjectHideFlags: 0

@@ -21,6 +21,14 @@ namespace NaughtyAttributes.Editor
 			}
 		}
 
+		public static float GetIndentLength(Rect sourceRect)
+		{
+			Rect indentRect = EditorGUI.IndentedRect(sourceRect);
+			float indentLength = indentRect.x - sourceRect.x;
+
+			return indentLength;
+		}
+
 		/// <summary>
 		/// Creates a dropdown
 		/// </summary>

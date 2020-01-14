@@ -23,6 +23,7 @@ namespace NaughtyAttributes.Editor
 			{
 				EditorGUI.BeginProperty(position, label, property);
 
+				float indentLength = EditorGUIExtensions.GetIndentLength(position);
 				float labelWidth = EditorGUIUtility.labelWidth;
 				float floatFieldWidth = EditorGUIUtility.fieldWidth;
 				float sliderWidth = position.width - labelWidth - 2f * floatFieldWidth;
@@ -35,21 +36,21 @@ namespace NaughtyAttributes.Editor
 					position.height);
 
 				Rect sliderRect = new Rect(
-					position.x + labelWidth + floatFieldWidth + sliderPadding,
+					position.x + labelWidth + floatFieldWidth + sliderPadding - indentLength,
 					position.y,
-					sliderWidth - 2f * sliderPadding,
+					sliderWidth - 2f * sliderPadding + indentLength,
 					position.height);
 
 				Rect minFloatFieldRect = new Rect(
-					position.x + labelWidth,
+					position.x + labelWidth - indentLength,
 					position.y,
-					floatFieldWidth,
+					floatFieldWidth + indentLength,
 					position.height);
 
 				Rect maxFloatFieldRect = new Rect(
-					position.x + labelWidth + floatFieldWidth + sliderWidth,
+					position.x + labelWidth + floatFieldWidth + sliderWidth - indentLength,
 					position.y,
-					floatFieldWidth,
+					floatFieldWidth + indentLength,
 					position.height);
 
 				// Draw the label
