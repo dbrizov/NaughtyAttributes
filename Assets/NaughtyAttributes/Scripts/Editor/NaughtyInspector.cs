@@ -34,9 +34,12 @@ namespace NaughtyAttributes.Editor
 		{
 			serializedObject.Update();
 
-			GUI.enabled = false;
-			EditorGUILayout.PropertyField(_script);
-			GUI.enabled = true;
+			if (_script != null)
+			{
+				GUI.enabled = false;
+				EditorGUILayout.PropertyField(_script);
+				GUI.enabled = true;
+			}
 
 			foreach (var field in _serializedFields)
 			{
