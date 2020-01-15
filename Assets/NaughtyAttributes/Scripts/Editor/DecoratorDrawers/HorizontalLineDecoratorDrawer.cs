@@ -17,7 +17,7 @@ namespace NaughtyAttributes.Editor
 			Rect rect = EditorGUI.IndentedRect(position);
 			rect.y += EditorGUIUtility.singleLineHeight / 3.0f;
 			HorizontalLineAttribute lineAttr = (HorizontalLineAttribute)attribute;
-			EditorGUIExtensions.HorizontalLine(rect, lineAttr.Height, lineAttr.Color.GetColor());
+			NaughtyEditorGUI.HorizontalLine(rect, lineAttr.Height, lineAttr.Color.GetColor());
 		}
 	}
 }

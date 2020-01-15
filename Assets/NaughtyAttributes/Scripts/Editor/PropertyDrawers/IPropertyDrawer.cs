@@ -30,7 +30,7 @@ namespace NaughtyAttributes.Editor
 					rect.width,
 					GetHelpBoxHeight() - 2.0f);
 
-			EditorGUIExtensions.HelpBox(helpBoxRect, message, MessageType.Warning, property.serializedObject.targetObject);
+			NaughtyEditorGUI.HelpBox(helpBoxRect, message, MessageType.Warning, property.serializedObject.targetObject);
 
 			Rect propertyRect = new Rect(
 				rect.x,

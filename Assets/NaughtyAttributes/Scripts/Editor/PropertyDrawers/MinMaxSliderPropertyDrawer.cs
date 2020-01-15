@@ -23,7 +23,7 @@ namespace NaughtyAttributes.Editor
 			{
 				EditorGUI.BeginProperty(position, label, property);
 
-				float indentLength = EditorGUIExtensions.GetIndentLength(position);
+				float indentLength = NaughtyEditorGUI.GetIndentLength(position);
 				float labelWidth = EditorGUIUtility.labelWidth;
 				float floatFieldWidth = EditorGUIUtility.fieldWidth;
 				float sliderWidth = position.width - labelWidth - 2f * floatFieldWidth;

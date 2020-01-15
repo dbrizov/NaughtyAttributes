@@ -5,9 +5,9 @@ using System.Reflection;
 
 namespace NaughtyAttributes.Editor
 {
-	public static class EditorGUIExtensions
+	public static class NaughtyEditorGUI
 	{
-		internal static void _PropertyField_Layout(SerializedProperty property, bool includeChildren)
+		public static void PropertyField_Layout(SerializedProperty property, bool includeChildren)
 		{
 			ISpecialCaseDrawerAttribute specialCaseAttribute = PropertyUtility.GetAttribute<ISpecialCaseDrawerAttribute>(property);
 			if (specialCaseAttribute != null)
