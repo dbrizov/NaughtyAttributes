@@ -2,7 +2,7 @@
 
 namespace NaughtyAttributes
 {
-	public interface IDrawerAttribute : INaughtyAttribute
+	public interface INaughtyAttribute
 	{
 	}
 }

@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace NaughtyAttributes.Editor
 {
 	[CustomPropertyDrawer(typeof(DropdownAttribute))]
-	public class DropdownPropertyDrawer : NaughtyPropertyDrawer
+	public class DropdownPropertyDrawer : PropertyDrawerBase
 	{
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
 		{

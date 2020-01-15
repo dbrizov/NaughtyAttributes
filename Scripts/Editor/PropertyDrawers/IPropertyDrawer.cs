@@ -3,7 +3,14 @@ using UnityEngine;
 
 namespace NaughtyAttributes.Editor
 {
-	public class NaughtyPropertyDrawer : PropertyDrawer
+	public interface IPropertyDrawer
+	{
+		float GetPropertyHeight(SerializedProperty property);
+		float GetHelpBoxHeight();
+		void DrawDefaultPropertyAndHelpBox(Rect rect, SerializedProperty property, string message, MessageType messageType);
+	}
+
+	public class PropertyDrawerBase : PropertyDrawer, IPropertyDrawer
 	{
 		public float GetPropertyHeight(SerializedProperty property)
 		{

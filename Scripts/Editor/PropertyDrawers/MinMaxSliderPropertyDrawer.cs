@@ -4,7 +4,7 @@ using UnityEngine;
 namespace NaughtyAttributes.Editor
 {
 	[CustomPropertyDrawer(typeof(MinMaxSliderAttribute))]
-	public class MinMaxSliderPropertyDrawer : NaughtyPropertyDrawer
+	public class MinMaxSliderPropertyDrawer : PropertyDrawerBase
 	{
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
 		{
