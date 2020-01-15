@@ -59,7 +59,7 @@ namespace NaughtyAttributes.Editor
 						selectedValueIndex = 0;
 					}
 
-					EditorGUIExtensions.Dropdown(
+					NaughtyEditorGUI.Dropdown(
 						position, property.serializedObject, target, dropdownField, property.displayName, selectedValueIndex, values, displayOptions);
 				}
 				else if (valuesObject is IDropdownList)
@@ -95,7 +95,7 @@ namespace NaughtyAttributes.Editor
 						selectedValueIndex = 0;
 					}
 
-					EditorGUIExtensions.Dropdown(
+					NaughtyEditorGUI.Dropdown(
 						position, property.serializedObject, target, dropdownField, property.displayName, selectedValueIndex, values.ToArray(), displayOptions.ToArray());
 				}
 			}

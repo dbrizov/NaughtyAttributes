@@ -44,7 +44,7 @@ namespace NaughtyAttributes.Editor
 			foreach (var field in _serializedFields)
 			{
 				SerializedProperty property = serializedObject.FindProperty(field.Name);
-				EditorGUIExtensions._PropertyField_Layout(property, true);
+				NaughtyEditorGUI.PropertyField_Layout(property, true);
 			}
 
 			serializedObject.ApplyModifiedProperties();
@@ -53,12 +53,12 @@ namespace NaughtyAttributes.Editor
 			if (_methods.Any())
 			{
 				EditorGUILayout.LabelField("Buttons", EditorStyles.boldLabel);
-				EditorGUIExtensions.HorizontalLine(
+				NaughtyEditorGUI.HorizontalLine(
 					EditorGUILayout.GetControlRect(false), HorizontalLineAttribute.DefaultHeight, HorizontalLineAttribute.DefaultColor.GetColor());
 
 				foreach (var method in _methods)
 				{
-					EditorGUIExtensions.Button(serializedObject.targetObject, method);
+					NaughtyEditorGUI.Button(serializedObject.targetObject, method);
 				}
 			}
 		}
