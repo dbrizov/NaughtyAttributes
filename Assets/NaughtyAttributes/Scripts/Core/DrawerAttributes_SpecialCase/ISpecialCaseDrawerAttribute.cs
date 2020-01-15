@@ -2,7 +2,7 @@
 
 namespace NaughtyAttributes
 {
-	public interface ISpecialCaseDrawerAttribute
+	public interface ISpecialCaseDrawerAttribute : INaughtyAttribute
 	{
 	}
 }

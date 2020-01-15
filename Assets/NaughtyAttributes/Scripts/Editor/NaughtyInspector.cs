@@ -27,7 +27,7 @@ namespace NaughtyAttributes.Editor
 
 		private void OnDisable()
 		{
-			SpecialCasePropertyDrawerDatabase.ClearCache();
+			ReorderableListPropertyDrawer.Instance.ClearCache();
 		}
 
 		public override void OnInspectorGUI()

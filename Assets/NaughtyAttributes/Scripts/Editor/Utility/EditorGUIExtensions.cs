@@ -12,8 +12,7 @@ namespace NaughtyAttributes.Editor
 			ISpecialCaseDrawerAttribute specialCaseAttribute = PropertyUtility.GetAttribute<ISpecialCaseDrawerAttribute>(property);
 			if (specialCaseAttribute != null)
 			{
-				SpecialCasePropertyDrawer drawer = SpecialCasePropertyDrawerDatabase.GetDrawerForAttribute(specialCaseAttribute.GetType());
-				drawer.OnGUI(property);
+				specialCaseAttribute.GetDrawer().OnGUI(property);
 			}
 			else
 			{

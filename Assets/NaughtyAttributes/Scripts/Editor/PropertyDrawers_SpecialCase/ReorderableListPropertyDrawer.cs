@@ -5,8 +5,10 @@ using System.Collections.Generic;
 
 namespace NaughtyAttributes.Editor
 {
-	public class ReorderableListPropertyDrawer : SpecialCasePropertyDrawer
+	public class ReorderableListPropertyDrawer : ISpecialCasePropertyDrawer
 	{
+		public static readonly ReorderableListPropertyDrawer Instance = new ReorderableListPropertyDrawer();
+
 		private Dictionary<string, ReorderableList> _reorderableListsByPropertyName = new Dictionary<string, ReorderableList>();
 
 		private string GetPropertyKeyName(SerializedProperty property)
@@ -14,7 +16,7 @@ namespace NaughtyAttributes.Editor
 			return property.serializedObject.targetObject.GetInstanceID() + "/" + property.name;
 		}
 
-		public override void OnGUI(SerializedProperty property)
+		public void OnGUI(SerializedProperty property)
 		{
 			if (property.isArray)
 			{
@@ -58,7 +60,7 @@ namespace NaughtyAttributes.Editor
 			}
 		}
 
-		public override void ClearCache()
+		public void ClearCache()
 		{
 			_reorderableListsByPropertyName.Clear();
 		}
