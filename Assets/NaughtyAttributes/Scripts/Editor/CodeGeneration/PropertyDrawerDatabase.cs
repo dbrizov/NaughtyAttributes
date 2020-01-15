@@ -15,12 +15,14 @@ namespace NaughtyAttributes.Editor
 			_drawersByAttributeType[typeof(DisableIfAttribute)] = new DisableIfPropertyDrawer();
 _drawersByAttributeType[typeof(DropdownAttribute)] = new DropdownPropertyDrawer();
 _drawersByAttributeType[typeof(EnableIfAttribute)] = new EnableIfPropertyDrawer();
+_drawersByAttributeType[typeof(InputAxisAttribute)] = new InputAxisPropertyDrawer();
 _drawersByAttributeType[typeof(LabelAttribute)] = new LabelPropertyDrawer();
 _drawersByAttributeType[typeof(MinMaxSliderAttribute)] = new MinMaxSliderPropertyDrawer();
 _drawersByAttributeType[typeof(ProgressBarAttribute)] = new ProgressBarPropertyDrawer();
 _drawersByAttributeType[typeof(ReadOnlyAttribute)] = new ReadOnlyPropertyDrawer();
 _drawersByAttributeType[typeof(ReorderableListAttribute)] = new ReorderableListPropertyDrawer();
 _drawersByAttributeType[typeof(ResizableTextAreaAttribute)] = new ResizableTextAreaPropertyDrawer();
+_drawersByAttributeType[typeof(SceneAttribute)] = new ScenePropertyDrawer();
 _drawersByAttributeType[typeof(ShowAssetPreviewAttribute)] = new ShowAssetPreviewPropertyDrawer();
 _drawersByAttributeType[typeof(SliderAttribute)] = new SliderPropertyDrawer();
 _drawersByAttributeType[typeof(TagAttribute)] = new TagPropertyDrawer();
