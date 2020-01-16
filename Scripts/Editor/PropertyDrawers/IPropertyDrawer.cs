@@ -12,12 +12,12 @@ namespace NaughtyAttributes.Editor
 
 	public class PropertyDrawerBase : PropertyDrawer, IPropertyDrawer
 	{
-		public float GetPropertyHeight(SerializedProperty property)
+		public virtual float GetPropertyHeight(SerializedProperty property)
 		{
 			return EditorGUI.GetPropertyHeight(property, true);
 		}
 
-		public float GetHelpBoxHeight()
+		public virtual float GetHelpBoxHeight()
 		{
 			return EditorGUIUtility.singleLineHeight * 3.0f;
 		}
@@ -25,7 +25,7 @@ namespace NaughtyAttributes.Editor
 		public void DrawDefaultPropertyAndHelpBox(Rect rect, SerializedProperty property, string message, MessageType messageType)
 		{
 			Rect helpBoxRect = new Rect(
-					rect.x,
+					rect.x + NaughtyEditorGUI.GetIndentLength(rect),
 					rect.y,
 					rect.width,
 					GetHelpBoxHeight() - 2.0f);

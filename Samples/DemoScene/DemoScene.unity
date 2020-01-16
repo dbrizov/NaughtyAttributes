@@ -163,11 +163,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c928ea15ae74a44089beb2e534c1a35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level1: 0
+  level1: '1
+
+    2
+
+    3'
   myClass:
-    level2: 0
+    level2: '1
+
+      2
+
+      3'
     myStruct:
-      level3: 0
+      level3: '1
+
+        2
+
+        3'
 --- !u!1 &1444377589
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,15 +498,15 @@ MonoBehaviour:
   - {x: 0, y: 1, z: 0}
   - {x: 1, y: 0, z: 0}
   structList:
-  - Int: 2
-    Float: 2.5
-    Vector: {x: 2, y: 2, z: 2}
   - Int: 1
     Float: 1.5
     Vector: {x: 1, y: 1, z: 1}
   - Int: 3
     Float: 3.5
     Vector: {x: 3, y: 3, z: 3}
+  - Int: 2
+    Float: 2.5
+    Vector: {x: 2, y: 2, z: 2}
 --- !u!114 &2033251980
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -600,8 +612,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3855e37cd6b01194e8166573c7c4b37d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intValue: 2
-  stringValue: C
+  intValue: 3
+  stringValue: B
   vectorValue: {x: 0, y: 1, z: 0}
 --- !u!114 &2033251987
 MonoBehaviour:
