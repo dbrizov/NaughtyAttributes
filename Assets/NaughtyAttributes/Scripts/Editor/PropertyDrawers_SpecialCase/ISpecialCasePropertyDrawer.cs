@@ -1,4 +1,6 @@
-﻿using UnityEditor;
+﻿using System;
+using System.Collections.Generic;
+using UnityEditor;
 
 namespace NaughtyAttributes.Editor
 {
@@ -9,11 +11,20 @@ namespace NaughtyAttributes.Editor
 
 	public static class SpecialCaseDrawerAttributeExtensions
 	{
+		private static Dictionary<Type, ISpecialCasePropertyDrawer> _drawersByAttributeType;
+
+		static SpecialCaseDrawerAttributeExtensions()
+		{
+			_drawersByAttributeType = new Dictionary<Type, ISpecialCasePropertyDrawer>();
+			_drawersByAttributeType[typeof(ReorderableListAttribute)] = ReorderableListPropertyDrawer.Instance;
+		}
+
 		public static ISpecialCasePropertyDrawer GetDrawer(this ISpecialCaseDrawerAttribute attr)
 		{
-			if (attr.GetType() == typeof(ReorderableListAttribute))
+			ISpecialCasePropertyDrawer drawer;
+			if (_drawersByAttributeType.TryGetValue(attr.GetType(), out drawer))
 			{
-				return ReorderableListPropertyDrawer.Instance;
+				return drawer;
 			}
 			else
 			{
