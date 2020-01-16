@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace NaughtyAttributes.Test
 {
-	public class ShowAssetPreview : MonoBehaviour
+	public class ShowAssetPreviewTest : MonoBehaviour
 	{
 		//[ShowAssetPreview]
 		public Sprite sprite;

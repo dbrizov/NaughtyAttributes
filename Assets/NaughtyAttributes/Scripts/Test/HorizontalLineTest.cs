@@ -2,7 +2,7 @@
 
 namespace NaughtyAttributes.Test
 {
-	public class HorizontalLine : MonoBehaviour
+	public class HorizontalLineTest : MonoBehaviour
 	{
 		[HorizontalLine(color: EColor.Black)]
 		[Header("Black")]
@@ -28,6 +28,24 @@ namespace NaughtyAttributes.Test
 		[Header("Yellow")]
 		[HorizontalLine(10.0f)]
 		[Header("Thick")]
-		public int dummy;
+		public int line0;
+
+		public HorizontalLineNest1 nest1;
+	}
+
+	[System.Serializable]
+	public class HorizontalLineNest1
+	{
+		[HorizontalLine]
+		public int line1;
+
+		public HorizontalLineNest2 nest2;
+	}
+
+	[System.Serializable]
+	public class HorizontalLineNest2
+	{
+		[HorizontalLine]
+		public int line2;
 	}
 }

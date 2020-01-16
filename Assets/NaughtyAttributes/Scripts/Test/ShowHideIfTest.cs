@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace NaughtyAttributes.Test
 {
-	public class ShowHideIf : MonoBehaviour
+	public class ShowHideIfTest : MonoBehaviour
 	{
 		public bool show1;
 		public bool show2;
