@@ -3,12 +3,6 @@ using UnityEngine;
 
 namespace NaughtyAttributes
 {
-	public enum EConditionOperator
-	{
-		And,
-		Or
-	}
-
 	[AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
 	public class EnableIfAttribute : PropertyAttribute, IDrawerAttribute
 	{
