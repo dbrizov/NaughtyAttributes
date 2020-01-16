@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace NaughtyAttributes.Test
 {
-	public class ProgressBar : MonoBehaviour
+	public class ProgressBarTest : MonoBehaviour
 	{
 		//[ProgressBar("Health", 100, ProgressBarColor.Orange)]
 		public float health = 50;

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace NaughtyAttributes.Test
 {
-	public class NonSerializedProperties : MonoBehaviour
+	public class ShowNonSerializedFieldTest : MonoBehaviour
 	{
 #pragma warning disable 414
 		//[ShowNonSerializedField]

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace NaughtyAttributes.Test
 {
-	public class Buttons : MonoBehaviour
+	public class ButtonTest : MonoBehaviour
 	{
 		[Button]
 		public void MethodOne()

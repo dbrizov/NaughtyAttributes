@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace NaughtyAttributes.Test
 {
-	public class EnableDisableIf : MonoBehaviour
+	public class EnableDisableIfTest : MonoBehaviour
 	{
 		public bool enable1;
 		public bool enable2;

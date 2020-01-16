@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 namespace NaughtyAttributes.Test
 {
-	public class Label : MonoBehaviour
+	public class LabelTest : MonoBehaviour
 	{
 		//[Label("A Short Name")]
 		public string aMoreSpecificName;

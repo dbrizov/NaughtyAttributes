@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace NaughtyAttributes.Test
 {
-	public class OnValueChanged : MonoBehaviour
+	public class OnValueChangedTest : MonoBehaviour
 	{
 		//[OnValueChanged("OnValueChangedMethod")]
 		public int onValueChanged;

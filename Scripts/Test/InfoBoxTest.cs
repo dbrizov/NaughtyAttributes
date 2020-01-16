@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace NaughtyAttributes.Test
 {
-	public class InfoBoxes : MonoBehaviour
+	public class InfoBoxTest : MonoBehaviour
 	{
 		//[InfoBox("Normal", InfoBoxType.Normal)]
 		public int int1;

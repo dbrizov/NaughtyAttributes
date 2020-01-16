@@ -3,6 +3,15 @@ using UnityEngine;
 
 namespace NaughtyAttributes.Test
 {
+	public class _NaughtyComponent : MonoBehaviour
+	{
+		[ResizableTextArea]
+		public string level1;
+
+		public MyClass myClass;
+	}
+
+
 	[System.Serializable]
 	public struct MyStruct
 	{
@@ -17,13 +26,5 @@ namespace NaughtyAttributes.Test
 		public string level2;
 
 		public MyStruct myStruct;
-	}
-
-	public class NaughtyComponent : MonoBehaviour
-	{
-		[ResizableTextArea]
-		public string level1;
-
-		public MyClass myClass;
 	}
 }
