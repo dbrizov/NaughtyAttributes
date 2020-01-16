@@ -15,7 +15,7 @@ namespace NaughtyAttributes.Editor
 
 		public static T[] GetAttributes<T>(SerializedProperty property) where T : class
 		{
-			FieldInfo fieldInfo = ReflectionUtility.GetField(property.serializedObject.targetObject, property.name);
+			FieldInfo fieldInfo = ReflectionUtility.GetField(GetTargetObjectWithProperty(property), property.name);
 			return (T[])fieldInfo.GetCustomAttributes(typeof(T), true);
 		}
 
