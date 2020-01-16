@@ -5,26 +5,22 @@ namespace NaughtyAttributes.Test
 {
 	public class _NaughtyComponent : MonoBehaviour
 	{
-		[ResizableTextArea]
-		public string level1;
+		public string level0;
 
 		public MyClass myClass;
-	}
-
-
-	[System.Serializable]
-	public struct MyStruct
-	{
-		[ResizableTextArea]
-		public string level3;
 	}
 
 	[System.Serializable]
 	public class MyClass
 	{
-		[ResizableTextArea]
-		public string level2;
+		public string level1;
 
 		public MyStruct myStruct;
+	}
+
+	[System.Serializable]
+	public struct MyStruct
+	{
+		public string level2;
 	}
 }
