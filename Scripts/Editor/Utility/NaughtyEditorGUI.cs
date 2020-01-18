@@ -95,7 +95,7 @@ namespace NaughtyAttributes.Editor
 			else
 			{
 				string warning = typeof(ButtonAttribute).Name + " works only on methods with no parameters";
-				HelpBox_Layout(warning, MessageType.Warning, context: target);
+				HelpBox_Layout(warning, MessageType.Warning, context: target, logToConsole: true);
 			}
 		}
 
@@ -105,7 +105,7 @@ namespace NaughtyAttributes.Editor
 			EditorGUI.DrawRect(rect, color);
 		}
 
-		public static void HelpBox(Rect rect, string message, MessageType type, UnityEngine.Object context = null, bool logToConsole = true)
+		public static void HelpBox(Rect rect, string message, MessageType type, UnityEngine.Object context = null, bool logToConsole = false)
 		{
 			EditorGUI.HelpBox(rect, message, type);
 
@@ -115,7 +115,7 @@ namespace NaughtyAttributes.Editor
 			}
 		}
 
-		public static void HelpBox_Layout(string message, MessageType type, UnityEngine.Object context = null, bool logToConsole = true)
+		public static void HelpBox_Layout(string message, MessageType type, UnityEngine.Object context = null, bool logToConsole = false)
 		{
 			EditorGUILayout.HelpBox(message, type);
 
