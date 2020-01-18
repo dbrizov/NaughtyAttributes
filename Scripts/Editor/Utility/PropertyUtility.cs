@@ -2,6 +2,8 @@
 using System.Reflection;
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace NaughtyAttributes.Editor
 {
@@ -17,6 +19,78 @@ namespace NaughtyAttributes.Editor
 		{
 			FieldInfo fieldInfo = ReflectionUtility.GetField(GetTargetObjectWithProperty(property), property.name);
 			return (T[])fieldInfo.GetCustomAttributes(typeof(T), true);
+		}
+
+		public static bool IsEnabled(SerializedProperty property)
+		{
+			EnableIfAttributeBase enableIfAttribute = GetAttribute<EnableIfAttributeBase>(property);
+			if (enableIfAttribute == null)
+			{
+				return true;
+			}
+
+			object target = GetTargetObjectWithProperty(property);
+
+			List<bool> conditionValues = new List<bool>();
+			foreach (var condition in enableIfAttribute.Conditions)
+			{
+				FieldInfo conditionField = ReflectionUtility.GetField(target, condition);
+				if (conditionField != null &&
+					conditionField.FieldType == typeof(bool))
+				{
+					conditionValues.Add((bool)conditionField.GetValue(target));
+				}
+
+				PropertyInfo conditionProperty = ReflectionUtility.GetProperty(target, condition);
+				if (conditionProperty != null &&
+					conditionProperty.PropertyType == typeof(bool))
+				{
+					conditionValues.Add((bool)conditionProperty.GetValue(target));
+				}
+
+				MethodInfo conditionMethod = ReflectionUtility.GetMethod(target, condition);
+				if (conditionMethod != null &&
+					conditionMethod.ReturnType == typeof(bool) &&
+					conditionMethod.GetParameters().Length == 0)
+				{
+					conditionValues.Add((bool)conditionMethod.Invoke(target, null));
+				}
+			}
+
+			if (conditionValues.Count > 0)
+			{
+				bool enabled;
+				if (enableIfAttribute.ConditionOperator == EConditionOperator.And)
+				{
+					enabled = true;
+					foreach (var value in conditionValues)
+					{
+						enabled = enabled && value;
+					}
+				}
+				else
+				{
+					enabled = false;
+					foreach (var value in conditionValues)
+					{
+						enabled = enabled || value;
+					}
+				}
+
+				if (enableIfAttribute.Reversed)
+				{
+					enabled = !enabled;
+				}
+
+				return enabled;
+			}
+			else
+			{
+				string message = enableIfAttribute.GetType().Name + " needs a valid boolean condition field, property or method name to work";
+				Debug.LogWarning(message, property.serializedObject.targetObject);
+
+				return false;
+			}
 		}
 
 		/// <summary>

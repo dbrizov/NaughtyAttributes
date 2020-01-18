@@ -23,9 +23,9 @@ namespace NaughtyAttributes.Editor
 			return propertyHeight;
 		}
 
-		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+		protected override void OnGUI_Internal(Rect rect, SerializedProperty property, GUIContent label)
 		{
-			EditorGUI.BeginProperty(position, label, property);
+			EditorGUI.BeginProperty(rect, label, property);
 
 			DropdownAttribute dropdownAttribute = (DropdownAttribute)attribute;
 			object target = PropertyUtility.GetTargetObjectWithProperty(property);
@@ -60,7 +60,7 @@ namespace NaughtyAttributes.Editor
 					}
 
 					NaughtyEditorGUI.Dropdown(
-						position, property.serializedObject, target, dropdownField, property.displayName, selectedValueIndex, values, displayOptions);
+						rect, property.serializedObject, target, dropdownField, property.displayName, selectedValueIndex, values, displayOptions);
 				}
 				else if (valuesObject is IDropdownList)
 				{
@@ -96,7 +96,7 @@ namespace NaughtyAttributes.Editor
 					}
 
 					NaughtyEditorGUI.Dropdown(
-						position, property.serializedObject, target, dropdownField, property.displayName, selectedValueIndex, values.ToArray(), displayOptions.ToArray());
+						rect, property.serializedObject, target, dropdownField, property.displayName, selectedValueIndex, values.ToArray(), displayOptions.ToArray());
 				}
 			}
 			else
@@ -104,7 +104,7 @@ namespace NaughtyAttributes.Editor
 				string message = string.Format("Invalid values with name '{0}' provided to '{1}'. Either the values name is incorrect or the types of the target field and the values field/property/method don't match",
 					dropdownAttribute.ValuesName, dropdownAttribute.GetType().Name);
 
-				DrawDefaultPropertyAndHelpBox(position, property, message, MessageType.Warning);
+				DrawDefaultPropertyAndHelpBox(rect, property, message, MessageType.Warning);
 			}
 
 			EditorGUI.EndProperty();

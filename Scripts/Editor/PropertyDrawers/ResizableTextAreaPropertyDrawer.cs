@@ -29,13 +29,13 @@ namespace NaughtyAttributes.Editor
 				: base.GetPropertyHeight(property) + GetHelpBoxHeight();
 		}
 
-		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+		protected override void OnGUI_Internal(Rect rect, SerializedProperty property, GUIContent label)
 		{
-			EditorGUI.BeginProperty(position, label, property);
+			EditorGUI.BeginProperty(rect, label, property);
 
 			if (property.propertyType == SerializedPropertyType.String)
 			{
-				Rect labelRect = position;
+				Rect labelRect = rect;
 				EditorGUI.LabelField(labelRect, property.displayName);
 
 				EditorGUI.BeginChangeCheck();
@@ -58,7 +58,7 @@ namespace NaughtyAttributes.Editor
 			else
 			{
 				string message = typeof(ResizableTextAreaAttribute).Name + " can only be used on string fields";
-				DrawDefaultPropertyAndHelpBox(position, property, message, MessageType.Warning);
+				DrawDefaultPropertyAndHelpBox(rect, property, message, MessageType.Warning);
 			}
 
 			EditorGUI.EndProperty();

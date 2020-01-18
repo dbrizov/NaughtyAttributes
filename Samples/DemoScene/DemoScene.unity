@@ -175,8 +175,8 @@ MonoBehaviour:
     nest2:
       enable1: 1
       enable2: 1
-      enableIfAll: 1
-      enableIfAny: 2
+      enableIfAll: {x: 0, y: 0}
+      enableIfAny: {x: 0, y: 0}
 --- !u!1 &237121640
 GameObject:
   m_ObjectHideFlags: 0
@@ -280,8 +280,8 @@ MonoBehaviour:
     nest2:
       disable1: 1
       disable2: 1
-      disableIfAll: 1
-      disableIfAny: 2
+      enableIfAll: {x: 0.25, y: 0.75}
+      enableIfAny: {x: 0.25, y: 0.75}
 --- !u!1 &607441873
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,11 +373,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c928ea15ae74a44089beb2e534c1a35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enabledLevel0: 0
   level0: 
-  myClass:
-    level1: 
-    myStruct:
-      level2: 
 --- !u!1 &779670086
 GameObject:
   m_ObjectHideFlags: 0

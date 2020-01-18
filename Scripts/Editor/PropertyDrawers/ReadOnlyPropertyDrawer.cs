@@ -11,12 +11,12 @@ namespace NaughtyAttributes.Editor
 			return GetPropertyHeight(property);
 		}
 
-		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+		protected override void OnGUI_Internal(Rect rect, SerializedProperty property, GUIContent label)
 		{
-			EditorGUI.BeginProperty(position, label, property);
+			EditorGUI.BeginProperty(rect, label, property);
 
 			GUI.enabled = false;
-			EditorGUI.PropertyField(position, property, label, true);
+			EditorGUI.PropertyField(rect, property, label, true);
 			GUI.enabled = true;
 
 			EditorGUI.EndProperty();

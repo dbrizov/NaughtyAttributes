@@ -13,45 +13,45 @@ namespace NaughtyAttributes.Editor
 				: GetPropertyHeight(property) + GetHelpBoxHeight();
 		}
 
-		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+		protected override void OnGUI_Internal(Rect rect, SerializedProperty property, GUIContent label)
 		{
-			EditorGUI.BeginProperty(position, label, property);
+			EditorGUI.BeginProperty(rect, label, property);
 
 			MinMaxSliderAttribute minMaxSliderAttribute = (MinMaxSliderAttribute)attribute;
 
 			if (property.propertyType == SerializedPropertyType.Vector2)
 			{
-				EditorGUI.BeginProperty(position, label, property);
+				EditorGUI.BeginProperty(rect, label, property);
 
-				float indentLength = NaughtyEditorGUI.GetIndentLength(position);
+				float indentLength = NaughtyEditorGUI.GetIndentLength(rect);
 				float labelWidth = EditorGUIUtility.labelWidth;
 				float floatFieldWidth = EditorGUIUtility.fieldWidth;
-				float sliderWidth = position.width - labelWidth - 2f * floatFieldWidth;
+				float sliderWidth = rect.width - labelWidth - 2f * floatFieldWidth;
 				float sliderPadding = 5f;
 
 				Rect labelRect = new Rect(
-					position.x,
-					position.y,
+					rect.x,
+					rect.y,
 					labelWidth,
-					position.height);
+					rect.height);
 
 				Rect sliderRect = new Rect(
-					position.x + labelWidth + floatFieldWidth + sliderPadding - indentLength,
-					position.y,
+					rect.x + labelWidth + floatFieldWidth + sliderPadding - indentLength,
+					rect.y,
 					sliderWidth - 2f * sliderPadding + indentLength,
-					position.height);
+					rect.height);
 
 				Rect minFloatFieldRect = new Rect(
-					position.x + labelWidth - indentLength,
-					position.y,
+					rect.x + labelWidth - indentLength,
+					rect.y,
 					floatFieldWidth + indentLength,
-					position.height);
+					rect.height);
 
 				Rect maxFloatFieldRect = new Rect(
-					position.x + labelWidth + floatFieldWidth + sliderWidth - indentLength,
-					position.y,
+					rect.x + labelWidth + floatFieldWidth + sliderWidth - indentLength,
+					rect.y,
 					floatFieldWidth + indentLength,
-					position.height);
+					rect.height);
 
 				// Draw the label
 				EditorGUI.LabelField(labelRect, property.displayName);
@@ -78,7 +78,7 @@ namespace NaughtyAttributes.Editor
 			else
 			{
 				string message = minMaxSliderAttribute.GetType().Name + " can be used only on Vector2 fields";
-				DrawDefaultPropertyAndHelpBox(position, property, message, MessageType.Warning);
+				DrawDefaultPropertyAndHelpBox(rect, property, message, MessageType.Warning);
 			}
 
 			EditorGUI.EndProperty();
