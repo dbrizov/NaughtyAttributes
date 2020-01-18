@@ -4,11 +4,17 @@ Library/
 Logs/
 Assets/AssetStoreTools/
 Assets/AssetStoreTools.meta
+Assets/Plugins/Editor/JetBrains
+Assets/Plugins/Editor/JetBrains.meta
+Assets/Plugins.meta
+Assets/Plugins/Editor.meta
 
 ====================
 ExportedObj/
 obj/
 .vs/
+.vscode/
+.idea/
 *.svd
 *.userprefs
 *.csproj
@@ -30,6 +36,3 @@ Thumbs.db
 
 ====================
 Builds/
-
-====================
-.vscode/
