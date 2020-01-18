@@ -31,8 +31,50 @@ namespace NaughtyAttributes.Editor
 
 			object target = GetTargetObjectWithProperty(property);
 
+			List<bool> conditionValues = GetConditionValues(target, enableIfAttribute.Conditions);
+			if (conditionValues.Count > 0)
+			{
+				bool enabled = GetConditionsFlag(conditionValues, enableIfAttribute.ConditionOperator, enableIfAttribute.Inverted);
+				return enabled;
+			}
+			else
+			{
+				string message = enableIfAttribute.GetType().Name + " needs a valid boolean condition field, property or method name to work";
+				Debug.LogWarning(message, property.serializedObject.targetObject);
+
+				return false;
+			}
+		}
+
+		public static bool IsVisible(SerializedProperty property)
+		{
+			ShowIfAttributeBase showIfAttribute = GetAttribute<ShowIfAttributeBase>(property);
+			if (showIfAttribute == null)
+			{
+				return true;
+			}
+
+			object target = GetTargetObjectWithProperty(property);
+
+			List<bool> conditionValues = GetConditionValues(target, showIfAttribute.Conditions);
+			if (conditionValues.Count > 0)
+			{
+				bool enabled = GetConditionsFlag(conditionValues, showIfAttribute.ConditionOperator, showIfAttribute.Inverted);
+				return enabled;
+			}
+			else
+			{
+				string message = showIfAttribute.GetType().Name + " needs a valid boolean condition field, property or method name to work";
+				Debug.LogWarning(message, property.serializedObject.targetObject);
+
+				return false;
+			}
+		}
+
+		private static List<bool> GetConditionValues(object target, string[] conditions)
+		{
 			List<bool> conditionValues = new List<bool>();
-			foreach (var condition in enableIfAttribute.Conditions)
+			foreach (var condition in conditions)
 			{
 				FieldInfo conditionField = ReflectionUtility.GetField(target, condition);
 				if (conditionField != null &&
@@ -57,40 +99,35 @@ namespace NaughtyAttributes.Editor
 				}
 			}
 
-			if (conditionValues.Count > 0)
+			return conditionValues;
+		}
+
+		private static bool GetConditionsFlag(List<bool> conditionValues, EConditionOperator conditionOperator, bool invert)
+		{
+			bool flag;
+			if (conditionOperator == EConditionOperator.And)
 			{
-				bool enabled;
-				if (enableIfAttribute.ConditionOperator == EConditionOperator.And)
+				flag = true;
+				foreach (var value in conditionValues)
 				{
-					enabled = true;
-					foreach (var value in conditionValues)
-					{
-						enabled = enabled && value;
-					}
+					flag = flag && value;
 				}
-				else
-				{
-					enabled = false;
-					foreach (var value in conditionValues)
-					{
-						enabled = enabled || value;
-					}
-				}
-
-				if (enableIfAttribute.Reversed)
-				{
-					enabled = !enabled;
-				}
-
-				return enabled;
 			}
 			else
 			{
-				string message = enableIfAttribute.GetType().Name + " needs a valid boolean condition field, property or method name to work";
-				Debug.LogWarning(message, property.serializedObject.targetObject);
-
-				return false;
+				flag = false;
+				foreach (var value in conditionValues)
+				{
+					flag = flag || value;
+				}
 			}
+
+			if (invert)
+			{
+				flag = !flag;
+			}
+
+			return flag;
 		}
 
 		/// <summary>

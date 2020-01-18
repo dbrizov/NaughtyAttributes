@@ -2,19 +2,19 @@
 
 namespace NaughtyAttributes
 {
-	public abstract class EnableIfAttributeBase : MetaAttribute
+	public class ShowIfAttributeBase : MetaAttribute
 	{
 		public string[] Conditions { get; private set; }
 		public EConditionOperator ConditionOperator { get; private set; }
 		public bool Inverted { get; protected set; }
 
-		public EnableIfAttributeBase(string condition)
+		public ShowIfAttributeBase(string condition)
 		{
 			ConditionOperator = EConditionOperator.And;
 			Conditions = new string[1] { condition };
 		}
 
-		public EnableIfAttributeBase(EConditionOperator conditionOperator, params string[] conditions)
+		public ShowIfAttributeBase(EConditionOperator conditionOperator, params string[] conditions)
 		{
 			ConditionOperator = conditionOperator;
 			Conditions = conditions;

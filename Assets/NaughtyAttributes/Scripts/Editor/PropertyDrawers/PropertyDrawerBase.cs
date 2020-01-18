@@ -7,6 +7,12 @@ namespace NaughtyAttributes.Editor
 	{
 		public sealed override void OnGUI(Rect rect, SerializedProperty property, GUIContent label)
 		{
+			bool visible = PropertyUtility.IsVisible(property);
+			if (!visible)
+			{
+				return;
+			}
+
 			bool enabled = PropertyUtility.IsEnabled(property);
 			GUI.enabled = enabled;
 			OnGUI_Internal(rect, property, label);

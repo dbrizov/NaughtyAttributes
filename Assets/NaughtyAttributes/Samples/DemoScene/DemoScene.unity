@@ -887,6 +887,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1524906391}
   - component: {fileID: 1524906392}
+  - component: {fileID: 1524906393}
   m_Layer: 0
   m_Name: ShowIf_HideIf
   m_TagString: Untagged
@@ -922,14 +923,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   show1: 0
   show2: 0
+  showIfAll: 
+  showIfAny: 
+  nest1:
+    show1: 1
+    show2: 0
+    showIfAll: 0
+    showIfAny: 0
+    nest2:
+      show1: 1
+      show2: 1
+      showIfAll: {x: 0.25, y: 0.75}
+      showIfAny: {x: 0.25, y: 0.75}
+--- !u!114 &1524906393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524906390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cf166cb519e666419bb79b0c50c5ee1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   hide1: 0
   hide2: 0
-  showIf: 0
-  showIfAll: 1
-  showIfAny: 2
-  hideIf: 0
-  hideIfAll: 1
-  hideIfAny: 2
+  hideIfAll: 
+  hideIfAny: 
+  nest1:
+    hide1: 1
+    hide2: 0
+    hideIfAll: 0
+    hideIfAny: 0
+    nest2:
+      hide1: 1
+      hide2: 1
+      hideIfAll: {x: 0.25, y: 0.75}
+      hideIfAny: {x: 0.25, y: 0.75}
 --- !u!1 &1552114399
 GameObject:
   m_ObjectHideFlags: 0

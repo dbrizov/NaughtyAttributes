@@ -9,6 +9,12 @@ namespace NaughtyAttributes.Editor
 	{
 		public void OnGUI(SerializedProperty property)
 		{
+			bool visible = PropertyUtility.IsVisible(property);
+			if (!visible)
+			{
+				return;
+			}
+
 			bool enabled = PropertyUtility.IsEnabled(property);
 			GUI.enabled = enabled;
 			OnGUI_Internal(property);

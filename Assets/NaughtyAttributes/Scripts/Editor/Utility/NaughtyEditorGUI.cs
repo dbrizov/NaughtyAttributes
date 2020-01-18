@@ -22,8 +22,14 @@ namespace NaughtyAttributes.Editor
 
 				if (!anyNaughtyAttribute)
 				{
-					// Naughty attributes check for enableability themselves,
-					// so if a property doesn't have an INaughtyAttribute we need to check for enableability explicitly
+					// Naughty attributes check for visibility/enableability themselves,
+					// so if a property doesn't have an INaughtyAttribute we need to check for visibility/enableability explicitly
+					bool visible = PropertyUtility.IsVisible(property);
+					if (!visible)
+					{
+						return;
+					}
+
 					bool enabled = PropertyUtility.IsEnabled(property);
 					GUI.enabled = enabled;
 					EditorGUILayout.PropertyField(property, includeChildren);
