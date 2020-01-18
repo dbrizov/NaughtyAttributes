@@ -38,7 +38,7 @@ namespace NaughtyAttributes
 				case EColor.Yellow:
 					return new Color32(255, 211, 0, 255);
 				case EColor.Green:
-					return new Color32(80, 232, 0, 255);
+					return new Color32(98, 200, 79, 255);
 				case EColor.Blue:
 					return new Color32(0, 135, 189, 255);
 				case EColor.Indigo:
