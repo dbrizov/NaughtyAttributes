@@ -2,7 +2,7 @@
 
 namespace NaughtyAttributes
 {
-	public abstract class EnableIfAttributeBase : Attribute, IMetaAttribute
+	public abstract class EnableIfAttributeBase : MetaAttribute
 	{
 		public string[] Conditions { get; private set; }
 		public EConditionOperator ConditionOperator { get; private set; }

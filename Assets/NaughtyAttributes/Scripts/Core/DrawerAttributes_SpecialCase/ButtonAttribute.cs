@@ -3,7 +3,7 @@
 namespace NaughtyAttributes
 {
 	[AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-	public class ButtonAttribute : Attribute, ISpecialCaseDrawerAttribute
+	public class ButtonAttribute : SpecialCaseDrawerAttribute
 	{
 		public string Text { get; private set; }
 
