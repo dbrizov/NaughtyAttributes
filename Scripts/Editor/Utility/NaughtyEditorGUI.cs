@@ -18,11 +18,11 @@ namespace NaughtyAttributes.Editor
 			else
 			{
 				bool anyNaughtyAttribute = PropertyUtility.GetAttributes<INaughtyAttribute>(property)
-					.Where(attr => !(attr is EnableIfAttributeBase)).Any();
+					.Any(attr => !(attr is EnableIfAttributeBase));
 
 				if (!anyNaughtyAttribute)
 				{
-					// Naughty attributes check for enableability theselves,
+					// Naughty attributes check for enableability themselves,
 					// so if a property doesn't have an INaughtyAttribute we need to check for enableability explicitly
 					bool enabled = PropertyUtility.IsEnabled(property);
 					GUI.enabled = enabled;
@@ -48,7 +48,7 @@ namespace NaughtyAttributes.Editor
 		/// <summary>
 		/// Creates a dropdown
 		/// </summary>
-		/// <param name="rect">The rect the defines the position and size of the dropdown in the inspector/param>
+		/// <param name="rect">The rect the defines the position and size of the dropdown in the inspector</param>
 		/// <param name="serializedObject">The serialized object that is being updated</param>
 		/// <param name="target">The target object that contains the dropdown</param>
 		/// <param name="dropdownField">The field of the target object that holds the currently selected dropdown value</param>
