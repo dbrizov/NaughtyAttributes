@@ -5,12 +5,10 @@ namespace NaughtyAttributes.Test
 {
 	public class _NaughtyComponent : MonoBehaviour
 	{
-		public bool enabledLevel0;
+		[ReorderableList]
+		public int[] list;
 
-		[EnableIf("enabledLevel0")]
-		public string level0;
-
-		//public MyClass myClass;
+		public MyClass myClass;
 	}
 
 	[System.Serializable]
@@ -24,6 +22,7 @@ namespace NaughtyAttributes.Test
 	[System.Serializable]
 	public struct MyStruct
 	{
+		[ResizableTextArea]
 		public string level2;
 	}
 }
