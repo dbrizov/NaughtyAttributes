@@ -3,15 +3,15 @@
 namespace NaughtyAttributes
 {
 	[AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-	public class EnableIfAttribute : EnableIfAttributeBase
+	public class ShowIfAttribute : ShowIfAttributeBase
 	{
-		public EnableIfAttribute(string condition)
+		public ShowIfAttribute(string condition)
 			: base(condition)
 		{
 			Inverted = false;
 		}
 
-		public EnableIfAttribute(EConditionOperator conditionOperator, params string[] conditions)
+		public ShowIfAttribute(EConditionOperator conditionOperator, params string[] conditions)
 			: base(conditionOperator, conditions)
 		{
 			Inverted = false;
