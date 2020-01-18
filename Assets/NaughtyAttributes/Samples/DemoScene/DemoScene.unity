@@ -439,8 +439,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 705c14aa9ecaa274289972381f471367, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite: {fileID: 0}
-  prefab: {fileID: 0}
+  sprite0: {fileID: 21300000, guid: 005888ede18a58e4db8d069cfa3007cb, type: 3}
+  prefab0: {fileID: 1981131855061102, guid: 7ec354ef3daae7641b7a3fa5e1fe0c81, type: 3}
+  nest1:
+    sprite1: {fileID: 21300000, guid: 005888ede18a58e4db8d069cfa3007cb, type: 3}
+    prefab1: {fileID: 1981131855061102, guid: 7ec354ef3daae7641b7a3fa5e1fe0c81, type: 3}
+    nest2:
+      sprite2: {fileID: 21300000, guid: 005888ede18a58e4db8d069cfa3007cb, type: 3}
+      prefab2: {fileID: 1981131855061102, guid: 7ec354ef3daae7641b7a3fa5e1fe0c81,
+        type: 3}
 --- !u!1 &948946033
 GameObject:
   m_ObjectHideFlags: 0
