@@ -1,10 +1,9 @@
 ﻿using System;
-using UnityEngine;
 
 namespace NaughtyAttributes
 {
 	[AttributeUsage(AttributeTargets.Field, AllowMultiple = true, Inherited = true)]
-	public class HorizontalLineAttribute : PropertyAttribute, IDrawerAttribute
+	public class HorizontalLineAttribute : DrawerAttribute
 	{
 		public const float DefaultHeight = 2.0f;
 		public const EColor DefaultColor = EColor.Gray;

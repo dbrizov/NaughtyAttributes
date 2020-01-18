@@ -8,10 +8,12 @@ namespace NaughtyAttributes.Test
 		public bool enable2;
 
 		[EnableIf(EConditionOperator.And, "enable1", "enable2")]
-		public int enableIfAll = 1;
+		[ReorderableList]
+		public int[] enableIfAll;
 
 		[EnableIf(EConditionOperator.Or, "enable1", "enable2")]
-		public int enableIfAny = 2;
+		[ReorderableList]
+		public int[] enableIfAny;
 
 		public EnableIfNest1 nest1;
 	}

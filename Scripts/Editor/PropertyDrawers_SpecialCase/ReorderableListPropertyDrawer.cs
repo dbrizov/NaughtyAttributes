@@ -5,22 +5,22 @@ using System.Collections.Generic;
 
 namespace NaughtyAttributes.Editor
 {
-	public class ReorderableListPropertyDrawer : ISpecialCasePropertyDrawer
+	public class ReorderableListPropertyDrawer : SpecialCasePropertyDrawerBase
 	{
 		public static readonly ReorderableListPropertyDrawer Instance = new ReorderableListPropertyDrawer();
 
-		private Dictionary<string, ReorderableList> _reorderableListsByPropertyName = new Dictionary<string, ReorderableList>();
+		private readonly Dictionary<string, ReorderableList> _reorderableListsByPropertyName = new Dictionary<string, ReorderableList>();
 
 		private string GetPropertyKeyName(SerializedProperty property)
 		{
 			return property.serializedObject.targetObject.GetInstanceID() + "/" + property.name;
 		}
 
-		public void OnGUI(SerializedProperty property)
+		protected override void OnGUI_Internal(SerializedProperty property)
 		{
 			if (property.isArray)
 			{
-				var key = GetPropertyKeyName(property);
+				string key = GetPropertyKeyName(property);
 
 				if (!_reorderableListsByPropertyName.ContainsKey(key))
 				{
@@ -28,12 +28,12 @@ namespace NaughtyAttributes.Editor
 					{
 						drawHeaderCallback = (Rect rect) =>
 						{
-							EditorGUI.LabelField(rect, string.Format("{0}: {1}", property.displayName, property.arraySize), EditorStyles.label);
+							EditorGUI.LabelField(rect, string.Format("{0}: {1}", property.displayName, property.arraySize), EditorStyles.boldLabel);
 						},
 
 						drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
 						{
-							var element = property.GetArrayElementAtIndex(index);
+							SerializedProperty element = property.GetArrayElementAtIndex(index);
 							rect.y += 1.0f;
 							rect.x += 10.0f;
 							rect.width -= 10.0f;

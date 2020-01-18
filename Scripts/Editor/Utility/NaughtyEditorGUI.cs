@@ -10,7 +10,7 @@ namespace NaughtyAttributes.Editor
 	{
 		public static void PropertyField_Layout(SerializedProperty property, bool includeChildren)
 		{
-			ISpecialCaseDrawerAttribute specialCaseAttribute = PropertyUtility.GetAttribute<ISpecialCaseDrawerAttribute>(property);
+			SpecialCaseDrawerAttribute specialCaseAttribute = PropertyUtility.GetAttribute<SpecialCaseDrawerAttribute>(property);
 			if (specialCaseAttribute != null)
 			{
 				specialCaseAttribute.GetDrawer().OnGUI(property);

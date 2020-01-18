@@ -1,10 +1,9 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
 
 namespace NaughtyAttributes
 {
 	[AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-	public class ResizableTextAreaAttribute : PropertyAttribute, IDrawerAttribute
+	public class ResizableTextAreaAttribute : DrawerAttribute
 	{
 	}
 }

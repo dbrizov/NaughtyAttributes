@@ -1,10 +1,9 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
 
 namespace NaughtyAttributes
 {
 	[AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-	public class AllowNestingAttribute : PropertyAttribute, IDrawerAttribute
+	public class AllowNestingAttribute : DrawerAttribute
 	{
 	}
 }

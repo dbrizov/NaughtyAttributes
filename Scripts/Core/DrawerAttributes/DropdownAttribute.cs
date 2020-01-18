@@ -1,12 +1,11 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System;
 using System.Collections.Generic;
 
 namespace NaughtyAttributes
 {
 	[AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-	public class DropdownAttribute : PropertyAttribute, IDrawerAttribute
+	public class DropdownAttribute : DrawerAttribute
 	{
 		public string ValuesName { get; private set; }
 

@@ -1,10 +1,9 @@
-﻿using UnityEngine;
-using System;
+﻿using System;
 
 namespace NaughtyAttributes
 {
 	[AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-	public class ReadOnlyAttribute : PropertyAttribute, IDrawerAttribute
+	public class ReadOnlyAttribute : DrawerAttribute
 	{
 
 	}
