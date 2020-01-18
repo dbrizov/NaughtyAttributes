@@ -343,8 +343,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c928ea15ae74a44089beb2e534c1a35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enabledLevel0: 0
-  level0: 
+  list: 
+  myClass:
+    level1: 
+    myStruct:
+      level2: 
 --- !u!1 &779670086
 GameObject:
   m_ObjectHideFlags: 0
@@ -1004,9 +1007,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dcb08e489c17644e9eacaa1ec5fe781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  int1: 0
-  int2: 0
-  int3: 0
+  normal: 0
+  nest1:
+    warning: 0
+    nest2:
+      error: 0
 --- !u!1 &1591883662
 GameObject:
   m_ObjectHideFlags: 0

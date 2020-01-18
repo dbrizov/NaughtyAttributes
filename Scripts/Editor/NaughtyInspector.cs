@@ -10,17 +10,10 @@ namespace NaughtyAttributes.Editor
 	[CustomEditor(typeof(UnityEngine.Object), true)]
 	public class NaughtyInspector : UnityEditor.Editor
 	{
-		private SerializedProperty _script;
-		private IEnumerable<FieldInfo> _serializedFields;
 		private IEnumerable<MethodInfo> _methods;
 
 		private void OnEnable()
 		{
-			_script = serializedObject.FindProperty("m_Script");
-
-			_serializedFields = ReflectionUtility.GetAllFields(
-				target, f => serializedObject.FindProperty(f.Name) != null);
-
 			_methods = ReflectionUtility.GetAllMethods(
 				target, m => m.GetCustomAttributes(typeof(ButtonAttribute), true).Length > 0);
 		}
@@ -32,19 +25,30 @@ namespace NaughtyAttributes.Editor
 
 		public override void OnInspectorGUI()
 		{
+			// Draw serialized properties
 			serializedObject.Update();
 
-			if (_script != null)
+			using (var iterator = serializedObject.GetIterator())
 			{
-				GUI.enabled = false;
-				EditorGUILayout.PropertyField(_script);
-				GUI.enabled = true;
-			}
-
-			foreach (var field in _serializedFields)
-			{
-				SerializedProperty property = serializedObject.FindProperty(field.Name);
-				NaughtyEditorGUI.PropertyField_Layout(property, true);
+				if (iterator.NextVisible(true))
+				{
+					do
+					{
+						if (iterator.name.Equals("m_Script", System.StringComparison.Ordinal))
+						{
+							GUI.enabled = false;
+							SerializedProperty property = serializedObject.FindProperty(iterator.name);
+							EditorGUILayout.PropertyField(property);
+							GUI.enabled = true;
+						}
+						else
+						{
+							SerializedProperty property = serializedObject.FindProperty(iterator.name);
+							NaughtyEditorGUI.PropertyField_Layout(property, true);
+						}
+					}
+					while (iterator.NextVisible(false));
+				}
 			}
 
 			serializedObject.ApplyModifiedProperties();
