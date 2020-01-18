@@ -3,15 +3,18 @@ using UnityEngine;
 
 namespace NaughtyAttributes.Editor
 {
-	public interface IPropertyDrawer
+	public abstract class PropertyDrawerBase : PropertyDrawer
 	{
-		float GetPropertyHeight(SerializedProperty property);
-		float GetHelpBoxHeight();
-		void DrawDefaultPropertyAndHelpBox(Rect rect, SerializedProperty property, string message, MessageType messageType);
-	}
+		public sealed override void OnGUI(Rect rect, SerializedProperty property, GUIContent label)
+		{
+			bool enabled = PropertyUtility.IsEnabled(property);
+			GUI.enabled = enabled;
+			OnGUI_Internal(rect, property, label);
+			GUI.enabled = true;
+		}
 
-	public class PropertyDrawerBase : PropertyDrawer, IPropertyDrawer
-	{
+		protected abstract void OnGUI_Internal(Rect rect, SerializedProperty property, GUIContent label);
+
 		public virtual float GetPropertyHeight(SerializedProperty property)
 		{
 			return EditorGUI.GetPropertyHeight(property, true);

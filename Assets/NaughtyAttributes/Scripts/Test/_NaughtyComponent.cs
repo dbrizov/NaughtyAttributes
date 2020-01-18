@@ -5,9 +5,12 @@ namespace NaughtyAttributes.Test
 {
 	public class _NaughtyComponent : MonoBehaviour
 	{
+		public bool enabledLevel0;
+
+		[EnableIf("enabledLevel0")]
 		public string level0;
 
-		public MyClass myClass;
+		//public MyClass myClass;
 	}
 
 	[System.Serializable]

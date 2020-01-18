@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEditor;
 using System;
 using System.Reflection;
+using System.Linq;
 
 namespace NaughtyAttributes.Editor
 {
@@ -16,7 +17,23 @@ namespace NaughtyAttributes.Editor
 			}
 			else
 			{
-				EditorGUILayout.PropertyField(property, includeChildren);
+				bool anyNaughtyAttribute = PropertyUtility.GetAttributes<INaughtyAttribute>(property)
+					.Where(attr => !(attr is EnableIfAttributeBase)).Any();
+
+				if (!anyNaughtyAttribute)
+				{
+					// Naughty attributes check for enableability theselves,
+					// so if a property doesn't have an INaughtyAttribute we need to check for enableability explicitly
+					bool enabled = PropertyUtility.IsEnabled(property);
+					GUI.enabled = enabled;
+					EditorGUILayout.PropertyField(property, includeChildren);
+					GUI.enabled = true;
+				}
+				else
+				{
+					// We don't need to check for enableIfAttribute
+					EditorGUILayout.PropertyField(property, includeChildren);
+				}
 			}
 		}
 

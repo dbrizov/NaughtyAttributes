@@ -16,20 +16,20 @@ namespace NaughtyAttributes.Editor
 				: GetPropertyHeight(property) + GetHelpBoxHeight();
 		}
 
-		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+		protected override void OnGUI_Internal(Rect rect, SerializedProperty property, GUIContent label)
 		{
-			EditorGUI.BeginProperty(position, label, property);
+			EditorGUI.BeginProperty(rect, label, property);
 
 			Enum targetEnum = PropertyUtility.GetTargetObjectOfProperty(property) as Enum;
 			if (targetEnum != null)
 			{
-				Enum enumNew = EditorGUI.EnumFlagsField(position, property.displayName, targetEnum);
+				Enum enumNew = EditorGUI.EnumFlagsField(rect, property.displayName, targetEnum);
 				property.intValue = (int)Convert.ChangeType(enumNew, targetEnum.GetType());
 			}
 			else
 			{
 				string message = attribute.GetType().Name + " can be used only on enums";
-				DrawDefaultPropertyAndHelpBox(position, property, message, MessageType.Warning);
+				DrawDefaultPropertyAndHelpBox(rect, property, message, MessageType.Warning);
 			}
 
 			EditorGUI.EndProperty();
