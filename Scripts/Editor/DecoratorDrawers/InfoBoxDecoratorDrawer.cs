@@ -15,10 +15,11 @@ namespace NaughtyAttributes.Editor
 		{
 			InfoBoxAttribute infoBoxAttribute = (InfoBoxAttribute)attribute;
 
+			float indentLength = NaughtyEditorGUI.GetIndentLength(rect);
 			Rect infoBoxRect = new Rect(
-				rect.x + NaughtyEditorGUI.GetIndentLength(rect),
+				rect.x + indentLength,
 				rect.y,
-				rect.width,
+				rect.width - indentLength,
 				GetHelpBoxHeight() - 2.0f);
 
 			DrawInfoBox(infoBoxRect, infoBoxAttribute.Text, infoBoxAttribute.Type);
