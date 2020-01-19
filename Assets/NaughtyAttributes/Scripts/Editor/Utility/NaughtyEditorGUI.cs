@@ -68,6 +68,20 @@ namespace NaughtyAttributes.Editor
 			return indentLength;
 		}
 
+		public static void BeginBoxGroup_Layout(string label = "")
+		{
+			EditorGUILayout.BeginVertical(GUI.skin.box);
+			if (!string.IsNullOrEmpty(label))
+			{
+				EditorGUILayout.LabelField(label, EditorStyles.boldLabel);
+			}
+		}
+
+		public static void EndBoxGroup_Layout()
+		{
+			EditorGUILayout.EndVertical();
+		}
+
 		/// <summary>
 		/// Creates a dropdown
 		/// </summary>
