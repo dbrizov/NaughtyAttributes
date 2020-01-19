@@ -36,7 +36,7 @@ namespace NaughtyAttributes.Editor
 			if (property.propertyType == SerializedPropertyType.String)
 			{
 				Rect labelRect = rect;
-				EditorGUI.LabelField(labelRect, property.displayName);
+				EditorGUI.LabelField(labelRect, label.text);
 
 				EditorGUI.BeginChangeCheck();
 

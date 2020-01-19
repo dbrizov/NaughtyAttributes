@@ -23,7 +23,7 @@ namespace NaughtyAttributes.Editor
 			Enum targetEnum = PropertyUtility.GetTargetObjectOfProperty(property) as Enum;
 			if (targetEnum != null)
 			{
-				Enum enumNew = EditorGUI.EnumFlagsField(rect, property.displayName, targetEnum);
+				Enum enumNew = EditorGUI.EnumFlagsField(rect, label.text, targetEnum);
 				property.intValue = (int)Convert.ChangeType(enumNew, targetEnum.GetType());
 			}
 			else

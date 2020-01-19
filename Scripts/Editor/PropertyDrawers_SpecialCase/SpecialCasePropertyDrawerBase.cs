@@ -17,11 +17,14 @@ namespace NaughtyAttributes.Editor
 
 			bool enabled = PropertyUtility.IsEnabled(property);
 			GUI.enabled = enabled;
-			OnGUI_Internal(property);
+
+			GUIContent overrideLabel = new GUIContent(PropertyUtility.GetLabel(property));
+			OnGUI_Internal(property, overrideLabel);
+
 			GUI.enabled = true;
 		}
 
-		protected abstract void OnGUI_Internal(SerializedProperty property);
+		protected abstract void OnGUI_Internal(SerializedProperty property, GUIContent label);
 	}
 
 	public static class SpecialCaseDrawerAttributeExtensions
