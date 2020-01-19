@@ -26,6 +26,14 @@ namespace NaughtyAttributes.Editor
 			return (T[])fieldInfo.GetCustomAttributes(typeof(T), true);
 		}
 
+		public static string GetLabel(SerializedProperty property)
+		{
+			LabelAttribute labelAttribute = GetAttribute<LabelAttribute>(property);
+			return (labelAttribute == null)
+				? property.displayName
+				: labelAttribute.Label;
+		}
+
 		public static void CallOnValueChangedCallbacks(SerializedProperty property)
 		{
 			object target = GetTargetObjectWithProperty(property);
@@ -119,14 +127,6 @@ namespace NaughtyAttributes.Editor
 
 				return false;
 			}
-		}
-
-		public static string GetLabel(SerializedProperty property)
-		{
-			LabelAttribute labelAttribute = GetAttribute<LabelAttribute>(property);
-			return (labelAttribute == null)
-				? property.displayName
-				: labelAttribute.Label;
 		}
 
 		private static List<bool> GetConditionValues(object target, string[] conditions)
