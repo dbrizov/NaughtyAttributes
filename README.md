@@ -119,6 +119,13 @@ Enable Tag selection with string field
 ## Meta Attributes
 Give the fields meta data. A field can have more than one meta attributes
 
+### BoxGroup
+Surrounds grouped fields with a box.
+
+![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/BoxGroup_Code.PNG)
+
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/BoxGroup_Inspector.PNG)
+
 ### EnableIf / DisableIf
 ![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/EnableIf_Code.PNG)
 
@@ -150,17 +157,6 @@ Keep in mind that the event is detected only when the value is changed from the 
 If you want a runtime event, you should probably use an event/delegate and subscribe to it.
 
 ![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/OnValueChanged_Code.PNG)
-
-## Group Attributes
-Serialized fields can be grouped in different groups.
-A field can have only one GroupAttribute. If a field has more than one, only the bottom one will be used.
-
-### BoxGroup
-Surrounds grouped fields with a box.
-
-![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/BoxGroup_Code.PNG)
-
-![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/BoxGroup_Inspector.PNG)
 
 ## Validator Attributes
 Used for validating the fields. A field can have infinite number of validator attributes.
