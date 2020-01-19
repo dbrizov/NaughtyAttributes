@@ -38,7 +38,7 @@ namespace NaughtyAttributes.Editor
 				}
 
 				// Draw the popup box with the current selected index
-				index = EditorGUI.Popup(rect, property.displayName, index, tagList.ToArray());
+				index = EditorGUI.Popup(rect, label.text, index, tagList.ToArray());
 
 				// Adjust the actual string value of the property based on the selection
 				if (index > 0)

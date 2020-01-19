@@ -9,7 +9,7 @@ namespace NaughtyAttributes.Editor
 		protected override void OnGUI_Internal(Rect rect, SerializedProperty property, GUIContent label)
 		{
 			EditorGUI.BeginProperty(rect, label, property);
-			EditorGUI.PropertyField(rect, property, true);
+			EditorGUI.PropertyField(rect, property, label, true);
 			EditorGUI.EndProperty();
 		}
 	}

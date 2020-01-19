@@ -18,7 +18,9 @@ namespace NaughtyAttributes.Editor
 			else
 			{
 				bool anyNaughtyAttribute = PropertyUtility.GetAttributes<INaughtyAttribute>(property)
-					.Any(attr => !(attr is EnableIfAttributeBase));
+					.Any(attr => !(attr is MetaAttribute));
+
+				GUIContent label = new GUIContent(PropertyUtility.GetLabel(property));
 
 				if (!anyNaughtyAttribute)
 				{
@@ -32,13 +34,13 @@ namespace NaughtyAttributes.Editor
 
 					bool enabled = PropertyUtility.IsEnabled(property);
 					GUI.enabled = enabled;
-					EditorGUILayout.PropertyField(property, includeChildren);
+					EditorGUILayout.PropertyField(property, label, includeChildren);
 					GUI.enabled = true;
 				}
 				else
 				{
 					// We don't need to check for enableIfAttribute
-					EditorGUILayout.PropertyField(property, includeChildren);
+					EditorGUILayout.PropertyField(property, label, includeChildren);
 				}
 			}
 		}

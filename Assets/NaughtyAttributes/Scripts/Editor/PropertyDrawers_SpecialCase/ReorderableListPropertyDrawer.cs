@@ -16,7 +16,7 @@ namespace NaughtyAttributes.Editor
 			return property.serializedObject.targetObject.GetInstanceID() + "/" + property.name;
 		}
 
-		protected override void OnGUI_Internal(SerializedProperty property)
+		protected override void OnGUI_Internal(SerializedProperty property, GUIContent label)
 		{
 			if (property.isArray)
 			{
@@ -28,7 +28,7 @@ namespace NaughtyAttributes.Editor
 					{
 						drawHeaderCallback = (Rect rect) =>
 						{
-							EditorGUI.LabelField(rect, string.Format("{0}: {1}", property.displayName, property.arraySize), EditorStyles.boldLabel);
+							EditorGUI.LabelField(rect, string.Format("{0}: {1}", label.text, property.arraySize), EditorStyles.boldLabel);
 						},
 
 						drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>

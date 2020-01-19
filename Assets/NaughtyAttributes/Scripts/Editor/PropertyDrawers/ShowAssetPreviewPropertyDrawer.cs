@@ -40,7 +40,7 @@ namespace NaughtyAttributes.Editor
 					height = EditorGUIUtility.singleLineHeight
 				};
 
-				EditorGUI.PropertyField(propertyRect, property);
+				EditorGUI.PropertyField(propertyRect, property, label);
 
 				Texture2D previewTexture = GetAssetPreview(property);
 				if (previewTexture != null)

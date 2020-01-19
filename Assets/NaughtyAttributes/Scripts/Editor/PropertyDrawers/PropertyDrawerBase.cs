@@ -15,7 +15,10 @@ namespace NaughtyAttributes.Editor
 
 			bool enabled = PropertyUtility.IsEnabled(property);
 			GUI.enabled = enabled;
-			OnGUI_Internal(rect, property, label);
+
+			GUIContent overrideLabel = new GUIContent(PropertyUtility.GetLabel(property));
+			OnGUI_Internal(rect, property, overrideLabel);
+
 			GUI.enabled = true;
 		}
 

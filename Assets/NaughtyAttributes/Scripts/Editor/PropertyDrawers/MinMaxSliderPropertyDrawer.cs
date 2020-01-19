@@ -54,7 +54,7 @@ namespace NaughtyAttributes.Editor
 					rect.height);
 
 				// Draw the label
-				EditorGUI.LabelField(labelRect, property.displayName);
+				EditorGUI.LabelField(labelRect, label.text);
 
 				// Draw the slider
 				EditorGUI.BeginChangeCheck();

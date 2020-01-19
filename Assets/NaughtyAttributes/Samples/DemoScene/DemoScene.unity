@@ -750,13 +750,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7488af014527ebf42af5c4fc4d5f4f5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aMoreSpecificName: 
-  vectorXYZ: {x: 0, y: 0, z: 0}
-  navMeshAgent: {fileID: 0}
-  arrayOfInts: 
-  myClass:
-    aInt: 0
-    aString: 
+  int0: 0
+  nest1:
+    int1: 0
+    nest2:
+      vector2: {x: 0.25, y: 0.75}
 --- !u!1 &1380469384
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,11 +798,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bcc0d5613b48fb43bd36c9d37e99900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tag0: Player
+  tag0: 
   nest1:
-    tag1: GameController
+    tag1: 
     nest2:
-      tag2: MainCamera
+      tag2: 
 --- !u!1 &1444377589
 GameObject:
   m_ObjectHideFlags: 0
