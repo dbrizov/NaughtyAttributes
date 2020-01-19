@@ -17,27 +17,36 @@ namespace NaughtyAttributes.Editor
 			}
 			else
 			{
-				bool anyNaughtyAttribute = PropertyUtility.GetAttributes<INaughtyAttribute>(property)
-					.Any(attr => !(attr is MetaAttribute));
-
 				GUIContent label = new GUIContent(PropertyUtility.GetLabel(property));
+				bool anyDrawerAttribute = PropertyUtility.GetAttributes<DrawerAttribute>(property).Any();
 
-				if (!anyNaughtyAttribute)
+				if (!anyDrawerAttribute)
 				{
-					// Naughty attributes check for visibility/enableability themselves,
-					// so if a property doesn't have an INaughtyAttribute we need to check for visibility/enableability explicitly
+					// Drawer attributes check for visibility, enableability and validator themselves,
+					// so if a property doesn't have a DrawerAttribute we need to check for these explicitly
+
+					// Check if visible
 					bool visible = PropertyUtility.IsVisible(property);
 					if (!visible)
 					{
 						return;
 					}
 
+					// Validate
+					ValidatorAttribute[] validatorAttributes = PropertyUtility.GetAttributes<ValidatorAttribute>(property);
+					foreach (var validatorAttribute in validatorAttributes)
+					{
+						validatorAttribute.GetValidator().ValidateProperty(property);
+					}
+
+					// Check if enabled and draw
 					EditorGUI.BeginChangeCheck();
 					bool enabled = PropertyUtility.IsEnabled(property);
 					GUI.enabled = enabled;
 					EditorGUILayout.PropertyField(property, label, includeChildren);
 					GUI.enabled = true;
 
+					// Call OnValueChanged callbacks
 					if (EditorGUI.EndChangeCheck())
 					{
 						PropertyUtility.CallOnValueChangedCallbacks(property);
