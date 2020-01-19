@@ -32,10 +32,16 @@ namespace NaughtyAttributes.Editor
 						return;
 					}
 
+					EditorGUI.BeginChangeCheck();
 					bool enabled = PropertyUtility.IsEnabled(property);
 					GUI.enabled = enabled;
 					EditorGUILayout.PropertyField(property, label, includeChildren);
 					GUI.enabled = true;
+
+					if (EditorGUI.EndChangeCheck())
+					{
+						PropertyUtility.CallOnValueChangedCallbacks(property);
+					}
 				}
 				else
 				{
