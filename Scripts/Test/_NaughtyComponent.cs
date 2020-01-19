@@ -9,6 +9,21 @@ namespace NaughtyAttributes.Test
 		public int[] list;
 
 		public MyClass myClass;
+
+		[ShowNativeProperty]
+		private Transform Transform
+		{
+			get
+			{
+				return transform;
+			}
+		}
+
+		[Button]
+		private void LogParent()
+		{
+			Debug.Log(transform.parent);
+		}
 	}
 
 	[System.Serializable]
