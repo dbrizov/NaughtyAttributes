@@ -10,6 +10,7 @@ namespace NaughtyAttributes.Editor
 	[CustomEditor(typeof(UnityEngine.Object), true)]
 	public class NaughtyInspector : UnityEditor.Editor
 	{
+		private List<SerializedProperty> _serializedProperties = new List<SerializedProperty>();
 		private IEnumerable<FieldInfo> _nonSerializedFields;
 		private IEnumerable<PropertyInfo> _nativeProperties;
 		private IEnumerable<MethodInfo> _methods;
@@ -36,27 +37,44 @@ namespace NaughtyAttributes.Editor
 			// Draw serialized properties
 			serializedObject.Update();
 
+			_serializedProperties.Clear();
 			using (var iterator = serializedObject.GetIterator())
 			{
 				if (iterator.NextVisible(true))
 				{
 					do
 					{
-						if (iterator.name.Equals("m_Script", System.StringComparison.Ordinal))
-						{
-							GUI.enabled = false;
-							SerializedProperty property = serializedObject.FindProperty(iterator.name);
-							EditorGUILayout.PropertyField(property);
-							GUI.enabled = true;
-						}
-						else
-						{
-							SerializedProperty property = serializedObject.FindProperty(iterator.name);
-							NaughtyEditorGUI.PropertyField_Layout(property, true);
-						}
+						_serializedProperties.Add(serializedObject.FindProperty(iterator.name));
 					}
 					while (iterator.NextVisible(false));
 				}
+			}
+
+			// Draw non-grouped serialized properties
+			foreach (var property in GetNonGroupedProperties(_serializedProperties))
+			{
+				if (property.name.Equals("m_Script", System.StringComparison.Ordinal))
+				{
+					GUI.enabled = false;
+					EditorGUILayout.PropertyField(property);
+					GUI.enabled = true;
+				}
+				else
+				{
+					NaughtyEditorGUI.PropertyField_Layout(property, true);
+				}
+			}
+
+			// Draw grouped serialized properties
+			foreach (var group in GetGroupedProperties(_serializedProperties))
+			{
+				NaughtyEditorGUI.BeginBoxGroup_Layout(group.Key);
+				foreach (var property in group)
+				{
+					NaughtyEditorGUI.PropertyField_Layout(property, true);
+				}
+
+				NaughtyEditorGUI.EndBoxGroup_Layout();
 			}
 
 			serializedObject.ApplyModifiedProperties();
@@ -104,7 +122,19 @@ namespace NaughtyAttributes.Editor
 			}
 		}
 
-		private GUIStyle GetHeaderGUIStyle()
+		private static IEnumerable<SerializedProperty> GetNonGroupedProperties(IEnumerable<SerializedProperty> properties)
+		{
+			return properties.Where(p => PropertyUtility.GetAttribute<BoxGroupAttribute>(p) == null);
+		}
+
+		private static IEnumerable<IGrouping<string, SerializedProperty>> GetGroupedProperties(IEnumerable<SerializedProperty> properties)
+		{
+			return properties
+				.Where(p => PropertyUtility.GetAttribute<BoxGroupAttribute>(p) != null)
+				.GroupBy(p => PropertyUtility.GetAttribute<BoxGroupAttribute>(p).Name);
+		}
+
+		private static GUIStyle GetHeaderGUIStyle()
 		{
 			GUIStyle style = new GUIStyle(EditorStyles.centeredGreyMiniLabel);
 			style.fontStyle = FontStyle.Bold;
