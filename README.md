@@ -9,7 +9,7 @@ It expands the range of attributes that Unity provides so that you can create po
 It is implemented by replacing the default Unity Inspector. This means that if you have any custom editors, NaughtyAttributes will not work with them. All of your custom editors and property drawers are not affected in any way.
 
 ## System Requirements
-Unity 2017.3.0 or later versions. Feel free to try older version. Don't forget to include the NaughtyAttributes namespace.
+Unity 2018.3.0 or later versions. Feel free to try older version. Don't forget to include the NaughtyAttributes namespace.
 
 ## Installation
 1. The package is available on the [openupm registry](https://openupm.com). You can install it via [openupm-cli](https://github.com/openupm/openupm-cli).
