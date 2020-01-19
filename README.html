@@ -1080,64 +1080,223 @@ table.capped-list td.middle{text-align:center}table.capped-list .favicon{width:1
   <div class="page">
     <div id="preview-page" class="preview-page" data-autorefresh-url="">
 
-
+    
 
       <div role="main" class="main-content">
         <div class="container new-discussion-timeline experiment-repo-nav">
           <div class="repository-content">
             <div id="readme" class="readme boxed-group clearfix announce instapaper_body md">
-
+              
                 <h3>
                   <span class="octicon octicon-book"></span>
                   README.md
                 </h3>
-
+              
               <article class="markdown-body entry-content" itemprop="text" id="grip-content">
                 <h1>
 <a id="user-content-naughtyattributes" class="anchor" href="#naughtyattributes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>NaughtyAttributes</h1>
+<p><a href="https://openupm.com/packages/com.dbrizov.naughtyattributes/" rel="nofollow"><img src="https://camo.githubusercontent.com/6c7d9a4d17a39962a7d14409953367813104e9dc/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f762f636f6d2e646272697a6f762e6e617567687479617474726962757465733f6c6162656c3d6f70656e75706d2672656769737472795f7572693d68747470733a2f2f7061636b6167652e6f70656e75706d2e636f6d" alt="openupm" data-canonical-src="https://img.shields.io/npm/v/com.dbrizov.naughtyattributes?label=openupm&amp;registry_uri=https://package.openupm.com" style="max-width:100%;"></a>
+<a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/LICENSE"><img src="https://camo.githubusercontent.com/a2753323735099059bdc88b724534a1a6bd134ee/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4c6963656e73652d4d49542d627269676874677265656e2e737667" alt="License: MIT" data-canonical-src="https://img.shields.io/badge/License-MIT-brightgreen.svg" style="max-width:100%;"></a></p>
 <p>NaughtyAttributes is an extension for the Unity Inspector.</p>
 <p>It expands the range of attributes that Unity provides so that you can create powerful inspectors without the need of custom editors or property drawers. It also provides attributes that can be applied to non-serialized fields or functions.</p>
 <p>It is implemented by replacing the default Unity Inspector. This means that if you have any custom editors, NaughtyAttributes will not work with them. All of your custom editors and property drawers are not affected in any way.</p>
 <h2>
 <a id="user-content-system-requirements" class="anchor" href="#system-requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>System Requirements</h2>
-<p>Unity 2017.1.0 or later versions. Feel free to try older version. Don't forget to include the NaughtyAttributes namespace.</p>
+<p>Unity 2018.3.0 or later versions. Feel free to try older version. Don't forget to include the NaughtyAttributes namespace.</p>
+<h2>
+<a id="user-content-installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+<ol>
+<li>The package is available on the <a href="https://openupm.com" rel="nofollow">openupm registry</a>. You can install it via <a href="https://github.com/openupm/openupm-cli">openupm-cli</a>.</li>
+</ol>
+<pre><code>openupm add com.dbrizov.naughtyattributes
+</code></pre>
+<ol start="2">
+<li>You can also install via git url by adding this entry in your <strong>manifest.json</strong>
+</li>
+</ol>
+<pre><code>"com.dbrizov.naughtyattributes": "https://github.com/dbrizov/NaughtyAttributes.git#upm"
+</code></pre>
+<ol start="3">
+<li>You can also download it from the <a href="https://assetstore.unity.com/packages/tools/utilities/naughtyattributes-129996" rel="nofollow">Asset Store</a>
+</li>
+</ol>
 <h2>
 <a id="user-content-drawer-attributes" class="anchor" href="#drawer-attributes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Drawer Attributes</h2>
 <p>Provide special draw options to serialized fields.
 A field can have only one DrawerAttribute. If a field has more than one, only the bottom one will be used.</p>
 <h3>
-<a id="user-content-slider" class="anchor" href="#slider" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Slider</h3>
-<p>The same as Unity's <strong>Range</strong> attribute.
-There is no difference between the two, you can use whatever you like, I just wanted to support a custom slider attribute.</p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Slider_Code.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/Slider_Code.PNG" alt="code" style="max-width:100%;"></a></p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Slider_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/Slider_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
-<h3>
-<a id="user-content-minmaxslider" class="anchor" href="#minmaxslider" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>MinMaxSlider</h3>
-<p>A double slider. The <strong>min value</strong> is saved to the <strong>X</strong> property, and the <strong>max value</strong> is saved to the <strong>Y</strong> property of a <strong>Vector2</strong> field.</p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/MinMaxSlider_Code.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/MinMaxSlider_Code.PNG" alt="code" style="max-width:100%;"></a></p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/MinMaxSlider_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/MinMaxSlider_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
-<h3>
-<a id="user-content-reorderablelist" class="anchor" href="#reorderablelist" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ReorderableList</h3>
-<p>Provides array type fields with an interface for easy reordering of elements.</p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ReorderableList_Code.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ReorderableList_Code.PNG" alt="code" style="max-width:100%;"></a></p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ReorderableList_Inspector.gif" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ReorderableList_Inspector.gif" alt="inspector" style="max-width:100%;"></a></p>
-<h3>
 <a id="user-content-button" class="anchor" href="#button" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Button</h3>
 <p>A method can be marked as a button. A button appears in the inspector and executes the method if clicked.
 Works both with instance and static methods.</p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Button_Code.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/Button_Code.PNG" alt="code" style="max-width:100%;"></a></p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	[<span class="pl-en">Button</span>]
+	<span class="pl-k">private</span> <span class="pl-k">void</span> <span class="pl-en">MethodOne</span>() { }
+
+	[<span class="pl-en">Button</span>(<span class="pl-s"><span class="pl-pds">"</span>Button Text<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">private</span> <span class="pl-k">void</span> <span class="pl-en">MethodTwo</span>() { }
+}</pre></div>
 <p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Button_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/Button_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-dropdown" class="anchor" href="#dropdown" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dropdown</h3>
 <p>Provides an interface for dropdown value selection.</p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Dropdown_Code.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/Dropdown_Code.PNG" alt="code" style="max-width:100%;"></a></p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	[<span class="pl-en">Dropdown</span>(<span class="pl-s"><span class="pl-pds">"</span>intValues<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">intValue</span>;
+
+	[<span class="pl-en">Dropdown</span>(<span class="pl-s"><span class="pl-pds">"</span>StringValues<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-smi">stringValue</span>;
+
+	[<span class="pl-en">Dropdown</span>(<span class="pl-s"><span class="pl-pds">"</span>GetVectorValues<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-en">Vector3</span> <span class="pl-smi">vectorValue</span>;
+
+	<span class="pl-k">private</span> <span class="pl-k">int</span>[] <span class="pl-smi">intValues</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-k">int</span>[] { <span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>, <span class="pl-c1">4</span>, <span class="pl-c1">5</span> };
+
+	<span class="pl-k">private</span> <span class="pl-en">List</span>&lt;<span class="pl-k">string</span>&gt; <span class="pl-smi">StringValues</span> { <span class="pl-k">get</span> { <span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-en">List</span>&lt;<span class="pl-k">string</span>&gt;() { <span class="pl-s"><span class="pl-pds">"</span>A<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>B<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>C<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>D<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>E<span class="pl-pds">"</span></span> }; } }
+
+	<span class="pl-k">private</span> <span class="pl-en">DropdownList</span>&lt;<span class="pl-en">Vector3</span>&gt; <span class="pl-en">GetVectorValues</span>()
+	{
+		<span class="pl-k">return</span> <span class="pl-k">new</span> <span class="pl-en">DropdownList</span>&lt;<span class="pl-en">Vector3</span>&gt;()
+		{
+			{ <span class="pl-s"><span class="pl-pds">"</span>Right<span class="pl-pds">"</span></span>,   <span class="pl-smi">Vector3</span>.<span class="pl-smi">right</span> },
+			{ <span class="pl-s"><span class="pl-pds">"</span>Left<span class="pl-pds">"</span></span>,    <span class="pl-smi">Vector3</span>.<span class="pl-smi">left</span> },
+			{ <span class="pl-s"><span class="pl-pds">"</span>Up<span class="pl-pds">"</span></span>,      <span class="pl-smi">Vector3</span>.<span class="pl-smi">up</span> },
+			{ <span class="pl-s"><span class="pl-pds">"</span>Down<span class="pl-pds">"</span></span>,    <span class="pl-smi">Vector3</span>.<span class="pl-smi">down</span> },
+			{ <span class="pl-s"><span class="pl-pds">"</span>Forward<span class="pl-pds">"</span></span>, <span class="pl-smi">Vector3</span>.<span class="pl-smi">forward</span> },
+			{ <span class="pl-s"><span class="pl-pds">"</span>Back<span class="pl-pds">"</span></span>,    <span class="pl-smi">Vector3</span>.<span class="pl-smi">back</span> }
+		};
+	}
+}</pre></div>
 <p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Dropdown_Inspector.gif" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/Dropdown_Inspector.gif" alt="inspector" style="max-width:100%;"></a></p>
+<h3>
+<a id="user-content-enumflags" class="anchor" href="#enumflags" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>EnumFlags</h3>
+<p>Provides dropdown interface for setting enum flags</p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">enum</span> <span class="pl-en">Direction</span>
+{
+	<span class="pl-en">None</span> <span class="pl-k">=</span> <span class="pl-c1">0</span>,
+	<span class="pl-en">Right</span> <span class="pl-k">=</span> <span class="pl-c1">1</span> <span class="pl-k">&lt;&lt;</span> <span class="pl-c1">0</span>,
+	<span class="pl-en">Left</span> <span class="pl-k">=</span> <span class="pl-c1">1</span> <span class="pl-k">&lt;&lt;</span> <span class="pl-c1">1</span>,
+	<span class="pl-en">Up</span> <span class="pl-k">=</span> <span class="pl-c1">1</span> <span class="pl-k">&lt;&lt;</span> <span class="pl-c1">2</span>,
+	<span class="pl-en">Down</span> <span class="pl-k">=</span> <span class="pl-c1">1</span> <span class="pl-k">&lt;&lt;</span> <span class="pl-c1">3</span>
+}
+
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	[<span class="pl-en">EnumFlags</span>]
+	<span class="pl-k">public</span> <span class="pl-en">Direction</span> <span class="pl-smi">flags</span>;
+}</pre></div>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/EnumFlags_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/EnumFlags_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
+<h3>
+<a id="user-content-horizontalline" class="anchor" href="#horizontalline" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>HorizontalLine</h3>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	[<span class="pl-en">HorizontalLine</span>(<span class="pl-smi">color</span>: <span class="pl-smi">EColor</span>.<span class="pl-smi">Red</span>)]
+	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">red</span>;
+
+	[<span class="pl-en">HorizontalLine</span>(<span class="pl-smi">color</span>: <span class="pl-smi">EColor</span>.<span class="pl-smi">Green</span>)]
+	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">green</span>;
+
+	[<span class="pl-en">HorizontalLine</span>(<span class="pl-smi">color</span>: <span class="pl-smi">EColor</span>.<span class="pl-smi">Blue</span>)]
+	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">blue</span>;
+}</pre></div>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/HorizontalLine_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/HorizontalLine_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
+<h3>
+<a id="user-content-infobox" class="anchor" href="#infobox" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>InfoBox</h3>
+<p>Used for providing additional information.</p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	[<span class="pl-en">InfoBox</span>(<span class="pl-s"><span class="pl-pds">"</span>This is my int<span class="pl-pds">"</span></span>, <span class="pl-smi">EInfoBoxType</span>.<span class="pl-smi">Normal</span>)]
+	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">myInt</span>;
+
+	[<span class="pl-en">InfoBox</span>(<span class="pl-s"><span class="pl-pds">"</span>This is my float<span class="pl-pds">"</span></span>, <span class="pl-smi">EInfoBoxType</span>.<span class="pl-smi">Warning</span>)]
+	<span class="pl-k">public</span> <span class="pl-k">float</span> <span class="pl-smi">myFloat</span>;
+
+	[<span class="pl-en">InfoBox</span>(<span class="pl-s"><span class="pl-pds">"</span>This is my vector<span class="pl-pds">"</span></span>, <span class="pl-smi">EInfoBoxType</span>.<span class="pl-smi">Error</span>)]
+	<span class="pl-k">public</span> <span class="pl-en">Vector3</span> <span class="pl-smi">myVector</span>;
+}</pre></div>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/InfoBox_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/InfoBox_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
+<h3>
+<a id="user-content-minmaxslider" class="anchor" href="#minmaxslider" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>MinMaxSlider</h3>
+<p>A double slider. The <strong>min value</strong> is saved to the <strong>X</strong> property, and the <strong>max value</strong> is saved to the <strong>Y</strong> property of a <strong>Vector2</strong> field.</p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	[<span class="pl-en">MinMaxSlider</span>(<span class="pl-c1">0.0f</span>, <span class="pl-c1">100.0f</span>)]
+	<span class="pl-k">public</span> <span class="pl-en">Vector2</span> <span class="pl-smi">minMaxSlider</span>;
+}</pre></div>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/MinMaxSlider_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/MinMaxSlider_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
+<h3>
+<a id="user-content-progressbar" class="anchor" href="#progressbar" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ProgressBar</h3>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	[<span class="pl-en">ProgressBar</span>]
+	<span class="pl-k">public</span> <span class="pl-k">float</span> <span class="pl-smi">health</span> <span class="pl-k">=</span> <span class="pl-c1">42.0f</span>;
+
+	[<span class="pl-en">ProgressBar</span>(<span class="pl-s"><span class="pl-pds">"</span>Coins found<span class="pl-pds">"</span></span>, <span class="pl-c1">25</span>, <span class="pl-smi">EColor</span>.<span class="pl-smi">Yellow</span>)]
+	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">coinsFound</span> <span class="pl-k">=</span> <span class="pl-c1">3</span>;
+
+	<span class="pl-k">private</span> <span class="pl-k">void</span> <span class="pl-en">Update</span>()
+	{
+		<span class="pl-smi">health</span> <span class="pl-k">+=</span> <span class="pl-smi">Time</span>.<span class="pl-smi">deltaTime</span> <span class="pl-k">*</span> <span class="pl-c1">3.0f</span>;
+	}
+}</pre></div>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ProgressBar_Inspector.gif" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ProgressBar_Inspector.gif" alt="inspector" style="max-width:100%;"></a></p>
+<h3>
+<a id="user-content-reorderablelist" class="anchor" href="#reorderablelist" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ReorderableList</h3>
+<p>Provides array type fields with an interface for easy reordering of elements.</p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	[<span class="pl-en">ReorderableList</span>]
+	<span class="pl-k">public</span> <span class="pl-k">int</span>[] <span class="pl-smi">intArray</span>;
+
+	[<span class="pl-en">ReorderableList</span>]
+	<span class="pl-k">public</span> <span class="pl-en">List</span>&lt;<span class="pl-k">float</span>&gt; <span class="pl-smi">floatArray</span>;
+}</pre></div>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ReorderableList_Inspector.gif" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ReorderableList_Inspector.gif" alt="inspector" style="max-width:100%;"></a></p>
+<h3>
+<a id="user-content-readonly" class="anchor" href="#readonly" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ReadOnly</h3>
+<p>Makes a field read only.</p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	[<span class="pl-en">ReadOnly</span>]
+	<span class="pl-k">public</span> <span class="pl-en">Vector3</span> <span class="pl-smi">forwardVector</span> <span class="pl-k">=</span> <span class="pl-smi">Vector3</span>.<span class="pl-smi">forward</span>;
+}</pre></div>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ReadOnly_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ReadOnly_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-resizabletextarea" class="anchor" href="#resizabletextarea" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ResizableTextArea</h3>
 <p>A resizable text area where you can see the whole text.
 Unlike Unity's <strong>Multiline</strong> and <strong>TextArea</strong> attributes where you can see only 3 rows of a given text, and in order to see it or modify it you have to manually scroll down to the desired row.</p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ResizableTextArea_Code.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ResizableTextArea_Code.PNG" alt="code" style="max-width:100%;"></a></p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	[<span class="pl-en">ResizableTextArea</span>]
+	<span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-smi">resizableTextArea</span>;
+}</pre></div>
 <p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ResizableTextArea_Inspector.gif" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ResizableTextArea_Inspector.gif" alt="inspector" style="max-width:100%;"></a></p>
+<h3>
+<a id="user-content-showassetpreview" class="anchor" href="#showassetpreview" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ShowAssetPreview</h3>
+<p>Shows the texture preview of a given asset (Sprite, Prefab...)</p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	[<span class="pl-en">ShowAssetPreview</span>]
+	<span class="pl-k">public</span> <span class="pl-en">Sprite</span> <span class="pl-smi">sprite</span>;
+
+	[<span class="pl-en">ShowAssetPreview</span>(<span class="pl-c1">128</span>, <span class="pl-c1">128</span>)]
+	<span class="pl-k">public</span> <span class="pl-en">GameObject</span> <span class="pl-smi">prefab</span>;
+}</pre></div>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ShowAssetPreview_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ShowAssetPreview_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
+<h3>
+<a id="user-content-shownativeproperty" class="anchor" href="#shownativeproperty" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ShowNativeProperty</h3>
+<p>Shows native C# properties in the inspector.
+All native properties are displayed at the bottom of the inspector after the non-serialized fields and before the method buttons.
+It supports only certain types <strong>(bool, int, long, float, double, string, Vector2, Vector3, Vector4, Color, Bounds, Rect, UnityEngine.Object)</strong>.</p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	<span class="pl-k">public</span> <span class="pl-en">List</span>&lt;<span class="pl-en">Transform</span>&gt; <span class="pl-smi">transforms</span>;
+
+	[<span class="pl-en">ShowNativeProperty</span>]
+	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">TransformsCount</span> <span class="pl-k">=&gt;</span> <span class="pl-smi">transforms</span>.<span class="pl-smi">Count</span>;
+}</pre></div>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ShowNativeProperty_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ShowNativeProperty_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-shownonserializedfield" class="anchor" href="#shownonserializedfield" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ShowNonSerializedField</h3>
 <p>Shows non-serialized fields in the inspector.
@@ -1145,117 +1304,189 @@ All non-serialized fields are displayed at the bottom of the inspector before th
 Keep in mind that if you change a non-static non-serialized field in the code - the value in the inspector will be updated after you press <strong>Play</strong> in the editor.
 There is no such issue with static non-serialized fields because their values are updated at compile time.
 It supports only certain types <strong>(bool, int, long, float, double, string, Vector2, Vector3, Vector4, Color, Bounds, Rect, UnityEngine.Object)</strong>.</p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ShowNonSerializedField_Code.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ShowNonSerializedField_Code.PNG" alt="code" style="max-width:100%;"></a></p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	[<span class="pl-en">ShowNonSerializedField</span>]
+	<span class="pl-k">private</span> <span class="pl-k">int</span> <span class="pl-smi">myInt</span> <span class="pl-k">=</span> <span class="pl-c1">10</span>;
+
+	[<span class="pl-en">ShowNonSerializedField</span>]
+	<span class="pl-k">private</span> <span class="pl-k">const</span> <span class="pl-k">float</span> <span class="pl-smi">PI</span> <span class="pl-k">=</span> <span class="pl-c1">3.14159f</span>;
+
+	[<span class="pl-en">ShowNonSerializedField</span>]
+	<span class="pl-k">private</span> <span class="pl-k">static</span> <span class="pl-k">readonly</span> <span class="pl-en">Vector3</span> <span class="pl-smi">CONST_VECTOR</span> <span class="pl-k">=</span> <span class="pl-smi">Vector3</span>.<span class="pl-smi">one</span>;
+}</pre></div>
 <p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ShowNonSerializedField_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ShowNonSerializedField_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
-<h3>
-<a id="user-content-shownativeproperty" class="anchor" href="#shownativeproperty" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ShowNativeProperty</h3>
-<p>Shows native C# properties in the inspector.
-All native properties are displayed at the bottom of the inspector after the non-serialized fields and before the method buttons.
-It supports only certain types <strong>(bool, int, long, float, double, string, Vector2, Vector3, Vector4, Color, Bounds, Rect, UnityEngine.Object)</strong>.</p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ShowNativeProperty_Code.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ShowNativeProperty_Code.PNG" alt="code" style="max-width:100%;"></a></p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ShowNativeProperty_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ShowNativeProperty_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
-<h3>
-<a id="user-content-readonly" class="anchor" href="#readonly" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ReadOnly</h3>
-<p>Makes a field read only.</p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ReadOnly_Code.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ReadOnly_Code.PNG" alt="code" style="max-width:100%;"></a></p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ReadOnly_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ReadOnly_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
-<h3>
-<a id="user-content-enableif--disableif" class="anchor" href="#enableif--disableif" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>EnableIf / DisableIf</h3>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/EnableIf_Code.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/EnableIf_Code.PNG" alt="code" style="max-width:100%;"></a></p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/EnableIf_Inspector.gif" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/EnableIf_Inspector.gif" alt="inspector" style="max-width:100%;"></a></p>
-<p>You can have more than one condition.</p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/EnableIf_Code2.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/EnableIf_Code2.PNG" alt="code" style="max-width:100%;"></a></p>
-<h3>
-<a id="user-content-showassetpreview" class="anchor" href="#showassetpreview" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ShowAssetPreview</h3>
-<p>Shows the texture preview of a given asset (Sprite, Prefab...)</p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ShowAssetPreview_Code.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ShowAssetPreview_Code.PNG" alt="code" style="max-width:100%;"></a></p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ShowAssetPreview_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ShowAssetPreview_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
-<h3>
-<a id="user-content-progressbar" class="anchor" href="#progressbar" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ProgressBar</h3>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ProgressBar_Code.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ProgressBar_Code.png" alt="code" style="max-width:100%;"></a></p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ProgressBar_Inspector.gif" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ProgressBar_Inspector.gif" alt="inspector" style="max-width:100%;"></a></p>
-<h3>
-<a id="user-content-label" class="anchor" href="#label" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Label</h3>
-<p>Override default field label</p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Label_Code.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/Label_Code.PNG" alt="code" style="max-width:100%;"></a></p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Label_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/Label_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-tag" class="anchor" href="#tag" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tag</h3>
 <p>Enable Tag selection with string field</p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Tag_Code.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/Tag_Code.PNG" alt="code" style="max-width:100%;"></a></p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	[<span class="pl-en">Tag</span>]
+	<span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-smi">tagField</span>;
+}</pre></div>
 <p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Tag_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/Tag_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
 <h2>
-<a id="user-content-drawcondition-attributes" class="anchor" href="#drawcondition-attributes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>DrawCondition Attributes</h2>
-<p>Can be used to specify when a given serialized field is visible, and when not. A field can have only one DrawConditionAttribute.</p>
-<h3>
-<a id="user-content-showif--hideif" class="anchor" href="#showif--hideif" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ShowIf / HideIf</h3>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ShowIf_Code.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ShowIf_Code.PNG" alt="code" style="max-width:100%;"></a></p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ShowIf_Inspector.gif" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ShowIf_Inspector.gif" alt="inspector" style="max-width:100%;"></a></p>
-<p>You can have more than one condition.</p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ShowIf_Code2.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ShowIf_Code2.PNG" alt="code" style="max-width:100%;"></a></p>
-<h2>
-<a id="user-content-group-attributes" class="anchor" href="#group-attributes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Group Attributes</h2>
-<p>Serialized fields can be grouped in different groups.
-A field can have only one GroupAttribute. If a field has more than one, only the bottom one will be used.</p>
+<a id="user-content-meta-attributes" class="anchor" href="#meta-attributes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Meta Attributes</h2>
+<p>Give the fields meta data. A field can have more than one meta attributes</p>
 <h3>
 <a id="user-content-boxgroup" class="anchor" href="#boxgroup" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>BoxGroup</h3>
 <p>Surrounds grouped fields with a box.</p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/BoxGroup_Code.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/BoxGroup_Code.PNG" alt="code" style="max-width:100%;"></a></p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	[<span class="pl-en">BoxGroup</span>(<span class="pl-s"><span class="pl-pds">"</span>Integers<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">firstInt</span>;
+	[<span class="pl-en">BoxGroup</span>(<span class="pl-s"><span class="pl-pds">"</span>Integers<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">secondInt</span>;
+
+	[<span class="pl-en">BoxGroup</span>(<span class="pl-s"><span class="pl-pds">"</span>Floats<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-k">float</span> <span class="pl-smi">firstFloat</span>;
+	[<span class="pl-en">BoxGroup</span>(<span class="pl-s"><span class="pl-pds">"</span>Floats<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-k">float</span> <span class="pl-smi">secondFloat</span>;
+}</pre></div>
 <p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/BoxGroup_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/BoxGroup_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
+<h3>
+<a id="user-content-enableif--disableif" class="anchor" href="#enableif--disableif" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>EnableIf / DisableIf</h3>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	<span class="pl-k">public</span> <span class="pl-k">bool</span> <span class="pl-smi">enableMyInt</span>;
+
+	[<span class="pl-en">EnableIf</span>(<span class="pl-s"><span class="pl-pds">"</span>enableMyInt<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">myInt</span>;
+
+	[<span class="pl-en">EnableIf</span>(<span class="pl-s"><span class="pl-pds">"</span>Enabled<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-k">float</span> <span class="pl-smi">myFloat</span>;
+
+	[<span class="pl-en">EnableIf</span>(<span class="pl-s"><span class="pl-pds">"</span>NotEnabled<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-en">Vector3</span> <span class="pl-smi">myVector</span>;
+
+	<span class="pl-k">public</span> <span class="pl-k">bool</span> <span class="pl-en">Enabled</span>() { <span class="pl-k">return</span> <span class="pl-c1">true</span>; }
+
+	<span class="pl-k">public</span> <span class="pl-k">bool</span> <span class="pl-smi">NotEnabled</span> <span class="pl-k">=&gt;</span> <span class="pl-c1">false</span>;
+}</pre></div>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/EnableIf_Inspector.gif" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/EnableIf_Inspector.gif" alt="inspector" style="max-width:100%;"></a></p>
+<p>You can have more than one condition.</p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	<span class="pl-k">public</span> <span class="pl-k">bool</span> <span class="pl-smi">flag0</span>;
+	<span class="pl-k">public</span> <span class="pl-k">bool</span> <span class="pl-smi">flag1</span>;
+
+	[<span class="pl-en">EnableIf</span>(<span class="pl-smi">EConditionOperator</span>.<span class="pl-smi">And</span>, <span class="pl-s"><span class="pl-pds">"</span>flag0<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>flag1<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">enabledIfAll</span>;
+
+	[<span class="pl-en">EnableIf</span>(<span class="pl-smi">EConditionOperator</span>.<span class="pl-smi">Or</span>, <span class="pl-s"><span class="pl-pds">"</span>flag0<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>flag1<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">enabledIfAny</span>;
+}</pre></div>
+<h3>
+<a id="user-content-showif--hideif" class="anchor" href="#showif--hideif" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ShowIf / HideIf</h3>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	<span class="pl-k">public</span> <span class="pl-k">bool</span> <span class="pl-smi">showInt</span>;
+
+	[<span class="pl-en">ShowIf</span>(<span class="pl-s"><span class="pl-pds">"</span>showInt<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">myInt</span>;
+
+	[<span class="pl-en">ShowIf</span>(<span class="pl-s"><span class="pl-pds">"</span>AlwaysShow<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-k">float</span> <span class="pl-smi">myFloat</span>;
+
+	[<span class="pl-en">ShowIf</span>(<span class="pl-s"><span class="pl-pds">"</span>NeverShow<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-en">Vector3</span> <span class="pl-smi">myVector</span>;
+
+	<span class="pl-k">public</span> <span class="pl-k">bool</span> <span class="pl-en">AlwaysShow</span>() { <span class="pl-k">return</span> <span class="pl-c1">true</span>; }
+
+	<span class="pl-k">public</span> <span class="pl-k">bool</span> <span class="pl-smi">NeverShow</span> <span class="pl-k">=&gt;</span> <span class="pl-c1">false</span>;
+}</pre></div>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ShowIf_Inspector.gif" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ShowIf_Inspector.gif" alt="inspector" style="max-width:100%;"></a></p>
+<p>You can have more than one condition.</p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	<span class="pl-k">public</span> <span class="pl-k">bool</span> <span class="pl-smi">flag0</span>;
+	<span class="pl-k">public</span> <span class="pl-k">bool</span> <span class="pl-smi">flag1</span>;
+
+	[<span class="pl-en">ShowIf</span>(<span class="pl-smi">EConditionOperator</span>.<span class="pl-smi">And</span>, <span class="pl-s"><span class="pl-pds">"</span>flag0<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>flag1<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">showIfAll</span>;
+
+	[<span class="pl-en">ShowIf</span>(<span class="pl-smi">EConditionOperator</span>.<span class="pl-smi">Or</span>, <span class="pl-s"><span class="pl-pds">"</span>flag0<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>flag1<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">showIfAny</span>;
+}</pre></div>
+<h3>
+<a id="user-content-label" class="anchor" href="#label" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Label</h3>
+<p>Override default field label</p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	[<span class="pl-en">Label</span>(<span class="pl-s"><span class="pl-pds">"</span>A Short Name<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-smi">aMoreSpecificName</span>;
+
+	[<span class="pl-en">Label</span>(<span class="pl-s"><span class="pl-pds">"</span>RGB<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-en">Vector3</span> <span class="pl-smi">vectorXYZ</span>;
+
+	[<span class="pl-en">Label</span>(<span class="pl-s"><span class="pl-pds">"</span>Agent<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-en">NavMeshAgent</span> <span class="pl-smi">navMeshAgent</span>;
+}</pre></div>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Label_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/Label_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
+<h3>
+<a id="user-content-onvaluechanged" class="anchor" href="#onvaluechanged" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>OnValueChanged</h3>
+<p>Detects a value change and executes a callback.
+Keep in mind that the event is detected only when the value is changed from the inspector.
+If you want a runtime event, you should probably use an event/delegate and subscribe to it.</p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	[<span class="pl-en">OnValueChanged</span>(<span class="pl-s"><span class="pl-pds">"</span>OnValueChangedCallback<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">myInt</span>;
+
+	<span class="pl-k">private</span> <span class="pl-k">void</span> <span class="pl-en">OnValueChangedCallback</span>(<span class="pl-k">int</span> <span class="pl-smi">oldValue</span>, <span class="pl-k">int</span> <span class="pl-smi">newValue</span>)
+	{
+		<span class="pl-smi">Debug</span>.<span class="pl-en">Log</span>(<span class="pl-smi">myInt</span> <span class="pl-k">==</span> <span class="pl-smi">newValue</span>); <span class="pl-c"><span class="pl-c">//</span> prints true</span>
+	}
+}</pre></div>
 <h2>
 <a id="user-content-validator-attributes" class="anchor" href="#validator-attributes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Validator Attributes</h2>
 <p>Used for validating the fields. A field can have infinite number of validator attributes.</p>
 <h3>
 <a id="user-content-minvalue--maxvalue" class="anchor" href="#minvalue--maxvalue" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>MinValue / MaxValue</h3>
 <p>Clamps integer and float fields.</p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/MinValueMaxValue_Code.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/MinValueMaxValue_Code.PNG" alt="code" style="max-width:100%;"></a></p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	[<span class="pl-en">MinValue</span>(<span class="pl-c1">0</span>), <span class="pl-en">MaxValue</span>(<span class="pl-c1">10</span>)]
+	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">myInt</span>;
+
+	[<span class="pl-en">MinValue</span>(<span class="pl-c1">0.0f</span>)]
+	<span class="pl-k">public</span> <span class="pl-k">float</span> <span class="pl-smi">myFloat</span>;
+}</pre></div>
 <p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/MinValueMaxValue_Inspector.gif" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/MinValueMaxValue_Inspector.gif" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-required" class="anchor" href="#required" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Required</h3>
 <p>Used to remind the developer that a given reference type field is required.</p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Required_Code.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/Required_Code.PNG" alt="code" style="max-width:100%;"></a></p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	[<span class="pl-en">Required</span>]
+	<span class="pl-k">public</span> <span class="pl-en">Transform</span> <span class="pl-smi">myTransform</span>;
+
+	[<span class="pl-en">Required</span>(<span class="pl-s"><span class="pl-pds">"</span>Custom required text<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-en">GameObject</span> <span class="pl-smi">myGameObject</span>;
+}</pre></div>
 <p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Required_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/Required_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-validateinput" class="anchor" href="#validateinput" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ValidateInput</h3>
 <p>The most powerful ValidatorAttribute.</p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ValidateInput_Code.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ValidateInput_Code.PNG" alt="code" style="max-width:100%;"></a></p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ValidateInput_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ValidateInput_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
-<h2>
-<a id="user-content-meta-attributes" class="anchor" href="#meta-attributes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Meta Attributes</h2>
-<p>Give the fields meta data. A field can have infinite number of meta attributes.</p>
-<h3>
-<a id="user-content-infobox" class="anchor" href="#infobox" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>InfoBox</h3>
-<p>Used for providing additional information.</p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/InfoBox_Code.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/InfoBox_Code.PNG" alt="code" style="max-width:100%;"></a></p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/InfoBox_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/InfoBox_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
-<h3>
-<a id="user-content-onvaluechanged" class="anchor" href="#onvaluechanged" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>OnValueChanged</h3>
-<p>Detects a value change and executes a callback.
-Keep in mind that the event is detected only when the value is changed from the inspector.
-If you want a runtime event, you should probably use an event/delegate and subscribe to it.</p>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/OnValueChanged_Code.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/OnValueChanged_Code.PNG" alt="code" style="max-width:100%;"></a></p>
-<h2>
-<a id="user-content-how-to-create-your-own-attributes" class="anchor" href="#how-to-create-your-own-attributes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to create your own attributes</h2>
-<p>Lets say you want to implement your own <strong>[ReadOnly]</strong> attribute.</p>
-<p>First you have to create a <strong>ReadOnlyAttribute</strong> class</p>
-<pre><code>[AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-public class ReadOnlyAttribute : DrawerAttribute
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">_NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
 {
-}
-</code></pre>
-<p>Then you need to create a drawer for that attribute</p>
-<pre><code>[PropertyDrawer(typeof(ReadOnlyAttribute))]
-public class ReadOnlyPropertyDrawer : PropertyDrawer
-{
-	public override void DrawProperty(SerializedProperty property)
+	[<span class="pl-en">ValidateInput</span>(<span class="pl-s"><span class="pl-pds">"</span>IsNotNull<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-en">Transform</span> <span class="pl-smi">myTransform</span>;
+
+	[<span class="pl-en">ValidateInput</span>(<span class="pl-s"><span class="pl-pds">"</span>IsGreaterThanZero<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>myInteger must be greater than zero<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">myInt</span>;
+
+	<span class="pl-k">private</span> <span class="pl-k">bool</span> <span class="pl-en">IsNotNull</span>(<span class="pl-en">Transform</span> <span class="pl-smi">tr</span>)
 	{
-		GUI.enabled = false;
-		EditorGUILayout.PropertyField(property, true);
-		GUI.enabled = true;
+		<span class="pl-k">return</span> <span class="pl-smi">tr</span> <span class="pl-k">!=</span> <span class="pl-c1">null</span>;
 	}
-}
-</code></pre>
-<p>Last, in order for the editor to recognize the drawer for this attribute, you have to press the <strong>Tools/NaughtyAttributes/Update Attributes Database</strong> menu item in the editor.</p>
+
+	<span class="pl-k">private</span> <span class="pl-k">bool</span> <span class="pl-en">IsGreaterThanZero</span>(<span class="pl-k">int</span> <span class="pl-smi">value</span>)
+	{
+		<span class="pl-k">return</span> <span class="pl-smi">value</span> <span class="pl-k">&gt;</span> <span class="pl-c1">0</span>;
+	}
+}</pre></div>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ValidateInput_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ValidateInput_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
 <h2>
 <a id="user-content-license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
 <p>MIT License</p>
@@ -1282,7 +1513,7 @@ SOFTWARE.</p>
         </div>
       </div>
 
-
+    
 
   </div>
   <div>&nbsp;</div>
