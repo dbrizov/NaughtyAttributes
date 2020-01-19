@@ -800,7 +800,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bcc0d5613b48fb43bd36c9d37e99900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tagField: 
+  tag0: Player
+  nest1:
+    tag1: GameController
+    nest2:
+      tag2: MainCamera
 --- !u!1 &1444377589
 GameObject:
   m_ObjectHideFlags: 0
