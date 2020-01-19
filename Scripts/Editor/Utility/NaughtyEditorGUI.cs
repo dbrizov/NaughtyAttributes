@@ -115,6 +115,22 @@ namespace NaughtyAttributes.Editor
 			}
 		}
 
+		public static void NonSerializedField_Layout(UnityEngine.Object target, FieldInfo field)
+		{
+			object value = field.GetValue(target);
+
+			if (value == null)
+			{
+				string warning = string.Format("{0} is null. {1} doesn't support reference types with null value", field.Name, typeof(ShowNonSerializedFieldAttribute).Name);
+				HelpBox_Layout(warning, MessageType.Warning, context: target);
+			}
+			else if (!Field_Layout(value, field.Name))
+			{
+				string warning = string.Format("{0} doesn't support {1} types", typeof(ShowNonSerializedFieldAttribute).Name, field.FieldType.Name);
+				HelpBox_Layout(warning, MessageType.Warning, context: target);
+			}
+		}
+
 		public static void HorizontalLine(Rect rect, float height, Color color)
 		{
 			rect.height = height;

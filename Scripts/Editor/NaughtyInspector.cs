@@ -10,16 +10,20 @@ namespace NaughtyAttributes.Editor
 	[CustomEditor(typeof(UnityEngine.Object), true)]
 	public class NaughtyInspector : UnityEditor.Editor
 	{
-		private IEnumerable<MethodInfo> _methods;
+		private IEnumerable<FieldInfo> _nonSerializedFields;
 		private IEnumerable<PropertyInfo> _nativeProperties;
+		private IEnumerable<MethodInfo> _methods;
 
 		private void OnEnable()
 		{
-			_methods = ReflectionUtility.GetAllMethods(
-				target, m => m.GetCustomAttributes(typeof(ButtonAttribute), true).Length > 0);
+			_nonSerializedFields = ReflectionUtility.GetAllFields(
+				target, f => f.GetCustomAttributes(typeof(ShowNonSerializedFieldAttribute), true).Length > 0);
 
 			_nativeProperties = ReflectionUtility.GetAllProperties(
 				target, p => p.GetCustomAttributes(typeof(ShowNativePropertyAttribute), true).Length > 0);
+
+			_methods = ReflectionUtility.GetAllMethods(
+				target, m => m.GetCustomAttributes(typeof(ButtonAttribute), true).Length > 0);
 		}
 
 		private void OnDisable()
@@ -56,6 +60,20 @@ namespace NaughtyAttributes.Editor
 			}
 
 			serializedObject.ApplyModifiedProperties();
+
+			// Draw non-serialized fields
+			if (_nonSerializedFields.Any())
+			{
+				EditorGUILayout.Space();
+				EditorGUILayout.LabelField("Non-Serialized Fields", GetHeaderGUIStyle());
+				NaughtyEditorGUI.HorizontalLine(
+					EditorGUILayout.GetControlRect(false), HorizontalLineAttribute.DefaultHeight, HorizontalLineAttribute.DefaultColor.GetColor());
+
+				foreach (var field in _nonSerializedFields)
+				{
+					NaughtyEditorGUI.NonSerializedField_Layout(serializedObject.targetObject, field);
+				}
+			}
 
 			// Draw native properties
 			if (_nativeProperties.Any())
