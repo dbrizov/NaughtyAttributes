@@ -15,13 +15,16 @@ namespace NaughtyAttributes.Editor
 				return;
 			}
 
+			EditorGUI.BeginChangeCheck();
 			bool enabled = PropertyUtility.IsEnabled(property);
 			GUI.enabled = enabled;
-
-			GUIContent overrideLabel = new GUIContent(PropertyUtility.GetLabel(property));
-			OnGUI_Internal(property, overrideLabel);
-
+			OnGUI_Internal(property, new GUIContent(PropertyUtility.GetLabel(property)));
 			GUI.enabled = true;
+
+			if (EditorGUI.EndChangeCheck())
+			{
+				PropertyUtility.CallOnValueChangedCallbacks(property);
+			}
 		}
 
 		protected abstract void OnGUI_Internal(SerializedProperty property, GUIContent label);

@@ -7,19 +7,25 @@ namespace NaughtyAttributes.Editor
 	{
 		public sealed override void OnGUI(Rect rect, SerializedProperty property, GUIContent label)
 		{
+			// Check if visible
 			bool visible = PropertyUtility.IsVisible(property);
 			if (!visible)
 			{
 				return;
 			}
 
+			// Check if enabled and draw
+			EditorGUI.BeginChangeCheck();
 			bool enabled = PropertyUtility.IsEnabled(property);
 			GUI.enabled = enabled;
-
-			GUIContent overrideLabel = new GUIContent(PropertyUtility.GetLabel(property));
-			OnGUI_Internal(rect, property, overrideLabel);
-
+			OnGUI_Internal(rect, property, new GUIContent(PropertyUtility.GetLabel(property)));
 			GUI.enabled = true;
+
+			// Call OnValurChanged callback
+			if (EditorGUI.EndChangeCheck())
+			{
+				PropertyUtility.CallOnValueChangedCallbacks(property);
+			}
 		}
 
 		protected abstract void OnGUI_Internal(Rect rect, SerializedProperty property, GUIContent label);
