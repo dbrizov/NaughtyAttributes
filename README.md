@@ -309,9 +309,9 @@ public class NaughtyComponent : MonoBehaviour
 ```csharp
 public class NaughtyComponent : MonoBehaviour
 {
-	public bool enabledMyInt;
+	public bool enableMyInt;
 
-	[EnableIf("enabledMyInt")]
+	[EnableIf("enableMyInt")]
 	public int myInt;
 
 	[EnableIf("Enabled")]
