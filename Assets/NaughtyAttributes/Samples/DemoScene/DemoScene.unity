@@ -1369,9 +1369,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   int0: 0
   nest1:
-    int1: 2
+    int1: 0
     nest2:
-      int2: 3
+      int2: 0
 --- !u!1 &1989156458
 GameObject:
   m_ObjectHideFlags: 0
