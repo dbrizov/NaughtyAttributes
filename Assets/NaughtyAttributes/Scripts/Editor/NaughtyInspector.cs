@@ -11,11 +11,15 @@ namespace NaughtyAttributes.Editor
 	public class NaughtyInspector : UnityEditor.Editor
 	{
 		private IEnumerable<MethodInfo> _methods;
+		private IEnumerable<PropertyInfo> _nativeProperties;
 
 		private void OnEnable()
 		{
 			_methods = ReflectionUtility.GetAllMethods(
 				target, m => m.GetCustomAttributes(typeof(ButtonAttribute), true).Length > 0);
+
+			_nativeProperties = ReflectionUtility.GetAllProperties(
+				target, p => p.GetCustomAttributes(typeof(ShowNativePropertyAttribute), true).Length > 0);
 		}
 
 		private void OnDisable()
@@ -53,10 +57,25 @@ namespace NaughtyAttributes.Editor
 
 			serializedObject.ApplyModifiedProperties();
 
+			// Draw native properties
+			if (_nativeProperties.Any())
+			{
+				EditorGUILayout.Space();
+				EditorGUILayout.LabelField("Native Properties", GetHeaderGUIStyle());
+				NaughtyEditorGUI.HorizontalLine(
+					EditorGUILayout.GetControlRect(false), HorizontalLineAttribute.DefaultHeight, HorizontalLineAttribute.DefaultColor.GetColor());
+
+				foreach (var property in _nativeProperties)
+				{
+					NaughtyEditorGUI.NativeProperty_Layout(serializedObject.targetObject, property);
+				}
+			}
+
 			// Draw methods
 			if (_methods.Any())
 			{
-				EditorGUILayout.LabelField("Buttons", EditorStyles.boldLabel);
+				EditorGUILayout.Space();
+				EditorGUILayout.LabelField("Buttons", GetHeaderGUIStyle());
 				NaughtyEditorGUI.HorizontalLine(
 					EditorGUILayout.GetControlRect(false), HorizontalLineAttribute.DefaultHeight, HorizontalLineAttribute.DefaultColor.GetColor());
 
@@ -65,6 +84,15 @@ namespace NaughtyAttributes.Editor
 					NaughtyEditorGUI.Button(serializedObject.targetObject, method);
 				}
 			}
+		}
+
+		private GUIStyle GetHeaderGUIStyle()
+		{
+			GUIStyle style = new GUIStyle(EditorStyles.centeredGreyMiniLabel);
+			style.fontStyle = FontStyle.Bold;
+			style.alignment = TextAnchor.UpperCenter;
+
+			return style;
 		}
 	}
 }
