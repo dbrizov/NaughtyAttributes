@@ -14,6 +14,13 @@ namespace NaughtyAttributes.Editor
 				return;
 			}
 
+			// Validate
+			ValidatorAttribute[] validatorAttributes = PropertyUtility.GetAttributes<ValidatorAttribute>(property);
+			foreach (var validatorAttribute in validatorAttributes)
+			{
+				validatorAttribute.GetValidator().ValidateProperty(property);
+			}
+
 			// Check if enabled and draw
 			EditorGUI.BeginChangeCheck();
 			bool enabled = PropertyUtility.IsEnabled(property);
@@ -21,7 +28,7 @@ namespace NaughtyAttributes.Editor
 			OnGUI_Internal(rect, property, new GUIContent(PropertyUtility.GetLabel(property)));
 			GUI.enabled = true;
 
-			// Call OnValurChanged callback
+			// Call OnValueChanged callbacks
 			if (EditorGUI.EndChangeCheck())
 			{
 				PropertyUtility.CallOnValueChangedCallbacks(property);
