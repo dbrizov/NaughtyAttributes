@@ -155,20 +155,18 @@ public class NaughtyComponent : MonoBehaviour
 ```csharp
 public class NaughtyComponent : MonoBehaviour
 {
-	[ProgressBar]
-	public float health = 42.0f;
+	[ProgressBar("Health", 300, EColor.Red)]
+	public int health = 250;
 
-	[ProgressBar("Coins found", 25, EColor.Yellow)]
-	public int coinsFound = 3;
+	[ProgressBar("Mana", 100, EColor.Blue)]
+	public int mana = 25;
 
-	private void Update()
-	{
-		health += Time.deltaTime * 3.0f;
-	}
+	[ProgressBar("Stamina", 200, EColor.Green)]
+	public int stamina = 150;
 }
 ```
 
-![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ProgressBar_Inspector.gif)
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ProgressBar_Inspector.PNG)
 
 ### ReorderableList
 Provides array type fields with an interface for easy reordering of elements.
@@ -389,14 +387,11 @@ Override default field label
 ```csharp
 public class NaughtyComponent : MonoBehaviour
 {
-	[Label("A Short Name")]
-	public string aMoreSpecificName;
+	[Label("Short Name")]
+	public string veryVeryLongName;
 
 	[Label("RGB")]
 	public Vector3 vectorXYZ;
-
-	[Label("Agent")]
-	public NavMeshAgent navMeshAgent;
 }
 ```
 
