@@ -1229,18 +1229,16 @@ Works both with instance and static methods.</p>
 <a id="user-content-progressbar" class="anchor" href="#progressbar" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ProgressBar</h3>
 <div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
 {
-	[<span class="pl-en">ProgressBar</span>]
-	<span class="pl-k">public</span> <span class="pl-k">float</span> <span class="pl-smi">health</span> <span class="pl-k">=</span> <span class="pl-c1">42.0f</span>;
+	[<span class="pl-en">ProgressBar</span>(<span class="pl-s"><span class="pl-pds">"</span>Health<span class="pl-pds">"</span></span>, <span class="pl-c1">300</span>, <span class="pl-smi">EColor</span>.<span class="pl-smi">Red</span>)]
+	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">health</span> <span class="pl-k">=</span> <span class="pl-c1">250</span>;
 
-	[<span class="pl-en">ProgressBar</span>(<span class="pl-s"><span class="pl-pds">"</span>Coins found<span class="pl-pds">"</span></span>, <span class="pl-c1">25</span>, <span class="pl-smi">EColor</span>.<span class="pl-smi">Yellow</span>)]
-	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">coinsFound</span> <span class="pl-k">=</span> <span class="pl-c1">3</span>;
+	[<span class="pl-en">ProgressBar</span>(<span class="pl-s"><span class="pl-pds">"</span>Mana<span class="pl-pds">"</span></span>, <span class="pl-c1">100</span>, <span class="pl-smi">EColor</span>.<span class="pl-smi">Blue</span>)]
+	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">mana</span> <span class="pl-k">=</span> <span class="pl-c1">25</span>;
 
-	<span class="pl-k">private</span> <span class="pl-k">void</span> <span class="pl-en">Update</span>()
-	{
-		<span class="pl-smi">health</span> <span class="pl-k">+=</span> <span class="pl-smi">Time</span>.<span class="pl-smi">deltaTime</span> <span class="pl-k">*</span> <span class="pl-c1">3.0f</span>;
-	}
+	[<span class="pl-en">ProgressBar</span>(<span class="pl-s"><span class="pl-pds">"</span>Stamina<span class="pl-pds">"</span></span>, <span class="pl-c1">200</span>, <span class="pl-smi">EColor</span>.<span class="pl-smi">Green</span>)]
+	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">stamina</span> <span class="pl-k">=</span> <span class="pl-c1">150</span>;
 }</pre></div>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ProgressBar_Inspector.gif" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ProgressBar_Inspector.gif" alt="inspector" style="max-width:100%;"></a></p>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ProgressBar_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ProgressBar_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-reorderablelist" class="anchor" href="#reorderablelist" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ReorderableList</h3>
 <p>Provides array type fields with an interface for easy reordering of elements.</p>
@@ -1413,14 +1411,11 @@ It supports only certain types <strong>(bool, int, long, float, double, string, 
 <p>Override default field label</p>
 <div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
 {
-	[<span class="pl-en">Label</span>(<span class="pl-s"><span class="pl-pds">"</span>A Short Name<span class="pl-pds">"</span></span>)]
-	<span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-smi">aMoreSpecificName</span>;
+	[<span class="pl-en">Label</span>(<span class="pl-s"><span class="pl-pds">"</span>Short Name<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-smi">veryVeryLongName</span>;
 
 	[<span class="pl-en">Label</span>(<span class="pl-s"><span class="pl-pds">"</span>RGB<span class="pl-pds">"</span></span>)]
 	<span class="pl-k">public</span> <span class="pl-en">Vector3</span> <span class="pl-smi">vectorXYZ</span>;
-
-	[<span class="pl-en">Label</span>(<span class="pl-s"><span class="pl-pds">"</span>Agent<span class="pl-pds">"</span></span>)]
-	<span class="pl-k">public</span> <span class="pl-en">NavMeshAgent</span> <span class="pl-smi">navMeshAgent</span>;
 }</pre></div>
 <p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Label_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/Label_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
