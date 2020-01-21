@@ -15,11 +15,6 @@ Unity 2017.3.0 or later versions. Feel free to try older version. Don't forget t
 ```
 openupm add com.dbrizov.naughtyattributes
 ```
-2. You can also install via git url by adding this entry in your **manifest.json**
-```
-"com.dbrizov.naughtyattributes": "https://github.com/dbrizov/NaughtyAttributes.git#upm"
-```
-3. You can also download it from the [Asset Store](https://assetstore.unity.com/packages/tools/utilities/naughtyattributes-129996)
 
 ## Drawer Attributes
 Provide special draw options to serialized fields.
@@ -98,9 +93,9 @@ Makes a field read only.
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/v1/Assets/NaughtyAttributes/Documentation~/ReadOnly_Inspector.PNG)
 
 ### EnableIf / DisableIf
-![code](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/EnableIf_Code.PNG)
+![code](https://github.com/dbrizov/NaughtyAttributes/blob/v1/Assets/NaughtyAttributes/Documentation~/EnableIf_Code.PNG)
 
-![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/EnableIf_Inspector.gif)
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/v1/Assets/NaughtyAttributes/Documentation~/EnableIf_Inspector.gif)
 
 You can have more than one condition.
 
@@ -116,7 +111,7 @@ Shows the texture preview of a given asset (Sprite, Prefab...)
 ### ProgressBar
 ![code](https://github.com/dbrizov/NaughtyAttributes/blob/v1/Assets/NaughtyAttributes/Documentation~/ProgressBar_Code.png)
 
-![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ProgressBar_Inspector.gif)
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/v1/Assets/NaughtyAttributes/Documentation~/ProgressBar_Inspector.gif)
 
 
 ### Label
@@ -201,7 +196,7 @@ If you want a runtime event, you should probably use an event/delegate and subsc
 Lets say you want to implement your own **[ReadOnly]** attribute.
 
 First you have to create a **ReadOnlyAttribute** class
-```
+```csharp
 [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
 public class ReadOnlyAttribute : DrawerAttribute
 {
@@ -209,7 +204,7 @@ public class ReadOnlyAttribute : DrawerAttribute
 ```
 
 Then you need to create a drawer for that attribute
-```
+```csharp
 [PropertyDrawer(typeof(ReadOnlyAttribute))]
 public class ReadOnlyPropertyDrawer : PropertyDrawer
 {
