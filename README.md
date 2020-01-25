@@ -26,6 +26,7 @@ openupm add com.dbrizov.naughtyattributes
 NaughtyAttributes is an open-source project that I am developing in my free time. If you like it you can support me by donating.
 
 - [PayPal](https://paypal.me/dbrizov)
+- [Buy Me A Coffee](https://www.buymeacoffee.com/dbrizov)
 
 ## Drawer Attributes
 Provide special draw options to serialized fields.
