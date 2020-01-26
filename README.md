@@ -22,11 +22,17 @@ openupm add com.dbrizov.naughtyattributes
 ```
 3. You can also download it from the [Asset Store](https://assetstore.unity.com/packages/tools/utilities/naughtyattributes-129996)
 
-## Supporting NaughtyAttributes
+## Documentation
+- [Documentation](https://dbrizov.github.io/na-docs/)
+- [Documentation Repo](https://github.com/dbrizov/na-docs)
+
+## Support
 NaughtyAttributes is an open-source project that I am developing in my free time. If you like it you can support me by donating.
 
 - [PayPal](https://paypal.me/dbrizov)
 - [Buy Me A Coffee](https://www.buymeacoffee.com/dbrizov)
+
+# Overview
 
 ## Drawer Attributes
 Provide special draw options to serialized fields.
