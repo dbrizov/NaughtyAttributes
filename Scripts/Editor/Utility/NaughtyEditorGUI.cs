@@ -247,6 +247,10 @@ namespace NaughtyAttributes.Editor
 			{
 				EditorGUILayout.ObjectField(label, (UnityEngine.Object)value, valueType, true);
 			}
+			else if (valueType.BaseType == typeof(Enum))
+            {
+                EditorGUILayout.EnumPopup(label, (Enum)value);
+            }
 			else
 			{
 				isDrawn = false;
