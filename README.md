@@ -13,7 +13,7 @@ Unity 2017.3.0 or later versions. Feel free to try older version. Don't forget t
 ## Installation
 1. The package is available on the [openupm registry](https://openupm.com). You can install it via [openupm-cli](https://github.com/openupm/openupm-cli).
 ```
-openupm add com.dbrizov.naughtyattributes
+openupm add com.dbrizov.naughtyattributes@1.0.4
 ```
 
 ## Drawer Attributes
