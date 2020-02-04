@@ -35,7 +35,14 @@ namespace NaughtyAttributes.Editor
 
 			if (property.propertyType == SerializedPropertyType.String)
 			{
-				Rect labelRect = rect;
+				Rect labelRect = new Rect()
+				{
+					x = rect.x,
+					y = rect.y,
+					width = rect.width,
+					height = EditorGUIUtility.singleLineHeight
+				};
+
 				EditorGUI.LabelField(labelRect, label.text);
 
 				EditorGUI.BeginChangeCheck();
