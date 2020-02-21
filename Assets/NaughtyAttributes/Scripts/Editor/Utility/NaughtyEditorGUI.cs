@@ -116,12 +116,14 @@ namespace NaughtyAttributes.Editor
 			if (methodInfo.GetParameters().Length == 0)
 			{
 				ButtonAttribute buttonAttribute = (ButtonAttribute)methodInfo.GetCustomAttributes(typeof(ButtonAttribute), true)[0];
-				string buttonText = string.IsNullOrEmpty(buttonAttribute.Text) ? methodInfo.Name : buttonAttribute.Text;
+				string buttonText = string.IsNullOrEmpty(buttonAttribute.Text) ? ObjectNames.NicifyVariableName(methodInfo.Name) : buttonAttribute.Text;
 
+				EditorGUILayout.GetControlRect(false, buttonAttribute.SpaceBefore);
 				if (GUILayout.Button(buttonText))
 				{
 					methodInfo.Invoke(target, null);
 				}
+				EditorGUILayout.GetControlRect(false, buttonAttribute.SpaceAfter);
 			}
 			else
 			{
