@@ -89,8 +89,14 @@ namespace NaughtyAttributes.Editor
 			// Draw grouped serialized properties
 			foreach (var group in GetGroupedProperties(_serializedProperties))
 			{
+				IEnumerable<SerializedProperty> visibleProperties = group.Where(p => PropertyUtility.IsVisible(p));
+				if (!visibleProperties.Any())
+				{
+					continue;
+				}
+
 				NaughtyEditorGUI.BeginBoxGroup_Layout(group.Key);
-				foreach (var property in group)
+				foreach (var property in visibleProperties)
 				{
 					NaughtyEditorGUI.PropertyField_Layout(property, true);
 				}

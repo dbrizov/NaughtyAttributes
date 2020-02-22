@@ -5,11 +5,18 @@ namespace NaughtyAttributes.Test
 {
 	public class _NaughtyComponent : MonoBehaviour
 	{
-		[Label("Short Name")]
-		public string veryVeryLongName;
+		public bool flag0 = true;
+		public bool flag1 = true;
 
-		[Label("RGB")]
-		public Vector3 vectorXYZ;
+		[BoxGroup("Sliders")]
+		[MinMaxSlider(0, 1)]
+		[ShowIf("flag0")]
+		public Vector2 slider0;
+
+		[BoxGroup("Sliders")]
+		[MinMaxSlider(0, 1)]
+		[ShowIf("flag1")]
+		public Vector2 slider1;
 	}
 
 	[System.Serializable]
