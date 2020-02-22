@@ -4,4 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/NaughtyAttributes/Samples/DemoScene/DemoScene.unity
+    guid: 07845a5477be2b149a6f1cb32b5a3a5b
+  m_configObjects: {}
