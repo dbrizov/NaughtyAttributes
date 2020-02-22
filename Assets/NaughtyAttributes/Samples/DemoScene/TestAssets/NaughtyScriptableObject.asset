@@ -12,18 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 753bdb918c6038142acddbd7aae6958f, type: 3}
   m_Name: NaughtyScriptableObject
   m_EditorClassIdentifier: 
-  intArray: 000000000000000000000000
-  vectorList:
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 0}
-  structList:
-  - Int: 0
-    Float: 0
-    Vector: {x: 0, y: 0, z: 0}
-  - Int: 0
-    Float: 0
-    Vector: {x: 0, y: 0, z: 0}
-  - Int: 0
-    Float: 0
-    Vector: {x: 0, y: 0, z: 0}
+  myInt: 4
