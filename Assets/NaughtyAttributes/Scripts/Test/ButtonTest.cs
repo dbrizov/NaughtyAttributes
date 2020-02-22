@@ -4,16 +4,18 @@ namespace NaughtyAttributes.Test
 {
 	public class ButtonTest : MonoBehaviour
 	{
+		public int myInt;
+
 		[Button]
-		public void MethodOne()
+		private void IncrementMyInt()
 		{
-			Debug.Log("MethodOne()");
+			myInt++;
 		}
 
-		[Button("Button Text")]
-		private void MethodTwo()
+		[Button("Decrement My Int")]
+		private void DecrementMyInt()
 		{
-			Debug.Log("MethodTwo()");
+			myInt--;
 		}
 	}
 }
