@@ -22,7 +22,7 @@ namespace NaughtyAttributes.Editor
 			}
 		}
 
-		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+		protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
 		{
 			return (property.propertyType == SerializedPropertyType.String)
 				? this.GetPropertyHeight(property)

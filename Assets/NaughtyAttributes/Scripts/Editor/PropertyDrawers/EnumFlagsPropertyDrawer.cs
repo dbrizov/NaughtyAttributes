@@ -7,7 +7,7 @@ namespace NaughtyAttributes.Editor
 	[CustomPropertyDrawer(typeof(EnumFlagsAttribute))]
 	public class EnumFlagsPropertyDrawer : PropertyDrawerBase
 	{
-		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+		protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
 		{
 			Enum targetEnum = PropertyUtility.GetTargetObjectOfProperty(property) as Enum;
 

@@ -6,7 +6,7 @@ namespace NaughtyAttributes.Editor
 	[CustomPropertyDrawer(typeof(ProgressBarAttribute))]
 	public class ProgressBarPropertyDrawer : PropertyDrawerBase
 	{
-		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+		protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
 		{
 			return IsNumber(property)
 				? GetPropertyHeight(property)

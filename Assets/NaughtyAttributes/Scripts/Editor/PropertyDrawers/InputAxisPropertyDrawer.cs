@@ -13,7 +13,7 @@ namespace NaughtyAttributes.Editor
 		private const string AxesPropertyPath = "m_Axes";
 		private const string NamePropertyPath = "m_Name";
 
-		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+		protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
 		{
 			return (property.propertyType == SerializedPropertyType.String)
 				? GetPropertyHeight(property)
