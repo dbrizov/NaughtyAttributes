@@ -12,7 +12,7 @@ namespace NaughtyAttributes.Editor
 			{
 				if (property.objectReferenceValue == null)
 				{
-					string errorMessage = property.name + " is required";
+					string errorMessage = property.displayName + " is required";
 					if (!string.IsNullOrEmpty(requiredAttribute.Message))
 					{
 						errorMessage = requiredAttribute.Message;
