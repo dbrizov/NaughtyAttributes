@@ -6,7 +6,7 @@ namespace NaughtyAttributes.Editor
 	[CustomPropertyDrawer(typeof(ShowAssetPreviewAttribute))]
 	public class ShowAssetPreviewPropertyDrawer : PropertyDrawerBase
 	{
-		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+		protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
 		{
 			if (property.propertyType == SerializedPropertyType.ObjectReference)
 			{

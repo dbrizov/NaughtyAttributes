@@ -10,7 +10,7 @@ namespace NaughtyAttributes.Editor
 	[CustomPropertyDrawer(typeof(DropdownAttribute))]
 	public class DropdownPropertyDrawer : PropertyDrawerBase
 	{
-		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+		protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
 		{
 			DropdownAttribute dropdownAttribute = (DropdownAttribute) attribute;
 			object values = GetValues(property, dropdownAttribute.ValuesName);

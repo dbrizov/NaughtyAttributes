@@ -14,7 +14,7 @@ namespace NaughtyAttributes.Editor
 		private const string TypeWarningMessage = "{0} must be an int or a string";
 		private const string BuildSettingsWarningMessage = "No scenes in the build settings";
 
-		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+		protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
 		{
 			bool validPropertyType = property.propertyType == SerializedPropertyType.String || property.propertyType == SerializedPropertyType.Integer;
 			bool anySceneInBuildSettings = GetScenes().Length > 0;
