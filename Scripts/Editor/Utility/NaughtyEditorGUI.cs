@@ -124,7 +124,9 @@ namespace NaughtyAttributes.Editor
 				{
 					methodInfo.Invoke(target, null);
 
-					// Set scene dirty to flush changes
+					// Set target object and scene dirty to serialize changes to disk
+					EditorUtility.SetDirty(target);
+
 					PrefabStage stage = PrefabStageUtility.GetCurrentPrefabStage();
 					if (stage != null)
 					{
