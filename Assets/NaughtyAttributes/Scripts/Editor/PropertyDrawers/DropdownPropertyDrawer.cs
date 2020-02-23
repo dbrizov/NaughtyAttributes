@@ -12,7 +12,7 @@ namespace NaughtyAttributes.Editor
 	{
 		protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
 		{
-			DropdownAttribute dropdownAttribute = (DropdownAttribute) attribute;
+			DropdownAttribute dropdownAttribute = (DropdownAttribute)attribute;
 			object values = GetValues(property, dropdownAttribute.ValuesName);
 			FieldInfo fieldInfo = ReflectionUtility.GetField(PropertyUtility.GetTargetObjectWithProperty(property), property.name);
 
@@ -27,7 +27,7 @@ namespace NaughtyAttributes.Editor
 		{
 			EditorGUI.BeginProperty(rect, label, property);
 
-			DropdownAttribute dropdownAttribute = (DropdownAttribute) attribute;
+			DropdownAttribute dropdownAttribute = (DropdownAttribute)attribute;
 			object target = PropertyUtility.GetTargetObjectWithProperty(property);
 
 			object valuesObject = GetValues(property, dropdownAttribute.ValuesName);
@@ -41,7 +41,7 @@ namespace NaughtyAttributes.Editor
 					object selectedValue = dropdownField.GetValue(target);
 
 					// Values and display options
-					IList valuesList = (IList) valuesObject;
+					IList valuesList = (IList)valuesObject;
 					object[] values = new object[valuesList.Count];
 					string[] displayOptions = new string[valuesList.Count];
 
@@ -72,7 +72,7 @@ namespace NaughtyAttributes.Editor
 					int selectedValueIndex = -1;
 					List<object> values = new List<object>();
 					List<string> displayOptions = new List<string>();
-					IDropdownList dropdown = (IDropdownList) valuesObject;
+					IDropdownList dropdown = (IDropdownList)valuesObject;
 
 					using (IEnumerator<KeyValuePair<string, object>> dropdownEnumerator = dropdown.GetEnumerator())
 					{
@@ -129,8 +129,8 @@ namespace NaughtyAttributes.Editor
 
 			MethodInfo methodValuesInfo = ReflectionUtility.GetMethod(target, valuesName);
 			if (methodValuesInfo != null &&
-			    methodValuesInfo.ReturnType != typeof(void) &&
-			    methodValuesInfo.GetParameters().Length == 0)
+				methodValuesInfo.ReturnType != typeof(void) &&
+				methodValuesInfo.GetParameters().Length == 0)
 			{
 				return methodValuesInfo.Invoke(target, null);
 			}
@@ -146,7 +146,7 @@ namespace NaughtyAttributes.Editor
 			}
 
 			if ((values is IList && dropdownField.FieldType == GetElementType(values)) ||
-			    (values is IDropdownList))
+				(values is IDropdownList))
 			{
 				return true;
 			}

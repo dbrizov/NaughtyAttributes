@@ -19,18 +19,18 @@ namespace NaughtyAttributes.Test
 		public Vector2 slider1;
 	}
 
-	[System.Serializable]
-	public class MyClass
-	{
-		public string level1;
+	//[System.Serializable]
+	//public class MyClass
+	//{
+	//	public string level1;
 
-		public MyStruct myStruct;
-	}
+	//	public MyStruct myStruct;
+	//}
 
-	[System.Serializable]
-	public struct MyStruct
-	{
-		[ResizableTextArea]
-		public string level2;
-	}
+	//[System.Serializable]
+	//public struct MyStruct
+	//{
+	//	[ResizableTextArea]
+	//	public string level2;
+	//}
 }
