@@ -42,17 +42,18 @@ namespace NaughtyAttributes.Editor
 			bool visible = PropertyUtility.IsVisible(property);
 			if (!visible)
 			{
-				return -EditorGUIUtility.standardVerticalSpacing;
+				return 0.0f;
 			}
 
 			return GetPropertyHeight_Internal(property, label);
 		}
 
-		protected virtual float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label) {
+		protected virtual float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
+		{
 			return base.GetPropertyHeight(property, label);
 		}
 
-		public virtual float GetPropertyHeight(SerializedProperty property)
+		protected virtual float GetPropertyHeight(SerializedProperty property)
 		{
 			return EditorGUI.GetPropertyHeight(property, true);
 		}
