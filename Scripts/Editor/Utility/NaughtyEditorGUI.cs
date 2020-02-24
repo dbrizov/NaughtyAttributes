@@ -124,19 +124,22 @@ namespace NaughtyAttributes.Editor
 				{
 					methodInfo.Invoke(target, null);
 
-					// Set target object and scene dirty to serialize changes to disk
-					EditorUtility.SetDirty(target);
+					if (!Application.isPlaying)
+					{
+						// Set target object and scene dirty to serialize changes to disk
+						EditorUtility.SetDirty(target);
 
-					PrefabStage stage = PrefabStageUtility.GetCurrentPrefabStage();
-					if (stage != null)
-					{
-						// Prefab mode
-						EditorSceneManager.MarkSceneDirty(stage.scene);
-					}
-					else
-					{
-						// Normal scene
-						EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+						PrefabStage stage = PrefabStageUtility.GetCurrentPrefabStage();
+						if (stage != null)
+						{
+							// Prefab mode
+							EditorSceneManager.MarkSceneDirty(stage.scene);
+						}
+						else
+						{
+							// Normal scene
+							EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+						}
 					}
 				}
 			}
