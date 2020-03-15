@@ -36,13 +36,18 @@ namespace NaughtyAttributes.Editor
 
 		public static void CallOnValueChangedCallbacks(SerializedProperty property)
 		{
+			OnValueChangedAttribute[] onValueChangedAttributes = GetAttributes<OnValueChangedAttribute>(property);
+			if (onValueChangedAttributes.Length == 0)
+			{
+				return;
+			}
+
 			object target = GetTargetObjectWithProperty(property);
 			FieldInfo fieldInfo = ReflectionUtility.GetField(target, property.name);
 			object oldValue = fieldInfo.GetValue(target);
 			property.serializedObject.ApplyModifiedProperties(); // We must apply modifications so that the new value is updated in the serialized object
 			object newValue = fieldInfo.GetValue(target);
 
-			OnValueChangedAttribute[] onValueChangedAttributes = GetAttributes<OnValueChangedAttribute>(property);
 			foreach (var onValueChangedAttribute in onValueChangedAttributes)
 			{
 				MethodInfo callbackMethod = ReflectionUtility.GetMethod(target, onValueChangedAttribute.CallbackName);
