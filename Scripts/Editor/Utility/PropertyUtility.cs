@@ -43,40 +43,21 @@ namespace NaughtyAttributes.Editor
 			}
 
 			object target = GetTargetObjectWithProperty(property);
-			FieldInfo fieldInfo = ReflectionUtility.GetField(target, property.name);
-			object oldValue = fieldInfo.GetValue(target);
 			property.serializedObject.ApplyModifiedProperties(); // We must apply modifications so that the new value is updated in the serialized object
-			object newValue = fieldInfo.GetValue(target);
 
 			foreach (var onValueChangedAttribute in onValueChangedAttributes)
 			{
 				MethodInfo callbackMethod = ReflectionUtility.GetMethod(target, onValueChangedAttribute.CallbackName);
 				if (callbackMethod != null &&
 					callbackMethod.ReturnType == typeof(void) &&
-					callbackMethod.GetParameters().Length == 2)
+					callbackMethod.GetParameters().Length == 0)
 				{
-					ParameterInfo oldValueParam = callbackMethod.GetParameters()[0];
-					ParameterInfo newValueParam = callbackMethod.GetParameters()[1];
-
-					if (fieldInfo.FieldType == oldValueParam.ParameterType &&
-						fieldInfo.FieldType == newValueParam.ParameterType)
-					{
-						callbackMethod.Invoke(target, new object[] { oldValue, newValue });
-					}
-					else
-					{
-						string warning = string.Format(
-							"The field '{0}' and the parameters of callback '{1}' must be of the same type." + Environment.NewLine +
-							"Field={2}, Param0={3}, Param1={4}",
-							fieldInfo.Name, callbackMethod.Name, fieldInfo.FieldType, oldValueParam.ParameterType, newValueParam.ParameterType);
-
-						Debug.LogWarning(warning, property.serializedObject.targetObject);
-					}
+					callbackMethod.Invoke(target, new object[] { });
 				}
 				else
 				{
 					string warning = string.Format(
-						"{0} can invoke only methods with 'void' return type and 2 parameters of the same type as the field the attribute was put on",
+						"{0} can invoke only methods with 'void' return type and 0 parameters",
 						onValueChangedAttribute.GetType().Name);
 
 					Debug.LogWarning(warning, property.serializedObject.targetObject);
