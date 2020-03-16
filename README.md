@@ -61,8 +61,14 @@ Set bounds and modify curve color for AnimationCurves
 ```csharp
 public class NaughtyComponent : MonoBehaviour
 {
-	[CurveRange(-1, -1, 2, 2, EColor.Red)]
+	[CurveRange(10, 10)]
     	public AnimationCurve curve;
+	
+	[CurveRange(1, 1, EColor.Orange)]
+	public AnimationCurve curve1;
+	
+	[CurveRange(-1, -1, 2, 2, EColor.Red)]
+	public AnimationCurve curve2;
 }
 ```
 
