@@ -7,6 +7,10 @@ public class CurveRangeTest : MonoBehaviour
 {
     [CurveRange(-1, -1, 2, 2, EColor.Red)]
     public AnimationCurve curve;
+    [CurveRange(1, 1, EColor.Orange)]
+    public AnimationCurve curve1;
+    [CurveRange(10, 10)]
+    public AnimationCurve curve2;
     public CurveRangeNest1 nest1;
 
 	[System.Serializable]
