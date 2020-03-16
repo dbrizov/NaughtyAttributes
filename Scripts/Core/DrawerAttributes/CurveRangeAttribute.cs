@@ -12,22 +12,35 @@ namespace NaughtyAttributes
         public float height { get; private set; }
         public EColor color { get; private set; }
 
-        public CurveRangeAttribute(float width, float height)
+        /// <summary>
+        /// Draw a curve within specified bounds
+        /// </summary>
+        /// <param name="width">the width of the curve graph</param>
+        /// <param name="height">the height of the curve graph</param>
+        public CurveRangeAttribute(float width, float height) : 
+            this(width, height, EColor.Clear)
         {
-            this.x = 0;
-            this.y = 0;
-            this.width = width;
-            this.height = height;
-            this.color = EColor.Green;
+            // EColor.Clear is used to mark default AnimationCurve color
         }
 
         /// <summary>
-        /// Draw a curve within specified width and height bounds
+        /// Draw a curve within specified bounds and color
         /// </summary>
-        /// <param name="x">the x value the rect is measured from</param>
-        /// <param name="y">the y value the rect is measured from</param>
-        /// <param name="width">the width of the rectangle</param>
-        /// <param name="height">the height of the rectangle</param>
+        /// <param name="width">the width of the curve graph</param>
+        /// <param name="height">the height of the curve graph</param>
+        /// <param name="color">the color of the curve</param>
+        public CurveRangeAttribute(float width, float height, EColor color) :
+            this(0, 0, width, height, color)
+        {
+        }
+
+        /// <summary>
+        /// Draw a curve within specified bounds and color
+        /// </summary>
+        /// <param name="x">the x value the curve graph is measured from</param>
+        /// <param name="y">the y value the curve graph is measured from</param>
+        /// <param name="width">the width of the curve graph</param>
+        /// <param name="height">the height of the curve graph</param>
         /// <param name="color">the color of the curve</param>
         public CurveRangeAttribute(float x, float y, float width, float height, EColor color)
         {
