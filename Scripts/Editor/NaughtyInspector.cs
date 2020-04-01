@@ -141,7 +141,7 @@ namespace NaughtyAttributes.Editor
 
 		private void DrawButtons()
 		{
-			if (_methods.Any())
+			if (_methods.Any(m => ButtonUtility.IsVisible(serializedObject.targetObject, m)))
 			{
 				EditorGUILayout.Space();
 				EditorGUILayout.LabelField("Buttons", GetHeaderGUIStyle());

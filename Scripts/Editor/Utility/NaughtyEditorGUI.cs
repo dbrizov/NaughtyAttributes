@@ -115,11 +115,19 @@ namespace NaughtyAttributes.Editor
 
 		public static void Button(UnityEngine.Object target, MethodInfo methodInfo)
 		{
+			bool visible = ButtonUtility.IsVisible(target, methodInfo);
+			if (!visible)
+			{
+				return;
+			}
+			
 			if (methodInfo.GetParameters().Length == 0)
 			{
 				ButtonAttribute buttonAttribute = (ButtonAttribute)methodInfo.GetCustomAttributes(typeof(ButtonAttribute), true)[0];
 				string buttonText = string.IsNullOrEmpty(buttonAttribute.Text) ? methodInfo.Name : buttonAttribute.Text;
 
+				bool enabled = ButtonUtility.IsEnabled(target, methodInfo);
+				GUI.enabled = enabled;
 				if (GUILayout.Button(buttonText))
 				{
 					methodInfo.Invoke(target, null);
@@ -142,6 +150,7 @@ namespace NaughtyAttributes.Editor
 						}
 					}
 				}
+				GUI.enabled = true;
 			}
 			else
 			{

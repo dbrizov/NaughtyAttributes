@@ -129,7 +129,7 @@ namespace NaughtyAttributes.Editor
 			}
 		}
 
-		private static List<bool> GetConditionValues(object target, string[] conditions)
+		internal static List<bool> GetConditionValues(object target, string[] conditions)
 		{
 			List<bool> conditionValues = new List<bool>();
 			foreach (var condition in conditions)
@@ -160,7 +160,7 @@ namespace NaughtyAttributes.Editor
 			return conditionValues;
 		}
 
-		private static bool GetConditionsFlag(List<bool> conditionValues, EConditionOperator conditionOperator, bool invert)
+		internal static bool GetConditionsFlag(List<bool> conditionValues, EConditionOperator conditionOperator, bool invert)
 		{
 			bool flag;
 			if (conditionOperator == EConditionOperator.And)
