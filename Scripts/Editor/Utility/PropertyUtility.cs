@@ -279,7 +279,172 @@ namespace NaughtyAttributes.Editor
 			return null;
 		}
 
-		private static object GetValue_Imp(object source, string name, int index)
+		/// <summary>
+        /// Sets the value of the property. Will do a deep copy for value types.
+        /// </summary>
+        /// <param name="property">Property to be set.</param>
+        /// <param name="value">New property value.</param>
+        public static void SetValue(SerializedProperty property, object value)
+        {
+            switch (property.propertyType)
+            {
+                case SerializedPropertyType.Generic:
+                    if (property.isArray)
+                    {
+                        var arrayValue = (Array)value;
+                        property.arraySize = arrayValue.Length;
+                        for (int index = 0; index < arrayValue.Length; index++)
+                        {
+                            var arrayElementProperty = property.FindPropertyRelative($"Array.data[{index}]");
+                            SetValue(arrayElementProperty, arrayValue.GetValue(index));
+                        }
+                    }
+                    else
+                    {
+                        foreach ((string path, object childValue) in MapValueType(value))
+                        {
+                            var childProperty = property.FindPropertyRelative(path);
+                            SetValue(childProperty, childValue);
+                        }
+                    }
+                    break;
+                case SerializedPropertyType.Integer:
+                    property.intValue = (int) value;
+                    break;
+                case SerializedPropertyType.Character:
+                    property.intValue = (char) value;
+                    break;
+                case SerializedPropertyType.Enum:
+                    property.intValue = Convert.ToInt32(value);
+                    break;
+                case SerializedPropertyType.LayerMask:
+                    property.intValue = (LayerMask) value;
+                    break;
+                case SerializedPropertyType.Boolean:
+                    property.boolValue = (bool) value;
+                    break;
+                case SerializedPropertyType.Float:
+                    property.floatValue = (float) value;
+                    break;
+                case SerializedPropertyType.String:
+                    property.stringValue = (string) value;
+                    break;
+                case SerializedPropertyType.Color:
+                    property.colorValue = (Color) value;
+                    break;
+                case SerializedPropertyType.ObjectReference:
+                    property.objectReferenceValue = (UnityEngine.Object) value;
+                    break;
+                case SerializedPropertyType.Vector2:
+                    property.vector2Value = (Vector2) value;
+                    break;
+                case SerializedPropertyType.Vector3:
+                    property.vector3Value = (Vector3) value;
+                    break;
+                case SerializedPropertyType.Vector4:
+                    property.vector4Value = (Vector4) value;
+                    break;
+                case SerializedPropertyType.Rect:
+                    property.rectValue = (Rect) value;
+                    break;
+                case SerializedPropertyType.ArraySize:
+                    property.arraySize = (int) value;
+                    break;
+                case SerializedPropertyType.AnimationCurve:
+                    // TODO: understand why animation curves values
+                    // are not being set inside value types
+                    property.animationCurveValue = (AnimationCurve) value;
+                    break;
+                case SerializedPropertyType.Bounds:
+                    property.boundsValue = (Bounds) value;
+                    break;
+                case SerializedPropertyType.Quaternion:
+                    property.quaternionValue = (Quaternion) value;
+                    break;
+                case SerializedPropertyType.ExposedReference:
+                    property.exposedReferenceValue = (UnityEngine.Object) value;
+                    break;
+                case SerializedPropertyType.Vector2Int:
+                    property.vector2IntValue = (Vector2Int) value;
+                    break;
+                case SerializedPropertyType.Vector3Int:
+                    property.vector3IntValue = (Vector3Int) value;
+                    break;
+                case SerializedPropertyType.RectInt:
+                    property.rectIntValue = (RectInt) value;
+                    break;
+                case SerializedPropertyType.BoundsInt:
+                    property.boundsIntValue = (BoundsInt) value;
+                    break;
+                case SerializedPropertyType.Gradient:
+                    //property.gradientValue = value;
+                    // TODO: understand why gradient values
+                    // are not being set inside value types
+                    var t = typeof(SerializedProperty);
+                    var p = t.GetProperty("gradientValue", BindingFlags.NonPublic | BindingFlags.Instance);
+                    p.SetValue(property, value);
+                    break;
+                case SerializedPropertyType.ManagedReference:
+                    property.managedReferenceValue = value;
+                    break;
+                default:
+                    Debug.LogWarning($"Could not set value for property {property.displayName}.");
+                    break;
+            }
+        }
+
+        private static bool IsKnownOrReferenceType(Type type)
+        {
+            return !type.IsValueType
+                   || type.IsEnum
+                   || type == typeof(int)
+                   || type == typeof(bool)
+                   || type == typeof(float)
+                   || type == typeof(char)
+                   || type == typeof(LayerMask)
+                   || type == typeof(ExposedReference<>)
+                   || type == typeof(Color)
+                   || type == typeof(Vector2)
+                   || type == typeof(Vector3)
+                   || type == typeof(Vector4)
+                   || type == typeof(Rect)
+                   || type == typeof(Bounds)
+                   || type == typeof(Quaternion)
+                   || type == typeof(Vector2Int)
+                   || type == typeof(Vector3Int)
+                   || type == typeof(RectInt)
+                   || type == typeof(BoundsInt);
+        }
+
+        private static IEnumerable<(string, object)> MapValueType(object value, string basePath = "")
+        {
+            if (value == null)
+            {
+                yield break;
+            }
+
+            Type type = value.GetType();
+            if (IsKnownOrReferenceType(type))
+            {
+                yield return (basePath, value);
+                yield break;
+            }
+
+            FieldInfo[] fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            foreach (FieldInfo fieldInfo in fields)
+            {
+                if (fieldInfo.IsPublic || fieldInfo.GetCustomAttribute<SerializeField>() != null)
+                {
+                    string path = string.IsNullOrEmpty(basePath) ? fieldInfo.Name : $"{basePath}.{fieldInfo.Name}";
+                    foreach ((string, object) child in MapValueType(fieldInfo.GetValue(value), path))
+                    {
+                        yield return child;
+                    }
+                }
+            }
+        }
+
+        private static object GetValue_Imp(object source, string name, int index)
 		{
 			IEnumerable enumerable = GetValue_Imp(source, name) as IEnumerable;
 			if (enumerable == null)
