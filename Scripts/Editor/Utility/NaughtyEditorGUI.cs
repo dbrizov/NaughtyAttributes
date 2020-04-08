@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -6,6 +7,7 @@ using UnityEditor;
 using UnityEditor.Experimental.SceneManagement;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace NaughtyAttributes.Editor
 {
@@ -117,17 +119,18 @@ namespace NaughtyAttributes.Editor
 				return;
 			}
 			
-			if (methodInfo.GetParameters().Length == 0)
+			if (methodInfo.GetParameters().All(p => p.IsOptional))
 			{
 				ButtonAttribute buttonAttribute = (ButtonAttribute)methodInfo.GetCustomAttributes(typeof(ButtonAttribute), true)[0];
-				string buttonText = string.IsNullOrEmpty(buttonAttribute.Text) ? methodInfo.Name : buttonAttribute.Text;
+				string buttonText = string.IsNullOrEmpty(buttonAttribute.Text) ? ObjectNames.NicifyVariableName(methodInfo.Name) : buttonAttribute.Text;
 
 				bool enabled = ButtonUtility.IsEnabled(target, methodInfo);
 				GUI.enabled = enabled;
 				if (GUILayout.Button(buttonText))
 				{
-					methodInfo.Invoke(target, null);
-
+					var defaultParams = methodInfo.GetParameters().Select(p => p.DefaultValue).ToArray();
+					var methodResult = methodInfo.Invoke(target, defaultParams) as IEnumerator;
+					
 					if (!Application.isPlaying)
 					{
 						// Set target object and scene dirty to serialize changes to disk
@@ -142,15 +145,19 @@ namespace NaughtyAttributes.Editor
 						else
 						{
 							// Normal scene
-							EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+							EditorSceneManager.MarkSceneDirty(SceneManager.GetActiveScene());
 						}
+					}
+					else if (methodResult != null && target is MonoBehaviour behaviour)
+					{
+						behaviour.StartCoroutine(methodResult);
 					}
 				}
 				GUI.enabled = true;
 			}
 			else
 			{
-				string warning = typeof(ButtonAttribute).Name + " works only on methods with no parameters";
+				string warning = $"{typeof(ButtonAttribute).Name} works only on methods that can be invoked with no parameters";
 				HelpBox_Layout(warning, MessageType.Warning, context: target, logToConsole: true);
 			}
 		}
@@ -161,12 +168,12 @@ namespace NaughtyAttributes.Editor
 
 			if (value == null)
 			{
-				string warning = string.Format("{0} is null. {1} doesn't support reference types with null value", property.Name, typeof(ShowNativePropertyAttribute).Name);
+				string warning = $"{property.Name} is null. {typeof(ShowNativePropertyAttribute).Name} doesn't support reference types with null value";
 				HelpBox_Layout(warning, MessageType.Warning, context: target);
 			}
 			else if (!Field_Layout(value, property.Name))
 			{
-				string warning = string.Format("{0} doesn't support {1} types", typeof(ShowNativePropertyAttribute).Name, property.PropertyType.Name);
+				string warning = $"{typeof(ShowNativePropertyAttribute).Name} doesn't support {property.PropertyType.Name} types";
 				HelpBox_Layout(warning, MessageType.Warning, context: target);
 			}
 		}
@@ -177,12 +184,12 @@ namespace NaughtyAttributes.Editor
 
 			if (value == null)
 			{
-				string warning = string.Format("{0} is null. {1} doesn't support reference types with null value", field.Name, typeof(ShowNonSerializedFieldAttribute).Name);
+				string warning = $"{field.Name} is null. {typeof(ShowNonSerializedFieldAttribute).Name} doesn't support reference types with null value";
 				HelpBox_Layout(warning, MessageType.Warning, context: target);
 			}
 			else if (!Field_Layout(value, field.Name))
 			{
-				string warning = string.Format("{0} doesn't support {1} types", typeof(ShowNonSerializedFieldAttribute).Name, field.FieldType.Name);
+				string warning = $"{typeof(ShowNonSerializedFieldAttribute).Name} doesn't support {field.FieldType.Name} types";
 				HelpBox_Layout(warning, MessageType.Warning, context: target);
 			}
 		}
