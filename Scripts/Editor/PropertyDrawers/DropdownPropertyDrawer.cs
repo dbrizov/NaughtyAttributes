@@ -81,7 +81,7 @@ namespace NaughtyAttributes.Editor
 							index++;
 
 							KeyValuePair<string, object> current = dropdownEnumerator.Current;
-							if (current.Value.Equals(selectedValue))
+							if (EqualityComparer<object>.Default.Equals(current.Value, selectedValue))
 							{
 								selectedValueIndex = index;
 							}
