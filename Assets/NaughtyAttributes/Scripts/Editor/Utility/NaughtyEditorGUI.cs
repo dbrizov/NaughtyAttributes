@@ -120,6 +120,14 @@ namespace NaughtyAttributes.Editor
 				ButtonAttribute buttonAttribute = (ButtonAttribute)methodInfo.GetCustomAttributes(typeof(ButtonAttribute), true)[0];
 				string buttonText = string.IsNullOrEmpty(buttonAttribute.Text) ? methodInfo.Name : buttonAttribute.Text;
 
+				ButtonAttribute.EnableMode mode = buttonAttribute.SelectedEnableMode;
+				bool buttonEnabled = 
+					mode == ButtonAttribute.EnableMode.Always ||
+					mode == ButtonAttribute.EnableMode.Editor && !Application.isPlaying ||
+					mode == ButtonAttribute.EnableMode.Playmode && Application.isPlaying;
+
+				EditorGUI.BeginDisabledGroup(!buttonEnabled);
+
 				if (GUILayout.Button(buttonText))
 				{
 					methodInfo.Invoke(target, null);
@@ -142,6 +150,8 @@ namespace NaughtyAttributes.Editor
 						}
 					}
 				}
+
+				EditorGUI.EndDisabledGroup();
 			}
 			else
 			{
