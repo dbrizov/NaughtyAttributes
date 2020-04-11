@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
@@ -17,14 +18,15 @@ namespace NaughtyAttributes.Editor
 
 		protected virtual void OnEnable()
 		{
+			Type targetType = target.GetType();
 			_nonSerializedFields = ReflectionUtility.GetAllFields(
-				target, f => f.GetCustomAttributes(typeof(ShowNonSerializedFieldAttribute), true).Length > 0);
+				targetType, f => f.GetCustomAttributes(typeof(ShowNonSerializedFieldAttribute), true).Length > 0);
 
 			_nativeProperties = ReflectionUtility.GetAllProperties(
-				target, p => p.GetCustomAttributes(typeof(ShowNativePropertyAttribute), true).Length > 0);
+				targetType, p => p.GetCustomAttributes(typeof(ShowNativePropertyAttribute), true).Length > 0);
 
 			_methods = ReflectionUtility.GetAllMethods(
-				target, m => m.GetCustomAttributes(typeof(ButtonAttribute), true).Length > 0);
+				targetType, m => m.GetCustomAttributes(typeof(ButtonAttribute), true).Length > 0);
 		}
 
 		protected virtual void OnDisable()

@@ -7,10 +7,17 @@ namespace NaughtyAttributes
 	[AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
 	public class DropdownAttribute : DrawerAttribute
 	{
+		public Type ProviderType { get; private set; }
 		public string ValuesName { get; private set; }
 
 		public DropdownAttribute(string valuesName)
 		{
+			ValuesName = valuesName;
+		}
+
+		public DropdownAttribute(Type providerType, string valuesName)
+		{
+			ProviderType = providerType;
 			ValuesName = valuesName;
 		}
 	}

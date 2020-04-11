@@ -10,14 +10,15 @@ namespace NaughtyAttributes.Editor
 		{
 			ValidateInputAttribute validateInputAttribute = PropertyUtility.GetAttribute<ValidateInputAttribute>(property);
 			object target = PropertyUtility.GetTargetObjectWithProperty(property);
+			Type targetType = target.GetType();
 
-			MethodInfo validationCallback = ReflectionUtility.GetMethod(target, validateInputAttribute.CallbackName);
+			MethodInfo validationCallback = ReflectionUtility.GetMethod(targetType, validateInputAttribute.CallbackName);
 
 			if (validationCallback != null &&
 				validationCallback.ReturnType == typeof(bool) &&
 				validationCallback.GetParameters().Length == 1)
 			{
-				FieldInfo fieldInfo = ReflectionUtility.GetField(target, property.name);
+				FieldInfo fieldInfo = ReflectionUtility.GetField(targetType, property.name);
 				Type fieldType = fieldInfo.FieldType;
 				Type parameterType = validationCallback.GetParameters()[0].ParameterType;
 

@@ -13,8 +13,10 @@ namespace NaughtyAttributes.Editor
 		protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
 		{
 			DropdownAttribute dropdownAttribute = (DropdownAttribute)attribute;
-			object values = GetValues(property, dropdownAttribute.ValuesName);
-			FieldInfo fieldInfo = ReflectionUtility.GetField(PropertyUtility.GetTargetObjectWithProperty(property), property.name);
+			object values = GetValues(property, dropdownAttribute);
+			object target = PropertyUtility.GetTargetObjectWithProperty(property);
+			Type targetType = target.GetType();
+			FieldInfo fieldInfo = ReflectionUtility.GetField(targetType, property.name);
 
 			float propertyHeight = AreValuesValid(values, fieldInfo)
 				? GetPropertyHeight(property)
@@ -29,9 +31,10 @@ namespace NaughtyAttributes.Editor
 
 			DropdownAttribute dropdownAttribute = (DropdownAttribute)attribute;
 			object target = PropertyUtility.GetTargetObjectWithProperty(property);
+			Type targetType = target.GetType();
 
-			object valuesObject = GetValues(property, dropdownAttribute.ValuesName);
-			FieldInfo dropdownField = ReflectionUtility.GetField(target, property.name);
+			object valuesObject = GetValues(property, dropdownAttribute);
+			FieldInfo dropdownField = ReflectionUtility.GetField(targetType, property.name);
 
 			if (AreValuesValid(valuesObject, dropdownField))
 			{
@@ -111,23 +114,31 @@ namespace NaughtyAttributes.Editor
 			EditorGUI.EndProperty();
 		}
 
-		private object GetValues(SerializedProperty property, string valuesName)
+		private object GetValues(SerializedProperty property, DropdownAttribute dropdownAttribute)
 		{
-			object target = PropertyUtility.GetTargetObjectWithProperty(property);
+			var valuesName = dropdownAttribute.ValuesName;
+			Type targetType = dropdownAttribute.ProviderType;
+			object target = null;
+			
+			if (targetType == null)
+			{
+				target = PropertyUtility.GetTargetObjectWithProperty(property);
+				targetType = target.GetType();
+			}
 
-			FieldInfo valuesFieldInfo = ReflectionUtility.GetField(target, valuesName);
+			FieldInfo valuesFieldInfo = ReflectionUtility.GetField(targetType, valuesName);
 			if (valuesFieldInfo != null)
 			{
 				return valuesFieldInfo.GetValue(target);
 			}
 
-			PropertyInfo valuesPropertyInfo = ReflectionUtility.GetProperty(target, valuesName);
+			PropertyInfo valuesPropertyInfo = ReflectionUtility.GetProperty(targetType, valuesName);
 			if (valuesPropertyInfo != null)
 			{
 				return valuesPropertyInfo.GetValue(target);
 			}
 
-			MethodInfo methodValuesInfo = ReflectionUtility.GetMethod(target, valuesName);
+			MethodInfo methodValuesInfo = ReflectionUtility.GetMethod(targetType, valuesName);
 			if (methodValuesInfo != null &&
 				methodValuesInfo.ReturnType != typeof(void) &&
 				methodValuesInfo.GetParameters().Length == 0)

@@ -7,11 +7,11 @@ namespace NaughtyAttributes.Editor
 {
 	public static class ReflectionUtility
 	{
-		public static IEnumerable<FieldInfo> GetAllFields(object target, Func<FieldInfo, bool> predicate)
+		public static IEnumerable<FieldInfo> GetAllFields(Type type, Func<FieldInfo, bool> predicate)
 		{
 			List<Type> types = new List<Type>()
 			{
-				target.GetType()
+				type
 			};
 
 			while (types.Last().BaseType != null)
@@ -32,11 +32,11 @@ namespace NaughtyAttributes.Editor
 			}
 		}
 
-		public static IEnumerable<PropertyInfo> GetAllProperties(object target, Func<PropertyInfo, bool> predicate)
+		public static IEnumerable<PropertyInfo> GetAllProperties(Type type, Func<PropertyInfo, bool> predicate)
 		{
 			List<Type> types = new List<Type>()
 			{
-				target.GetType()
+				type
 			};
 
 			while (types.Last().BaseType != null)
@@ -57,28 +57,28 @@ namespace NaughtyAttributes.Editor
 			}
 		}
 
-		public static IEnumerable<MethodInfo> GetAllMethods(object target, Func<MethodInfo, bool> predicate)
+		public static IEnumerable<MethodInfo> GetAllMethods(Type type, Func<MethodInfo, bool> predicate)
 		{
-			IEnumerable<MethodInfo> methodInfos = target.GetType()
+			IEnumerable<MethodInfo> methodInfos = type
 				.GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public)
 				.Where(predicate);
 
 			return methodInfos;
 		}
 
-		public static FieldInfo GetField(object target, string fieldName)
+		public static FieldInfo GetField(Type type, string fieldName)
 		{
-			return GetAllFields(target, f => f.Name.Equals(fieldName, StringComparison.InvariantCulture)).FirstOrDefault();
+			return GetAllFields(type, f => f.Name.Equals(fieldName, StringComparison.InvariantCulture)).FirstOrDefault();
 		}
 
-		public static PropertyInfo GetProperty(object target, string propertyName)
+		public static PropertyInfo GetProperty(Type type, string propertyName)
 		{
-			return GetAllProperties(target, p => p.Name.Equals(propertyName, StringComparison.InvariantCulture)).FirstOrDefault();
+			return GetAllProperties(type, p => p.Name.Equals(propertyName, StringComparison.InvariantCulture)).FirstOrDefault();
 		}
 
-		public static MethodInfo GetMethod(object target, string methodName)
+		public static MethodInfo GetMethod(Type type, string methodName)
 		{
-			return GetAllMethods(target, m => m.Name.Equals(methodName, StringComparison.InvariantCulture)).FirstOrDefault();
+			return GetAllMethods(type, m => m.Name.Equals(methodName, StringComparison.InvariantCulture)).FirstOrDefault();
 		}
 	}
 }

@@ -17,7 +17,9 @@ namespace NaughtyAttributes.Editor
 
 		public static T[] GetAttributes<T>(SerializedProperty property) where T : class
 		{
-			FieldInfo fieldInfo = ReflectionUtility.GetField(GetTargetObjectWithProperty(property), property.name);
+			object target = GetTargetObjectWithProperty(property);
+			Type targetType = target.GetType();
+			FieldInfo fieldInfo = ReflectionUtility.GetField(targetType, property.name);
 			if (fieldInfo == null)
 			{
 				return new T[] { };
@@ -37,7 +39,8 @@ namespace NaughtyAttributes.Editor
 		public static void CallOnValueChangedCallbacks(SerializedProperty property)
 		{
 			object target = GetTargetObjectWithProperty(property);
-			FieldInfo fieldInfo = ReflectionUtility.GetField(target, property.name);
+			Type targetType = target.GetType();
+			FieldInfo fieldInfo = ReflectionUtility.GetField(targetType, property.name);
 			object oldValue = fieldInfo.GetValue(target);
 			property.serializedObject.ApplyModifiedProperties(); // We must apply modifications so that the new value is updated in the serialized object
 			object newValue = fieldInfo.GetValue(target);
@@ -45,7 +48,7 @@ namespace NaughtyAttributes.Editor
 			OnValueChangedAttribute[] onValueChangedAttributes = GetAttributes<OnValueChangedAttribute>(property);
 			foreach (var onValueChangedAttribute in onValueChangedAttributes)
 			{
-				MethodInfo callbackMethod = ReflectionUtility.GetMethod(target, onValueChangedAttribute.CallbackName);
+				MethodInfo callbackMethod = ReflectionUtility.GetMethod(targetType, onValueChangedAttribute.CallbackName);
 				if (callbackMethod != null &&
 					callbackMethod.ReturnType == typeof(void) &&
 					callbackMethod.GetParameters().Length == 2)
@@ -131,24 +134,25 @@ namespace NaughtyAttributes.Editor
 
 		internal static List<bool> GetConditionValues(object target, string[] conditions)
 		{
+			Type targetType = target.GetType();
 			List<bool> conditionValues = new List<bool>();
 			foreach (var condition in conditions)
 			{
-				FieldInfo conditionField = ReflectionUtility.GetField(target, condition);
+				FieldInfo conditionField = ReflectionUtility.GetField(targetType, condition);
 				if (conditionField != null &&
 					conditionField.FieldType == typeof(bool))
 				{
 					conditionValues.Add((bool)conditionField.GetValue(target));
 				}
 
-				PropertyInfo conditionProperty = ReflectionUtility.GetProperty(target, condition);
+				PropertyInfo conditionProperty = ReflectionUtility.GetProperty(targetType, condition);
 				if (conditionProperty != null &&
 					conditionProperty.PropertyType == typeof(bool))
 				{
 					conditionValues.Add((bool)conditionProperty.GetValue(target));
 				}
 
-				MethodInfo conditionMethod = ReflectionUtility.GetMethod(target, condition);
+				MethodInfo conditionMethod = ReflectionUtility.GetMethod(targetType, condition);
 				if (conditionMethod != null &&
 					conditionMethod.ReturnType == typeof(bool) &&
 					conditionMethod.GetParameters().Length == 0)
