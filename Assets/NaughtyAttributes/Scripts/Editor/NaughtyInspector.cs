@@ -15,7 +15,7 @@ namespace NaughtyAttributes.Editor
 		private IEnumerable<PropertyInfo> _nativeProperties;
 		private IEnumerable<MethodInfo> _methods;
 
-		private void OnEnable()
+		protected void OnEnable()
 		{
 			_nonSerializedFields = ReflectionUtility.GetAllFields(
 				target, f => f.GetCustomAttributes(typeof(ShowNonSerializedFieldAttribute), true).Length > 0);
@@ -27,7 +27,7 @@ namespace NaughtyAttributes.Editor
 				target, m => m.GetCustomAttributes(typeof(ButtonAttribute), true).Length > 0);
 		}
 
-		private void OnDisable()
+		protected void OnDisable()
 		{
 			ReorderableListPropertyDrawer.Instance.ClearCache();
 		}
