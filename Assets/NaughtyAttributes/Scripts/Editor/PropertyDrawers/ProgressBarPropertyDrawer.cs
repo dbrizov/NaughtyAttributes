@@ -32,9 +32,13 @@ namespace NaughtyAttributes.Editor
 				if (maxValueField != null)
 				{
 					if (maxValueField.propertyType == SerializedPropertyType.Integer)
+					{
 						progressBarAttribute.MaxValue = maxValueField.intValue;
+					}
 					else if (maxValueField.propertyType == SerializedPropertyType.Float)
+					{
 						progressBarAttribute.MaxValue = maxValueField.floatValue;
+					}
 				}
 			}
 			
