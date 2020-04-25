@@ -15,7 +15,7 @@ namespace NaughtyAttributes.Editor
 		private IEnumerable<PropertyInfo> _nativeProperties;
 		private IEnumerable<MethodInfo> _methods;
 
-		private void OnEnable()
+		protected virtual void OnEnable()
 		{
 			_nonSerializedFields = ReflectionUtility.GetAllFields(
 				target, f => f.GetCustomAttributes(typeof(ShowNonSerializedFieldAttribute), true).Length > 0);
@@ -25,20 +25,12 @@ namespace NaughtyAttributes.Editor
 
 			_methods = ReflectionUtility.GetAllMethods(
 				target, m => m.GetCustomAttributes(typeof(ButtonAttribute), true).Length > 0);
-
-			OnEnabled();
 		}
 
-		private void OnDisable()
+		protected virtual void OnDisable()
 		{
 			ReorderableListPropertyDrawer.Instance.ClearCache();
-
-			OnDisabled();
 		}
-
-		// User defined OnEnabled() and OnDisabled() methods for when the NaughtyInspector is inherited
-		protected virtual void OnEnabled() { }
-		protected virtual void OnDisabled() { }
 
 		public override void OnInspectorGUI()
 		{
@@ -59,7 +51,7 @@ namespace NaughtyAttributes.Editor
 			DrawButtons();
 		}
 
-		private void GetSerializedProperties(ref List<SerializedProperty> outSerializedProperties)
+		protected void GetSerializedProperties(ref List<SerializedProperty> outSerializedProperties)
 		{
 			outSerializedProperties.Clear();
 			using (var iterator = serializedObject.GetIterator())
@@ -75,7 +67,7 @@ namespace NaughtyAttributes.Editor
 			}
 		}
 
-		private void DrawSerializedProperties()
+		protected void DrawSerializedProperties()
 		{
 			serializedObject.Update();
 
@@ -115,7 +107,7 @@ namespace NaughtyAttributes.Editor
 			serializedObject.ApplyModifiedProperties();
 		}
 
-		private void DrawNonSerializedFields()
+		protected void DrawNonSerializedFields()
 		{
 			if (_nonSerializedFields.Any())
 			{
@@ -131,7 +123,7 @@ namespace NaughtyAttributes.Editor
 			}
 		}
 
-		private void DrawNativeProperties()
+		protected void DrawNativeProperties()
 		{
 			if (_nativeProperties.Any())
 			{
@@ -147,7 +139,7 @@ namespace NaughtyAttributes.Editor
 			}
 		}
 
-		private void DrawButtons()
+		protected void DrawButtons()
 		{
 			if (_methods.Any())
 			{
