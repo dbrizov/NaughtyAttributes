@@ -121,7 +121,7 @@ namespace NaughtyAttributes.Editor
 				string buttonText = string.IsNullOrEmpty(buttonAttribute.Text) ? methodInfo.Name : buttonAttribute.Text;
 
 				ButtonAttribute.EnableMode mode = buttonAttribute.SelectedEnableMode;
-				bool buttonEnabled = 
+				bool buttonEnabled =
 					mode == ButtonAttribute.EnableMode.Always ||
 					mode == ButtonAttribute.EnableMode.Editor && !Application.isPlaying ||
 					mode == ButtonAttribute.EnableMode.Playmode && Application.isPlaying;
