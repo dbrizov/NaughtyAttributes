@@ -25,15 +25,18 @@ namespace NaughtyAttributes.Editor
 
 			_methods = ReflectionUtility.GetAllMethods(
 				target, m => m.GetCustomAttributes(typeof(ButtonAttribute), true).Length > 0);
+
 			OnEnabled();
 		}
 
 		private void OnDisable()
 		{
 			ReorderableListPropertyDrawer.Instance.ClearCache();
+
 			OnDisabled();
 		}
 
+		// User defined OnEnabled() and OnDisabled() methods for when the NaughtyInspector is inherited
 		protected virtual void OnEnabled() { }
 		protected virtual void OnDisabled() { }
 
