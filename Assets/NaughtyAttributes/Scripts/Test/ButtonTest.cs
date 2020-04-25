@@ -6,16 +6,22 @@ namespace NaughtyAttributes.Test
 	{
 		public int myInt;
 
-		[Button]
+		[Button(enabledMode: ButtonAttribute.EnableMode.Always)]
 		private void IncrementMyInt()
 		{
 			myInt++;
 		}
 
-		[Button("Decrement My Int")]
+		[Button("Decrement My Int", ButtonAttribute.EnableMode.Editor)]
 		private void DecrementMyInt()
 		{
 			myInt--;
+		}
+
+		[Button(enabledMode: ButtonAttribute.EnableMode.Playmode)]
+		private void LogMyInt()
+		{
+			Debug.Log(myInt);
 		}
 	}
 }
