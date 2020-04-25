@@ -25,6 +25,23 @@ namespace NaughtyAttributes.Editor
 			ProgressBarAttribute progressBarAttribute = PropertyUtility.GetAttribute<ProgressBarAttribute>(property);
 			var value = property.propertyType == SerializedPropertyType.Integer ? property.intValue : property.floatValue;
 			var valueFormatted = property.propertyType == SerializedPropertyType.Integer ? value.ToString() : string.Format("{0:0.00}", value);
+			
+			if (!string.IsNullOrEmpty(progressBarAttribute.MaxValueFieldName))
+			{
+				var maxValueField = property.serializedObject.FindProperty(progressBarAttribute.MaxValueFieldName);
+				if (maxValueField != null)
+				{
+					if (maxValueField.propertyType == SerializedPropertyType.Integer)
+					{
+						progressBarAttribute.MaxValue = maxValueField.intValue;
+					}
+					else if (maxValueField.propertyType == SerializedPropertyType.Float)
+					{
+						progressBarAttribute.MaxValue = maxValueField.floatValue;
+					}
+				}
+			}
+			
 			var fillPercentage = value / progressBarAttribute.MaxValue;
 			var barLabel = (!string.IsNullOrEmpty(progressBarAttribute.Name) ? "[" + progressBarAttribute.Name + "] " : "") + valueFormatted + "/" + progressBarAttribute.MaxValue;
 			var barColor = progressBarAttribute.Color.GetColor();
