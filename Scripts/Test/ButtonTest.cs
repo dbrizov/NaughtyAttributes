@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 namespace NaughtyAttributes.Test
@@ -19,9 +20,20 @@ namespace NaughtyAttributes.Test
 		}
 
 		[Button(enabledMode: ButtonAttribute.EnableMode.Playmode)]
-		private void LogMyInt()
+		private void LogMyInt(string prefix = "MyInt = ")
 		{
-			Debug.Log(myInt);
+			Debug.Log(prefix + myInt);
+		}
+
+		[Button("StartCoroutine")]
+		private IEnumerator IncrementMyIntCoroutine()
+		{
+			int seconds = 5;
+			for (int i = 0; i < seconds; i++)
+			{
+				myInt++;
+				yield return new WaitForSeconds(1.0f);
+			}
 		}
 	}
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
@@ -115,10 +116,10 @@ namespace NaughtyAttributes.Editor
 
 		public static void Button(UnityEngine.Object target, MethodInfo methodInfo)
 		{
-			if (methodInfo.GetParameters().Length == 0)
+			if (methodInfo.GetParameters().All(p => p.IsOptional))
 			{
 				ButtonAttribute buttonAttribute = (ButtonAttribute)methodInfo.GetCustomAttributes(typeof(ButtonAttribute), true)[0];
-				string buttonText = string.IsNullOrEmpty(buttonAttribute.Text) ? methodInfo.Name : buttonAttribute.Text;
+				string buttonText = string.IsNullOrEmpty(buttonAttribute.Text) ? ObjectNames.NicifyVariableName(methodInfo.Name) : buttonAttribute.Text;
 
 				ButtonAttribute.EnableMode mode = buttonAttribute.SelectedEnableMode;
 				bool buttonEnabled =
@@ -126,11 +127,18 @@ namespace NaughtyAttributes.Editor
 					mode == ButtonAttribute.EnableMode.Editor && !Application.isPlaying ||
 					mode == ButtonAttribute.EnableMode.Playmode && Application.isPlaying;
 
+				bool methodIsCoroutine = methodInfo.ReturnType == typeof(IEnumerator);
+				if (methodIsCoroutine)
+				{
+					buttonEnabled &= (Application.isPlaying ? true : false);
+				}
+
 				EditorGUI.BeginDisabledGroup(!buttonEnabled);
 
 				if (GUILayout.Button(buttonText))
 				{
-					methodInfo.Invoke(target, null);
+					object[] defaultParams = methodInfo.GetParameters().Select(p => p.DefaultValue).ToArray();
+					IEnumerator methodResult = methodInfo.Invoke(target, defaultParams) as IEnumerator;
 
 					if (!Application.isPlaying)
 					{
@@ -148,6 +156,10 @@ namespace NaughtyAttributes.Editor
 							// Normal scene
 							EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
 						}
+					}
+					else if (methodResult != null && target is MonoBehaviour behaviour)
+					{
+						behaviour.StartCoroutine(methodResult);
 					}
 				}
 
