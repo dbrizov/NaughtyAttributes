@@ -116,13 +116,21 @@ namespace NaughtyAttributes.Editor
 
 		public static void Button(UnityEngine.Object target, MethodInfo methodInfo)
 		{
+			bool visible = ButtonUtility.IsVisible(target, methodInfo);
+			if (!visible)
+			{
+				return;
+			}
+
 			if (methodInfo.GetParameters().All(p => p.IsOptional))
 			{
 				ButtonAttribute buttonAttribute = (ButtonAttribute)methodInfo.GetCustomAttributes(typeof(ButtonAttribute), true)[0];
 				string buttonText = string.IsNullOrEmpty(buttonAttribute.Text) ? ObjectNames.NicifyVariableName(methodInfo.Name) : buttonAttribute.Text;
 
+				bool buttonEnabled = ButtonUtility.IsEnabled(target, methodInfo);
+
 				ButtonAttribute.EnableMode mode = buttonAttribute.SelectedEnableMode;
-				bool buttonEnabled =
+				buttonEnabled &=
 					mode == ButtonAttribute.EnableMode.Always ||
 					mode == ButtonAttribute.EnableMode.Editor && !Application.isPlaying ||
 					mode == ButtonAttribute.EnableMode.Playmode && Application.isPlaying;
