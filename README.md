@@ -55,6 +55,25 @@ public class NaughtyComponent : MonoBehaviour
 
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Button_Inspector.png)
 
+### CurveRange
+Set bounds and modify curve color for AnimationCurves
+
+```csharp
+public class NaughtyComponent : MonoBehaviour
+{
+	[CurveRange(-1, -1, 1, 1)]
+	public AnimationCurve curve;
+	
+	[CurveRange(EColor.Orange)]
+	public AnimationCurve curve1;
+	
+	[CurveRange(0, 0, 10, 10, EColor.Red)]
+	public AnimationCurve curve2;
+}
+```
+
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/CurveRange_Inspector.png)
+
 ### Dropdown
 Provides an interface for dropdown value selection.
 

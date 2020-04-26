@@ -28,11 +28,11 @@ namespace NaughtyAttributes.Test
 
 		[EnableIf(EConditionOperator.And, "Enable1", "Enable2")]
 		[AllowNesting] // Because it's nested we need to explicitly allow nesting
-		public int enableIfAll = 1;
+		public int enableIfAll;
 
 		[EnableIf(EConditionOperator.Or, "Enable1", "Enable2")]
 		[AllowNesting] // Because it's nested we need to explicitly allow nesting
-		public int enableIfAny = 2;
+		public int enableIfAny;
 
 		public EnableIfNest2 nest2;
 	}
