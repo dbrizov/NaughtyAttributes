@@ -31,7 +31,7 @@ namespace NaughtyAttributes.Editor
 
 			EditorGUI.CurveField(rect, property,
 				attribute.Color == EColor.Clear ? Color.green : attribute.Color.GetColor(),
-				new Rect(attribute.X, attribute.Y, attribute.Width, attribute.Height));
+				new Rect(attribute.Min.x, attribute.Min.y, attribute.Max.x - attribute.Min.x, attribute.Max.y - attribute.Min.y));
 
 			EditorGUI.EndProperty();
 		}
