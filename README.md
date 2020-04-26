@@ -67,7 +67,7 @@ public class NaughtyComponent : MonoBehaviour
 	[CurveRange(EColor.Orange)]
 	public AnimationCurve curve1;
 	
-	[CurveRange(0, 0, 10, 10, EColor.Red)]
+	[CurveRange(0, 0, 5, 5, EColor.Red)]
 	public AnimationCurve curve2;
 }
 ```
