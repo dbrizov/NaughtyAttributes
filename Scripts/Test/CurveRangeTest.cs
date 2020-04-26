@@ -3,13 +3,13 @@ using NaughtyAttributes;
 
 public class CurveRangeTest : MonoBehaviour
 {
-	[CurveRange(-1, -1, 2, 2, EColor.Red)]
+	[CurveRange(-1, -1, 1, 1, EColor.Red)]
 	public AnimationCurve curve;
 
-	[CurveRange(1, 1, EColor.Orange)]
+	[CurveRange(EColor.Orange)]
 	public AnimationCurve curve1;
 
-	[CurveRange(10, 10)]
+	[CurveRange(0, 0, 10, 10)]
 	public AnimationCurve curve2;
 
 	public CurveRangeNest1 nest1;
@@ -26,7 +26,7 @@ public class CurveRangeTest : MonoBehaviour
 	[System.Serializable]
 	public class CurveRangeNest2
 	{
-		[CurveRange(0, 0, 10, 10, EColor.Blue)]
+		[CurveRange(0, 0, 5, 5, EColor.Blue)]
 		public AnimationCurve curve;
 	}
 }
