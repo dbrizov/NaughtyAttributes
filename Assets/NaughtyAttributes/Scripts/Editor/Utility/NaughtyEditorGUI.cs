@@ -129,11 +129,11 @@ namespace NaughtyAttributes.Editor
 
 				bool buttonEnabled = ButtonUtility.IsEnabled(target, methodInfo);
 
-				ButtonAttribute.EnableMode mode = buttonAttribute.SelectedEnableMode;
+				EButtonEnableMode mode = buttonAttribute.SelectedEnableMode;
 				buttonEnabled &=
-					mode == ButtonAttribute.EnableMode.Always ||
-					mode == ButtonAttribute.EnableMode.Editor && !Application.isPlaying ||
-					mode == ButtonAttribute.EnableMode.Playmode && Application.isPlaying;
+					mode == EButtonEnableMode.Always ||
+					mode == EButtonEnableMode.Editor && !Application.isPlaying ||
+					mode == EButtonEnableMode.Playmode && Application.isPlaying;
 
 				bool methodIsCoroutine = methodInfo.ReturnType == typeof(IEnumerator);
 				if (methodIsCoroutine)
