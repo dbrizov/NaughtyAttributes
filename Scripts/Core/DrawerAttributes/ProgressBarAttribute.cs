@@ -8,13 +8,13 @@ namespace NaughtyAttributes
 		public string Name { get; private set; }
 		public float MaxValue { get; set; }
 		public EColor Color { get; private set; }
-		public string MaxValueFieldName { get; private set; }
+		public string MaxValueName { get; private set; }
 
-		public ProgressBarAttribute(string name = "", string maxValueFieldName = "", int maxValue = 100, EColor color = EColor.Blue)
+		public ProgressBarAttribute(string name = "", string maxValueName = "", int maxValue = 100, EColor color = EColor.Blue)
 		{
 			Name = name;
 			MaxValue = maxValue;
-			MaxValueFieldName = maxValueFieldName;
+			MaxValueName = maxValueName;
 			Color = color;
 		}
 		

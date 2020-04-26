@@ -695,7 +695,7 @@ MonoBehaviour:
   nest1:
     mana: 25
     nest2:
-      mana: 75
+      stamina: 75
   elixir: 50
   maxElixir: 100
 --- !u!1 &1139446979
