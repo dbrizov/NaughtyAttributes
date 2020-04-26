@@ -468,9 +468,9 @@ public class NaughtyComponent : MonoBehaviour
 	[OnValueChanged("OnValueChangedCallback")]
 	public int myInt;
 
-	private void OnValueChangedCallback(int oldValue, int newValue)
+	private void OnValueChangedCallback()
 	{
-		Debug.Log(myInt == newValue); // prints true
+		Debug.Log(myInt);
 	}
 }
 ```
