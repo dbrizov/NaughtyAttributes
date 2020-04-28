@@ -301,6 +301,10 @@ namespace NaughtyAttributes.Editor
 			{
 				EditorGUILayout.EnumPopup(label, (Enum)value);
 			}
+			else if (valueType.BaseType == typeof(System.Reflection.TypeInfo))
+			{
+				EditorGUILayout.TextField(label, value.ToString());
+			}
 			else
 			{
 				isDrawn = false;
