@@ -5,80 +5,86 @@ using System.Reflection;
 
 namespace NaughtyAttributes.Editor
 {
-	public static class ReflectionUtility
-	{
-		public static IEnumerable<FieldInfo> GetAllFields(object target, Func<FieldInfo, bool> predicate)
-		{
-			List<Type> types = new List<Type>()
-			{
-				target.GetType()
-			};
+    public static class ReflectionUtility
+    {
+        public static IEnumerable<FieldInfo> GetAllFields(object target, Func<FieldInfo, bool> predicate)
+        {
+            if (target == null)
+                yield break;
 
-			while (types.Last().BaseType != null)
-			{
-				types.Add(types.Last().BaseType);
-			}
+            List<Type> types = new List<Type>()
+            {
+                target.GetType()
+            };
 
-			for (int i = types.Count - 1; i >= 0; i--)
-			{
-				IEnumerable<FieldInfo> fieldInfos = types[i]
-					.GetFields(BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly)
-					.Where(predicate);
+            while (types.Last().BaseType != null)
+            {
+                types.Add(types.Last().BaseType);
+            }
 
-				foreach (var fieldInfo in fieldInfos)
-				{
-					yield return fieldInfo;
-				}
-			}
-		}
+            for (int i = types.Count - 1; i >= 0; i--)
+            {
+                IEnumerable<FieldInfo> fieldInfos = types[i]
+                    .GetFields(BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                    .Where(predicate);
 
-		public static IEnumerable<PropertyInfo> GetAllProperties(object target, Func<PropertyInfo, bool> predicate)
-		{
-			List<Type> types = new List<Type>()
-			{
-				target.GetType()
-			};
+                foreach (var fieldInfo in fieldInfos)
+                {
+                    yield return fieldInfo;
+                }
+            }
+        }
 
-			while (types.Last().BaseType != null)
-			{
-				types.Add(types.Last().BaseType);
-			}
+        public static IEnumerable<PropertyInfo> GetAllProperties(object target, Func<PropertyInfo, bool> predicate)
+        {
+            if (target == null)
+                yield break;
 
-			for (int i = types.Count - 1; i >= 0; i--)
-			{
-				IEnumerable<PropertyInfo> propertyInfos = types[i]
-					.GetProperties(BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly)
-					.Where(predicate);
+            List<Type> types = new List<Type>()
+            {
+                target.GetType()
+            };
 
-				foreach (var propertyInfo in propertyInfos)
-				{
-					yield return propertyInfo;
-				}
-			}
-		}
+            while (types.Last().BaseType != null)
+            {
+                types.Add(types.Last().BaseType);
+            }
 
-		public static IEnumerable<MethodInfo> GetAllMethods(object target, Func<MethodInfo, bool> predicate)
-		{
-			IEnumerable<MethodInfo> methodInfos = target.GetType()
-				.GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public)
-				.Where(predicate);
+            for (int i = types.Count - 1; i >= 0; i--)
+            {
+                IEnumerable<PropertyInfo> propertyInfos = types[i]
+                    .GetProperties(BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly)
+                    .Where(predicate);
 
-			return methodInfos;
-		}
+                foreach (var propertyInfo in propertyInfos)
+                {
+                    yield return propertyInfo;
+                }
+            }
+        }
 
-		public static FieldInfo GetField(object target, string fieldName)
-		{
-			return GetAllFields(target, f => f.Name.Equals(fieldName, StringComparison.InvariantCulture)).FirstOrDefault();
-		}
+        public static IEnumerable<MethodInfo> GetAllMethods(object target, Func<MethodInfo, bool> predicate)
+        {
+            IEnumerable<MethodInfo> methodInfos = target != null ? target.GetType()
+                .GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public)
+                .Where(predicate) : null;
 
-		public static PropertyInfo GetProperty(object target, string propertyName)
-		{
-			return GetAllProperties(target, p => p.Name.Equals(propertyName, StringComparison.InvariantCulture)).FirstOrDefault();
-		}
+            return methodInfos;
+        }
 
-		public static MethodInfo GetMethod(object target, string methodName)
-		{
-			return GetAllMethods(target, m => m.Name.Equals(methodName, StringComparison.InvariantCulture)).FirstOrDefault();
-		}
-	}
+        public static FieldInfo GetField(object target, string fieldName)
+        {
+            return target != null ? GetAllFields(target, f => f.Name.Equals(fieldName, StringComparison.InvariantCulture)).FirstOrDefault() : null;
+        }
+
+        public static PropertyInfo GetProperty(object target, string propertyName)
+        {
+            return target != null ? GetAllProperties(target, p => p.Name.Equals(propertyName, StringComparison.InvariantCulture)).FirstOrDefault() : null;
+        }
+
+        public static MethodInfo GetMethod(object target, string methodName)
+        {
+            return target != null ? GetAllMethods(target, m => m.Name.Equals(methodName, StringComparison.InvariantCulture)).FirstOrDefault() : null;
+        }
+    }
 }
