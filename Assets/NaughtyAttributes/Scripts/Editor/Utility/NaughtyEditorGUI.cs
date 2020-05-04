@@ -44,10 +44,10 @@ namespace NaughtyAttributes.Editor
 
 					// Check if enabled and draw
 					EditorGUI.BeginChangeCheck();
-					bool enabled = PropertyUtility.IsEnabled(property);
-					GUI.enabled = enabled;
-					EditorGUILayout.PropertyField(property, label, includeChildren);
-					GUI.enabled = true;
+					using (new EditorGUI.DisabledScope(!PropertyUtility.IsEnabled(property)))
+                    			{
+						EditorGUILayout.PropertyField(property, label, includeChildren);
+					}
 
 					// Call OnValueChanged callbacks
 					if (EditorGUI.EndChangeCheck())
