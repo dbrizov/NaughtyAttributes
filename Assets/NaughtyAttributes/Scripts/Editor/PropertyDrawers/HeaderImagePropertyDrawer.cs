@@ -8,8 +8,6 @@ namespace NaughtyAttributes.Editor
 	{
 		protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
 		{
-			if (property.propertyType == SerializedPropertyType.ObjectReference)
-			{
 				Texture2D previewTexture = GetAssetPreview(property);
 				if (previewTexture != null)
 				{
@@ -18,14 +16,9 @@ namespace NaughtyAttributes.Editor
           // However, I don't know how to assess that programmatically. For the
           // moment, I'll #ifdef it based on macOS.
           var previewSize = RescaleSize(GetAssetPreviewSize(property),
-#if UNITY_EDITOR_OSX
-
-                                        Screen.dpi > 250 // Is this a Retina display?
-                                        ? Screen.width / 2
-                                        : Screen.width
-#else
-                                        Screen.width
-#endif
+                                        Screen.dpi > 200 // Is this a Retina display?
+                                          ? Screen.width / 2
+                                          : Screen.width
                                         );
           // Debug.Log($"Screen width is {Screen.width} preview size {previewSize}");
 
@@ -33,16 +26,13 @@ namespace NaughtyAttributes.Editor
 				}
 				else
 				{
-					return GetPropertyHeight(property);
+					// return GetPropertyHeight(property);
+          return GetPropertyHeight(property) + GetHelpBoxHeight();
 				}
-			}
-			else
-			{
-				return GetPropertyHeight(property) + GetHelpBoxHeight();
-			}
 		}
 
     private Vector2 RescaleSize(Vector2 previewSize, float maxWidth) {
+
       if (previewSize.x > maxWidth) {
         float scale = maxWidth / previewSize.x;
         previewSize.y *= scale;
@@ -54,9 +44,11 @@ namespace NaughtyAttributes.Editor
 		protected override void OnGUI_Internal(Rect rect, SerializedProperty property, GUIContent label)
 		{
 			EditorGUI.BeginProperty(rect, label, property);
-
-			if (property.propertyType == SerializedPropertyType.ObjectReference)
-			{
+      Texture2D previewTexture = GetAssetPreview(property);
+      HeaderImageAttribute headerImageAttribute
+        = PropertyUtility.GetAttribute<HeaderImageAttribute>(property);
+      if (previewTexture != null)
+      {
 
         float indentLength = NaughtyEditorGUI.GetIndentLength(rect);
         var previewSize = GetAssetPreviewSize(property);
@@ -65,8 +57,6 @@ namespace NaughtyAttributes.Editor
         previewSize = RescaleSize(previewSize, width);
         float alignmentLength = 0f;
         if (previewSize.x < width) {
-          HeaderImageAttribute headerImageAttribute
-            = PropertyUtility.GetAttribute<HeaderImageAttribute>(property);
           switch (headerImageAttribute.Alignment) {
             case EAlignment.Center:
               alignmentLength = (width - previewSize.x) / 2f;
@@ -90,9 +80,6 @@ namespace NaughtyAttributes.Editor
 
 				EditorGUI.PropertyField(propertyRect, property, label);
 
-				Texture2D previewTexture = GetAssetPreview(property);
-				if (previewTexture != null)
-				{
 					Rect previewRect = new Rect()
 					{
 						x = rect.x + indentLength + alignmentLength,
@@ -103,10 +90,9 @@ namespace NaughtyAttributes.Editor
 
 					GUI.Label(previewRect, previewTexture);
 				}
-			}
 			else
 			{
-				string message = property.name + " doesn't have an asset preview";
+				string message = property.name + " no header image for path: " + headerImageAttribute.Path;
 				DrawDefaultPropertyAndHelpBox(rect, property, message, MessageType.Warning);
 			}
 
