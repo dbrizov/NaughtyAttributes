@@ -132,6 +132,26 @@ public class NaughtyComponent : MonoBehaviour
 
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/EnumFlags_Inspector.png)
 
+### HeaderImage
+Show an image in the inspector.
+
+```csharp
+public class NaughtyComponent : MonoBehaviour
+{
+  public const string ICON
+    = "Assets/NaughtyAttributes/Samples/DemoScene/TestAssets/quadratic-transparent-smaller.png";
+  [HeaderImage(ICON)]
+  public float a;
+
+  [HeaderImage(ICON, Height = 96, Alignment = EAlignment.Center)]
+  public float b;
+
+  [HeaderImage(ICON, Width = 96, Alignment = EAlignment.Right)]
+  public float c;
+}
+```
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/HeaderImage_Inspector.gif)
+
 ### HorizontalLine
 
 ```csharp
