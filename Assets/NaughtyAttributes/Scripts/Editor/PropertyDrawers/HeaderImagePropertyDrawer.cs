@@ -24,29 +24,24 @@ namespace NaughtyAttributes.Editor
 				Texture2D previewTexture = GetAssetPreview(property);
 				if (previewTexture != null)
 				{
-          // HACK: On my macOS machine, I need to scale the Screen.Width by 1/2
-          // to make it work. It may be because Unity supports Retina displays.
-          // However, I don't know how to assess that programmatically. For the
-          // moment, I'll #ifdef it based on macOS.
+          // HACK: On my macOS machine, I need to scale the Screen.width by 1/2
+          // to make it work. I suppose it's a Retina display thing.
           var previewSize = RescaleSize(GetAssetPreviewSize(property),
                                         Screen.dpi > 200 // Is this a Retina display?
                                           ? Screen.width / 2
-                                          : Screen.width
-                                        );
-          // Debug.Log($"Screen width is {Screen.width} preview size {previewSize}");
-
+                                          : Screen.width);
 					return GetPropertyHeight(property) + previewSize.y;
 				}
 				else
 				{
-					// return GetPropertyHeight(property);
           return GetPropertyHeight(property) + GetHelpBoxHeight();
 				}
 		}
 
     private Vector2 RescaleSize(Vector2 previewSize, float maxWidth) {
 
-      if (previewSize.x > maxWidth) {
+      if (previewSize.x > maxWidth)
+      {
         float scale = maxWidth / previewSize.x;
         previewSize.y *= scale;
         previewSize.x = maxWidth;
@@ -69,8 +64,10 @@ namespace NaughtyAttributes.Editor
         float width = rect.width - indentLength;
         previewSize = RescaleSize(previewSize, width);
         float alignmentLength = 0f;
-        if (previewSize.x < width) {
-          switch (headerImageAttribute.Alignment) {
+        if (previewSize.x < width)
+        {
+          switch (headerImageAttribute.Alignment)
+          {
             case EAlignment.Center:
               alignmentLength = (width - previewSize.x) / 2f;
               break;
@@ -87,7 +84,7 @@ namespace NaughtyAttributes.Editor
 				{
 					x = rect.x,
 					y = rect.y + previewSize.y,
-					width = rect.width,
+					width = width,
 					height = EditorGUIUtility.singleLineHeight
 				};
 
@@ -97,7 +94,8 @@ namespace NaughtyAttributes.Editor
 					{
 						x = rect.x + indentLength + alignmentLength,
 						y = rect.y,
-						width = rect.width,
+						// width = rect.width,
+						width = previewSize.x,
 						height = previewSize.y
 					};
 
@@ -105,7 +103,7 @@ namespace NaughtyAttributes.Editor
 				}
 			else
 			{
-				string message = property.name + " no header image for path: " + headerImageAttribute.Path;
+				string message = property.name + " has no header image for path: " + headerImageAttribute.Path;
 				DrawDefaultPropertyAndHelpBox(rect, property, message, MessageType.Warning);
 			}
 
