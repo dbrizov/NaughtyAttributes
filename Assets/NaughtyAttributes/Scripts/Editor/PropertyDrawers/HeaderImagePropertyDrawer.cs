@@ -117,13 +117,29 @@ namespace NaughtyAttributes.Editor
 			{
 				HeaderImageAttribute headerImageAttribute
           = PropertyUtility.GetAttribute<HeaderImageAttribute>(property);
-				int width = headerImageAttribute.Width.HasValue
-          ? Mathf.Clamp(headerImageAttribute.Width.Value, 0, previewTexture.width)
+
+				float width = headerImageAttribute.width.HasValue
+          ? Mathf.Clamp(headerImageAttribute.width.Value, 0, previewTexture.width)
           : previewTexture.width;
 
-				int height = headerImageAttribute.Height.HasValue
-          ? Mathf.Clamp(headerImageAttribute.Height.Value, 0, previewTexture.height)
+				float height = headerImageAttribute.height.HasValue
+          ? Mathf.Clamp(headerImageAttribute.height.Value, 0, previewTexture.height)
           : previewTexture.height;
+
+        if (headerImageAttribute.width.HasValue
+            && ! headerImageAttribute.height.HasValue )
+        {
+          // Scale the height properly.
+          height = previewTexture.height * width / previewTexture.width;
+        }
+
+        if (headerImageAttribute.height.HasValue
+            && ! headerImageAttribute.width.HasValue )
+        {
+          // Scale the width properly.
+          width = previewTexture.width * height / previewTexture.height;
+        }
+
 				return new Vector2(width, height);
 			}
 		}
