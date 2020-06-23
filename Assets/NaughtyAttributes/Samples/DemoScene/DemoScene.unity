@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.49641287, b: 0.5748173, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -379,6 +379,71 @@ MonoBehaviour:
     trans1: {fileID: 0}
     nest2:
       trans2: {fileID: 0}
+--- !u!1 &581907806
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 581907807}
+  - component: {fileID: 581907808}
+  m_Layer: 0
+  m_Name: HeaderImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &581907807
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581907806}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1148579784}
+  m_RootOrder: 28
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &581907808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 581907806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71c240ad070724c9cadd26264d3db063, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite0: {fileID: 0}
+  a: 0
+  a1: 0
+  a0: 0
+  b: 0
+  b1: 0
+  b2: 0
+  b0: 0
+  c: 0
+  c1: 0
+  c2: 0
+  c0: 0
+  nest1:
+    sprite1: {fileID: 0}
+    prefab0: {fileID: 0}
+    prefab1: {fileID: 0}
+    prefab2: {fileID: 0}
+    nest2:
+      sprite2: {fileID: 0}
+      prefab0: {fileID: 0}
+      prefab1: {fileID: 0}
+      prefab2: {fileID: 0}
 --- !u!1 &607441873
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,6 +535,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c928ea15ae74a44089beb2e534c1a35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  a: 0
+  b: 0
+  c: 0
 --- !u!1 &732714203
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,6 +869,7 @@ Transform:
   - {fileID: 1706612702}
   - {fileID: 369789277}
   - {fileID: 1463483878}
+  - {fileID: 581907807}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
