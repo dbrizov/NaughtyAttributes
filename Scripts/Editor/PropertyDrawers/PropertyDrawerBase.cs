@@ -60,7 +60,7 @@ namespace NaughtyAttributes.Editor
 
 		public virtual float GetHelpBoxHeight()
 		{
-			return EditorGUIUtility.singleLineHeight * 3.0f;
+			return EditorGUIUtility.singleLineHeight * 2.0f;
 		}
 
 		public void DrawDefaultPropertyAndHelpBox(Rect rect, SerializedProperty property, string message, MessageType messageType)
@@ -70,7 +70,7 @@ namespace NaughtyAttributes.Editor
 					rect.x + indentLength,
 					rect.y,
 					rect.width - indentLength,
-					GetHelpBoxHeight() - 2.0f);
+					GetHelpBoxHeight());
 
 			NaughtyEditorGUI.HelpBox(helpBoxRect, message, MessageType.Warning, context: property.serializedObject.targetObject);
 
