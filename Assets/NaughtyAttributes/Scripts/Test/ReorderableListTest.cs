@@ -13,6 +13,15 @@ namespace NaughtyAttributes.Test
 
 		[ReorderableList]
 		public List<SomeStruct> structList;
+
+		[ReorderableList]
+		public GameObject[] gameObjectsList;
+
+		[ReorderableList]
+		public List<Transform> transformsList;
+
+		[ReorderableList]
+		public List<MonoBehaviour> monoBehavioursList;
 	}
 
 	[System.Serializable]

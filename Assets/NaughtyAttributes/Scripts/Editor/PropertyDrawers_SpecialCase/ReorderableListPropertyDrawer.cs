@@ -24,11 +24,14 @@ namespace NaughtyAttributes.Editor
 
 				if (!_reorderableListsByPropertyName.ContainsKey(key))
 				{
-					ReorderableList reorderableList = new ReorderableList(property.serializedObject, property, true, true, true, true)
+					ReorderableList reorderableList = null;
+
+					reorderableList = new ReorderableList(property.serializedObject, property, true, true, true, true)
 					{
 						drawHeaderCallback = (Rect rect) =>
 						{
 							EditorGUI.LabelField(rect, string.Format("{0}: {1}", label.text, property.arraySize), EditorStyles.boldLabel);
+							HandleDragAndDrop(rect, reorderableList);
 						},
 
 						drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
@@ -63,6 +66,102 @@ namespace NaughtyAttributes.Editor
 		public void ClearCache()
 		{
 			_reorderableListsByPropertyName.Clear();
+		}
+
+		private Object GetAssignableObject(Object obj, ReorderableList list)
+		{
+			System.Type listType = ReflectionUtility.GetTypeOfSerializedProperty(list.serializedProperty);
+			System.Type elementType = ReflectionUtility.GetListElementsType(listType);
+
+			if (elementType == null)
+			{
+				return null;
+			}
+
+			System.Type objType = obj.GetType();
+
+			if (elementType.IsAssignableFrom(objType))
+			{
+				return obj;
+			}
+
+			if (objType == typeof(GameObject))
+			{
+				if (typeof(Transform).IsAssignableFrom(elementType))
+				{
+					Transform transform = ((GameObject)obj).transform;
+					if (elementType == typeof(RectTransform))
+					{
+						RectTransform rectTransform = transform as RectTransform;
+						return rectTransform;
+					}
+					else
+					{
+						return transform;
+					}
+				}
+				else if (typeof(MonoBehaviour).IsAssignableFrom(elementType))
+				{
+					return ((GameObject)obj).GetComponent(elementType);
+				}
+			}
+
+			return null;
+		}
+
+		private void HandleDragAndDrop(Rect rect, ReorderableList list)
+		{
+			var currentEvent = Event.current;
+			var usedEvent = false;
+
+			switch (currentEvent.type)
+			{
+				case EventType.DragExited:
+					if (GUI.enabled)
+					{
+						HandleUtility.Repaint();
+					}
+
+					break;
+
+				case EventType.DragUpdated:
+				case EventType.DragPerform:
+					if (rect.Contains(currentEvent.mousePosition) && GUI.enabled)
+					{
+						// Check each single object, so we can add multiple objects in a single drag.
+						bool didAcceptDrag = false;
+						Object[] references = DragAndDrop.objectReferences;
+						foreach (Object obj in references)
+						{
+							Object assignableObject = GetAssignableObject(obj, list);
+							if (assignableObject != null)
+							{
+								DragAndDrop.visualMode = DragAndDropVisualMode.Copy;
+								if (currentEvent.type == EventType.DragPerform)
+								{
+									list.serializedProperty.arraySize++;
+									int arrayEnd = list.serializedProperty.arraySize - 1;
+									list.serializedProperty.GetArrayElementAtIndex(arrayEnd).objectReferenceValue = assignableObject;
+									didAcceptDrag = true;
+								}
+							}
+						}
+
+						if (didAcceptDrag)
+						{
+							GUI.changed = true;
+							DragAndDrop.AcceptDrag();
+							usedEvent = true;
+						}
+					}
+
+					break;
+			}
+
+			if (usedEvent)
+			{
+				currentEvent.Use();
+			}
 		}
 	}
 }
