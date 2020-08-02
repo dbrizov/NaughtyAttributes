@@ -20,14 +20,19 @@ namespace NaughtyAttributes.Editor
 				rect.x + indentLength,
 				rect.y,
 				rect.width - indentLength,
-				GetHelpBoxHeight() - 2.0f);
+				GetHelpBoxHeight());
 
 			DrawInfoBox(infoBoxRect, infoBoxAttribute.Text, infoBoxAttribute.Type);
 		}
 
 		private float GetHelpBoxHeight()
 		{
-			return EditorGUIUtility.singleLineHeight * 3.0f;
+			InfoBoxAttribute infoBoxAttribute = (InfoBoxAttribute)attribute;
+			float minHeight = EditorGUIUtility.singleLineHeight * 2.0f;
+			float desiredHeight = GUI.skin.box.CalcHeight(new GUIContent(infoBoxAttribute.Text), EditorGUIUtility.currentViewWidth);
+			float height = Mathf.Max(minHeight, desiredHeight);
+
+			return height;
 		}
 
 		private void DrawInfoBox(Rect rect, string infoText, EInfoBoxType infoBoxType)
