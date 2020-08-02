@@ -76,9 +76,10 @@ namespace NaughtyAttributes.Editor
 			{
 				if (property.name.Equals("m_Script", System.StringComparison.Ordinal))
 				{
-					GUI.enabled = false;
-					EditorGUILayout.PropertyField(property);
-					GUI.enabled = true;
+					using (new EditorGUI.DisabledScope(disabled: true))
+					{
+						EditorGUILayout.PropertyField(property);
+					}
 				}
 				else
 				{

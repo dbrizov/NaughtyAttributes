@@ -45,9 +45,11 @@ namespace NaughtyAttributes.Editor
 					// Check if enabled and draw
 					EditorGUI.BeginChangeCheck();
 					bool enabled = PropertyUtility.IsEnabled(property);
-					GUI.enabled = enabled;
-					EditorGUILayout.PropertyField(property, label, includeChildren);
-					GUI.enabled = true;
+
+					using (new EditorGUI.DisabledScope(disabled: !enabled))
+					{
+						EditorGUILayout.PropertyField(property, label, includeChildren);
+					}
 
 					// Call OnValueChanged callbacks
 					if (EditorGUI.EndChangeCheck())
@@ -240,79 +242,78 @@ namespace NaughtyAttributes.Editor
 
 		public static bool Field_Layout(object value, string label)
 		{
-			GUI.enabled = false;
+			using (new EditorGUI.DisabledScope(disabled: true))
+			{
+				bool isDrawn = true;
+				Type valueType = value.GetType();
 
-			bool isDrawn = true;
-			Type valueType = value.GetType();
+				if (valueType == typeof(bool))
+				{
+					EditorGUILayout.Toggle(label, (bool)value);
+				}
+				else if (valueType == typeof(int))
+				{
+					EditorGUILayout.IntField(label, (int)value);
+				}
+				else if (valueType == typeof(long))
+				{
+					EditorGUILayout.LongField(label, (long)value);
+				}
+				else if (valueType == typeof(float))
+				{
+					EditorGUILayout.FloatField(label, (float)value);
+				}
+				else if (valueType == typeof(double))
+				{
+					EditorGUILayout.DoubleField(label, (double)value);
+				}
+				else if (valueType == typeof(string))
+				{
+					EditorGUILayout.TextField(label, (string)value);
+				}
+				else if (valueType == typeof(Vector2))
+				{
+					EditorGUILayout.Vector2Field(label, (Vector2)value);
+				}
+				else if (valueType == typeof(Vector3))
+				{
+					EditorGUILayout.Vector3Field(label, (Vector3)value);
+				}
+				else if (valueType == typeof(Vector4))
+				{
+					EditorGUILayout.Vector4Field(label, (Vector4)value);
+				}
+				else if (valueType == typeof(Color))
+				{
+					EditorGUILayout.ColorField(label, (Color)value);
+				}
+				else if (valueType == typeof(Bounds))
+				{
+					EditorGUILayout.BoundsField(label, (Bounds)value);
+				}
+				else if (valueType == typeof(Rect))
+				{
+					EditorGUILayout.RectField(label, (Rect)value);
+				}
+				else if (typeof(UnityEngine.Object).IsAssignableFrom(valueType))
+				{
+					EditorGUILayout.ObjectField(label, (UnityEngine.Object)value, valueType, true);
+				}
+				else if (valueType.BaseType == typeof(Enum))
+				{
+					EditorGUILayout.EnumPopup(label, (Enum)value);
+				}
+				else if (valueType.BaseType == typeof(System.Reflection.TypeInfo))
+				{
+					EditorGUILayout.TextField(label, value.ToString());
+				}
+				else
+				{
+					isDrawn = false;
+				}
 
-			if (valueType == typeof(bool))
-			{
-				EditorGUILayout.Toggle(label, (bool)value);
+				return isDrawn;
 			}
-			else if (valueType == typeof(int))
-			{
-				EditorGUILayout.IntField(label, (int)value);
-			}
-			else if (valueType == typeof(long))
-			{
-				EditorGUILayout.LongField(label, (long)value);
-			}
-			else if (valueType == typeof(float))
-			{
-				EditorGUILayout.FloatField(label, (float)value);
-			}
-			else if (valueType == typeof(double))
-			{
-				EditorGUILayout.DoubleField(label, (double)value);
-			}
-			else if (valueType == typeof(string))
-			{
-				EditorGUILayout.TextField(label, (string)value);
-			}
-			else if (valueType == typeof(Vector2))
-			{
-				EditorGUILayout.Vector2Field(label, (Vector2)value);
-			}
-			else if (valueType == typeof(Vector3))
-			{
-				EditorGUILayout.Vector3Field(label, (Vector3)value);
-			}
-			else if (valueType == typeof(Vector4))
-			{
-				EditorGUILayout.Vector4Field(label, (Vector4)value);
-			}
-			else if (valueType == typeof(Color))
-			{
-				EditorGUILayout.ColorField(label, (Color)value);
-			}
-			else if (valueType == typeof(Bounds))
-			{
-				EditorGUILayout.BoundsField(label, (Bounds)value);
-			}
-			else if (valueType == typeof(Rect))
-			{
-				EditorGUILayout.RectField(label, (Rect)value);
-			}
-			else if (typeof(UnityEngine.Object).IsAssignableFrom(valueType))
-			{
-				EditorGUILayout.ObjectField(label, (UnityEngine.Object)value, valueType, true);
-			}
-			else if (valueType.BaseType == typeof(Enum))
-			{
-				EditorGUILayout.EnumPopup(label, (Enum)value);
-			}
-			else if (valueType.BaseType == typeof(System.Reflection.TypeInfo))
-			{
-				EditorGUILayout.TextField(label, value.ToString());
-			}
-			else
-			{
-				isDrawn = false;
-			}
-
-			GUI.enabled = true;
-
-			return isDrawn;
 		}
 
 		private static void DebugLogMessage(string message, MessageType type, UnityEngine.Object context)
