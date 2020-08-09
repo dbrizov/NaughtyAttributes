@@ -90,9 +90,18 @@ namespace NaughtyAttributes.Editor
 			}
 			else
 			{
+				int targetWidth = ShowAssetPreviewAttribute.DefaultWidth;
+				int targetHeight = ShowAssetPreviewAttribute.DefaultHeight;
+
 				ShowAssetPreviewAttribute showAssetPreviewAttribute = PropertyUtility.GetAttribute<ShowAssetPreviewAttribute>(property);
-				int width = Mathf.Clamp(showAssetPreviewAttribute.Width, 0, previewTexture.width);
-				int height = Mathf.Clamp(showAssetPreviewAttribute.Height, 0, previewTexture.height);
+				if (showAssetPreviewAttribute != null)
+				{
+					targetWidth = showAssetPreviewAttribute.Width;
+					targetHeight = showAssetPreviewAttribute.Height;
+				}
+
+				int width = Mathf.Clamp(targetWidth, 0, previewTexture.width);
+				int height = Mathf.Clamp(targetHeight, 0, previewTexture.height);
 
 				return new Vector2(width, height);
 			}
