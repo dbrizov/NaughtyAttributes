@@ -1,34 +1,34 @@
-namespace UnityEditor
+using UnityEditor;
+
+namespace NaughtyAttributes.Editor
 {
 	internal class SavedBool
 	{
-		private bool m_Value;
-		private string m_Name;
+		private bool _value;
+		private string _name;
 
-		public bool value
+		public bool Value
 		{
 			get
 			{
-				return this.m_Value;
+				return _value;
 			}
 			set
 			{
-				if (this.m_Value == value)
+				if (_value == value)
+				{
 					return;
-				this.m_Value = value;
-				EditorPrefs.SetBool(this.m_Name, value);
+				}
+
+				_value = value;
+				EditorPrefs.SetBool(_name, value);
 			}
 		}
 
 		public SavedBool(string name, bool value)
 		{
-			this.m_Name = name;
-			this.m_Value = EditorPrefs.GetBool(name, value);
-		}
-
-		public static implicit operator bool(SavedBool s)
-		{
-			return s.value;
+			_name = name;
+			_value = EditorPrefs.GetBool(name, value);
 		}
 	}
 }
