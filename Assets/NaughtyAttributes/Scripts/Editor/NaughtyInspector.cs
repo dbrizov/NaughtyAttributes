@@ -14,6 +14,7 @@ namespace NaughtyAttributes.Editor
 		private IEnumerable<FieldInfo> _nonSerializedFields;
 		private IEnumerable<PropertyInfo> _nativeProperties;
 		private IEnumerable<MethodInfo> _methods;
+		private Dictionary<string, SavedBool> _foldouts = new Dictionary<string, SavedBool>();
 
 		protected virtual void OnEnable()
 		{
@@ -105,6 +106,32 @@ namespace NaughtyAttributes.Editor
 				NaughtyEditorGUI.EndBoxGroup_Layout();
 			}
 
+			// Draw foldout serialized properties
+			foreach (var group in GetFoldoutProperties(_serializedProperties))
+			{
+				IEnumerable<SerializedProperty> visibleProperties = group.Where(p => PropertyUtility.IsVisible(p));
+				if (!visibleProperties.Any())
+				{
+					continue;
+				}
+
+				if (!_foldouts.ContainsKey(group.Key))
+				{
+					_foldouts[group.Key] = new SavedBool($"{target.GetInstanceID()}.{group.Key}", false);
+				}
+
+				_foldouts[group.Key].Value = NaughtyEditorGUI.BeginFoldout_Layout(_foldouts[group.Key].Value, group.Key);
+				if (_foldouts[group.Key].Value)
+				{
+					foreach (var property in visibleProperties)
+					{
+						NaughtyEditorGUI.PropertyField_Layout(property, true);
+					}
+				}
+
+				NaughtyEditorGUI.EndFoldout_Layout();
+			}
+
 			serializedObject.ApplyModifiedProperties();
 		}
 
@@ -167,7 +194,7 @@ namespace NaughtyAttributes.Editor
 
 		private static IEnumerable<SerializedProperty> GetNonGroupedProperties(IEnumerable<SerializedProperty> properties)
 		{
-			return properties.Where(p => PropertyUtility.GetAttribute<BoxGroupAttribute>(p) == null);
+			return properties.Where(p => PropertyUtility.GetAttribute<IGroupAttribute>(p) == null);
 		}
 
 		private static IEnumerable<IGrouping<string, SerializedProperty>> GetGroupedProperties(IEnumerable<SerializedProperty> properties)
@@ -175,6 +202,13 @@ namespace NaughtyAttributes.Editor
 			return properties
 				.Where(p => PropertyUtility.GetAttribute<BoxGroupAttribute>(p) != null)
 				.GroupBy(p => PropertyUtility.GetAttribute<BoxGroupAttribute>(p).Name);
+		}
+
+		private static IEnumerable<IGrouping<string, SerializedProperty>> GetFoldoutProperties(IEnumerable<SerializedProperty> properties)
+		{
+			return properties
+				.Where(p => PropertyUtility.GetAttribute<FoldoutAttribute>(p) != null)
+				.GroupBy(p => PropertyUtility.GetAttribute<FoldoutAttribute>(p).Name);
 		}
 
 		private static GUIStyle GetHeaderGUIStyle()

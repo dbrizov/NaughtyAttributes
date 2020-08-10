@@ -87,6 +87,16 @@ namespace NaughtyAttributes.Editor
 			EditorGUILayout.EndVertical();
 		}
 
+		public static bool BeginFoldout_Layout(bool unfolded, string label = "")
+		{
+			return EditorGUILayout.BeginFoldoutHeaderGroup(unfolded, label);
+		}
+
+		public static void EndFoldout_Layout()
+		{
+			EditorGUILayout.EndFoldoutHeaderGroup();
+		}
+
 		/// <summary>
 		/// Creates a dropdown
 		/// </summary>
