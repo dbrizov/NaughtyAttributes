@@ -7,7 +7,7 @@ namespace NaughtyAttributes
 	{
 		public string Name { get; private set; }
 
-		public FoldoutAttribute(string name = "")
+		public FoldoutAttribute(string name)
 		{
 			Name = name;
 		}
