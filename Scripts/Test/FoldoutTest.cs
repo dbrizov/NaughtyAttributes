@@ -24,9 +24,9 @@ namespace NaughtyAttributes.Test
 		public string str0;
 		public string str1;
 
-		[Foldout]
+		[Foldout("Transforms")]
 		public Transform trans0;
-		[Foldout]
+		[Foldout("Transforms")]
 		public Transform trans1;
 	}
 }
