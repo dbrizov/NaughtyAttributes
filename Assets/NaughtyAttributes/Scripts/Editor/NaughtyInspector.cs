@@ -117,12 +117,12 @@ namespace NaughtyAttributes.Editor
 
 				if (!_foldouts.ContainsKey(group.Key))
 				{
-					_foldouts[group.Key] = new SavedBool($"{target.GetType()}.{group.Key}", false);
+					_foldouts[group.Key] = new SavedBool($"{target.GetInstanceID()}.{group.Key}", false);
 				}
 
-				_foldouts[group.Key].value = NaughtyEditorGUI.BeginFoldout_Layout(_foldouts[group.Key].value, group.Key);
-				if (_foldouts[group.Key].value)
-				{	
+				_foldouts[group.Key].Value = NaughtyEditorGUI.BeginFoldout_Layout(_foldouts[group.Key].Value, group.Key);
+				if (_foldouts[group.Key].Value)
+				{
 					foreach (var property in visibleProperties)
 					{
 						NaughtyEditorGUI.PropertyField_Layout(property, true);
@@ -194,7 +194,7 @@ namespace NaughtyAttributes.Editor
 
 		private static IEnumerable<SerializedProperty> GetNonGroupedProperties(IEnumerable<SerializedProperty> properties)
 		{
-			return properties.Where(p => PropertyUtility.GetAttribute<BoxGroupAttribute>(p) == null && PropertyUtility.GetAttribute<FoldoutAttribute>(p) == null);
+			return properties.Where(p => PropertyUtility.GetAttribute<IGroupAttribute>(p) == null);
 		}
 
 		private static IEnumerable<IGrouping<string, SerializedProperty>> GetGroupedProperties(IEnumerable<SerializedProperty> properties)
