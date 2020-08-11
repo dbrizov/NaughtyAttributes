@@ -101,26 +101,16 @@ namespace NaughtyAttributes.Editor
 			return GetAllMethods(target, m => m.Name.Equals(methodName, StringComparison.InvariantCulture)).FirstOrDefault();
 		}
 
-		public static Type GetTypeOfSerializedProperty(SerializedProperty property)
+		public static Type GetListElementType(Type listType)
 		{
-			Type parentType = property.serializedObject.targetObject.GetType();
-			FieldInfo fieldInfo = parentType.GetField(property.propertyPath, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-
-			return fieldInfo.FieldType;
-		}
-
-		public static Type GetListElementsType(Type listType)
-		{
-			foreach (Type interfaceType in listType.GetInterfaces())
+			if (listType.IsGenericType)
 			{
-				if (interfaceType.IsGenericType && interfaceType.GetGenericTypeDefinition() == typeof(IList<>))
-				{
-					Type elementType = interfaceType.GetGenericArguments()[0];
-					return elementType;
-				}
+				return listType.GetGenericArguments()[0];
 			}
-
-			return null;
+			else
+			{
+				return listType.GetElementType();
+			}
 		}
 	}
 }

@@ -169,14 +169,9 @@ namespace NaughtyAttributes.Editor
 		private Type GetElementType(object values)
 		{
 			Type valuesType = values.GetType();
-			if (valuesType.IsGenericType)
-			{
-				return valuesType.GetGenericArguments()[0];
-			}
-			else
-			{
-				return valuesType.GetElementType();
-			}
+			Type elementType = ReflectionUtility.GetListElementType(valuesType);
+
+			return elementType;
 		}
 	}
 }
