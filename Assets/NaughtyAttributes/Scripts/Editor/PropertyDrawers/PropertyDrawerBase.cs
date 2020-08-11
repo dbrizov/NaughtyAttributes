@@ -55,7 +55,7 @@ namespace NaughtyAttributes.Editor
 			return base.GetPropertyHeight(property, label);
 		}
 
-		protected virtual float GetPropertyHeight(SerializedProperty property)
+		protected float GetPropertyHeight(SerializedProperty property)
 		{
 			return EditorGUI.GetPropertyHeight(property, true);
 		}
