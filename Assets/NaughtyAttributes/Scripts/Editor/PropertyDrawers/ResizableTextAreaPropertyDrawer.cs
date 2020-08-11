@@ -43,7 +43,7 @@ namespace NaughtyAttributes.Editor
 				Rect textAreaRect = new Rect()
 				{
 					x = labelRect.x,
-					y = labelRect.y + EditorGUIUtility.singleLineHeight - 3.0f,
+					y = labelRect.y + EditorGUIUtility.singleLineHeight,
 					width = labelRect.width,
 					height = GetTextAreaHeight(property.stringValue)
 				};
