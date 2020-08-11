@@ -70,8 +70,8 @@ namespace NaughtyAttributes.Editor
 
 		private Object GetAssignableObject(Object obj, ReorderableList list)
 		{
-			System.Type listType = ReflectionUtility.GetTypeOfSerializedProperty(list.serializedProperty);
-			System.Type elementType = ReflectionUtility.GetListElementsType(listType);
+			System.Type listType = PropertyUtility.GetPropertyType(list.serializedProperty);
+			System.Type elementType = ReflectionUtility.GetListElementType(listType);
 
 			if (elementType == null)
 			{

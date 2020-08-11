@@ -174,6 +174,14 @@ namespace NaughtyAttributes.Editor
 			return flag;
 		}
 
+		public static Type GetPropertyType(SerializedProperty property)
+		{
+			Type parentType = GetTargetObjectWithProperty(property).GetType();
+			FieldInfo fieldInfo = parentType.GetField(property.propertyPath, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
+			return fieldInfo.FieldType;
+		}
+
 		/// <summary>
 		/// Gets the object the property represents.
 		/// </summary>
