@@ -177,7 +177,7 @@ namespace NaughtyAttributes.Editor
 		public static Type GetPropertyType(SerializedProperty property)
 		{
 			Type parentType = GetTargetObjectWithProperty(property).GetType();
-			FieldInfo fieldInfo = parentType.GetField(property.propertyPath, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+			FieldInfo fieldInfo = parentType.GetField(property.name, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
 			return fieldInfo.FieldType;
 		}
