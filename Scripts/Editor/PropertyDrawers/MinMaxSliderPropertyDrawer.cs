@@ -24,10 +24,10 @@ namespace NaughtyAttributes.Editor
 				EditorGUI.BeginProperty(rect, label, property);
 
 				float indentLength = NaughtyEditorGUI.GetIndentLength(rect);
-				float labelWidth = EditorGUIUtility.labelWidth;
+				float labelWidth = EditorGUIUtility.labelWidth + NaughtyEditorGUI.HorizontalSpacing;
 				float floatFieldWidth = EditorGUIUtility.fieldWidth;
-				float sliderWidth = rect.width - labelWidth - 2f * floatFieldWidth;
-				float sliderPadding = 5f;
+				float sliderWidth = rect.width - labelWidth - 2.0f * floatFieldWidth;
+				float sliderPadding = 5.0f;
 
 				Rect labelRect = new Rect(
 					rect.x,
@@ -38,7 +38,7 @@ namespace NaughtyAttributes.Editor
 				Rect sliderRect = new Rect(
 					rect.x + labelWidth + floatFieldWidth + sliderPadding - indentLength,
 					rect.y,
-					sliderWidth - 2f * sliderPadding + indentLength,
+					sliderWidth - 2.0f * sliderPadding + indentLength,
 					rect.height);
 
 				Rect minFloatFieldRect = new Rect(

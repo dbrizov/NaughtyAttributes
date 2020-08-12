@@ -7,6 +7,9 @@ namespace NaughtyAttributes.Test
 	{
 		public int myInt;
 
+		[MinMaxSlider(0.0f, 1.0f)]
+		public Vector2 mySlider;
+
 		[Button]
 		private void IncrementMyInt()
 		{
