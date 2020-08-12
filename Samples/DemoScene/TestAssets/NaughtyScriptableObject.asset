@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 753bdb918c6038142acddbd7aae6958f, type: 3}
   m_Name: NaughtyScriptableObject
   m_EditorClassIdentifier: 
+  enableMyInt: 0
+  showMyFloat: 1
   myInt: 0
+  myFloat: 1
   mySlider: {x: 0.25, y: 0.75}
+  list: 010000000200000003000000
