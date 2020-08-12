@@ -14,7 +14,30 @@ namespace NaughtyAttributes.Editor
 		public const float IndentLength = 15.0f;
 		public const float HorizontalSpacing = 2.0f;
 
+		private delegate void PropertyFieldFunction(Rect rect, SerializedProperty property, GUIContent label, bool includeChildren);
+
+		public static void PropertyField(Rect rect, SerializedProperty property, bool includeChildren)
+		{
+			PropertyField_Implementation(rect, property, includeChildren, DrawPropertyField);
+		}
+
 		public static void PropertyField_Layout(SerializedProperty property, bool includeChildren)
+		{
+			Rect dummyRect = new Rect();
+			PropertyField_Implementation(dummyRect, property, includeChildren, DrawPropertyField_Layout);
+		}
+
+		private static void DrawPropertyField(Rect rect, SerializedProperty property, GUIContent label, bool includeChildren)
+		{
+			EditorGUI.PropertyField(rect, property, label, includeChildren);
+		}
+
+		private static void DrawPropertyField_Layout(Rect rect, SerializedProperty property, GUIContent label, bool includeChildren)
+		{
+			EditorGUILayout.PropertyField(property, label, includeChildren);
+		}
+
+		private static void PropertyField_Implementation(Rect rect, SerializedProperty property, bool includeChildren, PropertyFieldFunction propertyFieldFunction)
 		{
 			SpecialCaseDrawerAttribute specialCaseAttribute = PropertyUtility.GetAttribute<SpecialCaseDrawerAttribute>(property);
 			if (specialCaseAttribute != null)
@@ -51,7 +74,7 @@ namespace NaughtyAttributes.Editor
 
 					using (new EditorGUI.DisabledScope(disabled: !enabled))
 					{
-						EditorGUILayout.PropertyField(property, label, includeChildren);
+						propertyFieldFunction.Invoke(rect, property, label, includeChildren);
 					}
 
 					// Call OnValueChanged callbacks
@@ -63,7 +86,7 @@ namespace NaughtyAttributes.Editor
 				else
 				{
 					// We don't need to check for enableIfAttribute
-					EditorGUILayout.PropertyField(property, label, includeChildren);
+					propertyFieldFunction.Invoke(rect, property, label, includeChildren);
 				}
 			}
 		}

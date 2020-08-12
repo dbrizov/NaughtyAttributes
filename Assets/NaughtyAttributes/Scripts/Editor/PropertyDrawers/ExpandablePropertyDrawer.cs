@@ -35,6 +35,12 @@ namespace NaughtyAttributes.Editor
 										continue;
 									}
 
+									bool visible = PropertyUtility.IsVisible(childProperty);
+									if (!visible)
+									{
+										continue;
+									}
+
 									float height = GetPropertyHeight(childProperty);
 									totalHeight += height;
 								}
@@ -42,6 +48,7 @@ namespace NaughtyAttributes.Editor
 							}
 						}
 
+						totalHeight += EditorGUIUtility.standardVerticalSpacing;
 						return totalHeight;
 					}
 				}
@@ -79,7 +86,7 @@ namespace NaughtyAttributes.Editor
 						height = EditorGUIUtility.singleLineHeight
 					};
 
-					property.isExpanded = EditorGUI.Foldout(foldoutRect, property.isExpanded, label);
+					property.isExpanded = EditorGUI.Foldout(foldoutRect, property.isExpanded, label, toggleOnLabelClick: true);
 
 					// Draw the scriptable object field
 					float indentLength = NaughtyEditorGUI.GetIndentLength(rect);
@@ -153,6 +160,12 @@ namespace NaughtyAttributes.Editor
 									continue;
 								}
 
+								bool visible = PropertyUtility.IsVisible(childProperty);
+								if (!visible)
+								{
+									continue;
+								}
+
 								float childHeight = GetPropertyHeight(childProperty);
 								Rect childRect = new Rect()
 								{
@@ -162,7 +175,7 @@ namespace NaughtyAttributes.Editor
 									height = childHeight
 								};
 
-								EditorGUI.PropertyField(childRect, childProperty, new GUIContent(PropertyUtility.GetLabel(childProperty)));
+								NaughtyEditorGUI.PropertyField(childRect, childProperty, true);
 
 								yOffset += childHeight;
 							}
