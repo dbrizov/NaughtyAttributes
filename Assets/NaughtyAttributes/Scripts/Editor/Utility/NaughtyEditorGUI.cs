@@ -11,6 +11,9 @@ namespace NaughtyAttributes.Editor
 {
 	public static class NaughtyEditorGUI
 	{
+		public const float IndentLength = 15.0f;
+		public const float HorizontalSpacing = 2.0f;
+
 		public static void PropertyField_Layout(SerializedProperty property, bool includeChildren)
 		{
 			SpecialCaseDrawerAttribute specialCaseAttribute = PropertyUtility.GetAttribute<SpecialCaseDrawerAttribute>(property);
