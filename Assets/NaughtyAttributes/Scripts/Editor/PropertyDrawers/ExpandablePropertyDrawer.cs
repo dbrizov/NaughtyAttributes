@@ -142,51 +142,49 @@ namespace NaughtyAttributes.Editor
 
 			using (new EditorGUI.IndentLevelScope())
 			{
-				using (SerializedObject serializedObject = new SerializedObject(scriptableObject))
+				EditorGUI.BeginChangeCheck();
+
+				SerializedObject serializedObject = new SerializedObject(scriptableObject);
+				using (var iterator = serializedObject.GetIterator())
 				{
-					EditorGUI.BeginChangeCheck();
+					float yOffset = EditorGUIUtility.singleLineHeight;
 
-					using (var iterator = serializedObject.GetIterator())
+					if (iterator.NextVisible(true))
 					{
-						float yOffset = EditorGUIUtility.singleLineHeight;
-
-						if (iterator.NextVisible(true))
+						do
 						{
-							do
+							SerializedProperty childProperty = serializedObject.FindProperty(iterator.name);
+							if (childProperty.name.Equals("m_Script", System.StringComparison.Ordinal))
 							{
-								SerializedProperty childProperty = serializedObject.FindProperty(iterator.name);
-								if (childProperty.name.Equals("m_Script", System.StringComparison.Ordinal))
-								{
-									continue;
-								}
-
-								bool visible = PropertyUtility.IsVisible(childProperty);
-								if (!visible)
-								{
-									continue;
-								}
-
-								float childHeight = GetPropertyHeight(childProperty);
-								Rect childRect = new Rect()
-								{
-									x = rect.x,
-									y = rect.y + yOffset,
-									width = rect.width,
-									height = childHeight
-								};
-
-								NaughtyEditorGUI.PropertyField(childRect, childProperty, true);
-
-								yOffset += childHeight;
+								continue;
 							}
-							while (iterator.NextVisible(false));
-						}
-					}
 
-					if (EditorGUI.EndChangeCheck())
-					{
-						serializedObject.ApplyModifiedProperties();
+							bool visible = PropertyUtility.IsVisible(childProperty);
+							if (!visible)
+							{
+								continue;
+							}
+
+							float childHeight = GetPropertyHeight(childProperty);
+							Rect childRect = new Rect()
+							{
+								x = rect.x,
+								y = rect.y + yOffset,
+								width = rect.width,
+								height = childHeight
+							};
+
+							NaughtyEditorGUI.PropertyField(childRect, childProperty, true);
+
+							yOffset += childHeight;
+						}
+						while (iterator.NextVisible(false));
 					}
+				}
+
+				if (EditorGUI.EndChangeCheck())
+				{
+					serializedObject.ApplyModifiedProperties();
 				}
 			}
 		}

@@ -13,7 +13,7 @@ namespace NaughtyAttributes.Editor
 
 		private string GetPropertyKeyName(SerializedProperty property)
 		{
-			return property.serializedObject.targetObject.GetInstanceID() + "/" + property.name;
+			return property.serializedObject.targetObject.GetInstanceID() + "." + property.name;
 		}
 
 		protected override void OnGUI_Internal(SerializedProperty property, GUIContent label)
