@@ -39,6 +39,24 @@ NaughtyAttributes is an open-source project that I am developing in my free time
 Provide special draw options to serialized fields.
 A field can have only one DrawerAttribute. If a field has more than one, only the bottom one will be used.
 
+### AnimatorParam
+Select an Animator paramater via dropdown interface.
+
+```csharp
+public class NaughtyComponent : MonoBehaviour
+{
+	public Animator someAnimator;
+
+	[AnimatorParam("someAnimator")]
+	public int paramHash;
+
+	[AnimatorParam("someAnimator")]
+	public string paramName;
+}
+```
+
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/AnimatorParam_Inspector.png)
+
 ### Button
 A method can be marked as a button. A button appears in the inspector and executes the method if clicked.
 Works both with instance and static methods.
@@ -132,6 +150,19 @@ public class NaughtyComponent : MonoBehaviour
 ```
 
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/EnumFlags_Inspector.png)
+
+### Expandable
+Scriptable Objects can be edited inline when expanded inside the inspector.
+
+```csharp
+public class NaughtyComponent : MonoBehaviour
+{
+	[Expandable]
+	public ScriptableObject scriptableObject;
+}
+```
+
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Expandable_Inspector.png)
 
 ### HorizontalLine
 
@@ -363,6 +394,21 @@ public class NaughtyComponent : MonoBehaviour
 ```
 
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/BoxGroup_Inspector.png)
+
+### Foldout
+Makes a foldout group.
+
+```csharp
+public class NaughtyComponent : MonoBehaviour
+{
+	[Foldout("Integers")]
+	public int firstInt;
+	[Foldout("Integers")]
+	public int secondInt;
+}
+```
+
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Foldout_Inspector.gif)
 
 ### EnableIf / DisableIf
 ```csharp
