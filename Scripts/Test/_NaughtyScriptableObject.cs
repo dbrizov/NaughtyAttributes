@@ -18,7 +18,7 @@ namespace NaughtyAttributes.Test
 		[MinMaxSlider(0.0f, 1.0f)]
 		public Vector2 mySlider;
 
-		[ReorderableList]
+		//[ReorderableList]
 		public List<int> list;
 
 		[Button]
