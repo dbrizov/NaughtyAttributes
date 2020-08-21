@@ -152,7 +152,7 @@ public class NaughtyComponent : MonoBehaviour
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/EnumFlags_Inspector.png)
 
 ### Expandable
-Scriptable Objects can be edited inline when expanded inside the inspector.
+Make scriptable objects expandable.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
