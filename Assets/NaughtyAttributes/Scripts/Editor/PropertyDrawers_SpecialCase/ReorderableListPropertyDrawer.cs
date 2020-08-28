@@ -16,32 +16,31 @@ namespace NaughtyAttributes.Editor
 			return property.serializedObject.targetObject.GetInstanceID() + "." + property.name;
 		}
 
-		protected override void OnGUI_Internal(SerializedProperty property, GUIContent label)
+		protected override void OnGUI_Internal(Rect rect, SerializedProperty property, GUIContent label)
 		{
 			if (property.isArray)
 			{
 				string key = GetPropertyKeyName(property);
 
+				ReorderableList reorderableList = null;
 				if (!_reorderableListsByPropertyName.ContainsKey(key))
 				{
-					ReorderableList reorderableList = null;
-
 					reorderableList = new ReorderableList(property.serializedObject, property, true, true, true, true)
 					{
-						drawHeaderCallback = (Rect rect) =>
+						drawHeaderCallback = (Rect r) =>
 						{
-							EditorGUI.LabelField(rect, string.Format("{0}: {1}", label.text, property.arraySize), EditorStyles.boldLabel);
-							HandleDragAndDrop(rect, reorderableList);
+							EditorGUI.LabelField(r, string.Format("{0}: {1}", label.text, property.arraySize), EditorStyles.boldLabel);
+							HandleDragAndDrop(r, reorderableList);
 						},
 
-						drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
+						drawElementCallback = (Rect r, int index, bool isActive, bool isFocused) =>
 						{
 							SerializedProperty element = property.GetArrayElementAtIndex(index);
-							rect.y += 1.0f;
-							rect.x += 10.0f;
-							rect.width -= 10.0f;
+							r.y += 1.0f;
+							r.x += 10.0f;
+							r.width -= 10.0f;
 
-							EditorGUI.PropertyField(new Rect(rect.x, rect.y, rect.width, 0.0f), element, true);
+							EditorGUI.PropertyField(new Rect(r.x, r.y, r.width, 0.0f), element, true);
 						},
 
 						elementHeightCallback = (int index) =>
@@ -53,7 +52,11 @@ namespace NaughtyAttributes.Editor
 					_reorderableListsByPropertyName[key] = reorderableList;
 				}
 
-				_reorderableListsByPropertyName[key].DoLayoutList();
+				reorderableList = _reorderableListsByPropertyName[key];
+				if (rect == default)
+					reorderableList.DoLayoutList();
+				else
+					reorderableList.DoList(rect);
 			}
 			else
 			{
