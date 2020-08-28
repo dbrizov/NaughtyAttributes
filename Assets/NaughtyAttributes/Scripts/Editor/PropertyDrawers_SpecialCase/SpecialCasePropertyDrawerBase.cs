@@ -39,7 +39,13 @@ namespace NaughtyAttributes.Editor
 			}
 		}
 
+		public float GetPropertyHeight(SerializedProperty property)
+		{
+			return GetPropertyHeight_Internal(property);
+		}
+
 		protected abstract void OnGUI_Internal(Rect rect, SerializedProperty property, GUIContent label);
+		protected abstract float GetPropertyHeight_Internal(SerializedProperty property);
 	}
 
 	public static class SpecialCaseDrawerAttributeExtensions
