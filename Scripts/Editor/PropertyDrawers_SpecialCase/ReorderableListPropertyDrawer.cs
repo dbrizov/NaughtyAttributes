@@ -166,5 +166,20 @@ namespace NaughtyAttributes.Editor
 				currentEvent.Use();
 			}
 		}
+
+		protected override float GetPropertyHeight_Internal(SerializedProperty property)
+		{
+			if (property.isArray)
+			{
+				string key = GetPropertyKeyName(property);
+
+				if (_reorderableListsByPropertyName.TryGetValue(key, out ReorderableList reorderableList) == false)
+					return 0;
+
+				return reorderableList.GetHeight();
+			}
+
+			return 0;
+		}
 	}
 }

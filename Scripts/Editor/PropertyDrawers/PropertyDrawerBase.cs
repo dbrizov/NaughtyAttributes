@@ -57,6 +57,12 @@ namespace NaughtyAttributes.Editor
 
 		protected float GetPropertyHeight(SerializedProperty property)
 		{
+			SpecialCaseDrawerAttribute specialCaseAttribute = PropertyUtility.GetAttribute<SpecialCaseDrawerAttribute>(property);
+			if (specialCaseAttribute != null)
+			{
+				return specialCaseAttribute.GetDrawer().GetPropertyHeight(property);
+			}
+
 			return EditorGUI.GetPropertyHeight(property, true);
 		}
 
