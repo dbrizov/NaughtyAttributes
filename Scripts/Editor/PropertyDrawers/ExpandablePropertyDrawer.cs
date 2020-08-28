@@ -9,7 +9,7 @@ namespace NaughtyAttributes.Editor
 		protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
 		{
 			System.Type propertyType = PropertyUtility.GetPropertyType(property);
-			if (propertyType == typeof(ScriptableObject))
+			if (typeof(ScriptableObject).IsAssignableFrom(propertyType))
 			{
 				ScriptableObject scriptableObject = property.objectReferenceValue as ScriptableObject;
 				if (scriptableObject == null)
@@ -68,7 +68,7 @@ namespace NaughtyAttributes.Editor
 			EditorGUI.BeginProperty(rect, label, property);
 
 			System.Type propertyType = PropertyUtility.GetPropertyType(property);
-			if (propertyType == typeof(ScriptableObject))
+			if (typeof(ScriptableObject).IsAssignableFrom(propertyType))
 			{
 				ScriptableObject scriptableObject = property.objectReferenceValue as ScriptableObject;
 				if (scriptableObject == null)
