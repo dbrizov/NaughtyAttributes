@@ -16,6 +16,23 @@ namespace NaughtyAttributes.Editor
 			return property.serializedObject.targetObject.GetInstanceID() + "." + property.name;
 		}
 
+		protected override float GetPropertyHeight_Internal(SerializedProperty property)
+		{
+			if (property.isArray)
+			{
+				string key = GetPropertyKeyName(property);
+
+				if (_reorderableListsByPropertyName.TryGetValue(key, out ReorderableList reorderableList) == false)
+				{
+					return 0;
+				}
+
+				return reorderableList.GetHeight();
+			}
+
+			return EditorGUI.GetPropertyHeight(property, true);
+		}
+
 		protected override void OnGUI_Internal(Rect rect, SerializedProperty property, GUIContent label)
 		{
 			if (property.isArray)
@@ -53,10 +70,15 @@ namespace NaughtyAttributes.Editor
 				}
 
 				reorderableList = _reorderableListsByPropertyName[key];
+
 				if (rect == default)
+				{
 					reorderableList.DoLayoutList();
+				}
 				else
+				{
 					reorderableList.DoList(rect);
+				}
 			}
 			else
 			{
@@ -165,21 +187,6 @@ namespace NaughtyAttributes.Editor
 			{
 				currentEvent.Use();
 			}
-		}
-
-		protected override float GetPropertyHeight_Internal(SerializedProperty property)
-		{
-			if (property.isArray)
-			{
-				string key = GetPropertyKeyName(property);
-
-				if (_reorderableListsByPropertyName.TryGetValue(key, out ReorderableList reorderableList) == false)
-					return 0;
-
-				return reorderableList.GetHeight();
-			}
-
-			return 0;
 		}
 	}
 }
