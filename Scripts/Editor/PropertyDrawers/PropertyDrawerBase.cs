@@ -75,10 +75,10 @@ namespace NaughtyAttributes.Editor
 		{
 			float indentLength = NaughtyEditorGUI.GetIndentLength(rect);
 			Rect helpBoxRect = new Rect(
-					rect.x + indentLength,
-					rect.y,
-					rect.width - indentLength,
-					GetHelpBoxHeight());
+				rect.x + indentLength,
+				rect.y,
+				rect.width - indentLength,
+				GetHelpBoxHeight());
 
 			NaughtyEditorGUI.HelpBox(helpBoxRect, message, MessageType.Warning, context: property.serializedObject.targetObject);
 
