@@ -1095,11 +1095,12 @@ table.capped-list td.middle{text-align:center}table.capped-list .favicon{width:1
               <article class="markdown-body entry-content" itemprop="text" id="grip-content">
                 <h1>
 <a id="user-content-naughtyattributes" class="anchor" href="#naughtyattributes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>NaughtyAttributes</h1>
-<p><a href="https://openupm.com/packages/com.dbrizov.naughtyattributes/" rel="nofollow"><img src="https://camo.githubusercontent.com/6c7d9a4d17a39962a7d14409953367813104e9dc/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f762f636f6d2e646272697a6f762e6e617567687479617474726962757465733f6c6162656c3d6f70656e75706d2672656769737472795f7572693d68747470733a2f2f7061636b6167652e6f70656e75706d2e636f6d" alt="openupm" data-canonical-src="https://img.shields.io/npm/v/com.dbrizov.naughtyattributes?label=openupm&amp;registry_uri=https://package.openupm.com" style="max-width:100%;"></a>
+<p><a href="https://unity3d.com/get-unity/download" rel="nofollow"><img src="https://camo.githubusercontent.com/9e52c753ed2ea53a57c23d9daa3e09261135077b/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f756e6974792d323031382e332532422d626c75652e737667" alt="Unity 2018.3+" data-canonical-src="https://img.shields.io/badge/unity-2018.3%2B-blue.svg" style="max-width:100%;"></a>
+<a href="https://openupm.com/packages/com.dbrizov.naughtyattributes/" rel="nofollow"><img src="https://camo.githubusercontent.com/6c7d9a4d17a39962a7d14409953367813104e9dc/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f762f636f6d2e646272697a6f762e6e617567687479617474726962757465733f6c6162656c3d6f70656e75706d2672656769737472795f7572693d68747470733a2f2f7061636b6167652e6f70656e75706d2e636f6d" alt="openupm" data-canonical-src="https://img.shields.io/npm/v/com.dbrizov.naughtyattributes?label=openupm&amp;registry_uri=https://package.openupm.com" style="max-width:100%;"></a>
 <a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/LICENSE"><img src="https://camo.githubusercontent.com/a2753323735099059bdc88b724534a1a6bd134ee/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f4c6963656e73652d4d49542d627269676874677265656e2e737667" alt="License: MIT" data-canonical-src="https://img.shields.io/badge/License-MIT-brightgreen.svg" style="max-width:100%;"></a></p>
 <p>NaughtyAttributes is an extension for the Unity Inspector.</p>
 <p>It expands the range of attributes that Unity provides so that you can create powerful inspectors without the need of custom editors or property drawers. It also provides attributes that can be applied to non-serialized fields or functions.</p>
-<p>It is implemented by replacing the default Unity Inspector. This means that if you have any custom editors, NaughtyAttributes will not work with them. All of your custom editors and property drawers are not affected in any way.</p>
+<p>Most of the attributes are implemented using Unity's <code>CustomPropertyDrawer</code>, so they will work in your custom editors. If you want all of the attributes to work in your custom editors, however, you must inherit from <code>NaughtyInspector</code> and use the <code>NaughtyEditorGUI.PropertyField_Layout</code> function instead of <code>EditorGUILayout.PropertyField</code>.</p>
 <h2>
 <a id="user-content-system-requirements" class="anchor" href="#system-requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>System Requirements</h2>
 <p>Unity 2018.3.0 or later versions. Feel free to try older version. Don't forget to include the NaughtyAttributes namespace.</p>
@@ -1121,9 +1122,38 @@ table.capped-list td.middle{text-align:center}table.capped-list .favicon{width:1
 </li>
 </ol>
 <h2>
+<a id="user-content-documentation" class="anchor" href="#documentation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Documentation</h2>
+<ul>
+<li><a href="https://dbrizov.github.io/na-docs/" rel="nofollow">Documentation</a></li>
+<li><a href="https://github.com/dbrizov/na-docs">Documentation Repo</a></li>
+</ul>
+<h2>
+<a id="user-content-support" class="anchor" href="#support" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Support</h2>
+<p>NaughtyAttributes is an open-source project that I am developing in my free time. If you like it you can support me by donating.</p>
+<ul>
+<li><a href="https://paypal.me/dbrizov" rel="nofollow">PayPal</a></li>
+<li><a href="https://www.buymeacoffee.com/dbrizov" rel="nofollow">Buy Me A Coffee</a></li>
+</ul>
+<h1>
+<a id="user-content-overview" class="anchor" href="#overview" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Overview</h1>
+<h2>
 <a id="user-content-drawer-attributes" class="anchor" href="#drawer-attributes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Drawer Attributes</h2>
 <p>Provide special draw options to serialized fields.
 A field can have only one DrawerAttribute. If a field has more than one, only the bottom one will be used.</p>
+<h3>
+<a id="user-content-animatorparam" class="anchor" href="#animatorparam" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>AnimatorParam</h3>
+<p>Select an Animator paramater via dropdown interface.</p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	<span class="pl-k">public</span> <span class="pl-en">Animator</span> <span class="pl-smi">someAnimator</span>;
+
+	[<span class="pl-en">AnimatorParam</span>(<span class="pl-s"><span class="pl-pds">"</span>someAnimator<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">paramHash</span>;
+
+	[<span class="pl-en">AnimatorParam</span>(<span class="pl-s"><span class="pl-pds">"</span>someAnimator<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-smi">paramName</span>;
+}</pre></div>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/AnimatorParam_Inspector.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/AnimatorParam_Inspector.png" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-button" class="anchor" href="#button" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Button</h3>
 <p>A method can be marked as a button. A button appears in the inspector and executes the method if clicked.
@@ -1136,7 +1166,22 @@ Works both with instance and static methods.</p>
 	[<span class="pl-en">Button</span>(<span class="pl-s"><span class="pl-pds">"</span>Button Text<span class="pl-pds">"</span></span>)]
 	<span class="pl-k">private</span> <span class="pl-k">void</span> <span class="pl-en">MethodTwo</span>() { }
 }</pre></div>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Button_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/Button_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Button_Inspector.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/Button_Inspector.png" alt="inspector" style="max-width:100%;"></a></p>
+<h3>
+<a id="user-content-curverange" class="anchor" href="#curverange" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>CurveRange</h3>
+<p>Set bounds and modify curve color for AnimationCurves</p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	[<span class="pl-en">CurveRange</span>(<span class="pl-k">-</span><span class="pl-c1">1</span>, <span class="pl-k">-</span><span class="pl-c1">1</span>, <span class="pl-c1">1</span>, <span class="pl-c1">1</span>)]
+	<span class="pl-k">public</span> <span class="pl-en">AnimationCurve</span> <span class="pl-smi">curve</span>;
+	
+	[<span class="pl-en">CurveRange</span>(<span class="pl-smi">EColor</span>.<span class="pl-smi">Orange</span>)]
+	<span class="pl-k">public</span> <span class="pl-en">AnimationCurve</span> <span class="pl-smi">curve1</span>;
+	
+	[<span class="pl-en">CurveRange</span>(<span class="pl-c1">0</span>, <span class="pl-c1">0</span>, <span class="pl-c1">5</span>, <span class="pl-c1">5</span>, <span class="pl-smi">EColor</span>.<span class="pl-smi">Red</span>)]
+	<span class="pl-k">public</span> <span class="pl-en">AnimationCurve</span> <span class="pl-smi">curve2</span>;
+}</pre></div>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/CurveRange_Inspector.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/CurveRange_Inspector.png" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-dropdown" class="anchor" href="#dropdown" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dropdown</h3>
 <p>Provides an interface for dropdown value selection.</p>
@@ -1171,7 +1216,7 @@ Works both with instance and static methods.</p>
 <p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Dropdown_Inspector.gif" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/Dropdown_Inspector.gif" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-enumflags" class="anchor" href="#enumflags" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>EnumFlags</h3>
-<p>Provides dropdown interface for setting enum flags</p>
+<p>Provides dropdown interface for setting enum flags.</p>
 <div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">enum</span> <span class="pl-en">Direction</span>
 {
 	<span class="pl-en">None</span> <span class="pl-k">=</span> <span class="pl-c1">0</span>,
@@ -1186,7 +1231,16 @@ Works both with instance and static methods.</p>
 	[<span class="pl-en">EnumFlags</span>]
 	<span class="pl-k">public</span> <span class="pl-en">Direction</span> <span class="pl-smi">flags</span>;
 }</pre></div>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/EnumFlags_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/EnumFlags_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/EnumFlags_Inspector.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/EnumFlags_Inspector.png" alt="inspector" style="max-width:100%;"></a></p>
+<h3>
+<a id="user-content-expandable" class="anchor" href="#expandable" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Expandable</h3>
+<p>Make scriptable objects expandable.</p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	[<span class="pl-en">Expandable</span>]
+	<span class="pl-k">public</span> <span class="pl-en">ScriptableObject</span> <span class="pl-smi">scriptableObject</span>;
+}</pre></div>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Expandable_Inspector.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/Expandable_Inspector.png" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-horizontalline" class="anchor" href="#horizontalline" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>HorizontalLine</h3>
 <div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
@@ -1200,7 +1254,7 @@ Works both with instance and static methods.</p>
 	[<span class="pl-en">HorizontalLine</span>(<span class="pl-smi">color</span>: <span class="pl-smi">EColor</span>.<span class="pl-smi">Blue</span>)]
 	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">blue</span>;
 }</pre></div>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/HorizontalLine_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/HorizontalLine_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/HorizontalLine_Inspector.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/HorizontalLine_Inspector.png" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-infobox" class="anchor" href="#infobox" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>InfoBox</h3>
 <p>Used for providing additional information.</p>
@@ -1215,7 +1269,16 @@ Works both with instance and static methods.</p>
 	[<span class="pl-en">InfoBox</span>(<span class="pl-s"><span class="pl-pds">"</span>This is my vector<span class="pl-pds">"</span></span>, <span class="pl-smi">EInfoBoxType</span>.<span class="pl-smi">Error</span>)]
 	<span class="pl-k">public</span> <span class="pl-en">Vector3</span> <span class="pl-smi">myVector</span>;
 }</pre></div>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/InfoBox_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/InfoBox_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/InfoBox_Inspector.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/InfoBox_Inspector.png" alt="inspector" style="max-width:100%;"></a></p>
+<h3>
+<a id="user-content-inputaxis" class="anchor" href="#inputaxis" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>InputAxis</h3>
+<p>Select an input axis via dropdown interface.</p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	[<span class="pl-en">InputAxis</span>]
+	<span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-smi">inputAxis</span>;
+}</pre></div>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/InputAxis_Inspector.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/InputAxis_Inspector.png" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-minmaxslider" class="anchor" href="#minmaxslider" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>MinMaxSlider</h3>
 <p>A double slider. The <strong>min value</strong> is saved to the <strong>X</strong> property, and the <strong>max value</strong> is saved to the <strong>Y</strong> property of a <strong>Vector2</strong> field.</p>
@@ -1224,7 +1287,7 @@ Works both with instance and static methods.</p>
 	[<span class="pl-en">MinMaxSlider</span>(<span class="pl-c1">0.0f</span>, <span class="pl-c1">100.0f</span>)]
 	<span class="pl-k">public</span> <span class="pl-en">Vector2</span> <span class="pl-smi">minMaxSlider</span>;
 }</pre></div>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/MinMaxSlider_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/MinMaxSlider_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/MinMaxSlider_Inspector.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/MinMaxSlider_Inspector.png" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-progressbar" class="anchor" href="#progressbar" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ProgressBar</h3>
 <div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
@@ -1238,7 +1301,7 @@ Works both with instance and static methods.</p>
 	[<span class="pl-en">ProgressBar</span>(<span class="pl-s"><span class="pl-pds">"</span>Stamina<span class="pl-pds">"</span></span>, <span class="pl-c1">200</span>, <span class="pl-smi">EColor</span>.<span class="pl-smi">Green</span>)]
 	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">stamina</span> <span class="pl-k">=</span> <span class="pl-c1">150</span>;
 }</pre></div>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ProgressBar_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ProgressBar_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ProgressBar_Inspector.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ProgressBar_Inspector.png" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-reorderablelist" class="anchor" href="#reorderablelist" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ReorderableList</h3>
 <p>Provides array type fields with an interface for easy reordering of elements.</p>
@@ -1259,7 +1322,7 @@ Works both with instance and static methods.</p>
 	[<span class="pl-en">ReadOnly</span>]
 	<span class="pl-k">public</span> <span class="pl-en">Vector3</span> <span class="pl-smi">forwardVector</span> <span class="pl-k">=</span> <span class="pl-smi">Vector3</span>.<span class="pl-smi">forward</span>;
 }</pre></div>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ReadOnly_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ReadOnly_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ReadOnly_Inspector.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ReadOnly_Inspector.png" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-resizabletextarea" class="anchor" href="#resizabletextarea" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ResizableTextArea</h3>
 <p>A resizable text area where you can see the whole text.
@@ -1271,8 +1334,20 @@ Unlike Unity's <strong>Multiline</strong> and <strong>TextArea</strong> attribut
 }</pre></div>
 <p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ResizableTextArea_Inspector.gif" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ResizableTextArea_Inspector.gif" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
+<a id="user-content-scene" class="anchor" href="#scene" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Scene</h3>
+<p>Select a scene from the build settings via dropdown interface.</p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	[<span class="pl-en">Scene</span>]
+	<span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-smi">bootScene</span>; <span class="pl-c"><span class="pl-c">//</span> scene name</span>
+
+	[<span class="pl-en">Scene</span>]
+	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">tutorialScene</span>; <span class="pl-c"><span class="pl-c">//</span> scene index</span>
+}</pre></div>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Scene_Inspector.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/Scene_Inspector.png" alt="inspector" style="max-width:100%;"></a></p>
+<h3>
 <a id="user-content-showassetpreview" class="anchor" href="#showassetpreview" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ShowAssetPreview</h3>
-<p>Shows the texture preview of a given asset (Sprite, Prefab...)</p>
+<p>Shows the texture preview of a given asset (Sprite, Prefab...).</p>
 <div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
 {
 	[<span class="pl-en">ShowAssetPreview</span>]
@@ -1281,7 +1356,7 @@ Unlike Unity's <strong>Multiline</strong> and <strong>TextArea</strong> attribut
 	[<span class="pl-en">ShowAssetPreview</span>(<span class="pl-c1">128</span>, <span class="pl-c1">128</span>)]
 	<span class="pl-k">public</span> <span class="pl-en">GameObject</span> <span class="pl-smi">prefab</span>;
 }</pre></div>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ShowAssetPreview_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ShowAssetPreview_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ShowAssetPreview_Inspector.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ShowAssetPreview_Inspector.png" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-shownativeproperty" class="anchor" href="#shownativeproperty" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ShowNativeProperty</h3>
 <p>Shows native C# properties in the inspector.
@@ -1294,7 +1369,7 @@ It supports only certain types <strong>(bool, int, long, float, double, string, 
 	[<span class="pl-en">ShowNativeProperty</span>]
 	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">TransformsCount</span> <span class="pl-k">=&gt;</span> <span class="pl-smi">transforms</span>.<span class="pl-smi">Count</span>;
 }</pre></div>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ShowNativeProperty_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ShowNativeProperty_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ShowNativeProperty_Inspector.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ShowNativeProperty_Inspector.png" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-shownonserializedfield" class="anchor" href="#shownonserializedfield" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ShowNonSerializedField</h3>
 <p>Shows non-serialized fields in the inspector.
@@ -1313,19 +1388,19 @@ It supports only certain types <strong>(bool, int, long, float, double, string, 
 	[<span class="pl-en">ShowNonSerializedField</span>]
 	<span class="pl-k">private</span> <span class="pl-k">static</span> <span class="pl-k">readonly</span> <span class="pl-en">Vector3</span> <span class="pl-smi">CONST_VECTOR</span> <span class="pl-k">=</span> <span class="pl-smi">Vector3</span>.<span class="pl-smi">one</span>;
 }</pre></div>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ShowNonSerializedField_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ShowNonSerializedField_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ShowNonSerializedField_Inspector.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ShowNonSerializedField_Inspector.png" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-tag" class="anchor" href="#tag" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tag</h3>
-<p>Enable Tag selection with string field</p>
+<p>Select a tag via dropdown interface.</p>
 <div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
 {
 	[<span class="pl-en">Tag</span>]
 	<span class="pl-k">public</span> <span class="pl-k">string</span> <span class="pl-smi">tagField</span>;
 }</pre></div>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Tag_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/Tag_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Tag_Inspector.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/Tag_Inspector.png" alt="inspector" style="max-width:100%;"></a></p>
 <h2>
 <a id="user-content-meta-attributes" class="anchor" href="#meta-attributes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Meta Attributes</h2>
-<p>Give the fields meta data. A field can have more than one meta attributes</p>
+<p>Give the fields meta data. A field can have more than one meta attributes.</p>
 <h3>
 <a id="user-content-boxgroup" class="anchor" href="#boxgroup" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>BoxGroup</h3>
 <p>Surrounds grouped fields with a box.</p>
@@ -1341,7 +1416,18 @@ It supports only certain types <strong>(bool, int, long, float, double, string, 
 	[<span class="pl-en">BoxGroup</span>(<span class="pl-s"><span class="pl-pds">"</span>Floats<span class="pl-pds">"</span></span>)]
 	<span class="pl-k">public</span> <span class="pl-k">float</span> <span class="pl-smi">secondFloat</span>;
 }</pre></div>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/BoxGroup_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/BoxGroup_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/BoxGroup_Inspector.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/BoxGroup_Inspector.png" alt="inspector" style="max-width:100%;"></a></p>
+<h3>
+<a id="user-content-foldout" class="anchor" href="#foldout" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Foldout</h3>
+<p>Makes a foldout group.</p>
+<div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
+{
+	[<span class="pl-en">Foldout</span>(<span class="pl-s"><span class="pl-pds">"</span>Integers<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">firstInt</span>;
+	[<span class="pl-en">Foldout</span>(<span class="pl-s"><span class="pl-pds">"</span>Integers<span class="pl-pds">"</span></span>)]
+	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">secondInt</span>;
+}</pre></div>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Foldout_Inspector.gif" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/Foldout_Inspector.gif" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-enableif--disableif" class="anchor" href="#enableif--disableif" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>EnableIf / DisableIf</h3>
 <div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
@@ -1408,7 +1494,7 @@ It supports only certain types <strong>(bool, int, long, float, double, string, 
 }</pre></div>
 <h3>
 <a id="user-content-label" class="anchor" href="#label" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Label</h3>
-<p>Override default field label</p>
+<p>Override default field label.</p>
 <div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
 {
 	[<span class="pl-en">Label</span>(<span class="pl-s"><span class="pl-pds">"</span>Short Name<span class="pl-pds">"</span></span>)]
@@ -1417,7 +1503,7 @@ It supports only certain types <strong>(bool, int, long, float, double, string, 
 	[<span class="pl-en">Label</span>(<span class="pl-s"><span class="pl-pds">"</span>RGB<span class="pl-pds">"</span></span>)]
 	<span class="pl-k">public</span> <span class="pl-en">Vector3</span> <span class="pl-smi">vectorXYZ</span>;
 }</pre></div>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Label_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/Label_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Label_Inspector.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/Label_Inspector.png" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-onvaluechanged" class="anchor" href="#onvaluechanged" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>OnValueChanged</h3>
 <p>Detects a value change and executes a callback.
@@ -1428,9 +1514,9 @@ If you want a runtime event, you should probably use an event/delegate and subsc
 	[<span class="pl-en">OnValueChanged</span>(<span class="pl-s"><span class="pl-pds">"</span>OnValueChangedCallback<span class="pl-pds">"</span></span>)]
 	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">myInt</span>;
 
-	<span class="pl-k">private</span> <span class="pl-k">void</span> <span class="pl-en">OnValueChangedCallback</span>(<span class="pl-k">int</span> <span class="pl-smi">oldValue</span>, <span class="pl-k">int</span> <span class="pl-smi">newValue</span>)
+	<span class="pl-k">private</span> <span class="pl-k">void</span> <span class="pl-en">OnValueChangedCallback</span>()
 	{
-		<span class="pl-smi">Debug</span>.<span class="pl-en">Log</span>(<span class="pl-smi">myInt</span> <span class="pl-k">==</span> <span class="pl-smi">newValue</span>); <span class="pl-c"><span class="pl-c">//</span> prints true</span>
+		<span class="pl-smi">Debug</span>.<span class="pl-en">Log</span>(<span class="pl-smi">myInt</span>);
 	}
 }</pre></div>
 <h2>
@@ -1459,7 +1545,7 @@ If you want a runtime event, you should probably use an event/delegate and subsc
 	[<span class="pl-en">Required</span>(<span class="pl-s"><span class="pl-pds">"</span>Custom required text<span class="pl-pds">"</span></span>)]
 	<span class="pl-k">public</span> <span class="pl-en">GameObject</span> <span class="pl-smi">myGameObject</span>;
 }</pre></div>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Required_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/Required_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Required_Inspector.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/Required_Inspector.png" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-validateinput" class="anchor" href="#validateinput" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ValidateInput</h3>
 <p>The most powerful ValidatorAttribute.</p>
@@ -1481,26 +1567,7 @@ If you want a runtime event, you should probably use an event/delegate and subsc
 		<span class="pl-k">return</span> <span class="pl-smi">value</span> <span class="pl-k">&gt;</span> <span class="pl-c1">0</span>;
 	}
 }</pre></div>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ValidateInput_Inspector.PNG" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ValidateInput_Inspector.PNG" alt="inspector" style="max-width:100%;"></a></p>
-<h2>
-<a id="user-content-license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
-<p>MIT License</p>
-<p>Copyright (c) 2017 Denis Rizov</p>
-<p>Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:</p>
-<p>The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.</p>
-<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.</p>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ValidateInput_Inspector.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/ValidateInput_Inspector.png" alt="inspector" style="max-width:100%;"></a></p>
 
               </article>
             </div>
