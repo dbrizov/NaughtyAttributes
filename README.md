@@ -85,8 +85,8 @@ public class _NaughtyComponent : MonoBehaviour
 	}
 }
 ```
-![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/AdvancedDropdown_Inspectorpng)
-![inspector](https://github.com/krisrok/NaughtyAttributes/blob/advanceddropdown/Assets/NaughtyAttributes/Documentation~/AdvancedDropdown_Inspectorpng)
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/AdvancedDropdown_Inspector.png)
+![inspector](https://github.com/krisrok/NaughtyAttributes/blob/advanceddropdown/Assets/NaughtyAttributes/Documentation~/AdvancedDropdown_Inspector.png)
 
 ### AnimatorParam
 Select an Animator paramater via dropdown interface.
