@@ -61,27 +61,27 @@ public class _NaughtyComponent : MonoBehaviour
 		get
 		{
 			return new List<string>()
-				{
-					"A/A1",
-					"A/A2",
-					"B/B1",
-					"B/B2",
-					"B/B3"
-				};
+			{
+				"A/A1",
+				"A/A2",
+				"B/B1",
+				"B/B2",
+				"B/B3"
+			};
 		}
 	}
 
 	private DropdownList<Vector3> GetVectorValues()
 	{
 		return new DropdownList<Vector3>()
-			{
-				{ "Right",   Vector3.right },
-				{ "Left",    Vector3.left },
-				{ "Up",      Vector3.up },
-				{ "Others/Down",    Vector3.down },
-				{ "Others/Forward", Vector3.forward },
-				{ "Others/Back",    Vector3.back }
-			};
+		{
+			{ "Right",   Vector3.right },
+			{ "Left",    Vector3.left },
+			{ "Up",      Vector3.up },
+			{ "Others/Down",    Vector3.down },
+			{ "Others/Forward", Vector3.forward },
+			{ "Others/Back",    Vector3.back }
+		};
 	}
 }
 ```
