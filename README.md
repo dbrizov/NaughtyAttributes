@@ -39,6 +39,55 @@ NaughtyAttributes is an open-source project that I am developing in my free time
 Provide special draw options to serialized fields.
 A field can have only one DrawerAttribute. If a field has more than one, only the bottom one will be used.
 
+### AdvancedDropdown
+Provides an alternative interface for dropdown value selection and search.
+
+```csharp
+public class _NaughtyComponent : MonoBehaviour
+{
+	[AdvancedDropdown("intValues", MinHeight = 150)]
+	public int intValue;
+
+	[AdvancedDropdown("StringValues", MinHeight = 150)]
+	public string stringValue;
+
+	[AdvancedDropdown("GetVectorValues", MinHeight = 150)]
+	public Vector3 vectorValue;
+
+	private int[] intValues = new int[] { 1, 2, 3, 4, 5 };
+
+	private List<string> StringValues
+	{
+		get
+		{
+			return new List<string>()
+				{
+					"A/A1",
+					"A/A2",
+					"B/B1",
+					"B/B2",
+					"B/B3"
+				};
+		}
+	}
+
+	private DropdownList<Vector3> GetVectorValues()
+	{
+		return new DropdownList<Vector3>()
+			{
+				{ "Right",   Vector3.right },
+				{ "Left",    Vector3.left },
+				{ "Up",      Vector3.up },
+				{ "Others/Down",    Vector3.down },
+				{ "Others/Forward", Vector3.forward },
+				{ "Others/Back",    Vector3.back }
+			};
+	}
+}
+```
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/AdvancedDropdown_Inspectorpng)
+![inspector](https://github.com/krisrok/NaughtyAttributes/blob/advanceddropdown/Assets/NaughtyAttributes/Documentation~/AdvancedDropdown_Inspectorpng)
+
 ### AnimatorParam
 Select an Animator paramater via dropdown interface.
 
