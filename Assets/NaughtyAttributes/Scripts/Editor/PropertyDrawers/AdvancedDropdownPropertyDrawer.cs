@@ -314,7 +314,7 @@ namespace NaughtyAttributes.Editor
 			var propertyRect = rect;
 			var labelRect = rect;
 			labelRect.width -= EditorGUIUtility.labelWidth;
-			propertyRect.width -= EditorGUIUtility.labelWidth;
+			propertyRect.width -= EditorGUIUtility.labelWidth + 5;
 			propertyRect.x = EditorGUIUtility.labelWidth + 20;
 
 			EditorGUI.LabelField(labelRect, label);
