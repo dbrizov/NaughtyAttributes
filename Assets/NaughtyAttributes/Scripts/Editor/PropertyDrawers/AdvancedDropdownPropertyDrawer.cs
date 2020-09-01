@@ -67,7 +67,7 @@ namespace NaughtyAttributes.Editor
 						{
 							currentId = id++;
 							if (path == _options.SelectedValue.ToString())
-								icon = EditorGUIUtility.IconContent("d_Valid@2x").image as Texture2D;
+								icon = EditorGUIUtility.IconContent("FilterSelectedOnly").image as Texture2D;
 						}
 
 						//var type = Type.GetType(pathItem, false, true);
