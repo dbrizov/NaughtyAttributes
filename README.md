@@ -40,7 +40,10 @@ Provide special draw options to serialized fields.
 A field can have only one DrawerAttribute. If a field has more than one, only the bottom one will be used.
 
 ### AdvancedDropdown
-Provides an alternative interface for dropdown value selection and search.
+Provides an advanced interface for dropdown value selection, search and tree view navigation. 
+Useful for long lists or trees. Tree nodes have to be separated by `/`.
+
+Makes use of Unity's AdvancedDropdown class used e.g. for the "Add Component" menu in the inspector.
 
 ```csharp
 public class _NaughtyComponent : MonoBehaviour
