@@ -100,14 +100,14 @@ namespace NaughtyAttributes.Editor
 				_options.ItemSelected(item.id);
 			}
 
-			// https://forum.unity.com/threads/add-maximum-window-size-to-advanceddropdown-control.724229/
 			public new void Show(Rect rect)
 			{
 				base.Show(rect);
-				SetMaxHeightForOpenedPopup(rect, _options.MinHeight, _options.MaxHeight);
+				SetHeightForPopup(rect, _options.MinHeight, _options.MaxHeight);
 			}
 
-			private static void SetMaxHeightForOpenedPopup(Rect rect, float minHeight, float maxHeight)
+			// based upon https://forum.unity.com/threads/add-maximum-window-size-to-advanceddropdown-control.724229/
+			private static void SetHeightForPopup(Rect rect, float minHeight, float maxHeight)
 			{
 				var window = EditorWindow.focusedWindow;
 
@@ -306,9 +306,6 @@ namespace NaughtyAttributes.Editor
 			if (selectedValueIndex == -1)
 				selectedValueString = selectedValue?.ToString() ?? "<null>";
 		}
-
-
-		
 
 		private void ShowAdvancedDropdown(Rect rect, GUIContent label, AdvancedDropdownImpl.Options options)
 		{
