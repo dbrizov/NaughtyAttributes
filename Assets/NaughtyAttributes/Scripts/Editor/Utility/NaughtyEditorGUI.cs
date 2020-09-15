@@ -42,7 +42,7 @@ namespace NaughtyAttributes.Editor
 			SpecialCaseDrawerAttribute specialCaseAttribute = PropertyUtility.GetAttribute<SpecialCaseDrawerAttribute>(property);
 			if (specialCaseAttribute != null)
 			{
-				specialCaseAttribute.GetDrawer().OnGUI(property);
+				specialCaseAttribute.GetDrawer().OnGUI(rect, property);
 			}
 			else
 			{
