@@ -281,6 +281,10 @@ namespace NaughtyAttributes.Editor
 				{
 					EditorGUILayout.IntField(label, (int)value);
 				}
+				else if (valueType == typeof(uint))
+				{
+					EditorGUILayout.LongField(label, (long)value);
+				}
 				else if (valueType == typeof(long))
 				{
 					EditorGUILayout.LongField(label, (long)value);
