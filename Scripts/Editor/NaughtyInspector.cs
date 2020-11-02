@@ -16,7 +16,6 @@ namespace NaughtyAttributes.Editor
 		private IEnumerable<MethodInfo> _methods;
 		private Dictionary<string, SavedBool> _foldouts = new Dictionary<string, SavedBool>();
 
-
 		protected virtual void OnEnable()
 		{
 			_nonSerializedFields = ReflectionUtility.GetAllFields(
