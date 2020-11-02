@@ -1,7 +1,6 @@
 # NaughtyAttributes
 [![Unity 2018.3+](https://img.shields.io/badge/unity-2018.3%2B-blue.svg)](https://unity3d.com/get-unity/download)
 [![openupm](https://img.shields.io/npm/v/com.dbrizov.naughtyattributes?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.dbrizov.naughtyattributes/)
-![CI](https://github.com/dbrizov/NaughtyAttributes/workflows/CI/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://github.com/dbrizov/NaughtyAttributes/blob/master/LICENSE)
 
 NaughtyAttributes is an extension for the Unity Inspector.
