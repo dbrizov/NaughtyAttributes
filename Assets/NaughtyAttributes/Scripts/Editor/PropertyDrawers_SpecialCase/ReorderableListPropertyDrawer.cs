@@ -57,7 +57,7 @@ namespace NaughtyAttributes.Editor
 							r.x += 10.0f;
 							r.width -= 10.0f;
 
-							EditorGUI.PropertyField(new Rect(r.x, r.y, r.width, 0.0f), element, true);
+							EditorGUI.PropertyField(new Rect(r.x, r.y, r.width, EditorGUIUtility.singleLineHeight), element, true);
 						},
 
 						elementHeightCallback = (int index) =>
