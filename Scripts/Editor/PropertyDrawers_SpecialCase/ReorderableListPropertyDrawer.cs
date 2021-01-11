@@ -11,6 +11,19 @@ namespace NaughtyAttributes.Editor
 
 		private readonly Dictionary<string, ReorderableList> _reorderableListsByPropertyName = new Dictionary<string, ReorderableList>();
 
+		private GUIStyle _labelStyle;
+
+		private GUIStyle GetLabelStyle()
+		{
+			if (_labelStyle == null)
+			{
+				_labelStyle = new GUIStyle(EditorStyles.boldLabel);
+				_labelStyle.richText = true;
+			}
+
+			return _labelStyle;
+		}
+
 		private string GetPropertyKeyName(SerializedProperty property)
 		{
 			return property.serializedObject.targetObject.GetInstanceID() + "." + property.name;
@@ -46,7 +59,7 @@ namespace NaughtyAttributes.Editor
 					{
 						drawHeaderCallback = (Rect r) =>
 						{
-							EditorGUI.LabelField(r, string.Format("{0}: {1}", label.text, property.arraySize), EditorStyles.boldLabel);
+							EditorGUI.LabelField(r, string.Format("{0}: {1}", label.text, property.arraySize), GetLabelStyle());
 							HandleDragAndDrop(r, reorderableList);
 						},
 

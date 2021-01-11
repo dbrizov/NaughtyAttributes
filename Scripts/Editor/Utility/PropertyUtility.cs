@@ -26,12 +26,15 @@ namespace NaughtyAttributes.Editor
 			return (T[])fieldInfo.GetCustomAttributes(typeof(T), true);
 		}
 
-		public static string GetLabel(SerializedProperty property)
+		public static GUIContent GetLabel(SerializedProperty property)
 		{
 			LabelAttribute labelAttribute = GetAttribute<LabelAttribute>(property);
-			return (labelAttribute == null)
+			string labelText = (labelAttribute == null)
 				? property.displayName
 				: labelAttribute.Label;
+
+			GUIContent label = new GUIContent(labelText);
+			return label;
 		}
 
 		public static void CallOnValueChangedCallbacks(SerializedProperty property)
