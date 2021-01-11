@@ -84,7 +84,7 @@ namespace NaughtyAttributes.Editor
 				}
 				else
 				{
-					NaughtyEditorGUI.PropertyField_Layout(property, true);
+					NaughtyEditorGUI.PropertyField_Layout(property, includeChildren: true);
 				}
 			}
 
@@ -100,7 +100,7 @@ namespace NaughtyAttributes.Editor
 				NaughtyEditorGUI.BeginBoxGroup_Layout(group.Key);
 				foreach (var property in visibleProperties)
 				{
-					NaughtyEditorGUI.PropertyField_Layout(property, true);
+					NaughtyEditorGUI.PropertyField_Layout(property, includeChildren: true);
 				}
 
 				NaughtyEditorGUI.EndBoxGroup_Layout();
