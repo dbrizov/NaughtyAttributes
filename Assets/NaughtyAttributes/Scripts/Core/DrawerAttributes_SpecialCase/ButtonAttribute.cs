@@ -22,9 +22,28 @@ namespace NaughtyAttributes
 	public class ButtonAttribute : SpecialCaseDrawerAttribute
 	{
 		public string Text { get; private set; }
-		public EButtonEnableMode SelectedEnableMode { get; private set; }		
+		public EButtonEnableMode SelectedEnableMode { get; private set; }
 
-		public ButtonAttribute(string text = null, EButtonEnableMode enabledMode = EButtonEnableMode.Always)
+		public ButtonAttribute()
+		{
+			this.Text = null;
+			this.SelectedEnableMode = EButtonEnableMode.Always;
+		}
+		public ButtonAttribute(string text)
+		{
+			this.Text = text;
+			this.SelectedEnableMode = EButtonEnableMode.Always;
+		}
+
+		[Obsolete("enabledMode is obsolete, use [Button, EnabledInEditMode]")]
+		public ButtonAttribute(EButtonEnableMode enabledMode)
+		{
+			this.Text = null;
+			this.SelectedEnableMode = enabledMode;
+		}
+		
+		[Obsolete("enabledMode is obsolete, use [Button, EnabledInEditMode]")]
+		public ButtonAttribute(string text, EButtonEnableMode enabledMode)
 		{
 			this.Text = text;
 			this.SelectedEnableMode = enabledMode;

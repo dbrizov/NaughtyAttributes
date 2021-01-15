@@ -38,12 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 12
+  serializedVersion: 11
   m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
@@ -98,8 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: 98ee975b74776234986f4d35f14c4ccc,
-    type: 2}
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -119,8 +118,6 @@ NavMeshSettings:
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
-    maxJobWorkers: 0
-    preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
@@ -163,6 +160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 114650324}
+  - component: {fileID: 114650327}
   - component: {fileID: 114650325}
   - component: {fileID: 114650326}
   m_Layer: 0
@@ -238,6 +236,20 @@ MonoBehaviour:
       disable2: 1
       enableIfAll: {x: 0.25, y: 0.75}
       enableIfAny: {x: 0.25, y: 0.75}
+--- !u!114 &114650327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 114650323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b2da8b112f54f58abc0c075f7486a1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disableInEditMode: 0
+  disableInPlayMode: 0
 --- !u!1 &155697335
 GameObject:
   m_ObjectHideFlags: 0
@@ -1297,6 +1309,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1524906391}
+  - component: {fileID: 1524906394}
   - component: {fileID: 1524906392}
   - component: {fileID: 1524906393}
   m_Layer: 0
@@ -1372,6 +1385,21 @@ MonoBehaviour:
       hide2: 1
       hideIfAll: {x: 0.25, y: 0.75}
       hideIfAny: {x: 0.25, y: 0.75}
+--- !u!114 &1524906394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1524906390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cadd9354da448afa8fc8a74a4a0df04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hideInEditMode: 0
+  alwaysVisible: 0
+  hideInPlayMode: 0
 --- !u!1 &1552114399
 GameObject:
   m_ObjectHideFlags: 0

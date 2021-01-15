@@ -70,52 +70,59 @@ namespace NaughtyAttributes.Editor
 
 		public static bool IsEnabled(SerializedProperty property)
 		{
-			EnableIfAttributeBase enableIfAttribute = GetAttribute<EnableIfAttributeBase>(property);
-			if (enableIfAttribute == null)
+			var enabled = true;
+			var attributes = GetAttributes<EnabledAttribute>(property);
+			foreach (var attribute in attributes)
 			{
-				return true;
-			}
+				if (attribute is EnableIfAttribute enableIfAttribute)
+				{
+					var target = GetTargetObjectWithProperty(property);
+					var conditions = GetConditionValues(target, enableIfAttribute.Conditions);
+					if (conditions.Count > 0)
+					{
+						enabled &= GetConditionsFlag(conditions, enableIfAttribute.ConditionOperator, enableIfAttribute.Inverted);
+					}
+					else
+					{
+						string message = enableIfAttribute.GetType().Name + " needs a valid boolean condition field, property or method name to work";
+						Debug.LogWarning(message, property.serializedObject.targetObject);
 
-			object target = GetTargetObjectWithProperty(property);
-
-			List<bool> conditionValues = GetConditionValues(target, enableIfAttribute.Conditions);
-			if (conditionValues.Count > 0)
-			{
-				bool enabled = GetConditionsFlag(conditionValues, enableIfAttribute.ConditionOperator, enableIfAttribute.Inverted);
-				return enabled;
+					}
+					continue;
+				}
+				enabled &= attribute.Enabled;
 			}
-			else
-			{
-				string message = enableIfAttribute.GetType().Name + " needs a valid boolean condition field, property or method name to work";
-				Debug.LogWarning(message, property.serializedObject.targetObject);
-
-				return false;
-			}
+			return enabled;
 		}
 
 		public static bool IsVisible(SerializedProperty property)
 		{
-			ShowIfAttributeBase showIfAttribute = GetAttribute<ShowIfAttributeBase>(property);
-			if (showIfAttribute == null)
-			{
-				return true;
-			}
+			var visible = true;
+			var attributes = GetAttributes<ShowAttribute>(property);
 
-			object target = GetTargetObjectWithProperty(property);
-
-			List<bool> conditionValues = GetConditionValues(target, showIfAttribute.Conditions);
-			if (conditionValues.Count > 0)
+			foreach(var attribute in attributes)
 			{
-				bool enabled = GetConditionsFlag(conditionValues, showIfAttribute.ConditionOperator, showIfAttribute.Inverted);
-				return enabled;
-			}
-			else
-			{
-				string message = showIfAttribute.GetType().Name + " needs a valid boolean condition field, property or method name to work";
-				Debug.LogWarning(message, property.serializedObject.targetObject);
+				if(attribute is ShowIfAttributeBase showIfAttribute)
+				{
+					object target = GetTargetObjectWithProperty(property);
 
-				return false;
+					List<bool> conditionValues = GetConditionValues(target, showIfAttribute.Conditions);
+					if (conditionValues.Count > 0)
+					{
+						visible &= GetConditionsFlag(conditionValues, showIfAttribute.ConditionOperator, showIfAttribute.Inverted);
+					}
+					else
+					{
+						string message = showIfAttribute.GetType().Name + " needs a valid boolean condition field, property or method name to work";
+						Debug.LogWarning(message, property.serializedObject.targetObject);
+
+						visible &= false;
+					}
+					continue;
+				}
+				visible &= attribute.Visible;
 			}
+			return visible;
 		}
 
 		internal static List<bool> GetConditionValues(object target, string[] conditions)
