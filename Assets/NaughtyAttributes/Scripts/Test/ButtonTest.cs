@@ -35,5 +35,17 @@ namespace NaughtyAttributes.Test
 				yield return new WaitForSeconds(1.0f);
 			}
 		}
+		
+		[Button, DisabledInPlayMode]
+		private void OnlyEnabledInEditMode() { }
+		
+		[Button, DisableInEditMode]
+		private void OnlyEnabledInPlayMode() { }
+		
+		[Button, HideInPlayMode]
+		private void OnlyVisibleInEditMode() { }
+		
+		[Button, HideInEditMode]
+		private void OnlyVisibleInPlayMode() { }
 	}
 }
