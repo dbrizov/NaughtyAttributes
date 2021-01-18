@@ -1,0 +1,5 @@
+﻿{
+  "displayName": "Demo Scene",
+  "description": "This example contains a demo scene, showing all attributes and their usages in scripts.",
+  "createSeparatePackage": true
+}
