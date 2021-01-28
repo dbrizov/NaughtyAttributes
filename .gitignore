@@ -2,6 +2,7 @@
 Temp/
 Library/
 Logs/
+UserSettings/
 Assets/AssetStoreTools/
 Assets/AssetStoreTools.meta
 Assets/Plugins/Editor/JetBrains
@@ -14,6 +15,7 @@ ExportedObj/
 obj/
 .vs/
 .vscode/
+.vsconfig
 .idea/
 *.svd
 *.userprefs

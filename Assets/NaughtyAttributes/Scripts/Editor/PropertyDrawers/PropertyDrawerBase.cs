@@ -27,7 +27,7 @@ namespace NaughtyAttributes.Editor
 
 			using (new EditorGUI.DisabledScope(disabled: !enabled))
 			{
-				OnGUI_Internal(rect, property, new GUIContent(PropertyUtility.GetLabel(property)));
+				OnGUI_Internal(rect, property, PropertyUtility.GetLabel(property));
 			}
 
 			// Call OnValueChanged callbacks
@@ -52,7 +52,7 @@ namespace NaughtyAttributes.Editor
 
 		protected virtual float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
 		{
-			return base.GetPropertyHeight(property, label);
+			return EditorGUI.GetPropertyHeight(property, includeChildren: true);
 		}
 
 		protected float GetPropertyHeight(SerializedProperty property)
@@ -63,7 +63,7 @@ namespace NaughtyAttributes.Editor
 				return specialCaseAttribute.GetDrawer().GetPropertyHeight(property);
 			}
 
-			return EditorGUI.GetPropertyHeight(property, true);
+			return EditorGUI.GetPropertyHeight(property, includeChildren: true);
 		}
 
 		public virtual float GetHelpBoxHeight()
