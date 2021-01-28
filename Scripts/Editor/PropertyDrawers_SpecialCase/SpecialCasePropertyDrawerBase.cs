@@ -29,7 +29,7 @@ namespace NaughtyAttributes.Editor
 
 			using (new EditorGUI.DisabledScope(disabled: !enabled))
 			{
-				OnGUI_Internal(rect, property, new GUIContent(PropertyUtility.GetLabel(property)));
+				OnGUI_Internal(rect, property, PropertyUtility.GetLabel(property));
 			}
 
 			// Call OnValueChanged callbacks

@@ -14,6 +14,8 @@ namespace NaughtyAttributes.Editor
 		public const float IndentLength = 15.0f;
 		public const float HorizontalSpacing = 2.0f;
 
+		private static GUIStyle _buttonStyle = new GUIStyle(GUI.skin.button) { richText = true };
+
 		private delegate void PropertyFieldFunction(Rect rect, SerializedProperty property, GUIContent label, bool includeChildren);
 
 		public static void PropertyField(Rect rect, SerializedProperty property, bool includeChildren)
@@ -46,7 +48,7 @@ namespace NaughtyAttributes.Editor
 			}
 			else
 			{
-				GUIContent label = new GUIContent(PropertyUtility.GetLabel(property));
+				GUIContent label = PropertyUtility.GetLabel(property);
 				bool anyDrawerAttribute = PropertyUtility.GetAttributes<DrawerAttribute>(property).Any();
 
 				if (!anyDrawerAttribute)
@@ -113,16 +115,6 @@ namespace NaughtyAttributes.Editor
 			EditorGUILayout.EndVertical();
 		}
 
-		public static bool BeginFoldout_Layout(bool unfolded, string label = "")
-		{
-			return EditorGUILayout.BeginFoldoutHeaderGroup(unfolded, label);
-		}
-
-		public static void EndFoldout_Layout()
-		{
-			EditorGUILayout.EndFoldoutHeaderGroup();
-		}
-
 		/// <summary>
 		/// Creates a dropdown
 		/// </summary>
@@ -181,7 +173,7 @@ namespace NaughtyAttributes.Editor
 
 				EditorGUI.BeginDisabledGroup(!buttonEnabled);
 
-				if (GUILayout.Button(buttonText))
+				if (GUILayout.Button(buttonText, _buttonStyle))
 				{
 					object[] defaultParams = methodInfo.GetParameters().Select(p => p.DefaultValue).ToArray();
 					IEnumerator methodResult = methodInfo.Invoke(target, defaultParams) as IEnumerator;
