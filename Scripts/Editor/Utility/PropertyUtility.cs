@@ -114,6 +114,17 @@ namespace NaughtyAttributes.Editor
 
 			object target = GetTargetObjectWithProperty(property);
 
+			// deal with enum conditions
+			if (showIfAttribute.EnumValue != null)
+			{
+				Enum value = GetEnumValue(target, showIfAttribute.Conditions[0]);
+				if (value != null) return showIfAttribute.EnumValue.Equals(value) != showIfAttribute.Inverted;
+				
+				string message = showIfAttribute.GetType().Name + " needs a valid enum field, property or method name to work";
+				Debug.LogWarning(message, property.serializedObject.targetObject);
+				return false;
+			}
+
 			List<bool> conditionValues = GetConditionValues(target, showIfAttribute.Conditions);
 			if (conditionValues.Count > 0)
 			{
