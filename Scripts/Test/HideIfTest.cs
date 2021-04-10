@@ -16,7 +16,7 @@ namespace NaughtyAttributes.Test
 		[ReorderableList]
 		public int[] hideIfAny;
 		
-		[ShowIf("enum1", HideIfEnum.Case0)]
+		[HideIf("enum1", HideIfEnum.Case0)]
 		[ReorderableList]
 		public int[] hideIfEnum;
 
@@ -41,7 +41,7 @@ namespace NaughtyAttributes.Test
 		[AllowNesting] // Because it's nested we need to explicitly allow nesting
 		public int hideIfAny;
 		
-		[ShowIf("enum1", HideIfEnum.Case1)]
+		[HideIf("enum1", HideIfEnum.Case1)]
 		[AllowNesting]
 		public int hideIfEnum;
 
@@ -66,7 +66,7 @@ namespace NaughtyAttributes.Test
 		[MinMaxSlider(0.0f, 1.0f)] // AllowNesting attribute is not needed, because the field is already marked with a custom naughty property drawer
 		public Vector2 hideIfAny = new Vector2(0.25f, 0.75f);
 		
-		[ShowIf("GetEnum1", HideIfEnum.Case2)]
+		[HideIf("GetEnum1", HideIfEnum.Case2)]
 		[MinMaxSlider(0.0f, 1.0f)] // AllowNesting attribute is not needed, because the field is already marked with a custom naughty property drawer
 		public Vector2 hideIfEnum = new Vector2(0.25f, 0.75f);
 	}
