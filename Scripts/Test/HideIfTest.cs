@@ -6,6 +6,7 @@ namespace NaughtyAttributes.Test
 	{
 		public bool hide1;
 		public bool hide2;
+		public HideIfEnum enum1;
 
 		[HideIf(EConditionOperator.And, "hide1", "hide2")]
 		[ReorderableList]
@@ -14,6 +15,10 @@ namespace NaughtyAttributes.Test
 		[HideIf(EConditionOperator.Or, "hide1", "hide2")]
 		[ReorderableList]
 		public int[] hideIfAny;
+		
+		[ShowIf("enum1", HideIfEnum.Case0)]
+		[ReorderableList]
+		public int[] hideIfEnum;
 
 		public HideIfNest1 nest1;
 	}
@@ -23,8 +28,10 @@ namespace NaughtyAttributes.Test
 	{
 		public bool hide1;
 		public bool hide2;
+		public HideIfEnum enum1;
 		public bool Hide1 { get { return hide1; } }
 		public bool Hide2 { get { return hide2; } }
+		public HideIfEnum Enum1 { get { return enum1; } }
 
 		[HideIf(EConditionOperator.And, "Hide1", "Hide2")]
 		[AllowNesting] // Because it's nested we need to explicitly allow nesting
@@ -33,6 +40,10 @@ namespace NaughtyAttributes.Test
 		[HideIf(EConditionOperator.Or, "Hide1", "Hide2")]
 		[AllowNesting] // Because it's nested we need to explicitly allow nesting
 		public int hideIfAny;
+		
+		[ShowIf("enum1", HideIfEnum.Case1)]
+		[AllowNesting]
+		public int hideIfEnum;
 
 		public HideIfNest2 nest2;
 	}
@@ -42,8 +53,10 @@ namespace NaughtyAttributes.Test
 	{
 		public bool hide1;
 		public bool hide2;
+		public HideIfEnum enum1;
 		public bool GetHide1() { return hide1; }
 		public bool GetHide2() { return hide2; }
+		public HideIfEnum GetEnum1() { return enum1; }
 
 		[HideIf(EConditionOperator.And, "GetHide1", "GetHide2")]
 		[MinMaxSlider(0.0f, 1.0f)] // AllowNesting attribute is not needed, because the field is already marked with a custom naughty property drawer
@@ -52,5 +65,17 @@ namespace NaughtyAttributes.Test
 		[HideIf(EConditionOperator.Or, "GetHide1", "GetHide2")]
 		[MinMaxSlider(0.0f, 1.0f)] // AllowNesting attribute is not needed, because the field is already marked with a custom naughty property drawer
 		public Vector2 hideIfAny = new Vector2(0.25f, 0.75f);
+		
+		[ShowIf("GetEnum1", HideIfEnum.Case2)]
+		[MinMaxSlider(0.0f, 1.0f)] // AllowNesting attribute is not needed, because the field is already marked with a custom naughty property drawer
+		public Vector2 hideIfEnum = new Vector2(0.25f, 0.75f);
+	}
+	
+	public enum HideIfEnum
+	{
+		Case0,
+		Case1,
+		Case2,
+		Case3
 	}
 }
