@@ -6,31 +6,23 @@ namespace NaughtyAttributes.Test
 	//[CreateAssetMenu(fileName = "NaughtyScriptableObject", menuName = "NaughtyAttributes/_NaughtyScriptableObject")]
 	public class _NaughtyScriptableObject : ScriptableObject
 	{
-		public bool enableMyInt = true;
-		public bool showMyFloat = true;
+		[Dropdown("GetVectorValues")]
+		public Vector3 vectorValue;
 
-		[EnableIf("enableMyInt")]
-		public int myInt;
-
-		[ShowIf("showMyFloat")]
-		public float myFloat;
-
-		[MinMaxSlider(0.0f, 1.0f)]
-		public Vector2 mySlider;
-
-		//[ReorderableList]
-		public List<int> list;
-
-		[Button]
-		private void IncrementMyInt()
+		private DropdownList<Vector3> GetVectorValues()
 		{
-			myInt++;
+			return new DropdownList<Vector3>()
+			{
+				{ "Right", Vector3.right },
+				{ "Up", Vector3.up },
+				{ "Forward", Vector3.forward }
+			};
 		}
 
-		[Button("Decrement My Int")]
-		private void DecrementMyInt()
+		[Button]
+		private void Log()
 		{
-			myInt--;
+			Debug.Log(vectorValue);
 		}
 	}
 }
