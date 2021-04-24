@@ -29,9 +29,12 @@ namespace NaughtyAttributes.Editor
 
 			var attribute = PropertyUtility.GetAttribute<CurveRangeAttribute>(property);
 
-			EditorGUI.CurveField(rect, property,
+			EditorGUI.CurveField(
+				rect, 
+				property,
 				attribute.Color == EColor.Clear ? Color.green : attribute.Color.GetColor(),
-				new Rect(attribute.Min.x, attribute.Min.y, attribute.Max.x - attribute.Min.x, attribute.Max.y - attribute.Min.y));
+				new Rect(attribute.Min.x, attribute.Min.y, attribute.Max.x - attribute.Min.x, attribute.Max.y - attribute.Min.y),
+				label);
 
 			EditorGUI.EndProperty();
 		}
