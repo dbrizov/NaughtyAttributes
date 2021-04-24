@@ -25,6 +25,8 @@ namespace NaughtyAttributes.Editor
 
 		protected override void OnGUI_Internal(Rect rect, SerializedProperty property, GUIContent label)
 		{
+			EditorGUI.BeginProperty(rect, label, property);
+
 			AnimatorParamAttribute animatorParamAttribute = PropertyUtility.GetAttribute<AnimatorParamAttribute>(property);
 
 			AnimatorController animatorController = GetAnimatorController(property, animatorParamAttribute.AnimatorName);
@@ -57,6 +59,8 @@ namespace NaughtyAttributes.Editor
 					DrawDefaultPropertyAndHelpBox(rect, property, string.Format(InvalidTypeWarningMessage, property.name), MessageType.Warning);
 					break;
 			}
+
+			EditorGUI.EndProperty();
 		}
 
 		private static void DrawPropertyForInt(Rect rect, SerializedProperty property, GUIContent label, List<AnimatorControllerParameter> animatorParameters)
@@ -76,13 +80,11 @@ namespace NaughtyAttributes.Editor
 			string[] displayOptions = GetDisplayOptions(animatorParameters);
 
 			int newIndex = EditorGUI.Popup(rect, label.text, index, displayOptions);
-			if (newIndex == 0)
+			int newValue = newIndex == 0 ? 0 : animatorParameters[newIndex - 1].nameHash;
+
+			if (property.intValue != newValue)
 			{
-				property.intValue = 0;
-			}
-			else
-			{
-				property.intValue = animatorParameters[newIndex - 1].nameHash;
+				property.intValue = newValue;
 			}
 		}
 
@@ -93,7 +95,7 @@ namespace NaughtyAttributes.Editor
 
 			for (int i = 0; i < animatorParameters.Count; i++)
 			{
-				if (paramName == animatorParameters[i].name)
+				if (paramName.Equals(animatorParameters[i].name, System.StringComparison.Ordinal))
 				{
 					index = i + 1; // +1 because the first option is reserved for (None)
 					break;
@@ -103,13 +105,11 @@ namespace NaughtyAttributes.Editor
 			string[] displayOptions = GetDisplayOptions(animatorParameters);
 
 			int newIndex = EditorGUI.Popup(rect, label.text, index, displayOptions);
-			if (newIndex == 0)
+			string newValue = newIndex == 0 ? null : animatorParameters[newIndex - 1].name;
+
+			if (!property.stringValue.Equals(newValue, System.StringComparison.Ordinal))
 			{
-				property.stringValue = null;
-			}
-			else
-			{
-				property.stringValue = animatorParameters[newIndex - 1].name;
+				property.stringValue = newValue;
 			}
 		}
 

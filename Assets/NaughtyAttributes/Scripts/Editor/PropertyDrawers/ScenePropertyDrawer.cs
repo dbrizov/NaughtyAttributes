@@ -26,6 +26,8 @@ namespace NaughtyAttributes.Editor
 
 		protected override void OnGUI_Internal(Rect rect, SerializedProperty property, GUIContent label)
 		{
+			EditorGUI.BeginProperty(rect, label, property);
+
 			string[] scenes = GetScenes();
 			bool anySceneInBuildSettings = scenes.Length > 0;
 			if (!anySceneInBuildSettings)
@@ -48,6 +50,8 @@ namespace NaughtyAttributes.Editor
 					DrawDefaultPropertyAndHelpBox(rect, property, message, MessageType.Warning);
 					break;
 			}
+
+			EditorGUI.EndProperty();
 		}
 
 		private string[] GetScenes()
@@ -65,16 +69,25 @@ namespace NaughtyAttributes.Editor
 
 		private static void DrawPropertyForString(Rect rect, SerializedProperty property, GUIContent label, string[] scenes, string[] sceneOptions)
 		{
-			var index = IndexOf(scenes, property.stringValue);
-			var newIndex = EditorGUI.Popup(rect, label.text, index, sceneOptions);
-			property.stringValue = scenes[newIndex];
+			int index = IndexOf(scenes, property.stringValue);
+			int newIndex = EditorGUI.Popup(rect, label.text, index, sceneOptions);
+			string newScene = scenes[newIndex];
+
+			if (!property.stringValue.Equals(newScene, StringComparison.Ordinal))
+			{
+				property.stringValue = scenes[newIndex];
+			}
 		}
 
 		private static void DrawPropertyForInt(Rect rect, SerializedProperty property, GUIContent label, string[] sceneOptions)
 		{
-			var index = property.intValue;
-			var newIndex = EditorGUI.Popup(rect, label.text, index, sceneOptions);
-			property.intValue = newIndex;
+			int index = property.intValue;
+			int newIndex = EditorGUI.Popup(rect, label.text, index, sceneOptions);
+
+			if (property.intValue != newIndex)
+			{
+				property.intValue = newIndex;
+			}
 		}
 
 		private static int IndexOf(string[] scenes, string scene)
