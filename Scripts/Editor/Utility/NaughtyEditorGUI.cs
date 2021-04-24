@@ -133,14 +133,15 @@ namespace NaughtyAttributes.Editor
 			EditorGUI.BeginChangeCheck();
 
 			int newIndex = EditorGUI.Popup(rect, label, selectedValueIndex, displayOptions);
+			object newValue = values[newIndex];
 
-			if (EditorGUI.EndChangeCheck())
+			if (!dropdownField.GetValue(target).Equals(newValue))
 			{
 				Undo.RecordObject(serializedObject.targetObject, "Dropdown");
 
 				// TODO: Problem with structs, because they are value type.
 				// The solution is to make boxing/unboxing but unfortunately I don't know the compile time type of the target object
-				dropdownField.SetValue(target, values[newIndex]);
+				dropdownField.SetValue(target, newValue);
 			}
 		}
 
