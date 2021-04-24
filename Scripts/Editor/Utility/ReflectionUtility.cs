@@ -88,17 +88,17 @@ namespace NaughtyAttributes.Editor
 
 		public static FieldInfo GetField(object target, string fieldName)
 		{
-			return GetAllFields(target, f => f.Name.Equals(fieldName, StringComparison.InvariantCulture)).FirstOrDefault();
+			return GetAllFields(target, f => f.Name.Equals(fieldName, StringComparison.Ordinal)).FirstOrDefault();
 		}
 
 		public static PropertyInfo GetProperty(object target, string propertyName)
 		{
-			return GetAllProperties(target, p => p.Name.Equals(propertyName, StringComparison.InvariantCulture)).FirstOrDefault();
+			return GetAllProperties(target, p => p.Name.Equals(propertyName, StringComparison.Ordinal)).FirstOrDefault();
 		}
 
 		public static MethodInfo GetMethod(object target, string methodName)
 		{
-			return GetAllMethods(target, m => m.Name.Equals(methodName, StringComparison.InvariantCulture)).FirstOrDefault();
+			return GetAllMethods(target, m => m.Name.Equals(methodName, StringComparison.Ordinal)).FirstOrDefault();
 		}
 
 		public static Type GetListElementType(Type listType)

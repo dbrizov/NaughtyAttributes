@@ -19,6 +19,8 @@ namespace NaughtyAttributes.Editor
 
 		protected override void OnGUI_Internal(Rect rect, SerializedProperty property, GUIContent label)
 		{
+			EditorGUI.BeginProperty(rect, label, property);
+
 			if (!IsNumber(property))
 			{
 				string message = string.Format("Field {0} is not a number", property.name);
@@ -57,6 +59,8 @@ namespace NaughtyAttributes.Editor
 
 				DrawDefaultPropertyAndHelpBox(rect, property, message, MessageType.Warning);
 			}
+
+			EditorGUI.EndProperty();
 		}
 
 		private object GetMaxValue(SerializedProperty property, ProgressBarAttribute progressBarAttribute)

@@ -16,6 +16,8 @@ namespace NaughtyAttributes.Editor
 
 		protected override void OnGUI_Internal(Rect rect, SerializedProperty property, GUIContent label)
 		{
+			EditorGUI.BeginProperty(rect, label, property);
+
 			if (property.propertyType == SerializedPropertyType.String)
 			{
 				// generate the taglist + custom tags
@@ -30,7 +32,7 @@ namespace NaughtyAttributes.Editor
 				// we skip index 0 as that is a special custom case
 				for (int i = 1; i < tagList.Count; i++)
 				{
-					if (tagList[i] == propertyString)
+					if (tagList[i].Equals(propertyString, System.StringComparison.Ordinal))
 					{
 						index = i;
 						break;
@@ -38,16 +40,14 @@ namespace NaughtyAttributes.Editor
 				}
 
 				// Draw the popup box with the current selected index
-				index = EditorGUI.Popup(rect, label.text, index, tagList.ToArray());
+				int newIndex = EditorGUI.Popup(rect, label.text, index, tagList.ToArray());
 
 				// Adjust the actual string value of the property based on the selection
-				if (index > 0)
+				string newValue = newIndex > 0 ? tagList[newIndex] : string.Empty;
+
+				if (!property.stringValue.Equals(newValue, System.StringComparison.Ordinal))
 				{
-					property.stringValue = tagList[index];
-				}
-				else
-				{
-					property.stringValue = string.Empty;
+					property.stringValue = newValue;
 				}
 			}
 			else
@@ -55,6 +55,8 @@ namespace NaughtyAttributes.Editor
 				string message = string.Format("{0} supports only string fields", typeof(TagAttribute).Name);
 				DrawDefaultPropertyAndHelpBox(rect, property, message, MessageType.Warning);
 			}
+
+			EditorGUI.EndProperty();
 		}
 	}
 }
