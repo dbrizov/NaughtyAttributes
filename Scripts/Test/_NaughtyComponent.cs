@@ -5,23 +5,17 @@ namespace NaughtyAttributes.Test
 {
 	public class _NaughtyComponent : MonoBehaviour
 	{
-		[Dropdown("intValues")]
-		public int intValue;
+		[CurveRange(0, 0, 1, 1, EColor.Red)]
+		public AnimationCurve red;
 
-#pragma warning disable 414
-		private int[] intValues = new int[] { 10, 20, 30 };
-#pragma warning restore 414
-
-		[Button]
-		private void Log()
-		{
-			Debug.Log(intValue);
-		}
+		public MyClass myClass;
 	}
 
 	[System.Serializable]
 	public class MyClass
 	{
+		[CurveRange(0, 0, 1, 1, EColor.Green)]
+		public AnimationCurve green;
 	}
 
 	[System.Serializable]
