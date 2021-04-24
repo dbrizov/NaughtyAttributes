@@ -14,6 +14,7 @@ namespace NaughtyAttributes.Test
 	public class ReadOnlyNest1
 	{
 		[ReadOnly]
+		[AllowNesting]
 		public float readOnlyFloat = 3.14f;
 
 		public ReadOnlyNest2 nest2;
@@ -23,6 +24,7 @@ namespace NaughtyAttributes.Test
 	public struct ReadOnlyNest2
 	{
 		[ReadOnly]
+		[AllowNesting]
 		public string readOnlyString;
 	}
 }

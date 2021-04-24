@@ -70,6 +70,12 @@ namespace NaughtyAttributes.Editor
 
 		public static bool IsEnabled(SerializedProperty property)
 		{
+			ReadOnlyAttribute readOnlyAttribute = GetAttribute<ReadOnlyAttribute>(property);
+			if (readOnlyAttribute != null)
+			{
+				return false;
+			}
+
 			EnableIfAttributeBase enableIfAttribute = GetAttribute<EnableIfAttributeBase>(property);
 			if (enableIfAttribute == null)
 			{
