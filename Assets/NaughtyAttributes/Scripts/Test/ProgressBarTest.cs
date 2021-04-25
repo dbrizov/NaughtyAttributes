@@ -13,8 +13,8 @@ namespace NaughtyAttributes.Test
 
 		[Header("Dynamic ProgressBar")]
 		[ProgressBar("Elixir", "maxElixir", color: EColor.Violet)]
-		public float elixir = 50.0f;
-		public float maxElixir = 100.0f;
+		public int elixir = 50;
+		public int maxElixir = 100;
 	}
 
 	[System.Serializable]

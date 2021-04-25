@@ -12,7 +12,7 @@ namespace NaughtyAttributes.Editor
 			ProgressBarAttribute progressBarAttribute = PropertyUtility.GetAttribute<ProgressBarAttribute>(property);
 			var maxValue = GetMaxValue(property, progressBarAttribute);
 
-			return IsNumber(property) && maxValue is float
+			return IsNumber(property) && IsNumber(maxValue)
 				? GetPropertyHeight(property)
 				: GetPropertyHeight(property) + GetHelpBoxHeight();
 		}
@@ -33,9 +33,9 @@ namespace NaughtyAttributes.Editor
 			var valueFormatted = property.propertyType == SerializedPropertyType.Integer ? value.ToString() : string.Format("{0:0.00}", value);
 			var maxValue = GetMaxValue(property, progressBarAttribute);
 
-			if (maxValue != null && maxValue is float)
+			if (maxValue != null && IsNumber(maxValue))
 			{
-				var fillPercentage = value / (float)maxValue;
+				var fillPercentage = value / CastToFloat(maxValue);
 				var barLabel = (!string.IsNullOrEmpty(progressBarAttribute.Name) ? "[" + progressBarAttribute.Name + "] " : "") + valueFormatted + "/" + maxValue;
 				var barColor = progressBarAttribute.Color.GetColor();
 				var labelColor = Color.white;
@@ -54,7 +54,7 @@ namespace NaughtyAttributes.Editor
 			else
 			{
 				string message = string.Format(
-					"The provided dynamic max value for the progress bar is not correct. Please check if the '{0}' is correct, or the return type is float",
+					"The provided dynamic max value for the progress bar is not correct. Please check if the '{0}' is correct, or the return type is float/int",
 					nameof(progressBarAttribute.MaxValueName));
 
 				DrawDefaultPropertyAndHelpBox(rect, property, message, MessageType.Warning);
@@ -87,7 +87,7 @@ namespace NaughtyAttributes.Editor
 
 				MethodInfo methodValuesInfo = ReflectionUtility.GetMethod(target, progressBarAttribute.MaxValueName);
 				if (methodValuesInfo != null &&
-					methodValuesInfo.ReturnType == typeof(float) &&
+					(methodValuesInfo.ReturnType == typeof(float) || methodValuesInfo.ReturnType == typeof(int)) &&
 					methodValuesInfo.GetParameters().Length == 0)
 				{
 					return methodValuesInfo.Invoke(target, null);
@@ -132,6 +132,23 @@ namespace NaughtyAttributes.Editor
 		{
 			bool isNumber = property.propertyType == SerializedPropertyType.Float || property.propertyType == SerializedPropertyType.Integer;
 			return isNumber;
+		}
+
+		private bool IsNumber(object obj)
+		{
+			return (obj is float) || (obj is int);
+		}
+
+		private float CastToFloat(object obj)
+		{
+			if (obj is int)
+			{
+				return (int)obj;
+			}
+			else
+			{
+				return (float)obj;
+			}
 		}
 	}
 }
