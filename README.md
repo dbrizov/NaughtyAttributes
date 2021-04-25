@@ -1,5 +1,5 @@
 # NaughtyAttributes
-[![Unity 2018.3+](https://img.shields.io/badge/unity-2018.3%2B-blue.svg)](https://unity3d.com/get-unity/download)
+[![Unity 2018.3+](https://img.shields.io/badge/unity-2018.4%2B-blue.svg)](https://unity3d.com/get-unity/download)
 [![openupm](https://img.shields.io/npm/v/com.dbrizov.naughtyattributes?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.dbrizov.naughtyattributes/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://github.com/dbrizov/NaughtyAttributes/blob/master/LICENSE)
 
@@ -213,6 +213,22 @@ public class NaughtyComponent : MonoBehaviour
 ```
 
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/InputAxis_Inspector.png)
+
+### Layer
+Select a layer via dropdown interface.
+
+```csharp
+public class NaughtyComponent : MonoBehaviour
+{
+	[Layer]
+	public string layerName;
+
+	[Layer]
+	public int layerIndex;
+}
+```
+
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Layer_Inspector.png)
 
 ### MinMaxSlider
 A double slider. The **min value** is saved to the **X** property, and the **max value** is saved to the **Y** property of a **Vector2** field.

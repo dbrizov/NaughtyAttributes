@@ -538,6 +538,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c928ea15ae74a44089beb2e534c1a35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layerName: Default
+  layerIndex: 4
 --- !u!1 &732714203
 GameObject:
   m_ObjectHideFlags: 0
