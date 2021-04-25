@@ -88,13 +88,18 @@ namespace NaughtyAttributes.Editor
 			if (enableIfAttribute.EnumValue != null)
 			{
 				Enum value = GetEnumValue(target, enableIfAttribute.Conditions[0]);
-				if (value != null) return enableIfAttribute.EnumValue.Equals(value) != enableIfAttribute.Inverted;
-				
+				if (value != null)
+				{
+					return enableIfAttribute.EnumValue.Equals(value) != enableIfAttribute.Inverted;
+				}
+
 				string message = enableIfAttribute.GetType().Name + " needs a valid enum field, property or method name to work";
 				Debug.LogWarning(message, property.serializedObject.targetObject);
+
 				return false;
 			}
 
+			// deal with normal conditions
 			List<bool> conditionValues = GetConditionValues(target, enableIfAttribute.Conditions);
 			if (conditionValues.Count > 0)
 			{
@@ -124,13 +129,18 @@ namespace NaughtyAttributes.Editor
 			if (showIfAttribute.EnumValue != null)
 			{
 				Enum value = GetEnumValue(target, showIfAttribute.Conditions[0]);
-				if (value != null) return showIfAttribute.EnumValue.Equals(value) != showIfAttribute.Inverted;
-				
+				if (value != null)
+				{
+					return showIfAttribute.EnumValue.Equals(value) != showIfAttribute.Inverted;
+				}
+
 				string message = showIfAttribute.GetType().Name + " needs a valid enum field, property or method name to work";
 				Debug.LogWarning(message, property.serializedObject.targetObject);
+
 				return false;
 			}
 
+			// deal with normal conditions
 			List<bool> conditionValues = GetConditionValues(target, showIfAttribute.Conditions);
 			if (conditionValues.Count > 0)
 			{
@@ -156,15 +166,21 @@ namespace NaughtyAttributes.Editor
 		{
 			FieldInfo enumField = ReflectionUtility.GetField(target, enumName);
 			if (enumField != null && enumField.FieldType.IsSubclassOf(typeof(Enum)))
-				return (Enum) enumField.GetValue(target);
-			
+			{
+				return (Enum)enumField.GetValue(target);
+			}
+
 			PropertyInfo enumProperty = ReflectionUtility.GetProperty(target, enumName);
 			if (enumProperty != null && enumProperty.PropertyType.IsSubclassOf(typeof(Enum)))
-				return (Enum) enumProperty.GetValue(target);
-			
+			{
+				return (Enum)enumProperty.GetValue(target);
+			}
+
 			MethodInfo enumMethod = ReflectionUtility.GetMethod(target, enumName);
 			if (enumMethod != null && enumMethod.ReturnType.IsSubclassOf(typeof(Enum)))
-				return (Enum) enumMethod.Invoke(target, null);
+			{
+				return (Enum)enumMethod.Invoke(target, null);
+			}
 
 			return null;
 		}

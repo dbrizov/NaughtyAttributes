@@ -7,7 +7,7 @@ namespace NaughtyAttributes
 		public string[] Conditions { get; private set; }
 		public EConditionOperator ConditionOperator { get; private set; }
 		public bool Inverted { get; protected set; }
-		
+
 		/// <summary>
 		///		If this not null, <see cref="Conditions"/>[0] is name of an enum variable.
 		/// </summary>
@@ -25,10 +25,14 @@ namespace NaughtyAttributes
 			Conditions = conditions;
 		}
 
-		public EnableIfAttributeBase(string enumName, Enum enumValue) : this(enumName)
+		public EnableIfAttributeBase(string enumName, Enum enumValue)
+			: this(enumName)
 		{
-			if (enumName is null)
+			if (enumValue == null)
+			{
 				throw new ArgumentNullException(nameof(enumValue), "This parameter must be an enum value.");
+			}
+
 			EnumValue = enumValue;
 		}
 	}
