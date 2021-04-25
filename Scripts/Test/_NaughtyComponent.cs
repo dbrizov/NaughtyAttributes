@@ -10,8 +10,6 @@ namespace NaughtyAttributes.Test
 	[System.Serializable]
 	public class MyClass
 	{
-		[CurveRange(0, 0, 1, 1, EColor.Green)]
-		public AnimationCurve green;
 	}
 
 	[System.Serializable]
