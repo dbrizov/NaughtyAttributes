@@ -23,43 +23,55 @@ namespace NaughtyAttributes.Test
 		}
 
 		[ShowNativeProperty]
-		private ushort MyUShort {
-			get {
+		private ushort MyUShort
+		{
+			get
+			{
 				return ushort.MaxValue;
 			}
 		}
 
 		[ShowNativeProperty]
-		private short MyShort {
-			get {
+		private short MyShort
+		{
+			get
+			{
 				return short.MaxValue;
 			}
 		}
 
 		[ShowNativeProperty]
-		private ulong MyULong {
-			get {
+		private ulong MyULong
+		{
+			get
+			{
 				return ulong.MaxValue;
 			}
 		}
 
 		[ShowNativeProperty]
-		private long MyLong {
-			get {
+		private long MyLong
+		{
+			get
+			{
 				return long.MaxValue;
 			}
 		}
 
 		[ShowNativeProperty]
-		private uint MyUInt {
-			get {
+		private uint MyUInt
+		{
+			get
+			{
 				return uint.MaxValue;
 			}
 		}
 
 		[ShowNativeProperty]
-		private int MyInt {
-			get {
+		private int MyInt
+		{
+			get
+			{
 				return int.MaxValue;
 			}
 		}
