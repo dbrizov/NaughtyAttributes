@@ -70,7 +70,8 @@ namespace NaughtyAttributes.Editor
 					sliderValue.y = EditorGUI.FloatField(maxFloatFieldRect, sliderValue.y);
 					sliderValue.y = Mathf.Clamp(sliderValue.y, Mathf.Max(minMaxSliderAttribute.MinValue, sliderValue.x), minMaxSliderAttribute.MaxValue);
 
-					if (EditorGUI.EndChangeCheck()) {
+					if (EditorGUI.EndChangeCheck())
+					{
 						property.vector2Value = sliderValue;
 					}
 				}
@@ -87,7 +88,8 @@ namespace NaughtyAttributes.Editor
 					sliderValue.y = EditorGUI.IntField(maxFloatFieldRect, (int)yValue);
 					sliderValue.y = (int)Mathf.Clamp(sliderValue.y, Mathf.Max(minMaxSliderAttribute.MinValue, sliderValue.x), minMaxSliderAttribute.MaxValue);
 
-					if (EditorGUI.EndChangeCheck()) {
+					if (EditorGUI.EndChangeCheck())
+					{
 						property.vector2IntValue = sliderValue;
 					}
 				}
