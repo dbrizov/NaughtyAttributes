@@ -16,5 +16,11 @@ namespace NaughtyAttributes
 		{
 			Inverted = true;
 		}
+
+		public HideIfAttribute(string enumName, object enumValue)
+			: base(enumName, enumValue as Enum)
+		{
+			Inverted = true;
+		}
 	}
 }

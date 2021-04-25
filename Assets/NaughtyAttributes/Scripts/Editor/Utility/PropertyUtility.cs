@@ -84,6 +84,22 @@ namespace NaughtyAttributes.Editor
 
 			object target = GetTargetObjectWithProperty(property);
 
+			// deal with enum conditions
+			if (enableIfAttribute.EnumValue != null)
+			{
+				Enum value = GetEnumValue(target, enableIfAttribute.Conditions[0]);
+				if (value != null)
+				{
+					return enableIfAttribute.EnumValue.Equals(value) != enableIfAttribute.Inverted;
+				}
+
+				string message = enableIfAttribute.GetType().Name + " needs a valid enum field, property or method name to work";
+				Debug.LogWarning(message, property.serializedObject.targetObject);
+
+				return false;
+			}
+
+			// deal with normal conditions
 			List<bool> conditionValues = GetConditionValues(target, enableIfAttribute.Conditions);
 			if (conditionValues.Count > 0)
 			{
@@ -109,6 +125,22 @@ namespace NaughtyAttributes.Editor
 
 			object target = GetTargetObjectWithProperty(property);
 
+			// deal with enum conditions
+			if (showIfAttribute.EnumValue != null)
+			{
+				Enum value = GetEnumValue(target, showIfAttribute.Conditions[0]);
+				if (value != null)
+				{
+					return showIfAttribute.EnumValue.Equals(value) != showIfAttribute.Inverted;
+				}
+
+				string message = showIfAttribute.GetType().Name + " needs a valid enum field, property or method name to work";
+				Debug.LogWarning(message, property.serializedObject.targetObject);
+
+				return false;
+			}
+
+			// deal with normal conditions
 			List<bool> conditionValues = GetConditionValues(target, showIfAttribute.Conditions);
 			if (conditionValues.Count > 0)
 			{
@@ -122,6 +154,35 @@ namespace NaughtyAttributes.Editor
 
 				return false;
 			}
+		}
+
+		/// <summary>
+		///		Gets an enum value from reflection.
+		/// </summary>
+		/// <param name="target">The target object.</param>
+		/// <param name="enumName">Name of a field, property, or method that returns an enum.</param>
+		/// <returns>Null if can't find an enum value.</returns>
+		internal static Enum GetEnumValue(object target, string enumName)
+		{
+			FieldInfo enumField = ReflectionUtility.GetField(target, enumName);
+			if (enumField != null && enumField.FieldType.IsSubclassOf(typeof(Enum)))
+			{
+				return (Enum)enumField.GetValue(target);
+			}
+
+			PropertyInfo enumProperty = ReflectionUtility.GetProperty(target, enumName);
+			if (enumProperty != null && enumProperty.PropertyType.IsSubclassOf(typeof(Enum)))
+			{
+				return (Enum)enumProperty.GetValue(target);
+			}
+
+			MethodInfo enumMethod = ReflectionUtility.GetMethod(target, enumName);
+			if (enumMethod != null && enumMethod.ReturnType.IsSubclassOf(typeof(Enum)))
+			{
+				return (Enum)enumMethod.Invoke(target, null);
+			}
+
+			return null;
 		}
 
 		internal static List<bool> GetConditionValues(object target, string[] conditions)

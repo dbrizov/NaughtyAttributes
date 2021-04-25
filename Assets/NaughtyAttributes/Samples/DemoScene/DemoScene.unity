@@ -200,18 +200,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enable1: 0
   enable2: 0
+  enum1: 0
   enableIfAll: 
   enableIfAny: 
+  enableIfEnum: 
   nest1:
     enable1: 1
     enable2: 0
+    enum1: 0
     enableIfAll: 1
     enableIfAny: 2
+    enableIfEnum: 0
     nest2:
       enable1: 1
       enable2: 1
+      enum1: 0
       enableIfAll: {x: 0.25, y: 0.75}
       enableIfAny: {x: 0.25, y: 0.75}
+      enableIfEnum: {x: 0.25, y: 0.75}
 --- !u!114 &114650326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,18 +232,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   disable1: 0
   disable2: 0
+  enum1: 0
   disableIfAll: 
   disableIfAny: 
+  disableIfEnum: 
   nest1:
     disable1: 1
     disable2: 0
+    enum1: 0
     disableIfAll: 1
     disableIfAny: 2
+    disableIfEnum: 3
     nest2:
       disable1: 1
       disable2: 1
+      enum1: 0
       enableIfAll: {x: 0.25, y: 0.75}
       enableIfAny: {x: 0.25, y: 0.75}
+      enableIfEnum: {x: 0.25, y: 0.75}
 --- !u!1 &155697335
 GameObject:
   m_ObjectHideFlags: 0
@@ -1387,18 +1399,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   show1: 0
   show2: 0
+  enum1: 0
   showIfAll: 
   showIfAny: 
+  showIfEnum: 
   nest1:
     show1: 1
     show2: 0
+    enum1: 0
     showIfAll: 0
     showIfAny: 0
+    showIfEnum: 0
     nest2:
       show1: 1
       show2: 1
+      enum1: 0
       showIfAll: {x: 0.25, y: 0.75}
       showIfAny: {x: 0.25, y: 0.75}
+      showIfEnum: {x: 0.25, y: 0.75}
 --- !u!114 &1524906393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1413,18 +1431,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hide1: 0
   hide2: 0
+  enum1: 0
   hideIfAll: 
   hideIfAny: 
+  hideIfEnum: 
   nest1:
     hide1: 1
     hide2: 0
+    enum1: 0
     hideIfAll: 0
     hideIfAny: 0
+    hideIfEnum: 0
     nest2:
       hide1: 1
       hide2: 1
+      enum1: 0
       hideIfAll: {x: 0.25, y: 0.75}
       hideIfAny: {x: 0.25, y: 0.75}
+      hideIfEnum: {x: 0.25, y: 0.75}
 --- !u!1 &1552114399
 GameObject:
   m_ObjectHideFlags: 0
