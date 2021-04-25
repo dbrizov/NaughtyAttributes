@@ -89,22 +89,17 @@ namespace NaughtyAttributes.Editor
 					property.isExpanded = EditorGUI.Foldout(foldoutRect, property.isExpanded, label, toggleOnLabelClick: true);
 
 					// Draw the scriptable object field
-					float indentLength = NaughtyEditorGUI.GetIndentLength(rect);
-					float labelWidth = EditorGUIUtility.labelWidth - indentLength + NaughtyEditorGUI.HorizontalSpacing;
 					Rect propertyRect = new Rect()
 					{
-						x = rect.x + labelWidth,
+						x = rect.x,
 						y = rect.y,
-						width = rect.width - labelWidth,
+						width = rect.width,
 						height = EditorGUIUtility.singleLineHeight
 					};
 
-					EditorGUI.BeginChangeCheck();
-					property.objectReferenceValue = EditorGUI.ObjectField(propertyRect, GUIContent.none, property.objectReferenceValue, propertyType, false);
-					if (EditorGUI.EndChangeCheck())
-					{
-						property.serializedObject.ApplyModifiedProperties();
-					}
+					EditorGUI.PropertyField(propertyRect, property, label, false);
+
+					property.serializedObject.ApplyModifiedProperties();
 
 					// Draw the child properties
 					if (property.isExpanded)
@@ -142,9 +137,8 @@ namespace NaughtyAttributes.Editor
 
 			using (new EditorGUI.IndentLevelScope())
 			{
-				EditorGUI.BeginChangeCheck();
-
 				SerializedObject serializedObject = new SerializedObject(scriptableObject);
+
 				using (var iterator = serializedObject.GetIterator())
 				{
 					float yOffset = EditorGUIUtility.singleLineHeight;
@@ -182,10 +176,7 @@ namespace NaughtyAttributes.Editor
 					}
 				}
 
-				if (EditorGUI.EndChangeCheck())
-				{
-					serializedObject.ApplyModifiedProperties();
-				}
+				serializedObject.ApplyModifiedProperties();
 			}
 		}
 	}
