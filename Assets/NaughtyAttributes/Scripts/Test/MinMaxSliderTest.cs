@@ -22,7 +22,7 @@ namespace NaughtyAttributes.Test
 	[System.Serializable]
 	public class MinMaxSliderNest2
 	{
-		[MinMaxSlider(0.0f, 1.0f)]
-		public Vector2 minMaxSlider2 = new Vector2(0.25f, 0.75f);
+		[MinMaxSlider(1, 11)]
+		public Vector2Int minMaxSlider2 = new Vector2Int(6, 11);
 	}
 }

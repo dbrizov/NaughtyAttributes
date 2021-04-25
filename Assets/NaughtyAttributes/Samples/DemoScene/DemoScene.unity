@@ -482,7 +482,7 @@ MonoBehaviour:
   nest1:
     minMaxSlider1: {x: 0.25, y: 0.75}
     nest2:
-      minMaxSlider2: {x: 0.50000006, y: 1}
+      minMaxSlider2: {x: 6, y: 11}
 --- !u!1 &706445688
 GameObject:
   m_ObjectHideFlags: 0
@@ -1686,17 +1686,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450a05787c54e6b4fa88ffe223bcee87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  min0: 0
-  max0: 0
-  range01: 0
+  min0Int: 0
+  max0Int: 0
+  range01Float: 0
+  range01Vector2: {x: 0, y: 0}
+  range01Vector3: {x: 0, y: 0, z: 0}
+  range01Vector4: {x: 0, y: 0, z: 0, w: 0}
+  min0Vector2Int: {x: 0, y: 0}
+  max100Vector2Int: {x: 0, y: 0}
+  min0Vector3Int: {x: 0, y: 0, z: 0}
+  max100Vector3Int: {x: 0, y: 0, z: 0}
   nest1:
-    min0: 0
-    max0: 0
-    range01: 0
+    min0Int: 0
+    max0Int: 0
+    range01Float: 0
+    range01Vector2: {x: 0, y: 0}
+    range01Vector3: {x: 0, y: 0, z: 0}
+    range01Vector4: {x: 0, y: 0, z: 0, w: 0}
+    min0Vector2Int: {x: 0, y: 0}
+    max100Vector2Int: {x: 0, y: 0}
+    min0Vector3Int: {x: 0, y: 0, z: 0}
+    max100Vector3Int: {x: 0, y: 0, z: 0}
     nest2:
-      min0: 0
-      max0: 0
-      range01: 0
+      min0Int: 0
+      max0Int: 0
+      range01Float: 0
+      range01Vector2: {x: 0, y: 0}
+      range01Vector3: {x: 0, y: 0, z: 0}
+      range01Vector4: {x: 0, y: 0, z: 0, w: 0}
+      min0Vector2Int: {x: 0, y: 0}
+      max100Vector2Int: {x: 0, y: 0}
+      min0Vector3Int: {x: 0, y: 0, z: 0}
+      max100Vector3Int: {x: 0, y: 0, z: 0}
 --- !u!1 &1747151587
 GameObject:
   m_ObjectHideFlags: 0
