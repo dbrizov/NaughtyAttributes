@@ -266,13 +266,29 @@ namespace NaughtyAttributes.Editor
 				{
 					EditorGUILayout.Toggle(label, (bool)value);
 				}
+				else if (valueType == typeof(short))
+				{
+					EditorGUILayout.IntField(label, (short)value);
+				}
+				else if (valueType == typeof(ushort))
+				{
+					EditorGUILayout.IntField(label, (ushort)value);
+				}
 				else if (valueType == typeof(int))
 				{
 					EditorGUILayout.IntField(label, (int)value);
 				}
+				else if (valueType == typeof(uint))
+				{
+					EditorGUILayout.LongField(label, (uint)value);
+				}
 				else if (valueType == typeof(long))
 				{
 					EditorGUILayout.LongField(label, (long)value);
+				}
+				else if (valueType == typeof(ulong))
+				{
+					EditorGUILayout.TextField(label, ((ulong)value).ToString());
 				}
 				else if (valueType == typeof(float))
 				{
