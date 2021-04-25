@@ -491,19 +491,6 @@ public class NaughtyComponent : MonoBehaviour
 }
 ```
 
-### ReadOnly
-Makes a field read only.
-
-```csharp
-public class NaughtyComponent : MonoBehaviour
-{
-	[ReadOnly]
-	public Vector3 forwardVector = Vector3.forward;
-}
-```
-
-![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ReadOnly_Inspector.png)
-
 ### Label
 Override default field label.
 
@@ -519,6 +506,19 @@ public class NaughtyComponent : MonoBehaviour
 ```
 
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Label_Inspector.png)
+
+### ReadOnly
+Make a field read only.
+
+```csharp
+public class NaughtyComponent : MonoBehaviour
+{
+	[ReadOnly]
+	public Vector3 forwardVector = Vector3.forward;
+}
+```
+
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ReadOnly_Inspector.png)
 
 ### OnValueChanged
 Detects a value change and executes a callback.
