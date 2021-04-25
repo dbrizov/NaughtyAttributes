@@ -41,8 +41,8 @@ namespace NaughtyAttributes.Test
 		[AllowNesting] // Because it's nested we need to explicitly allow nesting
 		public int showIfAny;
 
-		[ShowIf("enum1", ShowIfEnum.Case1)]
-		[AllowNesting]
+		[ShowIf("Enum1", ShowIfEnum.Case1)]
+		[AllowNesting] // Because it's nested we need to explicitly allow nesting
 		public int showIfEnum;
 
 		public ShowIfNest2 nest2;
@@ -65,7 +65,7 @@ namespace NaughtyAttributes.Test
 		[ShowIf(EConditionOperator.Or, "GetShow1", "GetShow2")]
 		[MinMaxSlider(0.0f, 1.0f)] // AllowNesting attribute is not needed, because the field is already marked with a custom naughty property drawer
 		public Vector2 showIfAny = new Vector2(0.25f, 0.75f);
-		
+
 		[ShowIf("GetEnum1", ShowIfEnum.Case2)]
 		[MinMaxSlider(0.0f, 1.0f)] // AllowNesting attribute is not needed, because the field is already marked with a custom naughty property drawer
 		public Vector2 showIfEnum = new Vector2(0.25f, 0.75f);
@@ -75,7 +75,6 @@ namespace NaughtyAttributes.Test
 	{
 		Case0,
 		Case1,
-		Case2,
-		Case3
+		Case2
 	}
 }

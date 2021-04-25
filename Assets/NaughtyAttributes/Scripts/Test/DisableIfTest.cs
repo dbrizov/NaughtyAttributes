@@ -42,7 +42,7 @@ namespace NaughtyAttributes.Test
 		public int disableIfAny = 2;
 
 		[DisableIf("Enum1", DisableIfEnum.Case1)]
-		[AllowNesting]
+		[AllowNesting] // Because it's nested we need to explicitly allow nesting
 		public int disableIfEnum = 3;
 
 		public DisableIfNest2 nest2;
@@ -65,7 +65,7 @@ namespace NaughtyAttributes.Test
 		[DisableIf(EConditionOperator.Or, "GetDisable1", "GetDisable2")]
 		[MinMaxSlider(0.0f, 1.0f)] // AllowNesting attribute is not needed, because the field is already marked with a custom naughty property drawer
 		public Vector2 enableIfAny = new Vector2(0.25f, 0.75f);
-		
+
 		[DisableIf("GetEnum1", DisableIfEnum.Case2)]
 		[MinMaxSlider(0.0f, 1.0f)] // AllowNesting attribute is not needed, because the field is already marked with a custom naughty property drawer
 		public Vector2 enableIfEnum = new Vector2(0.25f, 0.75f);
@@ -76,7 +76,6 @@ namespace NaughtyAttributes.Test
 	{
 		Case0,
 		Case1,
-		Case2,
-		Case3
+		Case2
 	}
 }
