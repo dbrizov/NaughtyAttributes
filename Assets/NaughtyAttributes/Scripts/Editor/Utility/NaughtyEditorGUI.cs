@@ -48,47 +48,33 @@ namespace NaughtyAttributes.Editor
 			}
 			else
 			{
-				GUIContent label = PropertyUtility.GetLabel(property);
-				bool anyDrawerAttribute = PropertyUtility.GetAttributes<DrawerAttribute>(property).Any();
-
-				if (!anyDrawerAttribute)
+				// Check if visible
+				bool visible = PropertyUtility.IsVisible(property);
+				if (!visible)
 				{
-					// Drawer attributes check for visibility, enableability and validator themselves,
-					// so if a property doesn't have a DrawerAttribute we need to check for these explicitly
-
-					// Check if visible
-					bool visible = PropertyUtility.IsVisible(property);
-					if (!visible)
-					{
-						return;
-					}
-
-					// Validate
-					ValidatorAttribute[] validatorAttributes = PropertyUtility.GetAttributes<ValidatorAttribute>(property);
-					foreach (var validatorAttribute in validatorAttributes)
-					{
-						validatorAttribute.GetValidator().ValidateProperty(property);
-					}
-
-					// Check if enabled and draw
-					EditorGUI.BeginChangeCheck();
-					bool enabled = PropertyUtility.IsEnabled(property);
-
-					using (new EditorGUI.DisabledScope(disabled: !enabled))
-					{
-						propertyFieldFunction.Invoke(rect, property, label, includeChildren);
-					}
-
-					// Call OnValueChanged callbacks
-					if (EditorGUI.EndChangeCheck())
-					{
-						PropertyUtility.CallOnValueChangedCallbacks(property);
-					}
+					return;
 				}
-				else
+
+				// Validate
+				ValidatorAttribute[] validatorAttributes = PropertyUtility.GetAttributes<ValidatorAttribute>(property);
+				foreach (var validatorAttribute in validatorAttributes)
 				{
-					// We don't need to check for enableIfAttribute
-					propertyFieldFunction.Invoke(rect, property, label, includeChildren);
+					validatorAttribute.GetValidator().ValidateProperty(property);
+				}
+
+				// Check if enabled and draw
+				EditorGUI.BeginChangeCheck();
+				bool enabled = PropertyUtility.IsEnabled(property);
+
+				using (new EditorGUI.DisabledScope(disabled: !enabled))
+				{
+					propertyFieldFunction.Invoke(rect, property, PropertyUtility.GetLabel(property), includeChildren);
+				}
+
+				// Call OnValueChanged callbacks
+				if (EditorGUI.EndChangeCheck())
+				{
+					PropertyUtility.CallOnValueChangedCallbacks(property);
 				}
 			}
 		}
