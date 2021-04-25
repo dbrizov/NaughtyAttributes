@@ -298,6 +298,14 @@ namespace NaughtyAttributes.Editor
 				{
 					EditorGUILayout.Vector4Field(label, (Vector4)value);
 				}
+				else if (valueType == typeof(Vector2Int))
+				{
+					EditorGUILayout.Vector2IntField(label, (Vector2Int)value);
+				}
+				else if (valueType == typeof(Vector3Int))
+				{
+					EditorGUILayout.Vector3IntField(label, (Vector3Int)value);
+				}
 				else if (valueType == typeof(Color))
 				{
 					EditorGUILayout.ColorField(label, (Color)value);
@@ -309,6 +317,10 @@ namespace NaughtyAttributes.Editor
 				else if (valueType == typeof(Rect))
 				{
 					EditorGUILayout.RectField(label, (Rect)value);
+				}
+				else if (valueType == typeof(RectInt))
+				{
+					EditorGUILayout.RectIntField(label, (RectInt)value);
 				}
 				else if (typeof(UnityEngine.Object).IsAssignableFrom(valueType))
 				{
