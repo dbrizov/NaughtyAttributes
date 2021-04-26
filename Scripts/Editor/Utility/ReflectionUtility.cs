@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using UnityEditor;
 using UnityEngine;
 
 namespace NaughtyAttributes.Editor
@@ -17,7 +16,7 @@ namespace NaughtyAttributes.Editor
 				yield break;
 			}
 
-			List<Type> types = SelfAndBaseTypes(target);
+			List<Type> types = GetSelfAndBaseTypes(target);
 
 			for (int i = types.Count - 1; i >= 0; i--)
 			{
@@ -40,7 +39,7 @@ namespace NaughtyAttributes.Editor
 				yield break;
 			}
 
-			List<Type> types = SelfAndBaseTypes(target);
+			List<Type> types = GetSelfAndBaseTypes(target);
 
 			for (int i = types.Count - 1; i >= 0; i--)
 			{
@@ -63,7 +62,7 @@ namespace NaughtyAttributes.Editor
 				yield break;
 			}
 
-			List<Type> types = SelfAndBaseTypes(target);
+			List<Type> types = GetSelfAndBaseTypes(target);
 
 			for (int i = types.Count - 1; i >= 0; i--)
 			{
@@ -111,7 +110,7 @@ namespace NaughtyAttributes.Editor
 		/// </summary>
 		/// <param name="target"></param>
 		/// <returns></returns>
-		private static List<Type> SelfAndBaseTypes(object target)
+		private static List<Type> GetSelfAndBaseTypes(object target)
 		{
 			List<Type> types = new List<Type>()
 			{
