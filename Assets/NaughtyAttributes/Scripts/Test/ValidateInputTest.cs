@@ -13,6 +13,8 @@ namespace NaughtyAttributes.Test
 		}
 
 		public ValidateInputNest1 nest1;
+
+		public ValidateInputInheritedNest inheritedNest;
 	}
 
 	[System.Serializable]
@@ -41,5 +43,10 @@ namespace NaughtyAttributes.Test
 		{
 			return value != 0;
 		}
+	}
+
+	[System.Serializable]
+	public class ValidateInputInheritedNest : ValidateInputNest1
+	{
 	}
 }

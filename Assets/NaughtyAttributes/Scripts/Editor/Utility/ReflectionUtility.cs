@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using UnityEditor;
 using UnityEngine;
 
 namespace NaughtyAttributes.Editor
@@ -17,15 +16,7 @@ namespace NaughtyAttributes.Editor
 				yield break;
 			}
 
-			List<Type> types = new List<Type>()
-			{
-				target.GetType()
-			};
-
-			while (types.Last().BaseType != null)
-			{
-				types.Add(types.Last().BaseType);
-			}
+			List<Type> types = GetSelfAndBaseTypes(target);
 
 			for (int i = types.Count - 1; i >= 0; i--)
 			{
@@ -48,15 +39,7 @@ namespace NaughtyAttributes.Editor
 				yield break;
 			}
 
-			List<Type> types = new List<Type>()
-			{
-				target.GetType()
-			};
-
-			while (types.Last().BaseType != null)
-			{
-				types.Add(types.Last().BaseType);
-			}
+			List<Type> types = GetSelfAndBaseTypes(target);
 
 			for (int i = types.Count - 1; i >= 0; i--)
 			{
@@ -76,14 +59,22 @@ namespace NaughtyAttributes.Editor
 			if (target == null)
 			{
 				Debug.LogError("The target object is null. Check for missing scripts.");
-				return null;
+				yield break;
 			}
 
-			IEnumerable<MethodInfo> methodInfos = target.GetType()
-				.GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public)
-				.Where(predicate);
+			List<Type> types = GetSelfAndBaseTypes(target);
 
-			return methodInfos;
+			for (int i = types.Count - 1; i >= 0; i--)
+			{
+				IEnumerable<MethodInfo> methodInfos = types[i]
+					.GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly)
+					.Where(predicate);
+
+				foreach (var methodInfo in methodInfos)
+				{
+					yield return methodInfo;
+				}
+			}
 		}
 
 		public static FieldInfo GetField(object target, string fieldName)
@@ -111,6 +102,27 @@ namespace NaughtyAttributes.Editor
 			{
 				return listType.GetElementType();
 			}
+		}
+
+		/// <summary>
+		///		Get type and all base types of target, sorted as following:
+		///		<para />[target's type, base type, base's base type, ...]
+		/// </summary>
+		/// <param name="target"></param>
+		/// <returns></returns>
+		private static List<Type> GetSelfAndBaseTypes(object target)
+		{
+			List<Type> types = new List<Type>()
+			{
+				target.GetType()
+			};
+
+			while (types.Last().BaseType != null)
+			{
+				types.Add(types.Last().BaseType);
+			}
+
+			return types;
 		}
 	}
 }
