@@ -38,6 +38,29 @@ NaughtyAttributes is an open-source project that I am developing in my free time
 
 # Overview
 
+## Special Attributes
+
+### AllowNesting
+This attribute must be used in some cases when you want meta attributes to work inside serializable nested structs or classes.
+You can check in which cases you need to use it [here](https://dbrizov.github.io/na-docs/attributes/special_attributes/allow_nesting.html).
+
+```csharp
+public class NaughtyComponent : MonoBehaviour
+{
+    public MyStruct myStruct;
+}
+
+[System.Serializable]
+public struct MyStruct
+{
+    public bool enableFlag;
+
+    [EnableIf("enableFlag")]
+    [AllowNesting] // Because it's nested we need to explicitly allow nesting
+    public int integer;
+}
+```
+
 ## Drawer Attributes
 Provide special draw options to serialized fields.
 A field can have only one DrawerAttribute. If a field has more than one, only the bottom one will be used.
