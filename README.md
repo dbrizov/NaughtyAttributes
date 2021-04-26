@@ -7,7 +7,10 @@ NaughtyAttributes is an extension for the Unity Inspector.
 
 It expands the range of attributes that Unity provides so that you can create powerful inspectors without the need of custom editors or property drawers. It also provides attributes that can be applied to non-serialized fields or functions.
 
-Most of the attributes are implemented using Unity's `CustomPropertyDrawer`, so they will work in your custom editors. If you want all of the attributes to work in your custom editors, however, you must inherit from `NaughtyInspector` and use the `NaughtyEditorGUI.PropertyField_Layout` function instead of `EditorGUILayout.PropertyField`.
+Most of the attributes are implemented using Unity's `CustomPropertyDrawer`, so they will work in your custom editors.
+The attributes that won't work in your custom editors are the meta attributes and some drawer attributes such as
+`ReorderableList`, `Button`, `ShowNonSerializedField` and `ShowNativeProperty`.    
+If you want all of the attributes to work in your custom editors, however, you must inherit from `NaughtyInspector` and use the `NaughtyEditorGUI.PropertyField_Layout` function instead of `EditorGUILayout.PropertyField`.
 
 ## System Requirements
 Unity 2018.4.0 or later versions. Feel free to try older version. Don't forget to include the NaughtyAttributes namespace.
