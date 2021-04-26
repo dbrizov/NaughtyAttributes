@@ -17,15 +17,7 @@ namespace NaughtyAttributes.Editor
 				yield break;
 			}
 
-			List<Type> types = new List<Type>()
-			{
-				target.GetType()
-			};
-
-			while (types.Last().BaseType != null)
-			{
-				types.Add(types.Last().BaseType);
-			}
+			List<Type> types = SelfAndBaseTypes(target);
 
 			for (int i = types.Count - 1; i >= 0; i--)
 			{
@@ -48,15 +40,7 @@ namespace NaughtyAttributes.Editor
 				yield break;
 			}
 
-			List<Type> types = new List<Type>()
-			{
-				target.GetType()
-			};
-
-			while (types.Last().BaseType != null)
-			{
-				types.Add(types.Last().BaseType);
-			}
+			List<Type> types = SelfAndBaseTypes(target);
 
 			for (int i = types.Count - 1; i >= 0; i--)
 			{
@@ -79,15 +63,7 @@ namespace NaughtyAttributes.Editor
 				yield break;
 			}
 
-			List<Type> types = new List<Type>()
-			{
-				target.GetType()
-			};
-
-			while (types.Last().BaseType != null)
-			{
-				types.Add(types.Last().BaseType);
-			}
+			List<Type> types = SelfAndBaseTypes(target);
 
 			for (int i = types.Count - 1; i >= 0; i--)
 			{
@@ -127,6 +103,27 @@ namespace NaughtyAttributes.Editor
 			{
 				return listType.GetElementType();
 			}
+		}
+
+		/// <summary>
+		///		Get type and all base types of target, sorted as following:
+		///		<para />[target's type, base type, base's base type, ...]
+		/// </summary>
+		/// <param name="target"></param>
+		/// <returns></returns>
+		private static List<Type> SelfAndBaseTypes(object target)
+		{
+			List<Type> types = new List<Type>()
+			{
+				target.GetType()
+			};
+
+			while (types.Last().BaseType != null)
+			{
+				types.Add(types.Last().BaseType);
+			}
+
+			return types;
 		}
 	}
 }
