@@ -76,14 +76,30 @@ namespace NaughtyAttributes.Editor
 			if (target == null)
 			{
 				Debug.LogError("The target object is null. Check for missing scripts.");
-				return null;
+				yield break;
 			}
 
-			IEnumerable<MethodInfo> methodInfos = target.GetType()
-				.GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public)
-				.Where(predicate);
+			List<Type> types = new List<Type>()
+			{
+				target.GetType()
+			};
 
-			return methodInfos;
+			while (types.Last().BaseType != null)
+			{
+				types.Add(types.Last().BaseType);
+			}
+
+			for (int i = types.Count - 1; i >= 0; i--)
+			{
+				IEnumerable<MethodInfo> methodInfos = types[i]
+					.GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly)
+					.Where(predicate);
+
+				foreach (var methodInfo in methodInfos)
+				{
+					yield return methodInfo;
+				}
+			}
 		}
 
 		public static FieldInfo GetField(object target, string fieldName)
