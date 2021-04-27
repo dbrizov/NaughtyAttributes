@@ -55,7 +55,7 @@ public struct MyStruct
 {
     public bool enableFlag;
 
-    [EnableIf("enableFlag")]
+    [EnableIf(nameof(enableFlag))]
     [AllowNesting] // Because it's nested we need to explicitly allow nesting
     public int integer;
 }
@@ -73,10 +73,10 @@ public class NaughtyComponent : MonoBehaviour
 {
 	public Animator someAnimator;
 
-	[AnimatorParam("someAnimator")]
+	[AnimatorParam(nameof(someAnimator))]
 	public int paramHash;
 
-	[AnimatorParam("someAnimator")]
+	[AnimatorParam(nameof(someAnimator))]
 	public string paramName;
 }
 ```
@@ -93,7 +93,7 @@ public class NaughtyComponent : MonoBehaviour
 	[Button]
 	private void MethodOne() { }
 
-	[Button("Button Text")]
+	[Button(nameof(Button Text))]
 	private void MethodTwo() { }
 }
 ```
@@ -125,13 +125,13 @@ Provides an interface for dropdown value selection.
 ```csharp
 public class NaughtyComponent : MonoBehaviour
 {
-	[Dropdown("intValues")]
+	[Dropdown(nameof(intValues))]
 	public int intValue;
 
-	[Dropdown("StringValues")]
+	[Dropdown(nameof(StringValues))]
 	public string stringValue;
 
-	[Dropdown("GetVectorValues")]
+	[Dropdown(nameof(GetVectorValues))]
 	public Vector3 vectorValue;
 
 	private int[] intValues = new int[] { 1, 2, 3, 4, 5 };
@@ -484,13 +484,13 @@ public class NaughtyComponent : MonoBehaviour
 {
 	public bool showInt;
 
-	[ShowIf("showInt")]
+	[ShowIf(nameof(showInt))]
 	public int myInt;
 
-	[ShowIf("AlwaysShow")]
+	[ShowIf(nameof(AlwaysShow))]
 	public float myFloat;
 
-	[ShowIf("NeverShow")]
+	[ShowIf(nameof(NeverShow))]
 	public Vector3 myVector;
 
 	public bool AlwaysShow() { return true; }
@@ -509,10 +509,10 @@ public class NaughtyComponent : MonoBehaviour
 	public bool flag0;
 	public bool flag1;
 
-	[ShowIf(EConditionOperator.And, "flag0", "flag1")]
+	[ShowIf(EConditionOperator.And, nameof(flag0), nameof(flag1))]
 	public int showIfAll;
 
-	[ShowIf(EConditionOperator.Or, "flag0", "flag1")]
+	[ShowIf(EConditionOperator.Or, nameof(flag0), nameof(flag1))]
 	public int showIfAny;
 }
 ```
@@ -541,7 +541,7 @@ If you want a runtime event, you should probably use an event/delegate and subsc
 ```csharp
 public class NaughtyComponent : MonoBehaviour
 {
-	[OnValueChanged("OnValueChangedCallback")]
+	[OnValueChanged(nameof(OnValueChangedCallback))]
 	public int myInt;
 
 	private void OnValueChangedCallback()
@@ -605,10 +605,10 @@ The most powerful ValidatorAttribute.
 ```csharp
 public class _NaughtyComponent : MonoBehaviour
 {
-	[ValidateInput("IsNotNull")]
+	[ValidateInput(nameof(IsNotNull))]
 	public Transform myTransform;
 
-	[ValidateInput("IsGreaterThanZero", "myInteger must be greater than zero")]
+	[ValidateInput(nameof(IsGreaterThanZero), "myInteger must be greater than zero")]
 	public int myInt;
 
 	private bool IsNotNull(Transform tr)
