@@ -445,13 +445,13 @@ public class NaughtyComponent : MonoBehaviour
 {
 	public bool enableMyInt;
 
-	[EnableIf("enableMyInt")]
+	[EnableIf(nameof(enableMyInt))]
 	public int myInt;
 
-	[EnableIf("Enabled")]
+	[EnableIf(nameof(Enabled))]
 	public float myFloat;
 
-	[EnableIf("NotEnabled")]
+	[EnableIf(nameof(NotEnabled))]
 	public Vector3 myVector;
 
 	public bool Enabled() { return true; }
@@ -470,10 +470,10 @@ public class NaughtyComponent : MonoBehaviour
 	public bool flag0;
 	public bool flag1;
 
-	[EnableIf(EConditionOperator.And, "flag0", "flag1")]
+	[EnableIf(EConditionOperator.And, nameof(flag0), nameof(flag1))]
 	public int enabledIfAll;
 
-	[EnableIf(EConditionOperator.Or, "flag0", "flag1")]
+	[EnableIf(EConditionOperator.Or, nameof(flag0), nameof(flag1))]
 	public int enabledIfAny;
 }
 ```
