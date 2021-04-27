@@ -93,7 +93,7 @@ public class NaughtyComponent : MonoBehaviour
 	[Button]
 	private void MethodOne() { }
 
-	[Button(Button Text)]
+	[Button("Button Text")]
 	private void MethodTwo() { }
 }
 ```
