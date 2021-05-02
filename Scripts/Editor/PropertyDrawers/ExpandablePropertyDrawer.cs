@@ -8,6 +8,11 @@ namespace NaughtyAttributes.Editor
 	{
 		protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
 		{
+			if (property.objectReferenceValue == null)
+			{
+				return GetPropertyHeight(property);
+			}
+
 			System.Type propertyType = PropertyUtility.GetPropertyType(property);
 			if (typeof(ScriptableObject).IsAssignableFrom(propertyType))
 			{
@@ -67,51 +72,58 @@ namespace NaughtyAttributes.Editor
 		{
 			EditorGUI.BeginProperty(rect, label, property);
 
-			System.Type propertyType = PropertyUtility.GetPropertyType(property);
-			if (typeof(ScriptableObject).IsAssignableFrom(propertyType))
+			if (property.objectReferenceValue == null)
 			{
-				ScriptableObject scriptableObject = property.objectReferenceValue as ScriptableObject;
-				if (scriptableObject == null)
-				{
-					EditorGUI.PropertyField(rect, property, label, false);
-				}
-				else
-				{
-					// Draw a foldout
-					Rect foldoutRect = new Rect()
-					{
-						x = rect.x,
-						y = rect.y,
-						width = EditorGUIUtility.labelWidth,
-						height = EditorGUIUtility.singleLineHeight
-					};
-
-					property.isExpanded = EditorGUI.Foldout(foldoutRect, property.isExpanded, label, toggleOnLabelClick: true);
-
-					// Draw the scriptable object field
-					Rect propertyRect = new Rect()
-					{
-						x = rect.x,
-						y = rect.y,
-						width = rect.width,
-						height = EditorGUIUtility.singleLineHeight
-					};
-
-					EditorGUI.PropertyField(propertyRect, property, label, false);
-
-					property.serializedObject.ApplyModifiedProperties();
-
-					// Draw the child properties
-					if (property.isExpanded)
-					{
-						DrawChildProperties(rect, property);
-					}
-				}
+				EditorGUI.PropertyField(rect, property, label, false);
 			}
 			else
 			{
-				string message = $"{typeof(ExpandableAttribute).Name} can only be used on scriptable objects";
-				DrawDefaultPropertyAndHelpBox(rect, property, message, MessageType.Warning);
+				System.Type propertyType = PropertyUtility.GetPropertyType(property);
+				if (typeof(ScriptableObject).IsAssignableFrom(propertyType))
+				{
+					ScriptableObject scriptableObject = property.objectReferenceValue as ScriptableObject;
+					if (scriptableObject == null)
+					{
+						EditorGUI.PropertyField(rect, property, label, false);
+					}
+					else
+					{
+						// Draw a foldout
+						Rect foldoutRect = new Rect()
+						{
+							x = rect.x,
+							y = rect.y,
+							width = EditorGUIUtility.labelWidth,
+							height = EditorGUIUtility.singleLineHeight
+						};
+
+						property.isExpanded = EditorGUI.Foldout(foldoutRect, property.isExpanded, label, toggleOnLabelClick: true);
+
+						// Draw the scriptable object field
+						Rect propertyRect = new Rect()
+						{
+							x = rect.x,
+							y = rect.y,
+							width = rect.width,
+							height = EditorGUIUtility.singleLineHeight
+						};
+
+						EditorGUI.PropertyField(propertyRect, property, label, false);
+
+						property.serializedObject.ApplyModifiedProperties();
+
+						// Draw the child properties
+						if (property.isExpanded)
+						{
+							DrawChildProperties(rect, property);
+						}
+					}
+				}
+				else
+				{
+					string message = $"{typeof(ExpandableAttribute).Name} can only be used on scriptable objects";
+					DrawDefaultPropertyAndHelpBox(rect, property, message, MessageType.Warning);
+				}
 			}
 
 			EditorGUI.EndProperty();
