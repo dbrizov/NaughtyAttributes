@@ -90,7 +90,11 @@ namespace NaughtyAttributes.Editor
 				Enum value = GetEnumValue(target, enableIfAttribute.Conditions[0]);
 				if (value != null)
 				{
-					return enableIfAttribute.EnumValue.Equals(value) != enableIfAttribute.Inverted;
+					bool matched = value.GetType().GetCustomAttribute<FlagsAttribute>() == null
+						? enableIfAttribute.EnumValue.Equals(value)
+						: value.HasFlag(enableIfAttribute.EnumValue);
+
+					return matched != enableIfAttribute.Inverted;
 				}
 
 				string message = enableIfAttribute.GetType().Name + " needs a valid enum field, property or method name to work";
@@ -131,7 +135,11 @@ namespace NaughtyAttributes.Editor
 				Enum value = GetEnumValue(target, showIfAttribute.Conditions[0]);
 				if (value != null)
 				{
-					return showIfAttribute.EnumValue.Equals(value) != showIfAttribute.Inverted;
+					bool matched = value.GetType().GetCustomAttribute<FlagsAttribute>() == null
+						? showIfAttribute.EnumValue.Equals(value)
+						: value.HasFlag(showIfAttribute.EnumValue);
+
+					return matched != showIfAttribute.Inverted;
 				}
 
 				string message = showIfAttribute.GetType().Name + " needs a valid enum field, property or method name to work";
