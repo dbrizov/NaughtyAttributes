@@ -132,7 +132,6 @@ namespace NaughtyAttributes.Editor
 			// deal with enum conditions
 			if (showIfAttribute.EnumValue != null)
 			{
-
 				Enum value = GetEnumValue(target, showIfAttribute.Conditions[0]);
 				if (value != null)
 				{
