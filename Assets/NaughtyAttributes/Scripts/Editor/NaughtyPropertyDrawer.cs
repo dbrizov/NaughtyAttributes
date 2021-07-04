@@ -119,14 +119,14 @@ namespace NaughtyAttributes.Editor
         static void HackDrawerTypeForTypeDictionary()
         {
             // The hack works as follows:
-            // The dictionary's comparer is set to a special comparer that will:
+            // The dictionary's comparer is set to a faker comparer that will:
             //   for any type already present in the dictionary, perform standard comparision
-            //   for a type not present in the dictionary, fallback always to returning the '0' value, which returns the 'NaughtyPropertyDrawer' value
+            //   for a type not present in the dictionary, fallback and return the '0' hashcode - which maps to the 'NaughtyPropertyDrawer' type
 
             // Invoke the initialization method, as the dictionary may not have yet been created
             _ScriptAttributeUtilityType.GetMethod("BuildDrawerTypeForTypeDictionary", kAnyStaticMemberBindingFlags).Invoke(null, Array.Empty<object>());
 
-            // Get the dictionary field, and value
+            // Get the dictionary field and its value
             var ScriptAttributeUtility_s_DrawerTypeForTypeField = _ScriptAttributeUtilityType.GetField("s_DrawerTypeForType", kAnyStaticMemberBindingFlags);
             var drawerTypeForTypeDict = (IDictionary) ScriptAttributeUtility_s_DrawerTypeForTypeField.GetValue(null);
 
@@ -135,8 +135,8 @@ namespace NaughtyAttributes.Editor
             var drawerKeySet_drawerField = drawerKeySetType.GetField("drawer"); // drawer is type of the property drawer
             var drawerKeySet_typeField = drawerKeySetType.GetField("type"); // type is the handled type
 
-            // Store all handled types in a hash set, for fast lookup in the comparer
-            // Unity should populate the dictionary with all possible types, including derived types for 'base' drawers
+            // Store all handled types in a hash set - for fast lookup in the comparer
+            // Unity should populate the dictionary with all handled types (this includes derived types for drawers that support such)
             var handledTypes = new HashSet<Type>();
 
             foreach (var value in drawerTypeForTypeDict.Values)
@@ -153,10 +153,10 @@ namespace NaughtyAttributes.Editor
                 dictType.GetField("comparer", kAnyInstanceMemberBindingFlags) // .NET Framework
                 ?? dictType.GetField("_comparer", kAnyInstanceMemberBindingFlags); // .NET Standard
 
-            // Set the comparer to our faker
+            // Set the comparer to our faker comparer
             comparerField.SetValue(drawerTypeForTypeDict, new FallbackToNaughtyPropertyDrawerComparer(handledTypes));
 
-            // Finally, add the indicator type to the dictionary
+            // Add the indicator type to the dictionary
             var drawerKeySetInstance = Activator.CreateInstance(drawerKeySetType);
             drawerKeySet_drawerField.SetValue(drawerKeySetInstance, typeof(NaughtyPropertyDrawer));
             drawerKeySet_typeField.SetValue(drawerKeySetInstance, typeof(FallbackIndicatorType));
