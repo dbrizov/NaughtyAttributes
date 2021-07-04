@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -150,6 +150,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 0
@@ -182,6 +183,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 23
@@ -201,23 +203,32 @@ MonoBehaviour:
   enable1: 0
   enable2: 0
   enum1: 0
+  enum2: 0
   enableIfAll: 
   enableIfAny: 
   enableIfEnum: 
+  enableIfEnumFlag: 
+  enableIfEnumFlagMulti: 
   nest1:
     enable1: 1
     enable2: 0
     enum1: 0
+    enum2: 0
     enableIfAll: 1
     enableIfAny: 2
     enableIfEnum: 0
+    enableIfEnumFlag: 0
+    enableIfEnumFlagMulti: 0
     nest2:
       enable1: 1
       enable2: 1
       enum1: 0
+      enum2: 0
       enableIfAll: {x: 0.25, y: 0.75}
       enableIfAny: {x: 0.25, y: 0.75}
       enableIfEnum: {x: 0.25, y: 0.75}
+      enableIfEnumFlag: {x: 0, y: 0}
+      enableIfEnumFlagMulti: {x: 0, y: 0}
 --- !u!114 &114650326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -233,23 +244,32 @@ MonoBehaviour:
   disable1: 0
   disable2: 0
   enum1: 0
+  enum2: 0
   disableIfAll: 
   disableIfAny: 
   disableIfEnum: 
+  disableIfEnumFlag: 
+  disableIfEnumFlagMulti: 
   nest1:
     disable1: 1
     disable2: 0
     enum1: 0
+    enum2: 0
     disableIfAll: 1
     disableIfAny: 2
     disableIfEnum: 3
+    disableIfEnumFlag: 0
+    disableIfEnumFlagMulti: 0
     nest2:
       disable1: 1
       disable2: 1
       enum1: 0
+      enum2: 0
       enableIfAll: {x: 0.25, y: 0.75}
       enableIfAny: {x: 0.25, y: 0.75}
       enableIfEnum: {x: 0.25, y: 0.75}
+      disableIfEnumFlag: {x: 0, y: 0}
+      disableIfEnumFlagMulti: {x: 0, y: 0}
 --- !u!1 &155697335
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,6 +297,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 9
@@ -325,6 +346,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 27
@@ -373,6 +395,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 30
@@ -394,6 +417,114 @@ MonoBehaviour:
     trans1: {fileID: 0}
     nest2:
       trans2: {fileID: 0}
+--- !u!1 &399707454
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 399707455}
+  - component: {fileID: 399707456}
+  m_Layer: 0
+  m_Name: SerializableTypes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &399707455
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399707454}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1148579784}
+  m_RootOrder: 33
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &399707456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399707454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9368553f7002b2548be8781b3b4c6934, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Class:
+    ShowNestedMembers: 0
+    NestedClass:
+      ShowNestedMembers: 0
+      NestedClass:
+        ShowMembers: 0
+        Int1: 0
+        Float2: 0
+        String3: 
+      NestedStruct:
+        ShowMembers: 0
+        Int1: 0
+        Float2: 0
+        String3: 
+      NestedClassList: []
+      NestedStructList: []
+    NestedStruct:
+      ShowNestedMembers: 0
+      NestedClass:
+        ShowMembers: 0
+        Int1: 0
+        Float2: 0
+        String3: 
+      NestedStruct:
+        ShowMembers: 0
+        Int1: 0
+        Float2: 0
+        String3: 
+      NestedClassList: []
+      NestedStructList: []
+    NestedClassList: []
+    NestedStructList: []
+  Struct:
+    ShowNestedMembers: 0
+    NestedClass:
+      ShowNestedMembers: 0
+      NestedClass:
+        ShowMembers: 0
+        Int1: 0
+        Float2: 0
+        String3: 
+      NestedStruct:
+        ShowMembers: 0
+        Int1: 0
+        Float2: 0
+        String3: 
+      NestedClassList: []
+      NestedStructList: []
+    NestedStruct:
+      ShowNestedMembers: 0
+      NestedClass:
+        ShowMembers: 0
+        Int1: 0
+        Float2: 0
+        String3: 
+      NestedStruct:
+        ShowMembers: 0
+        Int1: 0
+        Float2: 0
+        String3: 
+      NestedClassList: []
+      NestedStructList: []
+    NestedClassList: []
+    NestedStructList: []
 --- !u!1 &572382748
 GameObject:
   m_ObjectHideFlags: 0
@@ -421,6 +552,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 22
@@ -474,6 +606,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 11
@@ -522,6 +655,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -538,8 +672,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c928ea15ae74a44089beb2e534c1a35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerName: Default
-  layerIndex: 4
 --- !u!1 &732714203
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,6 +698,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 20
@@ -597,6 +730,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 4
@@ -645,6 +779,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 15
@@ -693,6 +828,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 16
@@ -745,6 +881,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 12
@@ -795,6 +932,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 10
@@ -846,6 +984,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 7
@@ -893,6 +1032,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 106181863}
   - {fileID: 1178133860}
@@ -926,6 +1066,8 @@ Transform:
   - {fileID: 1706612702}
   - {fileID: 369789277}
   - {fileID: 1463483878}
+  - {fileID: 2026770417}
+  - {fileID: 399707455}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -957,6 +1099,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 1
@@ -986,7 +1129,7 @@ MonoBehaviour:
       name1: Trigger0
 --- !u!95 &1178133862
 Animator:
-  serializedVersion: 3
+  serializedVersion: 4
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -999,6 +1142,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -1030,6 +1174,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 18
@@ -1073,6 +1218,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 14
@@ -1145,6 +1291,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 25
@@ -1193,6 +1340,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 19
@@ -1303,6 +1451,7 @@ Transform:
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -1334,6 +1483,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 31
@@ -1352,6 +1502,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   int0: 0
   nest1:
+    int1: 0
+    nest2:
+      int2: 0
+  inheritedNest:
     int1: 0
     nest2:
       int2: 0
@@ -1383,6 +1537,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 24
@@ -1402,23 +1557,32 @@ MonoBehaviour:
   show1: 0
   show2: 0
   enum1: 0
+  enum2: 0
   showIfAll: 
   showIfAny: 
   showIfEnum: 
+  showIfEnumFlag: 
+  showIfEnumFlagMulti: 
   nest1:
     show1: 1
     show2: 0
     enum1: 0
+    enum2: 0
     showIfAll: 0
     showIfAny: 0
     showIfEnum: 0
+    showIfEnumFlag: 0
+    showIfEnumFlagMulti: 0
     nest2:
       show1: 1
       show2: 1
       enum1: 0
+      enum2: 0
       showIfAll: {x: 0.25, y: 0.75}
       showIfAny: {x: 0.25, y: 0.75}
       showIfEnum: {x: 0.25, y: 0.75}
+      showIfEnumFlag: {x: 0, y: 0}
+      showIfEnumFlagMulti: {x: 0, y: 0}
 --- !u!114 &1524906393
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1434,23 +1598,32 @@ MonoBehaviour:
   hide1: 0
   hide2: 0
   enum1: 0
+  enum2: 0
   hideIfAll: 
   hideIfAny: 
   hideIfEnum: 
+  hideIfEnumFlag: 
+  hideIfEnumFlagMulti: 
   nest1:
     hide1: 1
     hide2: 0
     enum1: 0
+    enum2: 0
     hideIfAll: 0
     hideIfAny: 0
     hideIfEnum: 0
+    hideIfEnumFlag: 0
+    hideIfEnumFlagMulti: 0
     nest2:
       hide1: 1
       hide2: 1
       enum1: 0
+      enum2: 0
       hideIfAll: {x: 0.25, y: 0.75}
       hideIfAny: {x: 0.25, y: 0.75}
       hideIfEnum: {x: 0.25, y: 0.75}
+      hideIfEnumFlag: {x: 0, y: 0}
+      hideIfEnumFlagMulti: {x: 0, y: 0}
 --- !u!1 &1552114399
 GameObject:
   m_ObjectHideFlags: 0
@@ -1478,6 +1651,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 8
@@ -1587,6 +1761,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1618,6 +1793,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 6
@@ -1665,6 +1841,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 28
@@ -1696,6 +1873,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 29
@@ -1771,6 +1949,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 13
@@ -1832,6 +2011,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 21
@@ -1885,6 +2065,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 26
@@ -1933,6 +2114,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 17
@@ -1976,6 +2158,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 5
@@ -1997,6 +2180,37 @@ MonoBehaviour:
     flags1: 6
     nest2:
       flags2: -1
+--- !u!1 &2026770416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2026770417}
+  m_Layer: 0
+  m_Name: ===== Non-Unity Serialized Types =====
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2026770417
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026770416}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1148579784}
+  m_RootOrder: 32
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2043059160
 GameObject:
   m_ObjectHideFlags: 0
@@ -2024,6 +2238,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 2
@@ -2068,6 +2283,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1148579784}
   m_RootOrder: 3
