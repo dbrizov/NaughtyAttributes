@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -12,8 +13,11 @@ namespace NaughtyAttributes.Editor
 	{
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
 		{
-			if (!PropertyUtility.IsVisible(property))
-				return 0;
+			if (PropertyUtility.GetTargetObjectWithProperty(property) != null)
+			{
+				if (!PropertyUtility.IsVisible(property))
+					return 0;
+			}
 
 			var handler = _ScriptAttributeUtility_GetPropertyHandler(property);
 
@@ -22,13 +26,10 @@ namespace NaughtyAttributes.Editor
 
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 		{		
-			#if UNITY_2021 || UNITY_2020
-			var includeChildren = _EditorGUI_HasVisibleChildFields(property, false);
-			#else
-			var includeChildren = _EditorGUI_HasVisibleChildFields(property);
-			#endif
-
-			NaughtyEditorGUI.PropertyField_Implementation(position, property, includeChildren, DefaultOnGUI);
+			if (PropertyUtility.GetTargetObjectWithProperty(property) == null)
+				DefaultOnGUI(position, property, label, true);
+			else
+				NaughtyEditorGUI.PropertyField_Implementation(position, property, true, DefaultOnGUI);
 		}
 
 		static void DefaultOnGUI(Rect position, SerializedProperty property, GUIContent label, bool includeChildren)
@@ -52,14 +53,6 @@ namespace NaughtyAttributes.Editor
 		// This method returns an instance of PropertyHandler for a SerializedProperty
 		private static Func<SerializedProperty, object> _ScriptAttributeUtility_GetPropertyHandler;
 		
-		// This method returns whether a serialized object has any visible child fields
-		// Unity passes result of this method down the line as value for the includeChildren parameters
-		#if UNITY_2021 || UNITY_2020
-		private static Func<SerializedProperty, bool, bool> _EditorGUI_HasVisibleChildFields;
-		#else
-		private static Func<SerializedProperty, bool> _EditorGUI_HasVisibleChildFields;
-		#endif
-
 		private static Func<object, SerializedProperty, GUIContent, float> _PropertyHandler_GetHeight;
 		private static Func<object, Rect, SerializedProperty, GUIContent, bool, bool> _PropertyHandler_OnGUI;
 
@@ -85,20 +78,6 @@ namespace NaughtyAttributes.Editor
 					.GetMethod("GetHandler", kAnyStaticMemberBindingFlags)
 					.CreateDelegate(typeof(Func<SerializedProperty, object>), null);
 
-
-			#if UNITY_2021 || UNITY_2020
-			_EditorGUI_HasVisibleChildFields = (Func<SerializedProperty, bool, bool>)
-				typeof(EditorGUI)
-					.GetMethod("HasVisibleChildFields", kAnyStaticMemberBindingFlags)
-					.CreateDelegate(typeof(Func<SerializedProperty, bool, bool>), null);
-			#else
-			_EditorGUI_HasVisibleChildFields = (Func<SerializedProperty, bool>)
-				typeof(EditorGUI)
-					.GetMethod("HasVisibleChildFields", kAnyStaticMemberBindingFlags)
-					.CreateDelegate(typeof(Func<SerializedProperty, bool>), null);
-			#endif
-
-
 			Compile_PropertyHandler_GetHeight();
 			Compile_PropertyHandler_OnGUI();
 		}
@@ -111,11 +90,24 @@ namespace NaughtyAttributes.Editor
 			// without needing to attribute the type.
 			 
 			var ScriptAttributeUtility_sharedNullHandlerField = _ScriptAttributeUtilityType.GetField("s_SharedNullHandler", kAnyStaticMemberBindingFlags);
-			var PropertyHandler_m_PropertyDrawerField = _PropertyHandlerType.GetField("m_PropertyDrawer", kAnyInstanceMemberBindingFlags);
-
+			
 			var sharedNullHandler = ScriptAttributeUtility_sharedNullHandlerField.GetValue(null);
 
+			#if UNITY_2021
+			// In 2021, the handler uses a collection of drawers instead of a single drawer
+			// ScriptAttributeUtility.s_SharedNullHandler.m_PropertyDrawers
+			var PropertyHandler_m_PropertyDrawersField = _PropertyHandlerType.GetField("m_PropertyDrawers", kAnyInstanceMemberBindingFlags);
+
+			var propertyDrawers = new List<PropertyDrawer> { new NaughtyPropertyDrawer() };
+
+			PropertyHandler_m_PropertyDrawersField.SetValue(sharedNullHandler, propertyDrawers);
+			#else
+			// ScriptAttributeUtility.s_SharedNullHandler.m_PropertyDrawer
+			var PropertyHandler_m_PropertyDrawerField = _PropertyHandlerType.GetField("m_PropertyDrawer", kAnyInstanceMemberBindingFlags);
+
 			PropertyHandler_m_PropertyDrawerField.SetValue(sharedNullHandler, new NaughtyPropertyDrawer());
+			#endif
+
 		}
 
 		static void Compile_PropertyHandler_GetHeight()
@@ -135,11 +127,7 @@ namespace NaughtyAttributes.Editor
 						Expression.TypeAs(paramHandler, _PropertyHandlerType), method,
 						paramProperty,
 						paramLabel,
-						#if UNITY_2021 || UNITY_2020
-						Expression.Call(null, _EditorGUI_HasVisibleChildFields.Method, paramProperty, Expression.Constant(false))),
-						#else
-						Expression.Call(null, _EditorGUI_HasVisibleChildFields.Method, paramProperty)),
-						#endif
+						Expression.Constant(true)),
 					new[] { paramHandler, paramProperty, paramLabel })
 					.Compile();
 		}
