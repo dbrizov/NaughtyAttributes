@@ -24,14 +24,16 @@ namespace NaughtyAttributes.Editor
 		{
 			var includeChildren = _EditorGUI_HasVisibleChildFields(property, false);
 
-			NaughtyEditorGUI.PropertyField_Implementation(position, property, includeChildren,
-				(Rect position, SerializedProperty property, GUIContent label, bool includeChildren) =>
-				{
-					var handler = _ScriptAttributeUtility_GetPropertyHandler(property);
-
-					_PropertyHandler_OnGUI(handler, position, property, label, includeChildren);
-				});
+			NaughtyEditorGUI.PropertyField_Implementation(position, property, includeChildren, DefaultOnGUI);
 		}
+
+		static void DefaultOnGUI(Rect position, SerializedProperty property, GUIContent label, bool includeChildren)
+		{
+			var handler = _ScriptAttributeUtility_GetPropertyHandler(property);
+
+			_PropertyHandler_OnGUI(handler, position, property, label, includeChildren);
+		}
+
 
 		const BindingFlags kAnyStaticMemberBindingFlags = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
 
