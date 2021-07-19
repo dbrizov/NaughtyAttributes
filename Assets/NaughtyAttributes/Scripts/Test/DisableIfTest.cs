@@ -18,6 +18,10 @@ namespace NaughtyAttributes.Test
 		[ReorderableList]
 		public int[] disableIfAny;
 
+		[DisableIf("!disable2")]
+		[ReorderableList]
+		public int[] disableIfNotDisable2;
+
 		[DisableIf("enum1", DisableIfEnum.Case0)]
 		[ReorderableList]
 		public int[] disableIfEnum;
@@ -53,6 +57,10 @@ namespace NaughtyAttributes.Test
 		[AllowNesting] // Because it's nested we need to explicitly allow nesting
 		public int disableIfAny = 2;
 
+		[DisableIf(EConditionOperator.And, "Disable1", "!Disable2")]
+		[AllowNesting]
+		public int disableIfDisable1AndNotDisable2;
+
 		[DisableIf("Enum1", DisableIfEnum.Case1)]
 		[AllowNesting] // Because it's nested we need to explicitly allow nesting
 		public int disableIfEnum = 3;
@@ -87,6 +95,10 @@ namespace NaughtyAttributes.Test
 		[DisableIf(EConditionOperator.Or, "GetDisable1", "GetDisable2")]
 		[MinMaxSlider(0.0f, 1.0f)] // AllowNesting attribute is not needed, because the field is already marked with a custom naughty property drawer
 		public Vector2 enableIfAny = new Vector2(0.25f, 0.75f);
+
+		[DisableIf(EConditionOperator.Or, "GetDisable1", "!GetDisable2")]
+		[MinMaxSlider(0.0f, 1.0f)] // AllowNesting attribute is not needed, because the field is already marked with a custom naughty property drawer
+		public Vector2 disableIfDisable1OrNotDisable2 = new Vector2(0.25f, 0.75f);
 
 		[DisableIf("GetEnum1", DisableIfEnum.Case2)]
 		[MinMaxSlider(0.0f, 1.0f)] // AllowNesting attribute is not needed, because the field is already marked with a custom naughty property drawer
