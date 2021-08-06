@@ -115,7 +115,10 @@ namespace NaughtyAttributes.Editor
 						// Draw the child properties
 						if (property.isExpanded)
 						{
+							ExpandableAttribute attr = (ExpandableAttribute)attribute;
+							GUI.enabled = attr.IsWritable;
 							DrawChildProperties(rect, property);
+							GUI.enabled = true;
 						}
 					}
 				}
