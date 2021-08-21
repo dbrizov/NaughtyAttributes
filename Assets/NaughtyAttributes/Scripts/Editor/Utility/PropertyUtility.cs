@@ -4,11 +4,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace NaughtyAttributes.Editor
 {
 	public static class PropertyUtility
 	{
+		private static Dictionary<(Type, Type), MethodInfo> s_DynamicCastCache = new Dictionary<(Type, Type), MethodInfo>();
+
+		// =======================================================================
 		public static T GetAttribute<T>(SerializedProperty property) where T : class
 		{
 			T[] attributes = GetAttributes<T>(property);
@@ -200,29 +204,88 @@ namespace NaughtyAttributes.Editor
 			{
 				FieldInfo conditionField = ReflectionUtility.GetField(target, condition);
 				if (conditionField != null &&
-					conditionField.FieldType == typeof(bool))
+					conditionField.GetValue(target).DynamicCast(conditionField.FieldType, out bool fieldValue))
 				{
-					conditionValues.Add((bool)conditionField.GetValue(target));
+					conditionValues.Add(fieldValue);
 				}
 
 				PropertyInfo conditionProperty = ReflectionUtility.GetProperty(target, condition);
 				if (conditionProperty != null &&
-					conditionProperty.PropertyType == typeof(bool))
+					conditionProperty.GetValue(target).DynamicCast(conditionProperty.PropertyType, out bool propertyValue))
 				{
-					conditionValues.Add((bool)conditionProperty.GetValue(target));
+					conditionValues.Add(propertyValue);
 				}
 
 				MethodInfo conditionMethod = ReflectionUtility.GetMethod(target, condition);
 				if (conditionMethod != null &&
-					conditionMethod.ReturnType == typeof(bool) &&
-					conditionMethod.GetParameters().Length == 0)
+					conditionMethod.GetParameters().Length == 0 &&
+					conditionMethod.Invoke(target, null).DynamicCast(conditionMethod.ReturnType, out bool methodValue))
 				{
-					conditionValues.Add((bool)conditionMethod.Invoke(target, null));
+					conditionValues.Add(methodValue);
 				}
 			}
 
 			return conditionValues;
-		}
+        }
+		
+        internal static bool DynamicCast<TType>(this object source, Type srcType, out TType result)
+		{
+			Type destType = typeof(TType);
+
+			if (srcType == destType)
+			{
+				result = (TType)source;
+				return true;
+			}
+            
+			// try to invoke cast operator through reflection
+			if (s_DynamicCastCache.TryGetValue((srcType, destType), out MethodInfo cast) == false)
+			{
+				cast = GetCastOperator(srcType, destType);
+				s_DynamicCastCache.Add((srcType, destType), cast);
+			}
+
+			if (cast == null)
+			{
+				result = default;
+				return false;
+			}
+
+			result = (TType)cast.Invoke(null, new object[] { source });
+			return true;
+        }
+
+		internal static MethodInfo GetCastOperator(Type srcType, Type destType)
+		{
+			// parse cast operators from this to base class
+			while (srcType != null)
+			{
+				MethodInfo cast = srcType
+								.GetMethods(BindingFlags.Static | BindingFlags.Public)
+								.Where(methodInfo =>
+ 								{
+									if ((methodInfo.Name == "op_Explicit" || methodInfo.Name == "op_Implicit") == false)
+										return false;
+
+									if (methodInfo.ReturnType != destType)
+										return false;
+
+									ParameterInfo[] pars = methodInfo.GetParameters();
+									if (pars.Length != 1 || pars[0].ParameterType.IsAssignableFrom(srcType) == false)
+										return false;
+
+									return true;
+								})
+								.FirstOrDefault();
+
+				if (cast != null)
+					return cast;
+				
+                srcType = srcType.BaseType;
+            }
+
+			return null;
+        }
 
 		internal static bool GetConditionsFlag(List<bool> conditionValues, EConditionOperator conditionOperator, bool invert)
 		{
