@@ -98,19 +98,9 @@ namespace NaughtyAttributes.Editor
 				{
 					do
 					{
-						NaughtyProperty naughtyProperty = new NaughtyProperty();
-						naughtyProperty.property = serializedObject.FindProperty(iterator.name);
-						
-						naughtyProperty.readOnlyAttribute = PropertyUtility.GetAttribute<ReadOnlyAttribute>(naughtyProperty.property);
-						naughtyProperty.enableIfAttribute = PropertyUtility.GetAttribute<EnableIfAttributeBase>(naughtyProperty.property);
-						
-						naughtyProperty.showIfAttribute = PropertyUtility.GetAttribute<ShowIfAttributeBase>(naughtyProperty.property);
-						naughtyProperty.validatorAttributes = PropertyUtility.GetAttributes<ValidatorAttribute>(naughtyProperty.property);
-
-						naughtyProperty.specialCaseDrawerAttribute =
-							PropertyUtility.GetAttribute<SpecialCaseDrawerAttribute>(naughtyProperty.property);
-						
-						outSerializedProperties.Add(naughtyProperty);
+						outSerializedProperties.Add(
+							PropertyUtility.CreateNaughtyProperty(
+								serializedObject.FindProperty(iterator.name)));
 					}
 					while (iterator.NextVisible(false));
 				}

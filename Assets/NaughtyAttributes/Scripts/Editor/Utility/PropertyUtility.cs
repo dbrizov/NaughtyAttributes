@@ -26,6 +26,23 @@ namespace NaughtyAttributes.Editor
 			return (T[])fieldInfo.GetCustomAttributes(typeof(T), true);
 		}
 
+		public static NaughtyProperty CreateNaughtyProperty(SerializedProperty property)
+		{
+			NaughtyProperty naughtyProperty = new NaughtyProperty();
+			naughtyProperty.property = property;
+
+			naughtyProperty.readOnlyAttribute = PropertyUtility.GetAttribute<ReadOnlyAttribute>(naughtyProperty.property);
+			naughtyProperty.enableIfAttribute = PropertyUtility.GetAttribute<EnableIfAttributeBase>(naughtyProperty.property);
+						
+			naughtyProperty.showIfAttribute = PropertyUtility.GetAttribute<ShowIfAttributeBase>(naughtyProperty.property);
+			naughtyProperty.validatorAttributes = PropertyUtility.GetAttributes<ValidatorAttribute>(naughtyProperty.property);
+
+			naughtyProperty.specialCaseDrawerAttribute =
+				PropertyUtility.GetAttribute<SpecialCaseDrawerAttribute>(naughtyProperty.property);
+			
+			return naughtyProperty;
+		}
+
 		public static GUIContent GetLabel(SerializedProperty property)
 		{
 			LabelAttribute labelAttribute = GetAttribute<LabelAttribute>(property);
