@@ -180,7 +180,7 @@ namespace NaughtyAttributes.Editor
 								height = childHeight
 							};
 
-							NaughtyEditorGUI.PropertyField(childRect, childProperty, true);
+							NaughtyEditorGUI.PropertyField(childRect, new NaughtyProperty(){property=childProperty}, true);
 
 							yOffset += childHeight;
 						}

@@ -1,21 +1,47 @@
 ﻿using System.Collections.Generic;
+using System;
 using System.Linq;
 using System.Reflection;
+
 using UnityEditor;
 using UnityEngine;
 
 namespace NaughtyAttributes.Editor
 {
+	public class NaughtyProperty
+	{
+		public SerializedProperty property;
+		public SpecialCaseDrawerAttribute specialCaseDrawerAttribute;
+		public ShowIfAttributeBase showIfAttribute;
+
+		public EnableIfAttributeBase enableIfAttribute;
+		
+		public ReadOnlyAttribute readOnlyAttribute;
+
+		public ValidatorAttribute[] validatorAttributes;
+	}
+	
 	[CanEditMultipleObjects]
 	[CustomEditor(typeof(UnityEngine.Object), true)]
 	public class NaughtyInspector : UnityEditor.Editor
 	{
-		private List<SerializedProperty> _serializedProperties = new List<SerializedProperty>();
+		private List<NaughtyProperty> _serializedProperties = new List<NaughtyProperty>();
 		private IEnumerable<FieldInfo> _nonSerializedFields;
 		private IEnumerable<PropertyInfo> _nativeProperties;
 		private IEnumerable<MethodInfo> _methods;
+
+		private IEnumerable<NaughtyProperty> _nonGroupedSerializedProperty;
+
+		private SerializedProperty m_ScriptProperty;
+
+		private IEnumerable<IGrouping<string, NaughtyProperty>> _groupedSerialzedProperty;
+
+		private IEnumerable<IGrouping<string, NaughtyProperty>> _foldoutGroupedSerializedProperty;
+		
 		private Dictionary<string, SavedBool> _foldouts = new Dictionary<string, SavedBool>();
 
+		private bool _anyNaughtyAttribute;
+		
 		protected virtual void OnEnable()
 		{
 			_nonSerializedFields = ReflectionUtility.GetAllFields(
@@ -26,19 +52,30 @@ namespace NaughtyAttributes.Editor
 
 			_methods = ReflectionUtility.GetAllMethods(
 				target, m => m.GetCustomAttributes(typeof(ButtonAttribute), true).Length > 0);
+
+			GetSerializedProperties(ref _serializedProperties);
+			
+			_anyNaughtyAttribute = _serializedProperties.Any(p => PropertyUtility.GetAttribute<INaughtyAttribute>(p.property) != null);
+
+			_nonGroupedSerializedProperty = GetNonGroupedProperties(_serializedProperties);
+			NaughtyProperty[] mScripts = _serializedProperties.Where(p => p.property.name.Equals("m_Script")).ToArray();
+			
+			m_ScriptProperty = mScripts.Length > 0 ? mScripts[0].property : null;
+			
+			_groupedSerialzedProperty = GetGroupedProperties(_serializedProperties);
+
+			_foldoutGroupedSerializedProperty = GetFoldoutProperties(_serializedProperties);
 		}
 
 		protected virtual void OnDisable()
 		{
 			ReorderableListPropertyDrawer.Instance.ClearCache();
 		}
+		
 
 		public override void OnInspectorGUI()
 		{
-			GetSerializedProperties(ref _serializedProperties);
-
-			bool anyNaughtyAttribute = _serializedProperties.Any(p => PropertyUtility.GetAttribute<INaughtyAttribute>(p) != null);
-			if (!anyNaughtyAttribute)
+			if (!_anyNaughtyAttribute)
 			{
 				DrawDefaultInspector();
 			}
@@ -51,8 +88,8 @@ namespace NaughtyAttributes.Editor
 			DrawNativeProperties();
 			DrawButtons();
 		}
-
-		protected void GetSerializedProperties(ref List<SerializedProperty> outSerializedProperties)
+		
+		protected void GetSerializedProperties(ref List<NaughtyProperty> outSerializedProperties)
 		{
 			outSerializedProperties.Clear();
 			using (var iterator = serializedObject.GetIterator())
@@ -61,7 +98,19 @@ namespace NaughtyAttributes.Editor
 				{
 					do
 					{
-						outSerializedProperties.Add(serializedObject.FindProperty(iterator.name));
+						NaughtyProperty naughtyProperty = new NaughtyProperty();
+						naughtyProperty.property = serializedObject.FindProperty(iterator.name);
+						
+						naughtyProperty.readOnlyAttribute = PropertyUtility.GetAttribute<ReadOnlyAttribute>(naughtyProperty.property);
+						naughtyProperty.enableIfAttribute = PropertyUtility.GetAttribute<EnableIfAttributeBase>(naughtyProperty.property);
+						
+						naughtyProperty.showIfAttribute = PropertyUtility.GetAttribute<ShowIfAttributeBase>(naughtyProperty.property);
+						naughtyProperty.validatorAttributes = PropertyUtility.GetAttributes<ValidatorAttribute>(naughtyProperty.property);
+
+						naughtyProperty.specialCaseDrawerAttribute =
+							PropertyUtility.GetAttribute<SpecialCaseDrawerAttribute>(naughtyProperty.property);
+						
+						outSerializedProperties.Add(naughtyProperty);
 					}
 					while (iterator.NextVisible(false));
 				}
@@ -72,26 +121,24 @@ namespace NaughtyAttributes.Editor
 		{
 			serializedObject.Update();
 
-			// Draw non-grouped serialized properties
-			foreach (var property in GetNonGroupedProperties(_serializedProperties))
+			if (m_ScriptProperty != null)
 			{
-				if (property.name.Equals("m_Script", System.StringComparison.Ordinal))
+				using (new EditorGUI.DisabledScope(disabled: true))
 				{
-					using (new EditorGUI.DisabledScope(disabled: true))
-					{
-						EditorGUILayout.PropertyField(property);
-					}
-				}
-				else
-				{
-					NaughtyEditorGUI.PropertyField_Layout(property, includeChildren: true);
+					EditorGUILayout.PropertyField(m_ScriptProperty);
 				}
 			}
 
-			// Draw grouped serialized properties
-			foreach (var group in GetGroupedProperties(_serializedProperties))
+			// Draw non-grouped serialized properties
+			foreach (var property in _nonGroupedSerializedProperty)
 			{
-				IEnumerable<SerializedProperty> visibleProperties = group.Where(p => PropertyUtility.IsVisible(p));
+				NaughtyEditorGUI.PropertyField_Layout(property, includeChildren: true);
+			}
+
+			// Draw grouped serialized properties
+			foreach (var group in _groupedSerialzedProperty)
+			{
+				IEnumerable<NaughtyProperty> visibleProperties = group.Where(p => PropertyUtility.IsVisible(p.property));
 				if (!visibleProperties.Any())
 				{
 					continue;
@@ -107,9 +154,9 @@ namespace NaughtyAttributes.Editor
 			}
 
 			// Draw foldout serialized properties
-			foreach (var group in GetFoldoutProperties(_serializedProperties))
+			foreach (var group in _foldoutGroupedSerializedProperty)
 			{
-				IEnumerable<SerializedProperty> visibleProperties = group.Where(p => PropertyUtility.IsVisible(p));
+				IEnumerable<NaughtyProperty> visibleProperties = group.Where(p => PropertyUtility.IsVisible(p.property));
 				if (!visibleProperties.Any())
 				{
 					continue;
@@ -190,23 +237,23 @@ namespace NaughtyAttributes.Editor
 			}
 		}
 
-		private static IEnumerable<SerializedProperty> GetNonGroupedProperties(IEnumerable<SerializedProperty> properties)
+		private static IEnumerable<NaughtyProperty> GetNonGroupedProperties(IEnumerable<NaughtyProperty> properties)
 		{
-			return properties.Where(p => PropertyUtility.GetAttribute<IGroupAttribute>(p) == null);
+			return properties.Where(p => PropertyUtility.GetAttribute<IGroupAttribute>(p.property) == null && !p.property.name.Equals("m_Script"));
 		}
 
-		private static IEnumerable<IGrouping<string, SerializedProperty>> GetGroupedProperties(IEnumerable<SerializedProperty> properties)
+		private static IEnumerable<IGrouping<string, NaughtyProperty>> GetGroupedProperties(IEnumerable<NaughtyProperty> properties)
 		{
 			return properties
-				.Where(p => PropertyUtility.GetAttribute<BoxGroupAttribute>(p) != null)
-				.GroupBy(p => PropertyUtility.GetAttribute<BoxGroupAttribute>(p).Name);
+				.Where(p => PropertyUtility.GetAttribute<BoxGroupAttribute>(p.property) != null)
+				.GroupBy(p => PropertyUtility.GetAttribute<BoxGroupAttribute>(p.property).Name);
 		}
 
-		private static IEnumerable<IGrouping<string, SerializedProperty>> GetFoldoutProperties(IEnumerable<SerializedProperty> properties)
+		private static IEnumerable<IGrouping<string, NaughtyProperty>> GetFoldoutProperties(IEnumerable<NaughtyProperty> properties)
 		{
 			return properties
-				.Where(p => PropertyUtility.GetAttribute<FoldoutAttribute>(p) != null)
-				.GroupBy(p => PropertyUtility.GetAttribute<FoldoutAttribute>(p).Name);
+				.Where(p => PropertyUtility.GetAttribute<FoldoutAttribute>(p.property) != null)
+				.GroupBy(p => PropertyUtility.GetAttribute<FoldoutAttribute>(p.property).Name);
 		}
 
 		private static GUIStyle GetHeaderGUIStyle()
