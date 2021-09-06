@@ -513,6 +513,262 @@ MonoBehaviour:
     minMaxSlider1: {x: 0.25, y: 0.75}
     nest2:
       minMaxSlider2: {x: 6, y: 11}
+--- !u!1 &645779700
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 645779701}
+  - component: {fileID: 645779702}
+  m_Layer: 0
+  m_Name: HugeMixPerformanceTest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &645779701
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645779700}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1148579784}
+  m_RootOrder: 33
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &645779702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645779700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d0844cc6e62fe54393612902562c4e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator0: {fileID: 1178133862}
+  hash0: -392453409
+  name0: Float1
+  animatorParamNest1:
+    animator1: {fileID: 1178133862}
+    hash1: 726565755
+    name1: Float1
+    nest2:
+      animator2: {fileID: 1178133862}
+      hash1: 0
+      name1: Trigger0
+  int0: 25
+  int1: 0
+  float0: 0
+  float1: 0
+  slider0: {x: 0, y: 0}
+  slider1: {x: 0, y: 0}
+  str0: dfgdfg
+  str1: 
+  trans0: {fileID: 0}
+  trans1: {fileID: 0}
+  myInt: 15
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -1
+      value: -1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  curve1:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  curve2:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  curveRangeNest1:
+    curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    curveRangeNest2:
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+  disableIf1: 0
+  disableIf2: 0
+  disableIfEnum1: 2
+  disableIfEnum2: 0
+  disableIfAll: 
+  disableIfAny: 
+  disableIfEnum: 
+  disableIfEnumFlag: 
+  disableIfEnumFlagMulti: 
+  disableIfNest1:
+    disable1: 0
+    disable2: 0
+    enum1: 0
+    enum2: 0
+    disableIfAll: 1
+    disableIfAny: 2
+    disableIfEnum: 3
+    disableIfEnumFlag: 0
+    disableIfEnumFlagMulti: 0
+    nest2:
+      disable1: 0
+      disable2: 0
+      enum1: 0
+      enum2: 0
+      enableIfAll: {x: 0.25, y: 0.75}
+      enableIfAny: {x: 0.25, y: 0.75}
+      enableIfEnum: {x: 0.25, y: 0.75}
+      disableIfEnumFlag: {x: 0, y: 0}
+      disableIfEnumFlagMulti: {x: 0, y: 0}
+  dropDownIntValue: 1
+  dropdownNest1:
+    stringValue: 
+    nest2:
+      vectorValue: {x: 0, y: 0, z: 0}
+  enable1: 0
+  enable2: 0
+  enableIfEnum1: 0
+  enableIfEnum2: 0
+  enableIfAll: 
+  enableIfAny: 
+  enableIfEnum: 
+  enableIfEnumFlag: 
+  enableIfEnumFlagMulti: 
+  enableIfNest1:
+    enable1: 0
+    enable2: 0
+    enum1: 0
+    enum2: 0
+    enableIfAll: 0
+    enableIfAny: 0
+    enableIfEnum: 0
+    enableIfEnumFlag: 0
+    enableIfEnumFlagMulti: 0
+    nest2:
+      enable1: 0
+      enable2: 0
+      enum1: 0
+      enum2: 0
+      enableIfAll: {x: 0.25, y: 0.75}
+      enableIfAny: {x: 0.25, y: 0.75}
+      enableIfEnum: {x: 0.25, y: 0.75}
+      enableIfEnumFlag: {x: 0, y: 0}
+      enableIfEnumFlagMulti: {x: 0, y: 0}
+  enumFlagsTest0: 0
+  enumFlagsNest1:
+    flags1: 0
+    nest2:
+      flags2: 0
+  obj0: {fileID: 0}
+  expandableScriptableObjectNest1:
+    obj1: {fileID: 0}
+    nest2:
+      obj2: {fileID: 0}
+  foldoutTestInt0: 27
+  foldoutTestInt1: 0
+  foldoutTestFloat0: 0
+  foldoutTestFloat1: 0
+  foldoutTestSlider0: {x: 0, y: 0.46343613}
+  foldoutTestSlider1: {x: 0, y: 1}
+  foldoutTestStr0: 
+  foldoutTestStr1: 
+  foldoutTestTrans0: {fileID: 0}
+  foldoutTestTrans1: {fileID: 0}
+  hide1: 0
+  hide2: 0
+  hideIfEnum1: 0
+  hideIfEnum2: 0
+  hideIfAll: 
+  hideIfAny: 
+  hideIfEnum: 
+  hideIfEnumFlag: 
+  hideIfEnumFlagMulti: 
+  hideIfNest1:
+    hide1: 0
+    hide2: 0
+    enum1: 0
+    enum2: 0
+    hideIfAll: 0
+    hideIfAny: 0
+    hideIfEnum: 0
+    hideIfEnumFlag: 0
+    hideIfEnumFlagMulti: 0
+    nest2:
+      hide1: 0
+      hide2: 0
+      enum1: 0
+      enum2: 0
+      hideIfAll: {x: 0.25, y: 0.75}
+      hideIfAny: {x: 0.25, y: 0.75}
+      hideIfEnum: {x: 0.25, y: 0.75}
+      hideIfEnumFlag: {x: 0, y: 0}
+      hideIfEnumFlagMulti: {x: 0, y: 0}
+  showIf1: 0
+  showIf2: 0
+  showIfEnum1: 0
+  showIfEnum2: 0
+  showIfAll: 
+  showIfAny: 
+  showIfEnum: 
+  showIfEnumFlag: 
+  showIfEnumFlagMulti: 
+  showIfNest1:
+    show1: 0
+    show2: 0
+    enum1: 0
+    enum2: 0
+    showIfAll: 0
+    showIfAny: 0
+    showIfEnum: 0
+    showIfEnumFlag: 0
+    showIfEnumFlagMulti: 0
+    nest2:
+      show1: 0
+      show2: 0
+      enum1: 0
+      enum2: 0
+      showIfAll: {x: 0.25, y: 0.75}
+      showIfAny: {x: 0.25, y: 0.75}
+      showIfEnum: {x: 0.25, y: 0.75}
+      showIfEnumFlag: {x: 0, y: 0}
+      showIfEnumFlagMulti: {x: 0, y: 0}
 --- !u!1 &706445688
 GameObject:
   m_ObjectHideFlags: 0
@@ -943,6 +1199,7 @@ Transform:
   - {fileID: 369789277}
   - {fileID: 1463483878}
   - {fileID: 1468344835}
+  - {fileID: 645779701}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
