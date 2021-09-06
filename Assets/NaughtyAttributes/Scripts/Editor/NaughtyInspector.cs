@@ -60,7 +60,6 @@ namespace NaughtyAttributes.Editor
 			ReorderableListPropertyDrawer.Instance.ClearCache();
 		}
 		
-
 		public override void OnInspectorGUI()
 		{
 			if (!_anyNaughtyAttribute)
@@ -77,9 +76,11 @@ namespace NaughtyAttributes.Editor
 			DrawButtons();
 		}
 		
-		protected void GetSerializedProperties(ref List<NaughtyProperty> outSerializedProperties)
+		protected virtual void GetSerializedProperties(ref List<NaughtyProperty> outSerializedProperties)
 		{
 			outSerializedProperties.Clear();
+			outSerializedProperties.TrimExcess();
+			
 			using (var iterator = serializedObject.GetIterator())
 			{
 				if (iterator.NextVisible(true))
@@ -95,7 +96,7 @@ namespace NaughtyAttributes.Editor
 			}
 		}
 
-		protected void DrawSerializedProperties()
+		protected virtual void DrawSerializedProperties()
 		{
 			serializedObject.Update();
 
@@ -108,24 +109,24 @@ namespace NaughtyAttributes.Editor
 			}
 
 			// Draw non-grouped serialized properties
-			foreach (var property in _nonGroupedSerializedProperty)
+			foreach (var naughtyProperty in _nonGroupedSerializedProperty)
 			{
-				NaughtyEditorGUI.PropertyField_Layout(property, includeChildren: true);
+				NaughtyEditorGUI.PropertyField_Layout(naughtyProperty, includeChildren: true);
 			}
 
 			// Draw grouped serialized properties
 			foreach (var group in _groupedSerialzedProperty)
 			{
-				IEnumerable<NaughtyProperty> visibleProperties = group.Where(p => PropertyUtility.IsVisible(p.serializedProperty));
+				IEnumerable<NaughtyProperty> visibleProperties = group.Where(p => PropertyUtility.IsVisible(p.showIfAttribute, p.serializedProperty));
 				if (!visibleProperties.Any())
 				{
 					continue;
 				}
 
 				NaughtyEditorGUI.BeginBoxGroup_Layout(group.Key);
-				foreach (var property in visibleProperties)
+				foreach (var naughtyProperty in visibleProperties)
 				{
-					NaughtyEditorGUI.PropertyField_Layout(property, includeChildren: true);
+					NaughtyEditorGUI.PropertyField_Layout(naughtyProperty, includeChildren: true);
 				}
 
 				NaughtyEditorGUI.EndBoxGroup_Layout();
@@ -134,7 +135,7 @@ namespace NaughtyAttributes.Editor
 			// Draw foldout serialized properties
 			foreach (var group in _foldoutGroupedSerializedProperty)
 			{
-				IEnumerable<NaughtyProperty> visibleProperties = group.Where(p => PropertyUtility.IsVisible(p.serializedProperty));
+				IEnumerable<NaughtyProperty> visibleProperties = group.Where(p => PropertyUtility.IsVisible(p.showIfAttribute, p.serializedProperty));
 				if (!visibleProperties.Any())
 				{
 					continue;
@@ -148,9 +149,9 @@ namespace NaughtyAttributes.Editor
 				_foldouts[group.Key].Value = EditorGUILayout.Foldout(_foldouts[group.Key].Value, group.Key, true);
 				if (_foldouts[group.Key].Value)
 				{
-					foreach (var property in visibleProperties)
+					foreach (var naughtyProperty in visibleProperties)
 					{
-						NaughtyEditorGUI.PropertyField_Layout(property, true);
+						NaughtyEditorGUI.PropertyField_Layout(naughtyProperty, true);
 					}
 				}
 			}
@@ -158,7 +159,7 @@ namespace NaughtyAttributes.Editor
 			serializedObject.ApplyModifiedProperties();
 		}
 
-		protected void DrawNonSerializedFields(bool drawHeader = false)
+		protected virtual void DrawNonSerializedFields(bool drawHeader = false)
 		{
 			if (_nonSerializedFields.Any())
 			{
@@ -177,7 +178,7 @@ namespace NaughtyAttributes.Editor
 			}
 		}
 
-		protected void DrawNativeProperties(bool drawHeader = false)
+		protected virtual void DrawNativeProperties(bool drawHeader = false)
 		{
 			if (_nativeProperties.Any())
 			{
@@ -196,7 +197,7 @@ namespace NaughtyAttributes.Editor
 			}
 		}
 
-		protected void DrawButtons(bool drawHeader = false)
+		protected virtual void DrawButtons(bool drawHeader = false)
 		{
 			if (_methods.Any())
 			{
