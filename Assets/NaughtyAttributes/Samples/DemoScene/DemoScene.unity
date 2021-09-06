@@ -200,8 +200,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enable1: 0
   enable2: 0
-  enum1: 0
-  enum2: 0
+  enum1: 2
+  enum2: 3
   enableIfAll: 
   enableIfAny: 
   enableIfEnum: 
@@ -311,11 +311,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0cc8a31c22090847b75538c0ed2d2fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputAxis0: 
+  inputAxis0: Fire1
   nest1:
-    inputAxis1: Horizontal
+    inputAxis1: Vertical
     nest2:
-      inputAxis2: Vertical
+      inputAxis2: Fire2
 --- !u!1 &237121640
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,9 +508,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd67fbde6acdd6a44944f12e507067c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minMaxSlider0: {x: 0, y: 0.5}
+  minMaxSlider0: {x: 0.10512249, y: 0.5}
   nest1:
-    minMaxSlider1: {x: 0.25, y: 0.75}
+    minMaxSlider1: {x: 0.25, y: 0.5771715}
     nest2:
       minMaxSlider2: {x: 6, y: 11}
 --- !u!1 &645779700
@@ -577,7 +577,7 @@ MonoBehaviour:
   str1: 
   trans0: {fileID: 0}
   trans1: {fileID: 0}
-  myInt: 15
+  myInt: 13
   curve:
     serializedVersion: 2
     m_Curve:
@@ -1039,7 +1039,7 @@ MonoBehaviour:
     nest2:
       stamina: 75
   elixir: 50
-  maxElixir: 100
+  maxElixir: 71
 --- !u!1 &993534225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1483,9 +1483,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bcc0d5613b48fb43bd36c9d37e99900, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tag0: 
+  tag0: Finish
   nest1:
-    tag1: MainCamera
+    tag1: EditorOnly
     nest2:
       tag2: Player
 --- !u!1 &1444377589
@@ -1624,7 +1624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94adafcfe59aa344c9b5596b2cc6ecd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  int0: 0
+  int0: 2
   nest1:
     int1: 0
     nest2:
@@ -1820,11 +1820,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dcb08e489c17644e9eacaa1ec5fe781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  normal: 0
+  normal: 37
   nest1:
-    warning: 0
+    warning: 37
     nest2:
-      error: 0
+      error: 70
 --- !u!1 &1591883662
 GameObject:
   m_ObjectHideFlags: 0
@@ -2113,22 +2113,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c93fde7cd79390148ac576c3a159a77b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  intArray: 020000000300000001000000
+  intArray: 010000000300000002000000
   vectorList:
-  - {x: 2, y: 2, z: 2}
   - {x: 3, y: 3, z: 3}
+  - {x: 2, y: 2, z: 2}
   - {x: 1, y: 1, z: 1}
   structList:
-  - Int: 2
-    Float: 2
-    Vector: {x: 2, y: 2, z: 2}
   - Int: 3
     Float: 3
     Vector: {x: 3, y: 3, z: 3}
   - Int: 1
-    Float: 1
+    Float: 1.96
     Vector: {x: 1, y: 1, z: 1}
-  gameObjectsList: []
+  - Int: 2
+    Float: 2
+    Vector: {x: 2, y: 2, z: 2}
+  gameObjectsList:
+  - {fileID: 0}
+  - {fileID: 0}
   transformsList: []
   monoBehavioursList: []
 --- !u!1 &1784643784
@@ -2174,13 +2176,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3920f5ea384951b4990e4d9e8032d12e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  int0: 0
+  int0: 27
   int1: 0
-  float0: 0
+  float0: 2.23
   float1: 0
-  slider0: {x: 0.25, y: 0.75}
+  slider0: {x: 0.33104458, y: 0.75}
   slider1: {x: 0.25, y: 0.75}
-  str0: 
+  str0: gg
   str1: 
   trans0: {fileID: 0}
   trans1: {fileID: 0}

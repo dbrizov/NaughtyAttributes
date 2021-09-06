@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System;
 using System.Linq;
 using System.Reflection;
 
@@ -31,6 +30,34 @@ namespace NaughtyAttributes.Editor
 		
 		protected virtual void OnEnable()
 		{
+			/*
+			 * TODO:
+			 * OnEnable is called for all monos and scriptable objects,
+			 * which eats some one time perf after compilation and also takes some memory (although not noticeable)
+			 * any other way to trigger this like via a custom editor/ window with on focus??
+			 *
+			 * Selection.selectionChanged += ????
+			 * Base Mono and SO scripts that handle this??
+			 */
+			
+			this.Prepare();
+		}
+
+		protected virtual void OnDisable()
+		{
+			//cleanup memory
+			ReorderableListPropertyDrawer.Instance.ClearCache();
+
+			_foldoutGroupedSerializedProperty = Enumerable.Empty<IGrouping<string, NaughtyProperty>>();
+			_groupedSerialzedProperty = Enumerable.Empty<IGrouping<string, NaughtyProperty>>();
+			_nonGroupedSerializedProperty = Enumerable.Empty<NaughtyProperty>();
+			_serializedProperties.Clear();
+			
+			m_ScriptProperty = default;
+		}
+
+		public virtual void Prepare()
+		{
 			_nonSerializedFields = ReflectionUtility.GetAllFields(
 				target, f => f.GetCustomAttributes(typeof(ShowNonSerializedFieldAttribute), true).Length > 0);
 
@@ -53,11 +80,6 @@ namespace NaughtyAttributes.Editor
 			_groupedSerialzedProperty = GetGroupedProperties(_serializedProperties);
 
 			_foldoutGroupedSerializedProperty = GetFoldoutProperties(_serializedProperties);
-		}
-
-		protected virtual void OnDisable()
-		{
-			ReorderableListPropertyDrawer.Instance.ClearCache();
 		}
 		
 		public override void OnInspectorGUI()
