@@ -8,19 +8,6 @@ using UnityEngine;
 
 namespace NaughtyAttributes.Editor
 {
-	public class NaughtyProperty
-	{
-		public SerializedProperty property;
-		public SpecialCaseDrawerAttribute specialCaseDrawerAttribute;
-		public ShowIfAttributeBase showIfAttribute;
-
-		public EnableIfAttributeBase enableIfAttribute;
-		
-		public ReadOnlyAttribute readOnlyAttribute;
-
-		public ValidatorAttribute[] validatorAttributes;
-	}
-	
 	[CanEditMultipleObjects]
 	[CustomEditor(typeof(UnityEngine.Object), true)]
 	public class NaughtyInspector : UnityEditor.Editor
@@ -55,12 +42,13 @@ namespace NaughtyAttributes.Editor
 
 			GetSerializedProperties(ref _serializedProperties);
 			
-			_anyNaughtyAttribute = _serializedProperties.Any(p => PropertyUtility.GetAttribute<INaughtyAttribute>(p.property) != null);
+			_anyNaughtyAttribute = _serializedProperties.Any(p => PropertyUtility.GetAttribute<INaughtyAttribute>(p.serializedProperty) != null);
 
 			_nonGroupedSerializedProperty = GetNonGroupedProperties(_serializedProperties);
-			NaughtyProperty[] mScripts = _serializedProperties.Where(p => p.property.name.Equals("m_Script")).ToArray();
 			
-			m_ScriptProperty = mScripts.Length > 0 ? mScripts[0].property : null;
+			//.First(...) doesnt work for some reason because the m_Script field isnt loaded yet I assume
+			NaughtyProperty[] mScripts = _serializedProperties.Where(p => p.serializedProperty.name.Equals("m_Script")).ToArray();
+			m_ScriptProperty = mScripts.Length > 0 ? mScripts[0].serializedProperty : null;
 			
 			_groupedSerialzedProperty = GetGroupedProperties(_serializedProperties);
 
@@ -128,7 +116,7 @@ namespace NaughtyAttributes.Editor
 			// Draw grouped serialized properties
 			foreach (var group in _groupedSerialzedProperty)
 			{
-				IEnumerable<NaughtyProperty> visibleProperties = group.Where(p => PropertyUtility.IsVisible(p.property));
+				IEnumerable<NaughtyProperty> visibleProperties = group.Where(p => PropertyUtility.IsVisible(p.serializedProperty));
 				if (!visibleProperties.Any())
 				{
 					continue;
@@ -146,7 +134,7 @@ namespace NaughtyAttributes.Editor
 			// Draw foldout serialized properties
 			foreach (var group in _foldoutGroupedSerializedProperty)
 			{
-				IEnumerable<NaughtyProperty> visibleProperties = group.Where(p => PropertyUtility.IsVisible(p.property));
+				IEnumerable<NaughtyProperty> visibleProperties = group.Where(p => PropertyUtility.IsVisible(p.serializedProperty));
 				if (!visibleProperties.Any())
 				{
 					continue;
@@ -229,21 +217,21 @@ namespace NaughtyAttributes.Editor
 
 		private static IEnumerable<NaughtyProperty> GetNonGroupedProperties(IEnumerable<NaughtyProperty> properties)
 		{
-			return properties.Where(p => PropertyUtility.GetAttribute<IGroupAttribute>(p.property) == null && !p.property.name.Equals("m_Script"));
+			return properties.Where(p => PropertyUtility.GetAttribute<IGroupAttribute>(p.serializedProperty) == null && !p.serializedProperty.name.Equals("m_Script"));
 		}
 
 		private static IEnumerable<IGrouping<string, NaughtyProperty>> GetGroupedProperties(IEnumerable<NaughtyProperty> properties)
 		{
 			return properties
-				.Where(p => PropertyUtility.GetAttribute<BoxGroupAttribute>(p.property) != null)
-				.GroupBy(p => PropertyUtility.GetAttribute<BoxGroupAttribute>(p.property).Name);
+				.Where(p => PropertyUtility.GetAttribute<BoxGroupAttribute>(p.serializedProperty) != null)
+				.GroupBy(p => PropertyUtility.GetAttribute<BoxGroupAttribute>(p.serializedProperty).Name);
 		}
 
 		private static IEnumerable<IGrouping<string, NaughtyProperty>> GetFoldoutProperties(IEnumerable<NaughtyProperty> properties)
 		{
 			return properties
-				.Where(p => PropertyUtility.GetAttribute<FoldoutAttribute>(p.property) != null)
-				.GroupBy(p => PropertyUtility.GetAttribute<FoldoutAttribute>(p.property).Name);
+				.Where(p => PropertyUtility.GetAttribute<FoldoutAttribute>(p.serializedProperty) != null)
+				.GroupBy(p => PropertyUtility.GetAttribute<FoldoutAttribute>(p.serializedProperty).Name);
 		}
 
 		private static GUIStyle GetHeaderGUIStyle()

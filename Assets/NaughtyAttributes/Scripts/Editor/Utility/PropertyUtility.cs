@@ -26,19 +26,19 @@ namespace NaughtyAttributes.Editor
 			return (T[])fieldInfo.GetCustomAttributes(typeof(T), true);
 		}
 
-		public static NaughtyProperty CreateNaughtyProperty(SerializedProperty property)
+		public static NaughtyProperty CreateNaughtyProperty(SerializedProperty serializedProperty)
 		{
 			NaughtyProperty naughtyProperty = new NaughtyProperty();
-			naughtyProperty.property = property;
+			naughtyProperty.serializedProperty = serializedProperty;
 
-			naughtyProperty.readOnlyAttribute = PropertyUtility.GetAttribute<ReadOnlyAttribute>(naughtyProperty.property);
-			naughtyProperty.enableIfAttribute = PropertyUtility.GetAttribute<EnableIfAttributeBase>(naughtyProperty.property);
+			naughtyProperty.readOnlyAttribute = PropertyUtility.GetAttribute<ReadOnlyAttribute>(naughtyProperty.serializedProperty);
+			naughtyProperty.enableIfAttribute = PropertyUtility.GetAttribute<EnableIfAttributeBase>(naughtyProperty.serializedProperty);
 						
-			naughtyProperty.showIfAttribute = PropertyUtility.GetAttribute<ShowIfAttributeBase>(naughtyProperty.property);
-			naughtyProperty.validatorAttributes = PropertyUtility.GetAttributes<ValidatorAttribute>(naughtyProperty.property);
+			naughtyProperty.showIfAttribute = PropertyUtility.GetAttribute<ShowIfAttributeBase>(naughtyProperty.serializedProperty);
+			naughtyProperty.validatorAttributes = PropertyUtility.GetAttributes<ValidatorAttribute>(naughtyProperty.serializedProperty);
 
 			naughtyProperty.specialCaseDrawerAttribute =
-				PropertyUtility.GetAttribute<SpecialCaseDrawerAttribute>(naughtyProperty.property);
+				PropertyUtility.GetAttribute<SpecialCaseDrawerAttribute>(naughtyProperty.serializedProperty);
 			
 			return naughtyProperty;
 		}
