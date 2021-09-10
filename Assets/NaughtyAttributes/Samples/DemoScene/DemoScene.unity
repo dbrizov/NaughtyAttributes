@@ -561,12 +561,18 @@ MonoBehaviour:
   name0: Float1
   animatorParamNest1:
     animator1: {fileID: 1178133862}
+    animatorController1: {fileID: 0}
     hash1: 726565755
     name1: Float1
+    hashController1: 0
+    nameController1: 
     nest2:
       animator2: {fileID: 1178133862}
+      animatorController2: {fileID: 0}
       hash1: 0
       name1: Trigger0
+      hashController2: 0
+      nameController2: 
   int0: 25
   int1: 0
   float0: 0
@@ -1248,16 +1254,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator0: {fileID: 1178133862}
-  hash0: 1943738498
+  animatorController0: {fileID: 9100000, guid: 63ee86efd213bf34285c95f33e79dc6c, type: 2}
+  hash0: -392453409
   name0: Float0
+  hashController0: 726565755
+  nameController0: Trigger1
   nest1:
     animator1: {fileID: 1178133862}
-    hash1: 726565755
+    animatorController1: {fileID: 9100000, guid: 63ee86efd213bf34285c95f33e79dc6c,
+      type: 2}
+    hash1: 1548334061
     name1: Float0
+    hashController1: 1548334061
+    nameController1: Float1
     nest2:
       animator2: {fileID: 1178133862}
+      animatorController2: {fileID: 9100000, guid: 63ee86efd213bf34285c95f33e79dc6c,
+        type: 2}
       hash1: -392453409
       name1: Trigger0
+      hashController2: -392453409
+      nameController2: Trigger1
 --- !u!95 &1178133862
 Animator:
   serializedVersion: 3
