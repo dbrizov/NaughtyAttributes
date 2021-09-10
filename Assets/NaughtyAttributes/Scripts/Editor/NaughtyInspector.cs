@@ -12,17 +12,17 @@ namespace NaughtyAttributes.Editor
 	public class NaughtyInspector : UnityEditor.Editor
 	{
 		private List<NaughtyProperty> _serializedProperties = new List<NaughtyProperty>();
-		private IEnumerable<FieldInfo> _nonSerializedFields;
-		private IEnumerable<PropertyInfo> _nativeProperties;
-		private IEnumerable<MethodInfo> _methods;
+		private List<FieldInfo> _nonSerializedFields;
+		private List<PropertyInfo> _nativeProperties;
+		private List<MethodInfo> _methods;
 
-		private IEnumerable<NaughtyProperty> _nonGroupedSerializedProperty;
+		private List<NaughtyProperty> _nonGroupedSerializedProperty;
 
 		private SerializedProperty m_ScriptProperty;
 
-		private IEnumerable<IGrouping<string, NaughtyProperty>> _groupedSerialzedProperty;
+		private List<IGrouping<string, NaughtyProperty>> _groupedSerialzedProperty;
 
-		private IEnumerable<IGrouping<string, NaughtyProperty>> _foldoutGroupedSerializedProperty;
+		private List<IGrouping<string, NaughtyProperty>> _foldoutGroupedSerializedProperty;
 		
 		private Dictionary<string, SavedBool> _foldouts = new Dictionary<string, SavedBool>();
 
@@ -50,9 +50,12 @@ namespace NaughtyAttributes.Editor
 			//cleanup memory
 			ReorderableListPropertyDrawer.Instance.ClearCache();
 
-			_foldoutGroupedSerializedProperty = Enumerable.Empty<IGrouping<string, NaughtyProperty>>();
-			_groupedSerialzedProperty = Enumerable.Empty<IGrouping<string, NaughtyProperty>>();
-			_nonGroupedSerializedProperty = Enumerable.Empty<NaughtyProperty>();
+			_nonSerializedFields.Clear();
+			_nativeProperties.Clear();
+			_methods.Clear();
+			_foldoutGroupedSerializedProperty.Clear();
+			_groupedSerialzedProperty.Clear();
+			_nonGroupedSerializedProperty.Clear();
 			_serializedProperties.Clear();
 			
 			m_ScriptProperty = default;
@@ -61,27 +64,27 @@ namespace NaughtyAttributes.Editor
 		public virtual void Prepare()
 		{
 			_nonSerializedFields = ReflectionUtility.GetAllFields(
-				target, f => f.GetCustomAttributes(typeof(ShowNonSerializedFieldAttribute), true).Length > 0);
+				target, f => f.GetCustomAttributes(typeof(ShowNonSerializedFieldAttribute), true).Length > 0).ToList();
 
 			_nativeProperties = ReflectionUtility.GetAllProperties(
-				target, p => p.GetCustomAttributes(typeof(ShowNativePropertyAttribute), true).Length > 0);
+				target, p => p.GetCustomAttributes(typeof(ShowNativePropertyAttribute), true).Length > 0).ToList();
 
 			_methods = ReflectionUtility.GetAllMethods(
-				target, m => m.GetCustomAttributes(typeof(ButtonAttribute), true).Length > 0);
+				target, m => m.GetCustomAttributes(typeof(ButtonAttribute), true).Length > 0).ToList();
 
 			GetSerializedProperties(ref _serializedProperties);
 			
 			_anyNaughtyAttribute = _serializedProperties.Any(p => PropertyUtility.GetAttribute<INaughtyAttribute>(p.serializedProperty) != null);
 
-			_nonGroupedSerializedProperty = GetNonGroupedProperties(_serializedProperties);
+			_nonGroupedSerializedProperty = GetNonGroupedProperties(_serializedProperties).ToList();
 			
 			//.First(...) doesnt work for some reason because the m_Script field isnt loaded yet I assume
 			NaughtyProperty[] mScripts = _serializedProperties.Where(p => p.serializedProperty.name.Equals("m_Script")).ToArray();
 			m_ScriptProperty = mScripts.Length > 0 ? mScripts[0].serializedProperty : null;
 			
-			_groupedSerialzedProperty = GetGroupedProperties(_serializedProperties);
+			_groupedSerialzedProperty = GetGroupedProperties(_serializedProperties).ToList();
 
-			_foldoutGroupedSerializedProperty = GetFoldoutProperties(_serializedProperties);
+			_foldoutGroupedSerializedProperty = GetFoldoutProperties(_serializedProperties).ToList();
 
 			_useCachedMetaAttributes = false;
 		}

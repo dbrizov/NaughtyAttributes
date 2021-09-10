@@ -557,7 +557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator0: {fileID: 1178133862}
-  hash0: -392453409
+  hash0: -1617128887
   name0: Float1
   animatorParamNest1:
     animator1: {fileID: 1178133862}
@@ -577,7 +577,7 @@ MonoBehaviour:
   str1: 
   trans0: {fileID: 0}
   trans1: {fileID: 0}
-  myInt: 13
+  myInt: 24
   curve:
     serializedVersion: 2
     m_Curve:
