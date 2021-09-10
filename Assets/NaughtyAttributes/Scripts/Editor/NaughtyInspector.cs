@@ -11,24 +11,23 @@ namespace NaughtyAttributes.Editor
 	[CustomEditor(typeof(UnityEngine.Object), true)]
 	public class NaughtyInspector : UnityEditor.Editor
 	{
-		private List<NaughtyProperty> _serializedProperties = new List<NaughtyProperty>();
-		private List<FieldInfo> _nonSerializedFields;
-		private List<PropertyInfo> _nativeProperties;
-		private List<MethodInfo> _methods;
+		protected List<NaughtyProperty> _serializedProperties = new List<NaughtyProperty>();
+		protected List<FieldInfo> _nonSerializedFields;
+		protected List<PropertyInfo> _nativeProperties;
+		protected List<MethodInfo> _methods;
 
-		private List<NaughtyProperty> _nonGroupedSerializedProperty;
+		protected List<NaughtyProperty> _nonGroupedSerializedProperty;
+		protected SerializedProperty m_ScriptProperty;
 
-		private SerializedProperty m_ScriptProperty;
-
-		private List<IGrouping<string, NaughtyProperty>> _groupedSerialzedProperty;
-
-		private List<IGrouping<string, NaughtyProperty>> _foldoutGroupedSerializedProperty;
+		protected List<IGrouping<string, NaughtyProperty>> _groupedSerialzedProperty;
+		protected List<IGrouping<string, NaughtyProperty>> _foldoutGroupedSerializedProperty;
 		
 		private Dictionary<string, SavedBool> _foldouts = new Dictionary<string, SavedBool>();
 
 		private bool _anyNaughtyAttribute;
-		private bool _useCachedMetaAttributes;
-		private bool _changeDetected;
+		
+		protected bool _useCachedMetaAttributes;
+		protected bool _changeDetected;
 		
 		protected virtual void OnEnable()
 		{
@@ -43,11 +42,12 @@ namespace NaughtyAttributes.Editor
 			_nonSerializedFields.Clear();
 			_nativeProperties.Clear();
 			_methods.Clear();
+			_foldouts.Clear();
+
 			_foldoutGroupedSerializedProperty.Clear();
 			_groupedSerialzedProperty.Clear();
 			_nonGroupedSerializedProperty.Clear();
 			_serializedProperties.Clear();
-			_foldouts.Clear();
 			
 			m_ScriptProperty = default;
 		}
