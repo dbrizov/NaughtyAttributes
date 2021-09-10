@@ -6,6 +6,8 @@ namespace NaughtyAttributes.Editor
 	[CustomPropertyDrawer(typeof(CurveRangeAttribute))]
 	public class CurveRangePropertyDrawer : PropertyDrawerBase
 	{
+		private CurveRangeAttribute _cachedCurveRangeAttribute;
+		
 		protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
 		{
 			float propertyHeight = property.propertyType == SerializedPropertyType.AnimationCurve
@@ -27,7 +29,10 @@ namespace NaughtyAttributes.Editor
 				return;
 			}
 
-			var attribute = PropertyUtility.GetAttribute<CurveRangeAttribute>(property);
+			if (_cachedCurveRangeAttribute == null)
+				_cachedCurveRangeAttribute = PropertyUtility.GetAttribute<CurveRangeAttribute>(property);
+			
+			var attribute = _cachedCurveRangeAttribute;
 
 			EditorGUI.CurveField(
 				rect, 

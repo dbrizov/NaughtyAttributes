@@ -557,7 +557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator0: {fileID: 1178133862}
-  hash0: -392453409
+  hash0: -1617128887
   name0: Float1
   animatorParamNest1:
     animator1: {fileID: 1178133862}
@@ -583,7 +583,7 @@ MonoBehaviour:
   str1: 
   trans0: {fileID: 0}
   trans1: {fileID: 0}
-  myInt: 13
+  myInt: 24
   curve:
     serializedVersion: 2
     m_Curve:
@@ -669,9 +669,9 @@ MonoBehaviour:
     nest2:
       vectorValue: {x: 0, y: 0, z: 0}
   enable1: 0
-  enable2: 0
-  enableIfEnum1: 0
-  enableIfEnum2: 0
+  enable2: 1
+  enableIfEnum1: 1
+  enableIfEnum2: 10
   enableIfAll: 
   enableIfAny: 
   enableIfEnum: 
@@ -697,7 +697,7 @@ MonoBehaviour:
       enableIfEnum: {x: 0.25, y: 0.75}
       enableIfEnumFlag: {x: 0, y: 0}
       enableIfEnumFlagMulti: {x: 0, y: 0}
-  enumFlagsTest0: 0
+  enumFlagsTest0: 1
   enumFlagsNest1:
     flags1: 0
     nest2:
@@ -711,7 +711,7 @@ MonoBehaviour:
   foldoutTestInt1: 0
   foldoutTestFloat0: 0
   foldoutTestFloat1: 0
-  foldoutTestSlider0: {x: 0, y: 0.46343613}
+  foldoutTestSlider0: {x: 0.4172527, y: 0.8947535}
   foldoutTestSlider1: {x: 0, y: 1}
   foldoutTestStr0: 
   foldoutTestStr1: 
@@ -719,7 +719,7 @@ MonoBehaviour:
   foldoutTestTrans1: {fileID: 0}
   hide1: 0
   hide2: 0
-  hideIfEnum1: 0
+  hideIfEnum1: 1
   hideIfEnum2: 0
   hideIfAll: 
   hideIfAny: 
@@ -746,10 +746,10 @@ MonoBehaviour:
       hideIfEnum: {x: 0.25, y: 0.75}
       hideIfEnumFlag: {x: 0, y: 0}
       hideIfEnumFlagMulti: {x: 0, y: 0}
-  showIf1: 0
+  showIf1: 1
   showIf2: 0
-  showIfEnum1: 0
-  showIfEnum2: 0
+  showIfEnum1: 1
+  showIfEnum2: 1
   showIfAll: 
   showIfAny: 
   showIfEnum: 

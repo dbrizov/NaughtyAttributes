@@ -31,14 +31,16 @@ namespace NaughtyAttributes.Editor
 			NaughtyProperty naughtyProperty = new NaughtyProperty();
 			naughtyProperty.serializedProperty = serializedProperty;
 
-			naughtyProperty.readOnlyAttribute = PropertyUtility.GetAttribute<ReadOnlyAttribute>(naughtyProperty.serializedProperty);
-			naughtyProperty.enableIfAttribute = PropertyUtility.GetAttribute<EnableIfAttributeBase>(naughtyProperty.serializedProperty);
+			naughtyProperty.readOnlyAttribute = PropertyUtility.GetAttribute<ReadOnlyAttribute>(serializedProperty);
+			naughtyProperty.enableIfAttribute = PropertyUtility.GetAttribute<EnableIfAttributeBase>(serializedProperty);
 						
-			naughtyProperty.showIfAttribute = PropertyUtility.GetAttribute<ShowIfAttributeBase>(naughtyProperty.serializedProperty);
-			naughtyProperty.validatorAttributes = PropertyUtility.GetAttributes<ValidatorAttribute>(naughtyProperty.serializedProperty);
+			naughtyProperty.showIfAttribute = PropertyUtility.GetAttribute<ShowIfAttributeBase>(serializedProperty);
+			naughtyProperty.validatorAttributes = PropertyUtility.GetAttributes<ValidatorAttribute>(serializedProperty);
 
+			naughtyProperty.labelAttribute = PropertyUtility.GetAttribute<LabelAttribute>(serializedProperty);
+			
 			naughtyProperty.specialCaseDrawerAttribute =
-				PropertyUtility.GetAttribute<SpecialCaseDrawerAttribute>(naughtyProperty.serializedProperty);
+				PropertyUtility.GetAttribute<SpecialCaseDrawerAttribute>(serializedProperty);
 			
 			return naughtyProperty;
 		}
@@ -46,6 +48,11 @@ namespace NaughtyAttributes.Editor
 		public static GUIContent GetLabel(SerializedProperty property)
 		{
 			LabelAttribute labelAttribute = GetAttribute<LabelAttribute>(property);
+			return GetLabel(labelAttribute, property);
+		}
+		
+		public static GUIContent GetLabel(LabelAttribute labelAttribute, SerializedProperty property)
+		{
 			string labelText = (labelAttribute == null)
 				? property.displayName
 				: labelAttribute.Label;
@@ -155,7 +162,7 @@ namespace NaughtyAttributes.Editor
 			{
 				return true;
 			}
-
+			
 			object target = GetTargetObjectWithProperty(property);
 
 			// deal with enum conditions
