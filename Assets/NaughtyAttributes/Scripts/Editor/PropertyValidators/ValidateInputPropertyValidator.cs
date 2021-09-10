@@ -6,9 +6,14 @@ namespace NaughtyAttributes.Editor
 {
 	public class ValidateInputPropertyValidator : PropertyValidatorBase
 	{
+		private ValidateInputAttribute _cachedValidateInputAttribute;
+		
 		public override void ValidateProperty(SerializedProperty property)
 		{
-			ValidateInputAttribute validateInputAttribute = PropertyUtility.GetAttribute<ValidateInputAttribute>(property);
+			if (_cachedValidateInputAttribute == null)
+				_cachedValidateInputAttribute = PropertyUtility.GetAttribute<ValidateInputAttribute>(property);
+			
+			ValidateInputAttribute validateInputAttribute = _cachedValidateInputAttribute;
 			object target = PropertyUtility.GetTargetObjectWithProperty(property);
 
 			MethodInfo validationCallback = ReflectionUtility.GetMethod(target, validateInputAttribute.CallbackName);

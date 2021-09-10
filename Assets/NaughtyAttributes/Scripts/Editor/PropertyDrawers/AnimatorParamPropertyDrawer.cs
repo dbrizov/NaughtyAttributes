@@ -9,13 +9,25 @@ namespace NaughtyAttributes.Editor
 	[CustomPropertyDrawer(typeof(AnimatorParamAttribute))]
 	public class AnimatorParamPropertyDrawer : PropertyDrawerBase
 	{
+		private AnimatorParamAttribute _cachedAnimatorParamAttribute;
+		
 		private const string InvalidAnimatorControllerWarningMessage = "Target animator controller is null";
 		private const string InvalidTypeWarningMessage = "{0} must be an int or a string";
 
+		private AnimatorController _cachedAnimatorController;
+		
 		protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
 		{
-			AnimatorParamAttribute animatorParamAttribute = PropertyUtility.GetAttribute<AnimatorParamAttribute>(property);
-			bool validAnimatorController = GetAnimatorController(property, animatorParamAttribute.AnimatorName) != null;
+			if (_cachedAnimatorParamAttribute == null)
+				_cachedAnimatorParamAttribute = PropertyUtility.GetAttribute<AnimatorParamAttribute>(property);
+			
+			AnimatorParamAttribute animatorParamAttribute = _cachedAnimatorParamAttribute;
+
+			if (_cachedAnimatorController == null)
+				_cachedAnimatorController = GetAnimatorController(property, animatorParamAttribute.AnimatorName);
+			
+			bool validAnimatorController = _cachedAnimatorController != null;
+			
 			bool validPropertyType = property.propertyType == SerializedPropertyType.Integer || property.propertyType == SerializedPropertyType.String;
 
 			return (validAnimatorController && validPropertyType)
@@ -27,9 +39,12 @@ namespace NaughtyAttributes.Editor
 		{
 			EditorGUI.BeginProperty(rect, label, property);
 
-			AnimatorParamAttribute animatorParamAttribute = PropertyUtility.GetAttribute<AnimatorParamAttribute>(property);
+			if (_cachedAnimatorParamAttribute == null)
+				_cachedAnimatorParamAttribute = PropertyUtility.GetAttribute<AnimatorParamAttribute>(property);
+			
+			AnimatorParamAttribute animatorParamAttribute = _cachedAnimatorParamAttribute;
 
-			AnimatorController animatorController = GetAnimatorController(property, animatorParamAttribute.AnimatorName);
+			AnimatorController animatorController = _cachedAnimatorController;
 			if (animatorController == null)
 			{
 				DrawDefaultPropertyAndHelpBox(rect, property, InvalidAnimatorControllerWarningMessage, MessageType.Warning);
@@ -131,39 +146,60 @@ namespace NaughtyAttributes.Editor
 			object target = PropertyUtility.GetTargetObjectWithProperty(property);
 
 			FieldInfo animatorFieldInfo = ReflectionUtility.GetField(target, animatorName);
-			if (animatorFieldInfo != null &&
-				animatorFieldInfo.FieldType == typeof(Animator))
+			if (animatorFieldInfo != null)
 			{
-				Animator animator = animatorFieldInfo.GetValue(target) as Animator;
-				if (animator != null)
+				if (animatorFieldInfo.FieldType == typeof(Animator))
 				{
-					AnimatorController animatorController = animator.runtimeAnimatorController as AnimatorController;
-					return animatorController;
+					Animator animator = animatorFieldInfo.GetValue(target) as Animator;
+					if (animator != null)
+					{
+						AnimatorController animatorController =
+							animator.runtimeAnimatorController as AnimatorController;
+						return animatorController;
+					}
+				}
+				else if (animatorFieldInfo.FieldType == typeof(AnimatorController))
+				{
+					return animatorFieldInfo.GetValue(target) as AnimatorController;
 				}
 			}
 
 			PropertyInfo animatorPropertyInfo = ReflectionUtility.GetProperty(target, animatorName);
-			if (animatorPropertyInfo != null &&
-				animatorPropertyInfo.PropertyType == typeof(Animator))
+			if (animatorPropertyInfo != null)
 			{
-				Animator animator = animatorPropertyInfo.GetValue(target) as Animator;
-				if (animator != null)
+				if (animatorPropertyInfo.PropertyType == typeof(Animator))
 				{
-					AnimatorController animatorController = animator.runtimeAnimatorController as AnimatorController;
-					return animatorController;
+					Animator animator = animatorPropertyInfo.GetValue(target) as Animator;
+					if (animator != null)
+					{
+						AnimatorController animatorController =
+							animator.runtimeAnimatorController as AnimatorController;
+						return animatorController;
+					}
+				}
+				else if (animatorPropertyInfo.PropertyType == typeof(AnimatorController))
+				{
+					return animatorPropertyInfo.GetValue(target) as AnimatorController;
 				}
 			}
 
 			MethodInfo animatorGetterMethodInfo = ReflectionUtility.GetMethod(target, animatorName);
 			if (animatorGetterMethodInfo != null &&
-				animatorGetterMethodInfo.ReturnType == typeof(Animator) &&
-				animatorGetterMethodInfo.GetParameters().Length == 0)
+			    animatorGetterMethodInfo.GetParameters().Length == 0)
 			{
-				Animator animator = animatorGetterMethodInfo.Invoke(target, null) as Animator;
-				if (animator != null)
+				if (animatorGetterMethodInfo.ReturnType == typeof(Animator))
 				{
-					AnimatorController animatorController = animator.runtimeAnimatorController as AnimatorController;
-					return animatorController;
+					Animator animator = animatorGetterMethodInfo.Invoke(target, null) as Animator;
+					if (animator != null)
+					{
+						AnimatorController animatorController =
+							animator.runtimeAnimatorController as AnimatorController;
+						return animatorController;
+					}
+				}
+				else if (animatorGetterMethodInfo.ReturnType == typeof(AnimatorController))
+				{
+					return animatorGetterMethodInfo.Invoke(target, null) as AnimatorController;
 				}
 			}
 

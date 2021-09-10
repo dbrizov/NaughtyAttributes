@@ -128,7 +128,7 @@ namespace NaughtyAttributes.Editor
 
 			EditorGUI.EndProperty();
 		}
-
+		
 		private void DrawChildProperties(Rect rect, SerializedProperty property)
 		{
 			ScriptableObject scriptableObject = property.objectReferenceValue as ScriptableObject;
@@ -180,7 +180,9 @@ namespace NaughtyAttributes.Editor
 								height = childHeight
 							};
 
-							NaughtyEditorGUI.PropertyField(childRect, childProperty, true);
+							//TODO since the depth can go deeper we cant just use one field. - need better caching and mapping here!
+							//_naughtyProperty ??= PropertyUtility.CreateNaughtyProperty(childProperty);
+							NaughtyEditorGUI.PropertyField(childRect, PropertyUtility.CreateNaughtyProperty(childProperty), true);
 
 							yOffset += childHeight;
 						}

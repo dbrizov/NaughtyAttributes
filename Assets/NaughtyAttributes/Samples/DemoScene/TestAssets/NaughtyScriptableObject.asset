@@ -16,3 +16,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 149474eb879a6a641b560ca17d48712f, type: 2}
   - {fileID: 11400000, guid: ca97c330d5c96794aa4df848d63f836b, type: 2}
   - {fileID: 0}
+  animatorController0: {fileID: 9100000, guid: 63ee86efd213bf34285c95f33e79dc6c, type: 2}
+  hashController0: -392453409
+  nameController0: Trigger1
