@@ -19,15 +19,15 @@ namespace NaughtyAttributes.Editor
 
 		private delegate void PropertyFieldFunction(Rect rect, NaughtyProperty naughtyProperty, GUIContent label, bool includeChildren);
 
-		public static void PropertyField(Rect rect, NaughtyProperty naughtyProperty, bool includeChildren)
+		public static bool PropertyField(Rect rect, NaughtyProperty naughtyProperty, bool includeChildren)
 		{
-			PropertyField_Implementation(rect, naughtyProperty, includeChildren, DrawPropertyField);
+			return PropertyField_Implementation(rect, naughtyProperty, includeChildren, DrawPropertyField);
 		}
 
-		public static void PropertyField_Layout(NaughtyProperty naughtyProperty, bool includeChildren)
+		public static bool PropertyField_Layout(NaughtyProperty naughtyProperty, bool includeChildren)
 		{
 			Rect dummyRect = new Rect();
-			PropertyField_Implementation(dummyRect, naughtyProperty, includeChildren, DrawPropertyField_Layout);
+			return PropertyField_Implementation(dummyRect, naughtyProperty, includeChildren, DrawPropertyField_Layout);
 		}
 
 		private static void DrawPropertyField(Rect rect, NaughtyProperty naughtyProperty, GUIContent label, bool includeChildren)
@@ -40,19 +40,20 @@ namespace NaughtyAttributes.Editor
 			EditorGUILayout.PropertyField(naughtyProperty.serializedProperty, label, includeChildren);
 		}
 
-		private static void PropertyField_Implementation(Rect rect, NaughtyProperty naughtyProperty, bool includeChildren, PropertyFieldFunction propertyFieldFunction)
+		private static bool PropertyField_Implementation(Rect rect, NaughtyProperty naughtyProperty, bool includeChildren, PropertyFieldFunction propertyFieldFunction)
 		{
+			bool changeDetected = false;
+			
 			if (naughtyProperty.specialCaseDrawerAttribute != null)
 			{
-				naughtyProperty.specialCaseDrawerAttribute.GetDrawer().OnGUI(rect, naughtyProperty.serializedProperty);
+				return naughtyProperty.specialCaseDrawerAttribute.GetDrawer().OnGUI(rect, naughtyProperty);
 			}
 			else
 			{
 				// Check if visible
-				bool visible = PropertyUtility.IsVisible(naughtyProperty.showIfAttribute, naughtyProperty.serializedProperty);
-				if (!visible)
+				if (!naughtyProperty.cachedIsVisible)
 				{
-					return;
+					return false;
 				}
 				
 				// Validate
@@ -63,7 +64,7 @@ namespace NaughtyAttributes.Editor
 				
 				// Check if enabled and draw
 				EditorGUI.BeginChangeCheck();
-				bool enabled = PropertyUtility.IsEnabled(naughtyProperty.readOnlyAttribute, naughtyProperty.enableIfAttribute, naughtyProperty.serializedProperty);
+				bool enabled = naughtyProperty.cachedIsEnabled;
 				
 				using (new EditorGUI.DisabledScope(disabled: !enabled))
 				{
@@ -73,9 +74,12 @@ namespace NaughtyAttributes.Editor
 				// Call OnValueChanged callbacks
 				if (EditorGUI.EndChangeCheck())
 				{
+					changeDetected = true;
 					PropertyUtility.CallOnValueChangedCallbacks(naughtyProperty.serializedProperty);
 				}
 			}
+
+			return changeDetected;
 		}
 
 		public static float GetIndentLength(Rect sourceRect)

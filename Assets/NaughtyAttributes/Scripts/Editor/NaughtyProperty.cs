@@ -14,5 +14,8 @@ namespace NaughtyAttributes.Editor
         public EnableIfAttributeBase enableIfAttribute;
         public ReadOnlyAttribute readOnlyAttribute;
         public ValidatorAttribute[] validatorAttributes;
+
+        public bool cachedIsVisible = true;
+        public bool cachedIsEnabled = true;
     }
 }

@@ -27,6 +27,8 @@ namespace NaughtyAttributes.Editor
 		private Dictionary<string, SavedBool> _foldouts = new Dictionary<string, SavedBool>();
 
 		private bool _anyNaughtyAttribute;
+		private bool _useCachedMetaAttributes;
+		private bool _changeDetected;
 		
 		protected virtual void OnEnable()
 		{
@@ -80,10 +82,14 @@ namespace NaughtyAttributes.Editor
 			_groupedSerialzedProperty = GetGroupedProperties(_serializedProperties);
 
 			_foldoutGroupedSerializedProperty = GetFoldoutProperties(_serializedProperties);
+
+			_useCachedMetaAttributes = false;
 		}
 		
 		public override void OnInspectorGUI()
 		{
+			_changeDetected = false;
+			
 			if (!_anyNaughtyAttribute)
 			{
 				DrawDefaultInspector();
@@ -96,6 +102,8 @@ namespace NaughtyAttributes.Editor
 			DrawNonSerializedFields();
 			DrawNativeProperties();
 			DrawButtons();
+
+			_useCachedMetaAttributes = !_changeDetected;
 		}
 		
 		protected virtual void GetSerializedProperties(ref List<NaughtyProperty> outSerializedProperties)
@@ -133,13 +141,33 @@ namespace NaughtyAttributes.Editor
 			// Draw non-grouped serialized properties
 			foreach (var naughtyProperty in _nonGroupedSerializedProperty)
 			{
-				NaughtyEditorGUI.PropertyField_Layout(naughtyProperty, includeChildren: true);
+				if (!_useCachedMetaAttributes)
+				{
+					naughtyProperty.cachedIsVisible = PropertyUtility.IsVisible(naughtyProperty.showIfAttribute,
+						naughtyProperty.serializedProperty);
+					
+					naughtyProperty.cachedIsEnabled = PropertyUtility.IsEnabled(naughtyProperty.readOnlyAttribute, naughtyProperty.enableIfAttribute,
+						naughtyProperty.serializedProperty);
+				}
+				
+				_changeDetected |= NaughtyEditorGUI.PropertyField_Layout(naughtyProperty, includeChildren: true);
 			}
 
 			// Draw grouped serialized properties
 			foreach (var group in _groupedSerialzedProperty)
 			{
-				IEnumerable<NaughtyProperty> visibleProperties = group.Where(p => PropertyUtility.IsVisible(p.showIfAttribute, p.serializedProperty));
+				IEnumerable<NaughtyProperty> visibleProperties = 
+					_useCachedMetaAttributes 
+						? group.Where(p => p.cachedIsVisible)
+						: group.Where(p =>
+						{
+							p.cachedIsEnabled = PropertyUtility.IsEnabled(p.readOnlyAttribute, p.enableIfAttribute,
+								p.serializedProperty);
+							
+							return p.cachedIsVisible =
+									PropertyUtility.IsVisible(p.showIfAttribute, p.serializedProperty);
+						});
+				
 				if (!visibleProperties.Any())
 				{
 					continue;
@@ -148,16 +176,26 @@ namespace NaughtyAttributes.Editor
 				NaughtyEditorGUI.BeginBoxGroup_Layout(group.Key);
 				foreach (var naughtyProperty in visibleProperties)
 				{
-					NaughtyEditorGUI.PropertyField_Layout(naughtyProperty, includeChildren: true);
+					_changeDetected |= NaughtyEditorGUI.PropertyField_Layout(naughtyProperty, includeChildren: true);
 				}
-			
 				NaughtyEditorGUI.EndBoxGroup_Layout();
 			}
 			
 			// Draw foldout serialized properties
 			foreach (var group in _foldoutGroupedSerializedProperty)
 			{
-				IEnumerable<NaughtyProperty> visibleProperties = group.Where(p => PropertyUtility.IsVisible(p.showIfAttribute, p.serializedProperty));
+				IEnumerable<NaughtyProperty> visibleProperties = 
+					_useCachedMetaAttributes 
+						? group.Where(p => p.cachedIsVisible)
+						: group.Where(p =>
+						{
+							p.cachedIsEnabled = PropertyUtility.IsEnabled(p.readOnlyAttribute, p.enableIfAttribute,
+								p.serializedProperty);
+							
+							return p.cachedIsVisible =
+									PropertyUtility.IsVisible(p.showIfAttribute, p.serializedProperty);
+						});
+				
 				if (!visibleProperties.Any())
 				{
 					continue;
@@ -173,7 +211,7 @@ namespace NaughtyAttributes.Editor
 				{
 					foreach (var naughtyProperty in visibleProperties)
 					{
-						NaughtyEditorGUI.PropertyField_Layout(naughtyProperty, true);
+						_changeDetected |= NaughtyEditorGUI.PropertyField_Layout(naughtyProperty, true);
 					}
 				}
 			}
