@@ -32,16 +32,6 @@ namespace NaughtyAttributes.Editor
 		
 		protected virtual void OnEnable()
 		{
-			/*
-			 * TODO:
-			 * OnEnable is called for all monos and scriptable objects,
-			 * which eats some one time perf after compilation and also takes some memory (although not noticeable)
-			 * any other way to trigger this like via a custom editor/ window with on focus??
-			 *
-			 * Selection.selectionChanged += ????
-			 * Base Mono and SO scripts that handle this??
-			 */
-			
 			this.Prepare();
 		}
 
@@ -57,6 +47,7 @@ namespace NaughtyAttributes.Editor
 			_groupedSerialzedProperty.Clear();
 			_nonGroupedSerializedProperty.Clear();
 			_serializedProperties.Clear();
+			_foldouts.Clear();
 			
 			m_ScriptProperty = default;
 		}
