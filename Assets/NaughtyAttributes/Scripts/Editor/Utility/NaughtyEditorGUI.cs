@@ -67,7 +67,7 @@ namespace NaughtyAttributes.Editor
 				
 				using (new EditorGUI.DisabledScope(disabled: !enabled))
 				{
-					propertyFieldFunction.Invoke(rect, naughtyProperty, PropertyUtility.GetLabel(naughtyProperty.serializedProperty), includeChildren);
+					propertyFieldFunction.Invoke(rect, naughtyProperty, PropertyUtility.GetLabel(naughtyProperty.labelAttribute, naughtyProperty.serializedProperty), includeChildren);
 				}
 				
 				// Call OnValueChanged callbacks

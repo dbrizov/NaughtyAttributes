@@ -144,16 +144,16 @@ namespace NaughtyAttributes.Editor
 				{
 					continue;
 				}
-
+			
 				NaughtyEditorGUI.BeginBoxGroup_Layout(group.Key);
 				foreach (var naughtyProperty in visibleProperties)
 				{
 					NaughtyEditorGUI.PropertyField_Layout(naughtyProperty, includeChildren: true);
 				}
-
+			
 				NaughtyEditorGUI.EndBoxGroup_Layout();
 			}
-
+			
 			// Draw foldout serialized properties
 			foreach (var group in _foldoutGroupedSerializedProperty)
 			{
@@ -162,12 +162,12 @@ namespace NaughtyAttributes.Editor
 				{
 					continue;
 				}
-
+			
 				if (!_foldouts.ContainsKey(group.Key))
 				{
 					_foldouts[group.Key] = new SavedBool($"{target.GetInstanceID()}.{group.Key}", false);
 				}
-
+			
 				_foldouts[group.Key].Value = EditorGUILayout.Foldout(_foldouts[group.Key].Value, group.Key, true);
 				if (_foldouts[group.Key].Value)
 				{
