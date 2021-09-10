@@ -1,5 +1,4 @@
-﻿using UnityEditor.Animations;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace NaughtyAttributes.Test
 {
@@ -7,7 +6,9 @@ namespace NaughtyAttributes.Test
 	{
 		public Animator animator0;
 
-		public AnimatorController animatorController0;
+#if UNITY_EDITOR
+		public UnityEditor.Animations.AnimatorController animatorController0;
+#endif
 
 		[AnimatorParam("animator0")]
 		public int hash0;
@@ -39,11 +40,16 @@ namespace NaughtyAttributes.Test
 	public class AnimatorParamNest1
 	{
 		public Animator animator1;
-		public AnimatorController animatorController1;
-
+		
+#if UNITY_EDITOR
+		public UnityEditor.Animations.AnimatorController animatorController1;
+#endif
+		
 		private Animator Animator1 => animator1;
 		
-		private AnimatorController AnimatorController1 => animatorController1;
+#if UNITY_EDITOR
+		private UnityEditor.Animations.AnimatorController AnimatorController1 => animatorController1;
+#endif
 		
 		[AnimatorParam("Animator1", AnimatorControllerParameterType.Bool)]
 		public int hash1;
@@ -64,12 +70,17 @@ namespace NaughtyAttributes.Test
 	public class AnimatorParamNest2
 	{
 		public Animator animator2;
-		public AnimatorController animatorController2;
-
+		
+#if UNITY_EDITOR
+		public UnityEditor.Animations.AnimatorController animatorController2;
+#endif
+		
 		private Animator GetAnimator2() => animator2;
 		
-		private AnimatorController GetAnimatorController2() => animatorController2;
-
+#if UNITY_EDITOR
+		private UnityEditor.Animations.AnimatorController GetAnimatorController2() => animatorController2;
+#endif
+		
 		[AnimatorParam("GetAnimator2", AnimatorControllerParameterType.Int)]
 		public int hash1;
 

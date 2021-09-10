@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
 namespace NaughtyAttributes.Test
@@ -10,12 +9,14 @@ namespace NaughtyAttributes.Test
 		[Expandable]
 		public List<_TestScriptableObject> list;
 
-		public AnimatorController animatorController0;
+#if UNITY_EDITOR
+		public UnityEditor.Animations.AnimatorController animatorController0;
+#endif
 		
-		[AnimatorParam(nameof(animatorController0))]
+		[AnimatorParam("animatorController0")]
 		public int hashController0;
 
-		[AnimatorParam(nameof(animatorController0))]
+		[AnimatorParam("animatorController0")]
 		public string nameController0;
 		
 		
