@@ -11,8 +11,6 @@ namespace NaughtyAttributes.Editor
 	{
 		public static T GetAttribute<T>(SerializedProperty property) where T : class
 		{
-			//Debug.Log("waste of time");
-			
 			T[] attributes = GetAttributes<T>(property);
 			return (attributes.Length > 0) ? attributes[0] : null;
 		}
