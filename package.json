@@ -13,5 +13,9 @@
       "description": "Demo Scene",
       "path": "Samples/DemoScene"
     }
-  ]
+  ],
+  "author": {
+    "name": "Denis Rizov",
+    "url": "https://github.com/dbrizov"
+  }
 }
