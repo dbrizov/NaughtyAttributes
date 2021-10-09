@@ -1,7 +1,7 @@
 {
   "name": "com.dbrizov.naughtyattributes",
   "displayName": "NaughtyAttributes",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "unity": "2018.4",
   "description": "NaughtyAttributes is an extension for the Unity Inspector.",
   "keywords": [ "attribute", "inspector", "editor" ],
@@ -13,5 +13,9 @@
       "description": "Demo Scene",
       "path": "Samples/DemoScene"
     }
-  ]
+  ],
+  "author": {
+    "name": "Denis Rizov",
+    "url": "https://github.com/dbrizov"
+  }
 }
