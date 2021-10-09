@@ -7,6 +7,6 @@ namespace NaughtyAttributes.Test
 	public class _NaughtyScriptableObject : ScriptableObject
 	{
 		[Expandable]
-		public List<_TestScriptableObject> list;
+		public List<_TestScriptableObjectA> listA;
 	}
 }
