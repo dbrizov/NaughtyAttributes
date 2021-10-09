@@ -71,6 +71,7 @@ namespace NaughtyAttributes.Editor
 		protected override void OnGUI_Internal(Rect rect, SerializedProperty property, GUIContent label)
 		{
 			EditorGUI.BeginProperty(rect, label, property);
+			property.serializedObject.Update();
 
 			if (property.objectReferenceValue == null)
 			{
@@ -110,8 +111,6 @@ namespace NaughtyAttributes.Editor
 
 						EditorGUI.PropertyField(propertyRect, property, label, false);
 
-						property.serializedObject.ApplyModifiedProperties();
-
 						// Draw the child properties
 						if (property.isExpanded)
 						{
@@ -126,6 +125,7 @@ namespace NaughtyAttributes.Editor
 				}
 			}
 
+			property.serializedObject.ApplyModifiedProperties();
 			EditorGUI.EndProperty();
 		}
 
@@ -150,6 +150,7 @@ namespace NaughtyAttributes.Editor
 			using (new EditorGUI.IndentLevelScope())
 			{
 				SerializedObject serializedObject = new SerializedObject(scriptableObject);
+				serializedObject.Update();
 
 				using (var iterator = serializedObject.GetIterator())
 				{

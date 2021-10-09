@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 753bdb918c6038142acddbd7aae6958f, type: 3}
   m_Name: NaughtyScriptableObject
   m_EditorClassIdentifier: 
-  list:
+  listA:
   - {fileID: 11400000, guid: 149474eb879a6a641b560ca17d48712f, type: 2}
-  - {fileID: 11400000, guid: ca97c330d5c96794aa4df848d63f836b, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 149474eb879a6a641b560ca17d48712f, type: 2}
