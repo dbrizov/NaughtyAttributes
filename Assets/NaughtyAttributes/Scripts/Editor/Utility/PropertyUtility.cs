@@ -26,9 +26,33 @@ namespace NaughtyAttributes.Editor
 			return (T[])fieldInfo.GetCustomAttributes(typeof(T), true);
 		}
 
+		public static NaughtyProperty CreateNaughtyProperty(SerializedProperty serializedProperty)
+		{
+			NaughtyProperty naughtyProperty = new NaughtyProperty();
+			naughtyProperty.serializedProperty = serializedProperty;
+
+			naughtyProperty.readOnlyAttribute = PropertyUtility.GetAttribute<ReadOnlyAttribute>(serializedProperty);
+			naughtyProperty.enableIfAttribute = PropertyUtility.GetAttribute<EnableIfAttributeBase>(serializedProperty);
+						
+			naughtyProperty.showIfAttribute = PropertyUtility.GetAttribute<ShowIfAttributeBase>(serializedProperty);
+			naughtyProperty.validatorAttributes = PropertyUtility.GetAttributes<ValidatorAttribute>(serializedProperty);
+
+			naughtyProperty.labelAttribute = PropertyUtility.GetAttribute<LabelAttribute>(serializedProperty);
+			
+			naughtyProperty.specialCaseDrawerAttribute =
+				PropertyUtility.GetAttribute<SpecialCaseDrawerAttribute>(serializedProperty);
+			
+			return naughtyProperty;
+		}
+
 		public static GUIContent GetLabel(SerializedProperty property)
 		{
 			LabelAttribute labelAttribute = GetAttribute<LabelAttribute>(property);
+			return GetLabel(labelAttribute, property);
+		}
+		
+		public static GUIContent GetLabel(LabelAttribute labelAttribute, SerializedProperty property)
+		{
 			string labelText = (labelAttribute == null)
 				? property.displayName
 				: labelAttribute.Label;
@@ -71,17 +95,23 @@ namespace NaughtyAttributes.Editor
 		public static bool IsEnabled(SerializedProperty property)
 		{
 			ReadOnlyAttribute readOnlyAttribute = GetAttribute<ReadOnlyAttribute>(property);
+			EnableIfAttributeBase enableIfAttribute = GetAttribute<EnableIfAttributeBase>(property);
+
+			return IsEnabled(readOnlyAttribute, enableIfAttribute, property);
+		}
+
+		public static bool IsEnabled(ReadOnlyAttribute readOnlyAttribute, EnableIfAttributeBase enableIfAttribute, SerializedProperty property)
+		{
 			if (readOnlyAttribute != null)
 			{
 				return false;
 			}
-
-			EnableIfAttributeBase enableIfAttribute = GetAttribute<EnableIfAttributeBase>(property);
+			
 			if (enableIfAttribute == null)
 			{
 				return true;
 			}
-
+			
 			object target = GetTargetObjectWithProperty(property);
 
 			// deal with enum conditions
@@ -118,15 +148,21 @@ namespace NaughtyAttributes.Editor
 				return false;
 			}
 		}
-
+		
 		public static bool IsVisible(SerializedProperty property)
 		{
 			ShowIfAttributeBase showIfAttribute = GetAttribute<ShowIfAttributeBase>(property);
+
+			return IsVisible(showIfAttribute, property);
+		}
+
+		public static bool IsVisible(ShowIfAttributeBase showIfAttribute, SerializedProperty property)
+		{
 			if (showIfAttribute == null)
 			{
 				return true;
 			}
-
+			
 			object target = GetTargetObjectWithProperty(property);
 
 			// deal with enum conditions
@@ -142,7 +178,8 @@ namespace NaughtyAttributes.Editor
 					return matched != showIfAttribute.Inverted;
 				}
 
-				string message = showIfAttribute.GetType().Name + " needs a valid enum field, property or method name to work";
+				string message = showIfAttribute.GetType().Name +
+				                 " needs a valid enum field, property or method name to work";
 				Debug.LogWarning(message, property.serializedObject.targetObject);
 
 				return false;
@@ -152,12 +189,14 @@ namespace NaughtyAttributes.Editor
 			List<bool> conditionValues = GetConditionValues(target, showIfAttribute.Conditions);
 			if (conditionValues.Count > 0)
 			{
-				bool enabled = GetConditionsFlag(conditionValues, showIfAttribute.ConditionOperator, showIfAttribute.Inverted);
+				bool enabled = GetConditionsFlag(conditionValues, showIfAttribute.ConditionOperator,
+					showIfAttribute.Inverted);
 				return enabled;
 			}
 			else
 			{
-				string message = showIfAttribute.GetType().Name + " needs a valid boolean condition field, property or method name to work";
+				string message = showIfAttribute.GetType().Name +
+				                 " needs a valid boolean condition field, property or method name to work";
 				Debug.LogWarning(message, property.serializedObject.targetObject);
 
 				return false;

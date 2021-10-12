@@ -9,12 +9,17 @@ namespace NaughtyAttributes.Editor
 	[CustomPropertyDrawer(typeof(AnimatorParamAttribute))]
 	public class AnimatorParamPropertyDrawer : PropertyDrawerBase
 	{
+		private AnimatorParamAttribute _cachedAnimatorParamAttribute;
+		
 		private const string InvalidAnimatorControllerWarningMessage = "Target animator controller is null";
 		private const string InvalidTypeWarningMessage = "{0} must be an int or a string";
 
 		protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
 		{
-			AnimatorParamAttribute animatorParamAttribute = PropertyUtility.GetAttribute<AnimatorParamAttribute>(property);
+			if (_cachedAnimatorParamAttribute == null)
+				_cachedAnimatorParamAttribute = PropertyUtility.GetAttribute<AnimatorParamAttribute>(property);
+			
+			AnimatorParamAttribute animatorParamAttribute = _cachedAnimatorParamAttribute;
 			bool validAnimatorController = GetAnimatorController(property, animatorParamAttribute.AnimatorName) != null;
 			bool validPropertyType = property.propertyType == SerializedPropertyType.Integer || property.propertyType == SerializedPropertyType.String;
 
@@ -27,7 +32,10 @@ namespace NaughtyAttributes.Editor
 		{
 			EditorGUI.BeginProperty(rect, label, property);
 
-			AnimatorParamAttribute animatorParamAttribute = PropertyUtility.GetAttribute<AnimatorParamAttribute>(property);
+			if (_cachedAnimatorParamAttribute == null)
+				_cachedAnimatorParamAttribute = PropertyUtility.GetAttribute<AnimatorParamAttribute>(property);
+			
+			AnimatorParamAttribute animatorParamAttribute = _cachedAnimatorParamAttribute;
 
 			AnimatorController animatorController = GetAnimatorController(property, animatorParamAttribute.AnimatorName);
 			if (animatorController == null)

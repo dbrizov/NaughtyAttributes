@@ -7,36 +7,41 @@ namespace NaughtyAttributes.Editor
 {
 	public abstract class SpecialCasePropertyDrawerBase
 	{
-		public void OnGUI(Rect rect, SerializedProperty property)
+		public bool OnGUI(Rect rect, NaughtyProperty naughtyProperty)
 		{
+			bool changeDetected = false;
+			
 			// Check if visible
-			bool visible = PropertyUtility.IsVisible(property);
+			bool visible = PropertyUtility.IsVisible(naughtyProperty.showIfAttribute, naughtyProperty.serializedProperty);
 			if (!visible)
 			{
-				return;
+				return false;
 			}
 
 			// Validate
-			ValidatorAttribute[] validatorAttributes = PropertyUtility.GetAttributes<ValidatorAttribute>(property);
+			ValidatorAttribute[] validatorAttributes = naughtyProperty.validatorAttributes;
 			foreach (var validatorAttribute in validatorAttributes)
 			{
-				validatorAttribute.GetValidator().ValidateProperty(property);
+				validatorAttribute.GetValidator().ValidateProperty(naughtyProperty.serializedProperty);
 			}
 
 			// Check if enabled and draw
 			EditorGUI.BeginChangeCheck();
-			bool enabled = PropertyUtility.IsEnabled(property);
+			bool enabled = PropertyUtility.IsEnabled(naughtyProperty.readOnlyAttribute, naughtyProperty.enableIfAttribute, naughtyProperty.serializedProperty);
 
 			using (new EditorGUI.DisabledScope(disabled: !enabled))
 			{
-				OnGUI_Internal(rect, property, PropertyUtility.GetLabel(property));
+				OnGUI_Internal(rect, naughtyProperty.serializedProperty, PropertyUtility.GetLabel(naughtyProperty.labelAttribute, naughtyProperty.serializedProperty));
 			}
 
 			// Call OnValueChanged callbacks
 			if (EditorGUI.EndChangeCheck())
 			{
-				PropertyUtility.CallOnValueChangedCallbacks(property);
+				changeDetected = true;
+				PropertyUtility.CallOnValueChangedCallbacks(naughtyProperty.serializedProperty);
 			}
+
+			return changeDetected;
 		}
 
 		public float GetPropertyHeight(SerializedProperty property)

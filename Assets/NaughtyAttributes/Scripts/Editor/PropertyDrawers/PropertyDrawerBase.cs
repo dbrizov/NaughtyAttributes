@@ -5,6 +5,8 @@ namespace NaughtyAttributes.Editor
 {
 	public abstract class PropertyDrawerBase : PropertyDrawer
 	{
+		private SpecialCaseDrawerAttribute _cachedSpecialCaseDrawerAttribute;
+		
 		public sealed override void OnGUI(Rect rect, SerializedProperty property, GUIContent label)
 		{
 			// Check if visible
@@ -57,7 +59,10 @@ namespace NaughtyAttributes.Editor
 
 		protected float GetPropertyHeight(SerializedProperty property)
 		{
-			SpecialCaseDrawerAttribute specialCaseAttribute = PropertyUtility.GetAttribute<SpecialCaseDrawerAttribute>(property);
+			if (_cachedSpecialCaseDrawerAttribute == null)
+				_cachedSpecialCaseDrawerAttribute = PropertyUtility.GetAttribute<SpecialCaseDrawerAttribute>(property);
+			
+			SpecialCaseDrawerAttribute specialCaseAttribute = _cachedSpecialCaseDrawerAttribute;
 			if (specialCaseAttribute != null)
 			{
 				return specialCaseAttribute.GetDrawer().GetPropertyHeight(property);

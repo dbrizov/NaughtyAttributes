@@ -6,6 +6,8 @@ namespace NaughtyAttributes.Editor
 	[CustomPropertyDrawer(typeof(ShowAssetPreviewAttribute))]
 	public class ShowAssetPreviewPropertyDrawer : PropertyDrawerBase
 	{
+		private ShowAssetPreviewAttribute _cachedShowAssetPreviewAttribute;
+		
 		protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
 		{
 			if (property.propertyType == SerializedPropertyType.ObjectReference)
@@ -93,7 +95,11 @@ namespace NaughtyAttributes.Editor
 				int targetWidth = ShowAssetPreviewAttribute.DefaultWidth;
 				int targetHeight = ShowAssetPreviewAttribute.DefaultHeight;
 
-				ShowAssetPreviewAttribute showAssetPreviewAttribute = PropertyUtility.GetAttribute<ShowAssetPreviewAttribute>(property);
+				if (_cachedShowAssetPreviewAttribute == null)
+					_cachedShowAssetPreviewAttribute =
+						PropertyUtility.GetAttribute<ShowAssetPreviewAttribute>(property);
+				
+				ShowAssetPreviewAttribute showAssetPreviewAttribute = _cachedShowAssetPreviewAttribute;
 				if (showAssetPreviewAttribute != null)
 				{
 					targetWidth = showAssetPreviewAttribute.Width;
