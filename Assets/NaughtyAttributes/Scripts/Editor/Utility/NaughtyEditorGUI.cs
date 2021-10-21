@@ -16,7 +16,7 @@ namespace NaughtyAttributes.Editor
 
 		private static GUIStyle _buttonStyle = new GUIStyle(GUI.skin.button) { richText = true };
 
-		private delegate void PropertyFieldFunction(Rect rect, SerializedProperty property, GUIContent label, bool includeChildren);
+		public delegate void PropertyFieldFunction(Rect rect, SerializedProperty property, GUIContent label, bool includeChildren);
 
 		public static void PropertyField(Rect rect, SerializedProperty property, bool includeChildren)
 		{
@@ -39,7 +39,7 @@ namespace NaughtyAttributes.Editor
 			EditorGUILayout.PropertyField(property, label, includeChildren);
 		}
 
-		private static void PropertyField_Implementation(Rect rect, SerializedProperty property, bool includeChildren, PropertyFieldFunction propertyFieldFunction)
+		public static void PropertyField_Implementation(Rect rect, SerializedProperty property, bool includeChildren, PropertyFieldFunction propertyFieldFunction)
 		{
 			SpecialCaseDrawerAttribute specialCaseAttribute = PropertyUtility.GetAttribute<SpecialCaseDrawerAttribute>(property);
 			if (specialCaseAttribute != null)
