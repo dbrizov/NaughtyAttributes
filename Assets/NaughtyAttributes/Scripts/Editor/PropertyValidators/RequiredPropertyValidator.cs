@@ -1,5 +1,7 @@
 ﻿using UnityEditor;
 
+using static NaughtyAttributes.Editor.PropertyUtility;
+
 namespace NaughtyAttributes.Editor
 {
 	public class RequiredPropertyValidator : PropertyValidatorBase
@@ -12,7 +14,11 @@ namespace NaughtyAttributes.Editor
 			{
 				if (property.objectReferenceValue == null)
 				{
-					string errorMessage = property.name + " is required";
+					LabelAttribute labelAttribute = GetAttribute<LabelAttribute>(property);
+					string labelText = (labelAttribute == null)
+						? property.displayName
+						: labelAttribute.Label;
+					string errorMessage = labelText + " is required";
 					if (!string.IsNullOrEmpty(requiredAttribute.Message))
 					{
 						errorMessage = requiredAttribute.Message;
