@@ -1,6 +1,10 @@
 {
     "name": "NaughtyAttributes.Core",
-    "references": [],
+    "rootNamespace": "",
+    "references": [
+        "GUID:60fd1960cd0079a4cb0401a37c2db3d4",
+        "GUID:825fd54a1be4dd7448e37859df8d2eb3"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
@@ -8,5 +12,6 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": []
+    "versionDefines": [],
+    "noEngineReferences": false
 }

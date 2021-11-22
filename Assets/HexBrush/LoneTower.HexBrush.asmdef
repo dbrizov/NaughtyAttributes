@@ -1,0 +1,17 @@
+{
+    "name": "LoneTower.HexBrush",
+    "rootNamespace": "",
+    "references": [
+        "GUID:60fd1960cd0079a4cb0401a37c2db3d4",
+        "GUID:5b34a38c2999c854cad4840282c17bc8"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
