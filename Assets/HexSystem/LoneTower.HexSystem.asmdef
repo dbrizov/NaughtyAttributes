@@ -1,0 +1,16 @@
+{
+    "name": "HexSystemAssembly",
+    "rootNamespace": "",
+    "references": [
+        "GUID:5b34a38c2999c854cad4840282c17bc8"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
