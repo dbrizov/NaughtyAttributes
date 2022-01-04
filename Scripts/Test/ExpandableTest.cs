@@ -4,6 +4,9 @@ namespace NaughtyAttributes.Test
 {
 	public class ExpandableTest : MonoBehaviour
 	{
+		// See #294
+		public int precedingField = 5;
+
 		[Expandable]
 		public ScriptableObject obj0;
 
