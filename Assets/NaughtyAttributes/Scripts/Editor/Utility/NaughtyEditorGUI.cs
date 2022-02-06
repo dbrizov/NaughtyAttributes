@@ -204,10 +204,10 @@ namespace NaughtyAttributes.Editor
 
 			if (value == null)
 			{
-				string warning = string.Format("{0} is null. {1} doesn't support reference types with null value", property.Name, typeof(ShowNativePropertyAttribute).Name);
+				string warning = string.Format("{0} is null. {1} doesn't support reference types with null value", ObjectNames.NicifyVariableName(property.Name), typeof(ShowNativePropertyAttribute).Name);
 				HelpBox_Layout(warning, MessageType.Warning, context: target);
 			}
-			else if (!Field_Layout(value, property.Name))
+			else if (!Field_Layout(value, ObjectNames.NicifyVariableName(property.Name)))
 			{
 				string warning = string.Format("{0} doesn't support {1} types", typeof(ShowNativePropertyAttribute).Name, property.PropertyType.Name);
 				HelpBox_Layout(warning, MessageType.Warning, context: target);
@@ -220,10 +220,10 @@ namespace NaughtyAttributes.Editor
 
 			if (value == null)
 			{
-				string warning = string.Format("{0} is null. {1} doesn't support reference types with null value", field.Name, typeof(ShowNonSerializedFieldAttribute).Name);
+				string warning = string.Format("{0} is null. {1} doesn't support reference types with null value", ObjectNames.NicifyVariableName(field.Name), typeof(ShowNonSerializedFieldAttribute).Name);
 				HelpBox_Layout(warning, MessageType.Warning, context: target);
 			}
-			else if (!Field_Layout(value, field.Name))
+			else if (!Field_Layout(value, ObjectNames.NicifyVariableName(field.Name)))
 			{
 				string warning = string.Format("{0} doesn't support {1} types", typeof(ShowNonSerializedFieldAttribute).Name, field.FieldType.Name);
 				HelpBox_Layout(warning, MessageType.Warning, context: target);
