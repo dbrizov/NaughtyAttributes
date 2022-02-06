@@ -4,6 +4,9 @@ namespace NaughtyAttributes.Test
 {
 	public class CurveRangeTest : MonoBehaviour
 	{
+		[CurveRange(0f, 0f, 1f, 1f, EColor.Yellow)]
+		public AnimationCurve[] curves;
+
 		[CurveRange(-1, -1, 1, 1, EColor.Red)]
 		public AnimationCurve curve;
 
