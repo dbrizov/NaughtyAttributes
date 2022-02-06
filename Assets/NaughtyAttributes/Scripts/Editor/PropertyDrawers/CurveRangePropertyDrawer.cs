@@ -28,10 +28,14 @@ namespace NaughtyAttributes.Editor
 			}
 
 			var curveRangeAttribute = (CurveRangeAttribute)attribute;
-			var curveRanges = new Rect(curveRangeAttribute.Min.x, curveRangeAttribute.Min.y, curveRangeAttribute.Max.x - curveRangeAttribute.Min.x, curveRangeAttribute.Max.y - curveRangeAttribute.Min.y);
+			var curveRanges = new Rect(
+				curveRangeAttribute.Min.x,
+				curveRangeAttribute.Min.y,
+				curveRangeAttribute.Max.x - curveRangeAttribute.Min.x,
+				curveRangeAttribute.Max.y - curveRangeAttribute.Min.y);
 
 			EditorGUI.CurveField(
-				rect, 
+				rect,
 				property,
 				curveRangeAttribute.Color == EColor.Clear ? Color.green : curveRangeAttribute.Color.GetColor(),
 				curveRanges,
