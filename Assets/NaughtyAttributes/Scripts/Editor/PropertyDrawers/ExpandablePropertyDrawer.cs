@@ -71,7 +71,6 @@ namespace NaughtyAttributes.Editor
 		protected override void OnGUI_Internal(Rect rect, SerializedProperty property, GUIContent label)
 		{
 			EditorGUI.BeginProperty(rect, label, property);
-			property.serializedObject.Update();
 
 			if (property.objectReferenceValue == null)
 			{
