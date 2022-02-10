@@ -68,11 +68,12 @@ namespace NaughtyAttributes.Editor
 			{
 				IEnumerable<MethodInfo> methodInfos = types[i]
 					.GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly)
-					.Where(predicate);
+					.Where(predicate)
+					.Where(x => !x.IsAbstract && x.GetBaseDefinition().DeclaringType != x.DeclaringType);
 
 				foreach (var methodInfo in methodInfos)
 				{
-					yield return methodInfo;
+						yield return methodInfo;
 				}
 			}
 		}
