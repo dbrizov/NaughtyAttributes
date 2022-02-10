@@ -6,6 +6,7 @@ namespace NaughtyAttributes.Test
 	public class ButtonTest : MonoBehaviour
 	{
 		public int myInt;
+		public bool isZero => myInt == 0;
 
 		[Button(enabledMode: EButtonEnableMode.Always)]
 		private void IncrementMyInt()
@@ -35,5 +36,13 @@ namespace NaughtyAttributes.Test
 				yield return new WaitForSeconds(1.0f);
 			}
 		}
+
+		
+		[Button("Set Increment to zero"),ShowIf("!isZero")]
+		public void SetIntToZero()
+        {
+			myInt = 0;
+        }
+
 	}
 }

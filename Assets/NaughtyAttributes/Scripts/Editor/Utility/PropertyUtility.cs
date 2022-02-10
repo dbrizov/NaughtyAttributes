@@ -133,6 +133,7 @@ namespace NaughtyAttributes.Editor
 			if (showIfAttribute.EnumValue != null)
 			{
 				Enum value = GetEnumValue(target, showIfAttribute.Conditions[0]);
+				Debug.Log($"Expected: {showIfAttribute.EnumValue}, current: {value}");
 				if (value != null)
 				{
 					bool matched = value.GetType().GetCustomAttribute<FlagsAttribute>() == null
@@ -198,26 +199,33 @@ namespace NaughtyAttributes.Editor
 			List<bool> conditionValues = new List<bool>();
 			foreach (var condition in conditions)
 			{
-				FieldInfo conditionField = ReflectionUtility.GetField(target, condition);
+
+				string fieldName = condition;
+				bool inverted = condition[0] == '!';
+				if (inverted)
+					fieldName = condition.Substring(1);
+
+
+				FieldInfo conditionField = ReflectionUtility.GetField(target, fieldName);
 				if (conditionField != null &&
 					conditionField.FieldType == typeof(bool))
 				{
-					conditionValues.Add((bool)conditionField.GetValue(target));
+					conditionValues.Add((bool)conditionField.GetValue(target) != inverted);
 				}
 
-				PropertyInfo conditionProperty = ReflectionUtility.GetProperty(target, condition);
+				PropertyInfo conditionProperty = ReflectionUtility.GetProperty(target, fieldName);
 				if (conditionProperty != null &&
 					conditionProperty.PropertyType == typeof(bool))
 				{
-					conditionValues.Add((bool)conditionProperty.GetValue(target));
+					conditionValues.Add((bool)conditionProperty.GetValue(target) != inverted);
 				}
 
-				MethodInfo conditionMethod = ReflectionUtility.GetMethod(target, condition);
+				MethodInfo conditionMethod = ReflectionUtility.GetMethod(target, fieldName);
 				if (conditionMethod != null &&
 					conditionMethod.ReturnType == typeof(bool) &&
 					conditionMethod.GetParameters().Length == 0)
 				{
-					conditionValues.Add((bool)conditionMethod.Invoke(target, null));
+					conditionValues.Add((bool)conditionMethod.Invoke(target, null) != inverted);
 				}
 			}
 
