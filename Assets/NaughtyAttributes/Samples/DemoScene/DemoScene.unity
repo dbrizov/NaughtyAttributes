@@ -1673,14 +1673,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed73e666d447964d93c4840f05423dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerNumber0: 146379811
-  layerName0: SortingLayer0
+  layerNumber0: 0
+  layerName0: Default
   nest1:
-    layerNumber1: -2136883699
-    layerName1: SortingLayer1
+    layerNumber1: 0
+    layerName1: Default
     nest2:
-      layerNumber2: 1583436447
-      layerName2: SortingLayer2
+      layerNumber2: 0
+      layerName2: Default
 --- !u!1 &1622801695
 GameObject:
   m_ObjectHideFlags: 0
