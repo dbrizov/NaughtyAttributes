@@ -929,8 +929,8 @@ Transform:
   - {fileID: 933563385}
   - {fileID: 1989156459}
   - {fileID: 1194502638}
-  - {fileID: 1380469385}
   - {fileID: 1609261820}
+  - {fileID: 1380469385}
   - {fileID: 732714204}
   - {fileID: 1784643785}
   - {fileID: 572382749}
@@ -1212,7 +1212,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1148579784}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1380469386
 MonoBehaviour:
@@ -1659,7 +1659,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1148579784}
-  m_RootOrder: 20
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1609261821
 MonoBehaviour:
@@ -1673,14 +1673,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed73e666d447964d93c4840f05423dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerNumber0: 0
-  layerName0: Default
+  layerNumber0: 146379811
+  layerName0: SortingLayer0
   nest1:
-    layerNumber1: 0
-    layerName1: Default
+    layerNumber1: -2136883699
+    layerName1: SortingLayer1
     nest2:
-      layerNumber2: 0
-      layerName2: Default
+      layerNumber2: 1583436447
+      layerName2: SortingLayer2
 --- !u!1 &1622801695
 GameObject:
   m_ObjectHideFlags: 0
