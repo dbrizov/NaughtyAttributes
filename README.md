@@ -256,6 +256,22 @@ public class NaughtyComponent : MonoBehaviour
 
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Layer_Inspector.png)
 
+### SortingLayer
+Select a sorting layer via dropdown interface.
+
+```csharp
+public class NaughtyComponent : MonoBehaviour
+{
+	[SortingLayer]
+	public string layerName;
+
+	[SortingLayer]
+	public int layerId;
+}
+```
+
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/SortingLayer_Inspector.png)
+
 ### MinMaxSlider
 A double slider. The **min value** is saved to the **X** property, and the **max value** is saved to the **Y** property of a **Vector2** field.
 
