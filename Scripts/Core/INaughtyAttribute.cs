@@ -2,7 +2,7 @@
 
 namespace NaughtyAttributes
 {
-	public interface INaughtyAttribute
-	{
-	}
+    public interface INaughtyAttribute
+    {
+    }
 }

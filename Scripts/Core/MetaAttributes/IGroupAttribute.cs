@@ -2,7 +2,7 @@
 
 namespace NaughtyAttributes
 {
-	public interface IGroupAttribute
-	{
-	}
+    public interface IGroupAttribute
+    {
+    }
 }
