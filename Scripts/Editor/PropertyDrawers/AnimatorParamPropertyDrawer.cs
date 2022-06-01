@@ -138,6 +138,13 @@ namespace NaughtyAttributes.Editor
                 if (animator != null)
                 {
                     AnimatorController animatorController = animator.runtimeAnimatorController as AnimatorController;
+
+                    // [PATCH] Allow AnimatorOverrideController to be used with the AnimatorParam attribute.
+                    if (!animatorController && animator.runtimeAnimatorController is AnimatorOverrideController animatorOverrideController)
+                    {
+                        animatorController = animatorOverrideController.runtimeAnimatorController as AnimatorController;
+                    }
+
                     return animatorController;
                 }
             }
@@ -150,6 +157,13 @@ namespace NaughtyAttributes.Editor
                 if (animator != null)
                 {
                     AnimatorController animatorController = animator.runtimeAnimatorController as AnimatorController;
+
+                    // [PATCH] Allow AnimatorOverrideController to be used with the AnimatorParam attribute.
+                    if (!animatorController && animator.runtimeAnimatorController is AnimatorOverrideController animatorOverrideController)
+                    {
+                        animatorController = animatorOverrideController.runtimeAnimatorController as AnimatorController;
+                    }
+
                     return animatorController;
                 }
             }
@@ -163,6 +177,13 @@ namespace NaughtyAttributes.Editor
                 if (animator != null)
                 {
                     AnimatorController animatorController = animator.runtimeAnimatorController as AnimatorController;
+
+                    // [PATCH] Allow AnimatorOverrideController to be used with the AnimatorParam attribute.
+                    if (!animatorController && animator.runtimeAnimatorController is AnimatorOverrideController animatorOverrideController)
+                    {
+                        animatorController = animatorOverrideController.runtimeAnimatorController as AnimatorController;
+                    }
+
                     return animatorController;
                 }
             }
