@@ -3,6 +3,7 @@ using System.Reflection;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace NaughtyAttributes.Editor
@@ -130,14 +131,14 @@ namespace NaughtyAttributes.Editor
             object target = GetTargetObjectWithProperty(property);
 
             // deal with enum conditions
-            if (showIfAttribute.EnumValue != null)
+            if (showIfAttribute.EnumValues != null)
             {
                 Enum value = GetEnumValue(target, showIfAttribute.Conditions[0]);
                 if (value != null)
                 {
                     bool matched = value.GetType().GetCustomAttribute<FlagsAttribute>() == null
-                        ? showIfAttribute.EnumValue.Equals(value)
-                        : value.HasFlag(showIfAttribute.EnumValue);
+                        ? showIfAttribute.EnumValues.Contains(value)
+                        : showIfAttribute.EnumValues.Any(element => value.HasFlag(element));
 
                     return matched != showIfAttribute.Inverted;
                 }
