@@ -190,6 +190,21 @@ public class NaughtyComponent : MonoBehaviour
 
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Expandable_Inspector.png)
 
+### Hex
+Draws the editor field for an integer in hexadecimal. Can be modified as hex, or decimal, but will always draw as hex.
+
+```csharp
+public class NaughtyComponent : MonoBehaviour
+{
+	[Hex]
+	public int myHexValue = 0x1234;
+	[Hex]
+	public int myIntValue = 1234;
+}
+```
+
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/Hex_Inspector.png)
+
 ### HorizontalLine
 
 ```csharp
