@@ -3,40 +3,45 @@ using UnityEditor;
 
 namespace NaughtyAttributes.Editor
 {
-	[CustomPropertyDrawer(typeof(CurveRangeAttribute))]
-	public class CurveRangePropertyDrawer : PropertyDrawerBase
-	{
-		protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
-		{
-			float propertyHeight = property.propertyType == SerializedPropertyType.AnimationCurve
-				? GetPropertyHeight(property)
-				: GetPropertyHeight(property) + GetHelpBoxHeight();
+    [CustomPropertyDrawer(typeof(CurveRangeAttribute))]
+    public class CurveRangePropertyDrawer : PropertyDrawerBase
+    {
+        protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
+        {
+            float propertyHeight = property.propertyType == SerializedPropertyType.AnimationCurve
+                ? GetPropertyHeight(property)
+                : GetPropertyHeight(property) + GetHelpBoxHeight();
 
-			return propertyHeight;
-		}
+            return propertyHeight;
+        }
 
-		protected override void OnGUI_Internal(Rect rect, SerializedProperty property, GUIContent label)
-		{
-			EditorGUI.BeginProperty(rect, label, property);
+        protected override void OnGUI_Internal(Rect rect, SerializedProperty property, GUIContent label)
+        {
+            EditorGUI.BeginProperty(rect, label, property);
 
-			// Check user error
-			if (property.propertyType != SerializedPropertyType.AnimationCurve)
-			{
-				string message = string.Format("Field {0} is not an AnimationCurve", property.name);
-				DrawDefaultPropertyAndHelpBox(rect, property, message, MessageType.Warning);
-				return;
-			}
+            // Check user error
+            if (property.propertyType != SerializedPropertyType.AnimationCurve)
+            {
+                string message = string.Format("Field {0} is not an AnimationCurve", property.name);
+                DrawDefaultPropertyAndHelpBox(rect, property, message, MessageType.Warning);
+                return;
+            }
 
-			var attribute = PropertyUtility.GetAttribute<CurveRangeAttribute>(property);
+            var curveRangeAttribute = (CurveRangeAttribute)attribute;
+            var curveRanges = new Rect(
+                curveRangeAttribute.Min.x,
+                curveRangeAttribute.Min.y,
+                curveRangeAttribute.Max.x - curveRangeAttribute.Min.x,
+                curveRangeAttribute.Max.y - curveRangeAttribute.Min.y);
 
-			EditorGUI.CurveField(
-				rect, 
-				property,
-				attribute.Color == EColor.Clear ? Color.green : attribute.Color.GetColor(),
-				new Rect(attribute.Min.x, attribute.Min.y, attribute.Max.x - attribute.Min.x, attribute.Max.y - attribute.Min.y),
-				label);
+            EditorGUI.CurveField(
+                rect,
+                property,
+                curveRangeAttribute.Color == EColor.Clear ? Color.green : curveRangeAttribute.Color.GetColor(),
+                curveRanges,
+                label);
 
-			EditorGUI.EndProperty();
-		}
-	}
+            EditorGUI.EndProperty();
+        }
+    }
 }

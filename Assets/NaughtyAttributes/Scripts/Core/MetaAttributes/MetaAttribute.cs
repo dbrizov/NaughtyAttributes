@@ -2,7 +2,7 @@
 
 namespace NaughtyAttributes
 {
-	public class MetaAttribute : Attribute, INaughtyAttribute
-	{
-	}
+    public class MetaAttribute : Attribute, INaughtyAttribute
+    {
+    }
 }

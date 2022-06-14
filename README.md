@@ -1,5 +1,5 @@
 # NaughtyAttributes
-[![Unity 2018.3+](https://img.shields.io/badge/unity-2018.4%2B-blue.svg)](https://unity3d.com/get-unity/download)
+[![Unity 2019.4+](https://img.shields.io/badge/unity-2019.4%2B-blue.svg)](https://unity3d.com/get-unity/download)
 [![openupm](https://img.shields.io/npm/v/com.dbrizov.naughtyattributes?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.dbrizov.naughtyattributes/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://github.com/dbrizov/NaughtyAttributes/blob/master/LICENSE)
 
@@ -13,7 +13,7 @@ The attributes that won't work in your custom editors are the meta attributes an
 If you want all of the attributes to work in your custom editors, however, you must inherit from `NaughtyInspector` and use the `NaughtyEditorGUI.PropertyField_Layout` function instead of `EditorGUILayout.PropertyField`.
 
 ## System Requirements
-Unity 2018.4.0 or later versions. Feel free to try older version. Don't forget to include the NaughtyAttributes namespace.
+Unity **2019.4** or later versions. Don't forget to include the NaughtyAttributes namespace.
 
 ## Installation
 1. The package is available on the [openupm registry](https://openupm.com). You can install it via [openupm-cli](https://github.com/openupm/openupm-cli).
@@ -402,6 +402,22 @@ public class NaughtyComponent : MonoBehaviour
 ```
 
 ![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/ShowNonSerializedField_Inspector.png)
+
+### SortingLayer
+Select a sorting layer via dropdown interface.
+
+```csharp
+public class NaughtyComponent : MonoBehaviour
+{
+	[SortingLayer]
+	public string layerName;
+
+	[SortingLayer]
+	public int layerId;
+}
+```
+
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/SortingLayer_Inspector.png)
 
 ### Tag
 Select a tag via dropdown interface.

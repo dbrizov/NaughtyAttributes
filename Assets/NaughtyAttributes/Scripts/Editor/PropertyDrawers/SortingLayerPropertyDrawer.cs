@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using UnityEditor;
 using System;
+using System.Reflection;
 
 namespace NaughtyAttributes.Editor
 {
-    [CustomPropertyDrawer(typeof(LayerAttribute))]
-    public class LayerPropertyDrawer : PropertyDrawerBase
+    [CustomPropertyDrawer(typeof(SortingLayerAttribute))]
+    public class SortingLayerPropertyDrawer : PropertyDrawerBase
     {
         private const string TypeWarningMessage = "{0} must be an int or a string";
 
@@ -41,7 +42,9 @@ namespace NaughtyAttributes.Editor
 
         private string[] GetLayers()
         {
-            return UnityEditorInternal.InternalEditorUtility.layers;
+            Type internalEditorUtilityType = typeof(UnityEditorInternal.InternalEditorUtility);
+            PropertyInfo sortingLayersProperty = internalEditorUtilityType.GetProperty("sortingLayerNames", BindingFlags.Static | BindingFlags.NonPublic);
+            return (string[])sortingLayersProperty.GetValue(null, new object[0]);
         }
 
         private static void DrawPropertyForString(Rect rect, SerializedProperty property, GUIContent label, string[] layers)
@@ -59,7 +62,7 @@ namespace NaughtyAttributes.Editor
         private static void DrawPropertyForInt(Rect rect, SerializedProperty property, GUIContent label, string[] layers)
         {
             int index = 0;
-            string layerName = LayerMask.LayerToName(property.intValue);
+            string layerName = SortingLayer.IDToName(property.intValue);
             for (int i = 0; i < layers.Length; i++)
             {
                 if (layerName.Equals(layers[i], StringComparison.Ordinal))
@@ -71,7 +74,7 @@ namespace NaughtyAttributes.Editor
 
             int newIndex = EditorGUI.Popup(rect, label.text, index, layers);
             string newLayerName = layers[newIndex];
-            int newLayerNumber = LayerMask.NameToLayer(newLayerName);
+            int newLayerNumber = SortingLayer.NameToID(newLayerName);
 
             if (property.intValue != newLayerNumber)
             {

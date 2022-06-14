@@ -1,7 +1,7 @@
 {
   "name": "com.dbrizov.naughtyattributes",
   "displayName": "NaughtyAttributes",
-  "version": "2.1.1",
+  "version": "2.1.4",
   "unity": "2018.4",
   "description": "NaughtyAttributes is an extension for the Unity Inspector.",
   "keywords": [ "attribute", "inspector", "editor" ],

@@ -2,8 +2,8 @@
 
 namespace NaughtyAttributes
 {
-	[AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-	public class ShowNonSerializedFieldAttribute : SpecialCaseDrawerAttribute
-	{
-	}
+    [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
+    public class ShowNonSerializedFieldAttribute : SpecialCaseDrawerAttribute
+    {
+    }
 }
