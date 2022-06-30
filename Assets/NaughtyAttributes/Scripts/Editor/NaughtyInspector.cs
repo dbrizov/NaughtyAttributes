@@ -15,6 +15,7 @@ namespace NaughtyAttributes.Editor
         private IEnumerable<PropertyInfo> _nativeProperties;
         private IEnumerable<MethodInfo> _methods;
         private Dictionary<string, SavedBool> _foldouts = new Dictionary<string, SavedBool>();
+        private Dictionary<string, SavedBool> _boxFoldouts = new Dictionary<string, SavedBool>();																							 
 
         protected virtual void OnEnable()
         {
@@ -97,12 +98,29 @@ namespace NaughtyAttributes.Editor
                     continue;
                 }
 
-                NaughtyEditorGUI.BeginBoxGroup_Layout(group.Key);
-                foreach (var property in visibleProperties)
+                var boxRect = NaughtyEditorGUI.BeginBoxGroup_Layout(group.Key.name);
+                bool unfolded = true; //Default to true so when the Foldable optional isn't being used, we'll default to showing the properties.
+
+                if (group.Key.foldable)
                 {
-                    NaughtyEditorGUI.PropertyField_Layout(property, includeChildren: true);
+                    if (!_boxFoldouts.ContainsKey(group.Key.name))
+                    {
+                        _boxFoldouts[group.Key.name] = new SavedBool($"{target.GetInstanceID()}.{group.Key}", false);
+                    }
+					//Align Foldout icon to the Label Rect created in BeginBoxGroup_Layout(), but with width as wide as the inspector, allowing us to click anywhere on the label to toggle folding.
+                    boxRect.x -= .75f * (boxRect.height = EditorGUIUtility.singleLineHeight * 1.25f);
+                    boxRect.width = EditorGUIUtility.currentViewWidth;
+                    unfolded = EditorGUI.Foldout(boxRect, _boxFoldouts[group.Key.name].Value, "", true);
+                    _boxFoldouts[group.Key.name].Value = unfolded;
                 }
 
+                if (unfolded)
+                { 
+					foreach (var property in visibleProperties)
+					{
+						NaughtyEditorGUI.PropertyField_Layout(property, includeChildren: true);
+					}
+				}
                 NaughtyEditorGUI.EndBoxGroup_Layout();
             }
 
@@ -194,14 +212,14 @@ namespace NaughtyAttributes.Editor
         {
             return properties.Where(p => PropertyUtility.GetAttribute<IGroupAttribute>(p) == null);
         }
-
-        private static IEnumerable<IGrouping<string, SerializedProperty>> GetGroupedProperties(IEnumerable<SerializedProperty> properties)
+		
+        private static IEnumerable<IGrouping<(string name, bool foldable), SerializedProperty>> GetGroupedProperties(IEnumerable<SerializedProperty> properties)
         {
             return properties
                 .Where(p => PropertyUtility.GetAttribute<BoxGroupAttribute>(p) != null)
-                .GroupBy(p => PropertyUtility.GetAttribute<BoxGroupAttribute>(p).Name);
+                .GroupBy(p => (PropertyUtility.GetAttribute<BoxGroupAttribute>(p).Name, PropertyUtility.GetAttribute<BoxGroupAttribute>(p).Foldable));
         }
-
+		
         private static IEnumerable<IGrouping<string, SerializedProperty>> GetFoldoutProperties(IEnumerable<SerializedProperty> properties)
         {
             return properties
