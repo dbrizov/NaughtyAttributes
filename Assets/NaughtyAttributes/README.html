@@ -1403,7 +1403,7 @@ It supports only certain types <strong>(bool, int, long, float, double, string, 
 <p>Give the fields meta data. A field can have more than one meta attributes.</p>
 <h3>
 <a id="user-content-boxgroup" class="anchor" href="#boxgroup" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>BoxGroup</h3>
-<p>Surrounds grouped fields with a box.</p>
+<p>Surrounds grouped fields with a box and optionally a foldout.</p>
 <div class="highlight highlight-source-cs"><pre><span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">NaughtyComponent</span> : <span class="pl-en">MonoBehaviour</span>
 {
 	[<span class="pl-en">BoxGroup</span>(<span class="pl-s"><span class="pl-pds">"</span>Integers<span class="pl-pds">"</span></span>)]
@@ -1411,12 +1411,12 @@ It supports only certain types <strong>(bool, int, long, float, double, string, 
 	[<span class="pl-en">BoxGroup</span>(<span class="pl-s"><span class="pl-pds">"</span>Integers<span class="pl-pds">"</span></span>)]
 	<span class="pl-k">public</span> <span class="pl-k">int</span> <span class="pl-smi">secondInt</span>;
 
-	[<span class="pl-en">BoxGroup</span>(<span class="pl-s"><span class="pl-pds">"</span>Floats<span class="pl-pds">"</span></span>)]
+	[<span class="pl-en">BoxGroup</span>(<span class="pl-s"><span class="pl-pds">"</span>Floats<span class="pl-pds">"</span> <span class="pl-c1">true</span></span>)]
 	<span class="pl-k">public</span> <span class="pl-k">float</span> <span class="pl-smi">firstFloat</span>;
-	[<span class="pl-en">BoxGroup</span>(<span class="pl-s"><span class="pl-pds">"</span>Floats<span class="pl-pds">"</span></span>)]
+	[<span class="pl-en">BoxGroup</span>(<span class="pl-s"><span class="pl-pds">"</span>Floats<span class="pl-pds">"</span> <span class="pl-c1">true</span></span>)]
 	<span class="pl-k">public</span> <span class="pl-k">float</span> <span class="pl-smi">secondFloat</span>;
 }</pre></div>
-<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/BoxGroup_Inspector.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/BoxGroup_Inspector.png" alt="inspector" style="max-width:100%;"></a></p>
+<p><a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/BoxGroup_Inspector.gif" target="_blank" rel="noopener noreferrer"><img src="https://github.com/dbrizov/NaughtyAttributes/raw/master/Assets/NaughtyAttributes/Documentation~/BoxGroup_Inspector.gif" alt="inspector" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-foldout" class="anchor" href="#foldout" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Foldout</h3>
 <p>Makes a foldout group.</p>
