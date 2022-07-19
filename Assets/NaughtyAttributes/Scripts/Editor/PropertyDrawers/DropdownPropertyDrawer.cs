@@ -32,11 +32,13 @@ namespace NaughtyAttributes.Editor
 
             object valuesObject = GetValues(property, dropdownAttribute.ValuesName);
             FieldInfo dropdownField = ReflectionUtility.GetField(target, property.name);
-            
-            string prefix = dropdownAttribute.DisplayPrefix;
-            string suffix = dropdownAttribute.DisplaySuffix;
 
-            Func<object, string> generateDisplayValue = v => string.Format("{0}{1}{2}", prefix, v, suffix);
+            Func<object, string> generateDisplayValue = v => v.ToString();
+
+            if (!string.IsNullOrWhiteSpace(dropdownAttribute.DisplayFormat))
+            {
+               generateDisplayValue =  v => string.Format(dropdownAttribute.DisplayFormat, v);
+            }
 
             if (AreValuesValid(valuesObject, dropdownField))
             {
