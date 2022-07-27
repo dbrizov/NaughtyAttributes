@@ -7,9 +7,9 @@ using UnityEngine;
 namespace NaughtyAttributes.Editor
 {
     [CustomPropertyDrawer(typeof(HorizontalEnumAttribute))]
-    public class HorizontalEnumPropertyDrawer : PropertyDrawer
+    public class HorizontalEnumPropertyDrawer : PropertyDrawerBase
     {
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        protected override void OnGUI_Internal(Rect position, SerializedProperty property, GUIContent label)
         {
             EditorGUI.BeginProperty(position, label, property);
 
@@ -88,7 +88,7 @@ namespace NaughtyAttributes.Editor
             }
             else
             {
-                EditorGUI.HelpBox(position, $"{nameof(HorizontalEnumAttribute)} Can only be used on enum fields", MessageType.Error);
+                DrawDefaultPropertyAndHelpBox(position, property, $"{nameof(HorizontalEnumAttribute)} Can only be used on enum fields", MessageType.Warning);
             }
 
             EditorGUI.EndProperty();
@@ -103,7 +103,7 @@ namespace NaughtyAttributes.Editor
         {
             var result = EditorGUI.Toggle(pos, value, EditorStyles.miniButton);
 
-            var labelStyle = EditorStyles.label;
+            var labelStyle = GUI.skin.label;
             labelStyle.alignment = TextAnchor.MiddleCenter;
             labelStyle.fontStyle = FontStyle.Bold;
 
