@@ -84,7 +84,6 @@ namespace NaughtyAttributes.Editor
                 var lowVal = GetLowValue(property, progressBarAttribute);
                 if (lowVal != null && IsNumber(lowVal) && val <= CastToFloat(lowVal))
                     return lowColor;
-                return lowColor;
             }
             
             return color;
