@@ -37,7 +37,7 @@ namespace NaughtyAttributes.Editor
             {
                 var fillPercentage = value / CastToFloat(maxValue);
                 var barLabel = (!string.IsNullOrEmpty(progressBarAttribute.Name) ? "[" + progressBarAttribute.Name + "] " : "") + valueFormatted + "/" + maxValue;
-                var barColor = progressBarAttribute.Color.GetColor();
+                var barColor = GetColor(value, property, progressBarAttribute);
                 var labelColor = Color.white;
 
                 var indentLength = NaughtyEditorGUI.GetIndentLength(rect);
@@ -63,38 +63,82 @@ namespace NaughtyAttributes.Editor
             EditorGUI.EndProperty();
         }
 
+        private Color GetColor(float val,SerializedProperty property, ProgressBarAttribute progressBarAttribute)
+        {
+            var color = progressBarAttribute.Color.GetColor();
+            var highColor =  progressBarAttribute.HighColor.GetColor();
+            var lowColor =  progressBarAttribute.LowColor.GetColor();
+
+            var highColorPresent = highColor != color;
+            var lowColorPresent = lowColor != color;
+
+            if (highColor != color)
+            {
+                var highVal = GetHighValue(property, progressBarAttribute);
+                if (highVal != null && IsNumber(highVal) && val >= CastToFloat(highVal))
+                    return highColor;
+            }
+
+            if (lowColor != color)
+            {
+                var lowVal = GetLowValue(property, progressBarAttribute);
+                if (lowVal != null && IsNumber(lowVal) && val <= CastToFloat(lowVal))
+                    return lowColor;
+                return lowColor;
+            }
+            
+            return color;
+        }
+
+        private object GetNumberValueFromProperty(string name, SerializedProperty property)
+        {
+            object target = PropertyUtility.GetTargetObjectWithProperty(property);
+
+            FieldInfo valuesFieldInfo = ReflectionUtility.GetField(target, name);
+            if (valuesFieldInfo != null)
+            {
+                return valuesFieldInfo.GetValue(target);
+            }
+
+            PropertyInfo valuesPropertyInfo = ReflectionUtility.GetProperty(target, name);
+            if (valuesPropertyInfo != null)
+            {
+                return valuesPropertyInfo.GetValue(target);
+            }
+
+            MethodInfo methodValuesInfo = ReflectionUtility.GetMethod(target, name);
+            if (methodValuesInfo != null &&
+                (methodValuesInfo.ReturnType == typeof(float) || methodValuesInfo.ReturnType == typeof(int)) &&
+                methodValuesInfo.GetParameters().Length == 0)
+            {
+                return methodValuesInfo.Invoke(target, null);
+            }
+
+            return null;
+        }
+
+        private object GetLowValue(SerializedProperty property, ProgressBarAttribute progressBarAttribute)
+        {
+            if (IsNumber(progressBarAttribute.LowValue))
+                return progressBarAttribute.LowValue;
+            
+            return GetNumberValueFromProperty(progressBarAttribute.LowValue as string, property);
+        }
+        
+        private object GetHighValue(SerializedProperty property, ProgressBarAttribute progressBarAttribute)
+        {
+            if (IsNumber(progressBarAttribute.HighValue))
+                return progressBarAttribute.HighValue;
+            
+            return GetNumberValueFromProperty(progressBarAttribute.HighValue as string, property);
+        }
+
         private object GetMaxValue(SerializedProperty property, ProgressBarAttribute progressBarAttribute)
         {
             if (string.IsNullOrEmpty(progressBarAttribute.MaxValueName))
-            {
                 return progressBarAttribute.MaxValue;
-            }
-            else
-            {
-                object target = PropertyUtility.GetTargetObjectWithProperty(property);
 
-                FieldInfo valuesFieldInfo = ReflectionUtility.GetField(target, progressBarAttribute.MaxValueName);
-                if (valuesFieldInfo != null)
-                {
-                    return valuesFieldInfo.GetValue(target);
-                }
-
-                PropertyInfo valuesPropertyInfo = ReflectionUtility.GetProperty(target, progressBarAttribute.MaxValueName);
-                if (valuesPropertyInfo != null)
-                {
-                    return valuesPropertyInfo.GetValue(target);
-                }
-
-                MethodInfo methodValuesInfo = ReflectionUtility.GetMethod(target, progressBarAttribute.MaxValueName);
-                if (methodValuesInfo != null &&
-                    (methodValuesInfo.ReturnType == typeof(float) || methodValuesInfo.ReturnType == typeof(int)) &&
-                    methodValuesInfo.GetParameters().Length == 0)
-                {
-                    return methodValuesInfo.Invoke(target, null);
-                }
-
-                return null;
-            }
+            return GetNumberValueFromProperty(progressBarAttribute.MaxValueName, property);
         }
 
         private void DrawBar(Rect rect, float fillPercent, string label, Color barColor, Color labelColor)
