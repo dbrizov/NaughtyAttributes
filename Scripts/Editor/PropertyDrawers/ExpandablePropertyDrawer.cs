@@ -108,7 +108,7 @@ namespace NaughtyAttributes.Editor
                             height = EditorGUIUtility.singleLineHeight
                         };
 
-                        EditorGUI.PropertyField(propertyRect, property, label, false);
+                        EditorGUI.PropertyField(propertyRect, property, false);
 
                         // Draw the child properties
                         if (property.isExpanded)
