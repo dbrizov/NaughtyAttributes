@@ -49,6 +49,7 @@ namespace NaughtyAttributes.Editor
                     height = EditorGUIUtility.singleLineHeight
                 };
 
+                HandleInput(barRect, property, maxValue);
                 DrawBar(barRect, Mathf.Clamp01(fillPercentage), barLabel, barColor, labelColor);
             }
             else
@@ -63,6 +64,48 @@ namespace NaughtyAttributes.Editor
             EditorGUI.EndProperty();
         }
 
+        private void HandleInput(Rect rect, SerializedProperty property, object maxValue)
+        {
+            bool changed = false;
+            float minValue = 0f;
+            var value = property.propertyType == SerializedPropertyType.Integer ? property.intValue : property.floatValue;
+            var controlId = GUIUtility.GetControlID(FocusType.Keyboard);
+
+            if (Event.current.type == EventType.MouseDown && Event.current.button == 0 && rect.Contains(Event.current.mousePosition) ||
+                GUIUtility.hotControl == controlId && (Event.current.type == EventType.MouseMove || Event.current.type == EventType.MouseDrag))
+            {
+                // Update value based on mouse position.
+                GUIUtility.hotControl = controlId;
+                value = minValue + Mathf.Abs(CastToFloat(maxValue) - minValue) *
+                    Mathf.Clamp01((Event.current.mousePosition.x - rect.xMin) / rect.width);
+
+                changed = true;
+            }
+            else if (GUIUtility.hotControl == controlId && Event.current.rawType == EventType.MouseUp)
+            {
+                // Release hot control.
+                GUIUtility.hotControl = 0;
+            }
+
+            if (changed)
+            {
+                GUI.changed = true;
+                
+                value = value <= minValue ? minValue : value >= CastToFloat(maxValue) ? CastToFloat(maxValue) : value;
+                switch (property.propertyType)
+                {
+                    case SerializedPropertyType.Integer:
+                        property.intValue = (int) value;
+                        break;
+                    case SerializedPropertyType.Float:
+                        property.floatValue = value;
+                        break;
+                }
+
+                Event.current.Use();
+            }
+        }
+        
         private object GetMaxValue(SerializedProperty property, ProgressBarAttribute progressBarAttribute)
         {
             if (string.IsNullOrEmpty(progressBarAttribute.MaxValueName))
