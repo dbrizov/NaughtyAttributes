@@ -20,6 +20,7 @@ namespace NaughtyAttributes.Editor
             _validatorsByAttributeType[typeof(MaxValueAttribute)] = new MaxValuePropertyValidator();
             _validatorsByAttributeType[typeof(RequiredAttribute)] = new RequiredPropertyValidator();
             _validatorsByAttributeType[typeof(ValidateInputAttribute)] = new ValidateInputPropertyValidator();
+            _validatorsByAttributeType[typeof(RequiredTypeAttribute)] = new RequiredTypePropertyValidator();
         }
 
         public static PropertyValidatorBase GetValidator(this ValidatorAttribute attr)
