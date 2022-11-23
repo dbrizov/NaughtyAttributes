@@ -2,7 +2,7 @@
 
 namespace NaughtyAttributes.Test
 {
-    public class RequiredTypeTestTestObject2InheritsAll : MonoBehaviour, IRequiredTypeTestInterface, IRequiredTypeTestInterface2
+    public class RequiredTypeTestTestObject2InheritsAll : RequiredTypeTestTestObject, IRequiredTypeTestInterface2
     {
     }
 }
