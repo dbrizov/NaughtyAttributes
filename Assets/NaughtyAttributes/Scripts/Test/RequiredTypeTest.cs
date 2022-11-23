@@ -29,5 +29,8 @@ namespace NaughtyAttributes.Test
 
         [RequiredType(typeof(IRequiredTypeTestInterface), typeof(IRequiredTypeTestInterface2))] 
         public GameObject gameObjectMustHaveMultipleType;
+        
+        [RequiredType(typeof(RequiredTypeTestTestObject))]
+        public RequiredTypeTest componentMustHaveAnotherComponent;
     }
 }
