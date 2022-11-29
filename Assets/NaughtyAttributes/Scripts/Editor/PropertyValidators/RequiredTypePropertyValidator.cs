@@ -31,12 +31,12 @@ namespace NaughtyAttributes.Editor
                     StringBuilder infoMessage = new StringBuilder();
                     infoMessage.AppendLine(property.name + " must have ");
                     
-                    foreach (var baseType in requiredTypeAttribute.BaseTypes)
+                    foreach (var baseType in requiredTypeAttribute.RequiredTypes)
                     {
                         infoMessage.AppendLine("\"" + baseType.FullName + "\"");
                     }
 
-                    infoMessage.Append(requiredTypeAttribute.BaseTypes.Length > 1
+                    infoMessage.Append(requiredTypeAttribute.RequiredTypes.Length > 1
                         ? " or one of their derived types"
                         : " or derived type");
 
@@ -52,7 +52,7 @@ namespace NaughtyAttributes.Editor
                 bool hasValidationError = false;
                 StringBuilder errorMessage = new StringBuilder();
 
-                foreach (var baseType in requiredTypeAttribute.BaseTypes)
+                foreach (var baseType in requiredTypeAttribute.RequiredTypes)
                 {
                     var hasComponent = gameObject.GetComponent(baseType);
                     if (!hasComponent)
