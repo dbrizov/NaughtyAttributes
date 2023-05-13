@@ -31,52 +31,34 @@ namespace NaughtyAttributes.Editor
 
             _methods = ReflectionUtility.GetAllMethods(
                 target, m => m.GetCustomAttributes(typeof(ButtonAttribute), true).Length > 0);
-            
-            EasyButtonSupport();
+
+            if (!EasyButtonSupport())
+            {
+                Debug.LogWarning("EasyButtons drawer definition does not match");
+            }
         }
 
-        private void EasyButtonSupport()
+        private bool EasyButtonSupport()
         {
             var ebDrawerType = Type.GetType("EasyButtons.Editor.ButtonsDrawer, EasyButtons.Editor");
-
-            if(ebDrawerType == null) return;
+            if (ebDrawerType == null) return true;
             
             var constructor = ebDrawerType.GetConstructor(new [] {typeof(object)});
-            if(constructor == null)
-            {
-                Debug.LogWarning("NaughtyAttributes: EasyButtons.ButtonAttribute constructor not found");
-                return;
-            }
-
-            var ebDrawer = constructor.Invoke(new[] { target });
-            if(ebDrawer == null)
-            {
-                Debug.LogWarning("NaughtyAttributes: EasyButtons.ButtonAttribute constructor failed");
-                return;
-            }
+            var ebDrawer = constructor?.Invoke(new[] { target });
+            if (ebDrawer == null) return false;
             
             var buttonsListField = ebDrawerType.GetField("Buttons", BindingFlags.Instance | BindingFlags.Public); 
-            if(buttonsListField == null)
-            {
-                Debug.LogWarning("NaughtyAttributes: EasyButtons.Editor.ButtonsDrawer.Buttons field not found");
-                return;
-            }
+            if (buttonsListField == null) return false;
             
             var buttonsList = buttonsListField.GetValue(ebDrawer) as IList;
             
-            if(buttonsList == null || buttonsList.Count == 0)
-            {
-                return;
-            }
-
-            var drawMethodInfo = ebDrawerType.GetMethod("DrawButtons", new [] { typeof(IEnumerable<object>) });
-            if(drawMethodInfo == null)
-            {
-                Debug.LogWarning("NaughtyAttributes: EasyButtons.Editor.ButtonsDrawer.DrawButtons method not found");
-                return;
-            }
+            if (buttonsList == null || buttonsList.Count == 0) return true;
             
+            var drawMethodInfo = ebDrawerType.GetMethod("DrawButtons", new [] { typeof(IEnumerable<object>) });
+            if (drawMethodInfo == null) return false;
+
             _ebEbDrawMethod = drawMethodInfo.CreateDelegate(typeof(EBDrawMethodDel), ebDrawer) as EBDrawMethodDel;
+            return true;
         }
 
         protected virtual void OnDisable()
