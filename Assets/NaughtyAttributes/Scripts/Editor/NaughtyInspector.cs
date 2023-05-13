@@ -32,13 +32,13 @@ namespace NaughtyAttributes.Editor
             _methods = ReflectionUtility.GetAllMethods(
                 target, m => m.GetCustomAttributes(typeof(ButtonAttribute), true).Length > 0);
 
-            if (!EasyButtonSupport())
+            if (!BindEasyButtonDrawer())
             {
                 Debug.LogWarning("EasyButtons drawer definition does not match");
             }
         }
 
-        private bool EasyButtonSupport()
+        private bool BindEasyButtonDrawer()
         {
             var ebDrawerType = Type.GetType("EasyButtons.Editor.ButtonsDrawer, EasyButtons.Editor");
             if (ebDrawerType == null) return true;
