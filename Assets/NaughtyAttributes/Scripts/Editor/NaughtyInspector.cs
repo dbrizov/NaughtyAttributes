@@ -18,10 +18,10 @@ namespace NaughtyAttributes.Editor
 
         protected virtual void OnEnable()
         {
-            GetReferences();
+            GetNaughtyReferences();
         }
 		
-		protected virtual void GetReferences()
+		protected virtual void GetNaughtyReferences()
 		{
 			_nonSerializedFields = ReflectionUtility.GetAllFields(
                 target, f => f.GetCustomAttributes(typeof(ShowNonSerializedFieldAttribute), true).Length > 0);
