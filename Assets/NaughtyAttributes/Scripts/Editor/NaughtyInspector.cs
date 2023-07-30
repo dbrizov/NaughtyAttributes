@@ -18,7 +18,12 @@ namespace NaughtyAttributes.Editor
 
         protected virtual void OnEnable()
         {
-            _nonSerializedFields = ReflectionUtility.GetAllFields(
+            GetReferences();
+        }
+		
+		protected virtual void GetReferences()
+		{
+			_nonSerializedFields = ReflectionUtility.GetAllFields(
                 target, f => f.GetCustomAttributes(typeof(ShowNonSerializedFieldAttribute), true).Length > 0);
 
             _nativeProperties = ReflectionUtility.GetAllProperties(
@@ -26,7 +31,7 @@ namespace NaughtyAttributes.Editor
 
             _methods = ReflectionUtility.GetAllMethods(
                 target, m => m.GetCustomAttributes(typeof(ButtonAttribute), true).Length > 0);
-        }
+		}
 
         protected virtual void OnDisable()
         {
@@ -35,7 +40,12 @@ namespace NaughtyAttributes.Editor
 
         public override void OnInspectorGUI()
         {
-            GetSerializedProperties(ref _serializedProperties);
+			DrawNaughtyInspectorGUI();
+        }
+		
+		protected virtual void DrawNaughtyInspectorGUI()
+		{
+			GetSerializedProperties(ref _serializedProperties);
 
             bool anyNaughtyAttribute = _serializedProperties.Any(p => PropertyUtility.GetAttribute<INaughtyAttribute>(p) != null);
             if (!anyNaughtyAttribute)
@@ -50,9 +60,9 @@ namespace NaughtyAttributes.Editor
             DrawNonSerializedFields();
             DrawNativeProperties();
             DrawButtons();
-        }
+		}
 
-        protected void GetSerializedProperties(ref List<SerializedProperty> outSerializedProperties)
+        protected virtual void GetSerializedProperties(ref List<SerializedProperty> outSerializedProperties)
         {
             outSerializedProperties.Clear();
             using (var iterator = serializedObject.GetIterator())
@@ -68,7 +78,7 @@ namespace NaughtyAttributes.Editor
             }
         }
 
-        protected void DrawSerializedProperties()
+        protected virtual void DrawSerializedProperties()
         {
             serializedObject.Update();
 
@@ -133,7 +143,7 @@ namespace NaughtyAttributes.Editor
             serializedObject.ApplyModifiedProperties();
         }
 
-        protected void DrawNonSerializedFields(bool drawHeader = false)
+        protected virtual void DrawNonSerializedFields(bool drawHeader = false)
         {
             if (_nonSerializedFields.Any())
             {
@@ -152,7 +162,7 @@ namespace NaughtyAttributes.Editor
             }
         }
 
-        protected void DrawNativeProperties(bool drawHeader = false)
+        protected virtual void DrawNativeProperties(bool drawHeader = false)
         {
             if (_nativeProperties.Any())
             {
@@ -171,7 +181,7 @@ namespace NaughtyAttributes.Editor
             }
         }
 
-        protected void DrawButtons(bool drawHeader = false)
+        protected virtual void DrawButtons(bool drawHeader = false)
         {
             if (_methods.Any())
             {
