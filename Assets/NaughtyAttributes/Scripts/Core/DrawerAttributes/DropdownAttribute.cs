@@ -33,6 +33,11 @@ namespace NaughtyAttributes
             _values.Add(new KeyValuePair<string, object>(displayName, value));
         }
 
+        public void Clear()
+        {
+            _values.Clear();
+        }
+
         public IEnumerator<KeyValuePair<string, object>> GetEnumerator()
         {
             return _values.GetEnumerator();
