@@ -26,7 +26,11 @@ namespace NaughtyAttributes.Editor
 
         private string GetPropertyKeyName(SerializedProperty property)
         {
+#if UNITY_6000_5_OR_NEWER
+            return EntityId.ToULong(property.serializedObject.targetObject.GetEntityId()) + "." + property.name;
+#else
             return property.serializedObject.targetObject.GetInstanceID() + "." + property.name;
+#endif
         }
 
         protected override float GetPropertyHeight_Internal(SerializedProperty property)
