@@ -90,12 +90,12 @@ namespace NaughtyAttributes.Editor
             if (changed)
             {
                 GUI.changed = true;
-                
+
                 value = value <= minValue ? minValue : value >= CastToFloat(maxValue) ? CastToFloat(maxValue) : value;
                 switch (property.propertyType)
                 {
                     case SerializedPropertyType.Integer:
-                        property.intValue = (int) value;
+                        property.intValue = (int)value;
                         break;
                     case SerializedPropertyType.Float:
                         property.floatValue = value;
@@ -105,7 +105,7 @@ namespace NaughtyAttributes.Editor
                 Event.current.Use();
             }
         }
-        
+
         private object GetMaxValue(SerializedProperty property, ProgressBarAttribute progressBarAttribute)
         {
             if (string.IsNullOrEmpty(progressBarAttribute.MaxValueName))
