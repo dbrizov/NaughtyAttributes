@@ -102,13 +102,13 @@ namespace NaughtyAttributes.Editor
                         // Draw the scriptable object field
                         Rect propertyRect = new Rect()
                         {
-                            x = rect.x,
+                            x = rect.x + EditorGUIUtility.labelWidth + 2.0f,
                             y = rect.y,
-                            width = rect.width,
+                            width = rect.width - EditorGUIUtility.labelWidth - 2.0f,
                             height = EditorGUIUtility.singleLineHeight
                         };
 
-                        EditorGUI.PropertyField(propertyRect, property, false);
+                        EditorGUI.PropertyField(propertyRect, property, GUIContent.none, false);
 
                         // Draw the child properties
                         if (property.isExpanded)
