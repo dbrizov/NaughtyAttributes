@@ -25,7 +25,7 @@ namespace NaughtyAttributes.Test
     [System.Serializable]
     public class ExpandableScriptableObjectNest2
     {
-        [Expandable]
+        [Expandable(isReadonly: true)]
         public ScriptableObject obj2;
     }
 }
