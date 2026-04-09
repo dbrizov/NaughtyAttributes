@@ -10,7 +10,7 @@ namespace NaughtyAttributes
         public Vector2 Max { get; private set; }
         public EColor Color { get; private set; }
 
-        public CurveRangeAttribute(Vector2 min, Vector2 max, EColor color = EColor.Clear)
+        public CurveRangeAttribute(Vector2 min, Vector2 max, EColor color = EColor.Green)
         {
             Min = min;
             Max = max;
@@ -22,7 +22,7 @@ namespace NaughtyAttributes
         {
         }
 
-        public CurveRangeAttribute(float minX, float minY, float maxX, float maxY, EColor color = EColor.Clear)
+        public CurveRangeAttribute(float minX, float minY, float maxX, float maxY, EColor color = EColor.Green)
             : this(new Vector2(minX, minY), new Vector2(maxX, maxY), color)
         {
         }

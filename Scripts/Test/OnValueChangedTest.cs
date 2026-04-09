@@ -25,7 +25,7 @@ namespace NaughtyAttributes.Test
     public class OnValueChangedNest1
     {
         [OnValueChanged("OnValueChangedMethod")]
-        [AllowNesting]
+        [AllowNesting] // Because it's nested we need to explicitly allow nesting
         public int int1;
 
         private void OnValueChangedMethod()
@@ -40,7 +40,7 @@ namespace NaughtyAttributes.Test
     public class OnValueChangedNest2
     {
         [OnValueChanged("OnValueChangedMethod")]
-        [AllowNesting]
+        [AllowNesting] // Because it's nested we need to explicitly allow nesting
         public int int2;
 
         private void OnValueChangedMethod()
