@@ -6,15 +6,14 @@ namespace NaughtyAttributes
     public class RequiredTypeAttribute : ValidatorAttribute
     {
         public Type[] RequiredTypes { get; private set; }
-        
+
         public bool ShowInfoMessageWhenEmpty { get; private set; }
-        
+
         public RequiredTypeAttribute(params Type[] requiredTypes)
+            : this(true, requiredTypes)
         {
-            RequiredTypes = requiredTypes;
-            ShowInfoMessageWhenEmpty = true;
         }
-        
+
         public RequiredTypeAttribute(bool showInfoMessageWhenEmpty, params Type[] requiredTypes)
         {
             RequiredTypes = requiredTypes;
