@@ -12,10 +12,10 @@ namespace NaughtyAttributes.Test
 
     public class RequiredTypeTest : MonoBehaviour
     {
-        [RequiredType(typeof(Rigidbody))] 
+        [RequiredType(typeof(Rigidbody))]
         public GameObject gameObjectMustHaveRigidbody;
-        
-        [RequiredType(typeof(Rigidbody))] 
+
+        [RequiredType(typeof(Rigidbody))]
         public Transform transformMustHaveRigidbody;
 
         [RequiredType(typeof(IRequiredTypeTestInterface))]
@@ -27,9 +27,9 @@ namespace NaughtyAttributes.Test
         [RequiredType(showInfoMessageWhenEmpty: false, typeof(IRequiredTypeTestInterface))]
         public GameObject shouldNotShowInfoMessageWhenEmpty;
 
-        [RequiredType(typeof(IRequiredTypeTestInterface), typeof(IRequiredTypeTestInterface2))] 
+        [RequiredType(typeof(IRequiredTypeTestInterface), typeof(IRequiredTypeTestInterface2))]
         public GameObject gameObjectMustHaveMultipleType;
-        
+
         [RequiredType(typeof(RequiredTypeTestTestObject))]
         public RequiredTypeTest componentMustHaveAnotherComponent;
     }

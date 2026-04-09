@@ -30,7 +30,7 @@ namespace NaughtyAttributes.Editor
                 {
                     StringBuilder infoMessage = new StringBuilder();
                     infoMessage.AppendLine(property.name + " must have ");
-                    
+
                     foreach (var baseType in requiredTypeAttribute.RequiredTypes)
                     {
                         infoMessage.AppendLine("\"" + baseType.FullName + "\"");
