@@ -130,41 +130,36 @@ namespace NaughtyAttributes.Editor
         {
             object target = PropertyUtility.GetTargetObjectWithProperty(property);
 
-            FieldInfo animatorFieldInfo = ReflectionUtility.GetField(target, animatorName);
-            if (animatorFieldInfo != null &&
-                animatorFieldInfo.FieldType == typeof(Animator))
+            static Animator ResolveAnimator(object obj, string memberName)
             {
-                Animator animator = animatorFieldInfo.GetValue(target) as Animator;
-                if (animator != null)
-                {
-                    AnimatorController animatorController = animator.runtimeAnimatorController as AnimatorController;
-                    return animatorController;
-                }
+                var field = ReflectionUtility.GetField(obj, memberName);
+                if (field != null && field.FieldType == typeof(Animator))
+                    return field.GetValue(obj) as Animator;
+
+                var prop = ReflectionUtility.GetProperty(obj, memberName);
+                if (prop != null && prop.PropertyType == typeof(Animator))
+                    return prop.GetValue(obj) as Animator;
+
+                var getter = ReflectionUtility.GetMethod(obj, memberName);
+                if (getter != null && getter.ReturnType == typeof(Animator) && getter.GetParameters().Length == 0)
+                    return getter.Invoke(obj, null) as Animator;
+
+                return null;
             }
 
-            PropertyInfo animatorPropertyInfo = ReflectionUtility.GetProperty(target, animatorName);
-            if (animatorPropertyInfo != null &&
-                animatorPropertyInfo.PropertyType == typeof(Animator))
-            {
-                Animator animator = animatorPropertyInfo.GetValue(target) as Animator;
-                if (animator != null)
-                {
-                    AnimatorController animatorController = animator.runtimeAnimatorController as AnimatorController;
-                    return animatorController;
-                }
-            }
+            var animator = ResolveAnimator(target, animatorName);
+            if (animator == null) return null;
 
-            MethodInfo animatorGetterMethodInfo = ReflectionUtility.GetMethod(target, animatorName);
-            if (animatorGetterMethodInfo != null &&
-                animatorGetterMethodInfo.ReturnType == typeof(Animator) &&
-                animatorGetterMethodInfo.GetParameters().Length == 0)
+            var rac = animator.runtimeAnimatorController;
+            // Handle both regular controllers and override controllers
+            if (rac is AnimatorController ac)
+                return ac;
+
+            if (rac is AnimatorOverrideController aoc)
             {
-                Animator animator = animatorGetterMethodInfo.Invoke(target, null) as Animator;
-                if (animator != null)
-                {
-                    AnimatorController animatorController = animator.runtimeAnimatorController as AnimatorController;
-                    return animatorController;
-                }
+                // The base controller holds the parameters
+                var baseCtrl = aoc.runtimeAnimatorController as AnimatorController;
+                return baseCtrl;
             }
 
             return null;
