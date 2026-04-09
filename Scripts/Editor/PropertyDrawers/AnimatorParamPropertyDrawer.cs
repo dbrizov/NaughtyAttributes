@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Reflection;
 using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
@@ -134,15 +133,21 @@ namespace NaughtyAttributes.Editor
             {
                 var field = ReflectionUtility.GetField(obj, memberName);
                 if (field != null && field.FieldType == typeof(Animator))
+                {
                     return field.GetValue(obj) as Animator;
+                }
 
                 var prop = ReflectionUtility.GetProperty(obj, memberName);
                 if (prop != null && prop.PropertyType == typeof(Animator))
+                {
                     return prop.GetValue(obj) as Animator;
+                }
 
                 var getter = ReflectionUtility.GetMethod(obj, memberName);
                 if (getter != null && getter.ReturnType == typeof(Animator) && getter.GetParameters().Length == 0)
+                {
                     return getter.Invoke(obj, null) as Animator;
+                }
 
                 return null;
             }
@@ -150,15 +155,17 @@ namespace NaughtyAttributes.Editor
             var animator = ResolveAnimator(target, animatorName);
             if (animator == null) return null;
 
-            var rac = animator.runtimeAnimatorController;
+            var runtimeAnimatorController = animator.runtimeAnimatorController;
             // Handle both regular controllers and override controllers
-            if (rac is AnimatorController ac)
-                return ac;
+            if (runtimeAnimatorController is AnimatorController animatorController)
+            {
+                return animatorController;
+            }
 
-            if (rac is AnimatorOverrideController aoc)
+            if (runtimeAnimatorController is AnimatorOverrideController animatorOverrideController)
             {
                 // The base controller holds the parameters
-                var baseCtrl = aoc.runtimeAnimatorController as AnimatorController;
+                var baseCtrl = animatorOverrideController.runtimeAnimatorController as AnimatorController;
                 return baseCtrl;
             }
 
