@@ -27,8 +27,8 @@ openupm add com.dbrizov.naughtyattributes
 3. You can also download it from the [Asset Store](https://assetstore.unity.com/packages/tools/utilities/naughtyattributes-129996)
 
 ## Documentation
-- [Documentation](https://dbrizov.github.io/na-docs/)
-- [Documentation Repo](https://github.com/dbrizov/na-docs)
+- [Documentation](https://naughtyattributes.com/)
+- [Documentation Repo](https://github.com/dbrizov/NaughtyAttributes-Docs)
 
 ## Support
 NaughtyAttributes is an open-source project that I am developing in my free time. If you like it you can support me by donating.
@@ -42,7 +42,7 @@ NaughtyAttributes is an open-source project that I am developing in my free time
 
 ### AllowNesting
 This attribute must be used in some cases when you want meta attributes to work inside serializable nested structs or classes.
-You can check in which cases you need to use it [here](https://dbrizov.github.io/na-docs/attributes/special_attributes/allow_nesting.html).
+You can check in which cases you need to use it [here](https://naughtyattributes.com/attributes/special_attributes/allow_nesting.html).
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
