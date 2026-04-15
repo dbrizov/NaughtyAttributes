@@ -29,9 +29,17 @@ namespace NaughtyAttributes.Editor
         public static GUIContent GetLabel(SerializedProperty property)
         {
             LabelAttribute labelAttribute = GetAttribute<LabelAttribute>(property);
-            string labelText = (labelAttribute == null)
-                ? property.displayName
-                : labelAttribute.Label;
+            string labelText = property.displayName;
+
+            if(labelAttribute != null){
+                labelText = labelAttribute.Label;
+
+                if(labelAttribute is VarLabelAttribute) {
+                    object target = GetTargetObjectWithProperty(property);
+
+                    labelText = GetVariableLabel(target, ((VarLabelAttribute)labelAttribute).Label);
+                }
+            }
 
             GUIContent label = new GUIContent(labelText);
             return label;
@@ -222,6 +230,29 @@ namespace NaughtyAttributes.Editor
             }
 
             return conditionValues;
+        }
+
+        internal static string GetVariableLabel(object target, string path) {
+            FieldInfo labelField = ReflectionUtility.GetField(target, path);
+            if(labelField != null &&
+                labelField.FieldType == typeof(string)) {
+                return (string)labelField.GetValue(target);
+            }
+
+            PropertyInfo labelProperty = ReflectionUtility.GetProperty(target, path);
+            if(labelProperty != null &&
+                labelProperty.PropertyType == typeof(string)) {
+                return (string)labelProperty.GetValue(target);
+            }
+
+            MethodInfo labelMethod = ReflectionUtility.GetMethod(target, path);
+            if(labelMethod != null &&
+                labelMethod.ReturnType == typeof(string) &&
+                labelMethod.GetParameters().Length == 0) {
+                return (string)labelMethod.Invoke(target, null);
+            }
+
+            return "[label property not found]";
         }
 
         internal static bool GetConditionsFlag(List<bool> conditionValues, EConditionOperator conditionOperator, bool invert)
