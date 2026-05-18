@@ -62,6 +62,10 @@ namespace NaughtyAttributes.Editor
                     if (!string.IsNullOrEmpty(selectedPath))
                     {
                         property.stringValue = selectedPath;
+                        property.serializedObject.ApplyModifiedProperties();
+                        EditorGUIUtility.editingTextField = false;
+                        GUIUtility.keyboardControl = 0;
+                        GUI.changed = true;
                     }
                 }
             }
