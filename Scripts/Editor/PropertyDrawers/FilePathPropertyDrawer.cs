@@ -8,14 +8,20 @@ namespace NaughtyAttributes.Editor
     public class FilePathPropertyDrawer : PropertyDrawerBase
     {
         private const string TypeWarningMessage = "{0} must be a string";
+        private const string FileNotFoundWarningMessage = "{0} does not exist";
         private const string BrowseButtonLabel = "Browse";
         private const float BrowseButtonWidth = 60.0f;
 
         protected override float GetPropertyHeight_Internal(SerializedProperty property, GUIContent label)
         {
-            return (property.propertyType == SerializedPropertyType.String)
-                ? GetPropertyHeight(property)
-                : GetPropertyHeight(property) + GetHelpBoxHeight();
+            if (property.propertyType != SerializedPropertyType.String)
+            {
+                return GetPropertyHeight(property) + GetHelpBoxHeight();
+            }
+
+            return ShouldShowFileNotFoundWarning(property)
+                ? GetPropertyHeight(property) + EditorGUIUtility.standardVerticalSpacing + GetHelpBoxHeight()
+                : GetPropertyHeight(property);
         }
 
         protected override void OnGUI_Internal(Rect rect, SerializedProperty property, GUIContent label)
@@ -61,12 +67,28 @@ namespace NaughtyAttributes.Editor
 
                     if (!string.IsNullOrEmpty(selectedPath))
                     {
+                        selectedPath = filePathAttribute.RelativePath
+                            ? NaughtyPathUtility.GetProjectRelativePath(selectedPath)
+                            : NaughtyPathUtility.NormalizePath(selectedPath);
+
                         property.stringValue = selectedPath;
                         property.serializedObject.ApplyModifiedProperties();
                         EditorGUIUtility.editingTextField = false;
                         GUIUtility.keyboardControl = 0;
                         GUI.changed = true;
                     }
+                }
+
+                if (ShouldShowFileNotFoundWarning(property))
+                {
+                    Rect helpBoxRect = new Rect(
+                        rect.x + NaughtyEditorGUI.GetIndentLength(rect),
+                        rect.y + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing,
+                        rect.width - NaughtyEditorGUI.GetIndentLength(rect),
+                        GetHelpBoxHeight());
+
+                    string message = string.Format(FileNotFoundWarningMessage, property.stringValue);
+                    NaughtyEditorGUI.HelpBox(helpBoxRect, message, MessageType.Warning, property.serializedObject.targetObject);
                 }
             }
             else
@@ -76,6 +98,17 @@ namespace NaughtyAttributes.Editor
             }
 
             EditorGUI.EndProperty();
+        }
+
+        private static bool ShouldShowFileNotFoundWarning(SerializedProperty property)
+        {
+            FilePathAttribute filePathAttribute = PropertyUtility.GetAttribute<FilePathAttribute>(property);
+            if (filePathAttribute == null || !filePathAttribute.ValidateExists || string.IsNullOrEmpty(property.stringValue))
+            {
+                return false;
+            }
+
+            return !File.Exists(NaughtyPathUtility.GetProjectAbsolutePath(property.stringValue));
         }
     }
 }

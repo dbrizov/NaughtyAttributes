@@ -61,6 +61,10 @@ namespace NaughtyAttributes.Editor
 
                     if (!string.IsNullOrEmpty(selectedPath))
                     {
+                        selectedPath = folderPathAttribute.RelativePath
+                            ? NaughtyPathUtility.GetProjectRelativePath(selectedPath)
+                            : NaughtyPathUtility.NormalizePath(selectedPath);
+
                         property.stringValue = selectedPath;
                         property.serializedObject.ApplyModifiedProperties();
                         EditorGUIUtility.editingTextField = false;

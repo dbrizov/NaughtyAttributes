@@ -10,6 +10,18 @@ namespace NaughtyAttributes.Test
         [FilePath("Select a C# file", "", "cs")]
         public string filePath1;
 
+        [FilePath("Select a relative file", "", "", true)]
+        public string relativeFilePath;
+
+        [FilePath("Select an existing file", "", "", false, true)]
+        public string existingFilePath;
+
+        [FilePath("Select an existing relative file", "", "", true, true)]
+        public string existingRelativeFilePath;
+
+        [FolderPath("Select a relative folder", "", true)]
+        public string relativeFolderPath;
+
         public FilePathNest1 nest1;
     }
 
