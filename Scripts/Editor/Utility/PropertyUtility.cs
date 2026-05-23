@@ -9,6 +9,30 @@ namespace NaughtyAttributes.Editor
 {
     public static class PropertyUtility
     {
+        public static float GetValue(SerializedProperty property, IValuableAttribute attribute)
+        {
+            if (!attribute.IsDynamic)
+                return attribute.Value;
+
+            object target = property.serializedObject.targetObject;
+            var field = ReflectionUtility.GetField(target, attribute.ValueName);
+            if (field != null)
+            {
+                object value = field.GetValue(target);
+                return GetNumericValue(value, attribute.ValueName);
+            }
+
+            var prop = ReflectionUtility.GetProperty(target, attribute.ValueName);
+
+            if (prop != null)
+            {
+                object value = prop.GetValue(target);
+                return GetNumericValue(value, attribute.ValueName);
+            }
+
+            throw new MissingMemberException($"Cannot find member '{attribute.ValueName}'");
+        }
+
         public static T GetAttribute<T>(SerializedProperty property) where T : class
         {
             T[] attributes = GetAttributes<T>(property);
@@ -369,6 +393,27 @@ namespace NaughtyAttributes.Editor
             }
 
             return enumerator.Current;
+        }
+
+        private static float GetNumericValue(object value, string memberName)
+        {
+            switch (value)
+            {
+                case byte b: return b;
+                case sbyte sb: return sb;
+                case short s: return s;
+                case ushort us: return us;
+                case int i: return i;
+                case uint ui: return ui;
+                case long l: return l;
+                case ulong ul: return ul;
+                case float f: return f;
+                case double d: return (float)d;
+                case decimal m: return (float)m;
+
+                default:
+                    throw new InvalidCastException($"Member '{memberName}' used by [MaxValue(nameof({memberName}))] " + $"must be a numeric type. Actual type: {value?.GetType().Name ?? "null"}");
+            }
         }
     }
 }

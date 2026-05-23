@@ -3,9 +3,14 @@
 namespace NaughtyAttributes
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = false, Inherited = true)]
-    public class MaxValueAttribute : ValidatorAttribute
+    public class MaxValueAttribute : ValidatorAttribute, IValuableAttribute
     {
+        public string MaxValueName { get; private set; }
         public float MaxValue { get; private set; }
+
+        public string ValueName => MaxValueName;
+        public float Value => MaxValue;
+        public bool IsDynamic => !string.IsNullOrEmpty(MaxValueName);
 
         public MaxValueAttribute(float maxValue)
         {
@@ -15,6 +20,11 @@ namespace NaughtyAttributes
         public MaxValueAttribute(int maxValue)
         {
             MaxValue = maxValue;
+        }
+
+        public MaxValueAttribute(string maxValueName)
+        {
+            MaxValueName = maxValueName;
         }
     }
 }

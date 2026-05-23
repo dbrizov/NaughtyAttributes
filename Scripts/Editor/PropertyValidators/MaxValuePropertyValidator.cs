@@ -8,40 +8,41 @@ namespace NaughtyAttributes.Editor
         public override void ValidateProperty(SerializedProperty property)
         {
             MaxValueAttribute maxValueAttribute = PropertyUtility.GetAttribute<MaxValueAttribute>(property);
+            float maxValue = PropertyUtility.GetValue(property, maxValueAttribute);
 
             if (property.propertyType == SerializedPropertyType.Integer)
             {
-                if (property.intValue > maxValueAttribute.MaxValue)
+                if (property.intValue > maxValue)
                 {
-                    property.intValue = (int)maxValueAttribute.MaxValue;
+                    property.intValue = (int)maxValue;
                 }
             }
             else if (property.propertyType == SerializedPropertyType.Float)
             {
-                if (property.floatValue > maxValueAttribute.MaxValue)
+                if (property.floatValue > maxValue)
                 {
-                    property.floatValue = maxValueAttribute.MaxValue;
+                    property.floatValue = maxValue;
                 }
             }
             else if (property.propertyType == SerializedPropertyType.Vector2)
             {
-                property.vector2Value = Vector2.Min(property.vector2Value, new Vector2(maxValueAttribute.MaxValue, maxValueAttribute.MaxValue));
+                property.vector2Value = Vector2.Min(property.vector2Value, new Vector2(maxValue, maxValue));
             }
             else if (property.propertyType == SerializedPropertyType.Vector3)
             {
-                property.vector3Value = Vector3.Min(property.vector3Value, new Vector3(maxValueAttribute.MaxValue, maxValueAttribute.MaxValue, maxValueAttribute.MaxValue));
+                property.vector3Value = Vector3.Min(property.vector3Value, new Vector3(maxValue, maxValue, maxValue));
             }
             else if (property.propertyType == SerializedPropertyType.Vector4)
             {
-                property.vector4Value = Vector4.Min(property.vector4Value, new Vector4(maxValueAttribute.MaxValue, maxValueAttribute.MaxValue, maxValueAttribute.MaxValue, maxValueAttribute.MaxValue));
+                property.vector4Value = Vector4.Min(property.vector4Value, new Vector4(maxValue, maxValue, maxValue, maxValue));
             }
             else if (property.propertyType == SerializedPropertyType.Vector2Int)
             {
-                property.vector2IntValue = Vector2Int.Min(property.vector2IntValue, new Vector2Int((int)maxValueAttribute.MaxValue, (int)maxValueAttribute.MaxValue));
+                property.vector2IntValue = Vector2Int.Min(property.vector2IntValue, new Vector2Int((int)maxValue, (int)maxValue));
             }
             else if (property.propertyType == SerializedPropertyType.Vector3Int)
             {
-                property.vector3IntValue = Vector3Int.Min(property.vector3IntValue, new Vector3Int((int)maxValueAttribute.MaxValue, (int)maxValueAttribute.MaxValue, (int)maxValueAttribute.MaxValue));
+                property.vector3IntValue = Vector3Int.Min(property.vector3IntValue, new Vector3Int((int)maxValue, (int)maxValue, (int)maxValue));
             }
             else
             {
