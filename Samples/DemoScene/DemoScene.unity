@@ -897,12 +897,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ca4c27fc649764b9d1625f1740cb9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
+  health: 91.51193
   nest1:
     mana: 25
     nest2:
       stamina: 75
-  elixir: 50
+  elixir: 83
   maxElixir: 100
 --- !u!1 &993534225
 GameObject:
@@ -2106,7 +2106,9 @@ MonoBehaviour:
   min0Int: 0
   max0Int: 5
   maxByNameInt: 5
+  minByNameInt: 0
   range01Float: 0.66
+  rangeMinus10Float: 0
   rangeByNameFloat: 0.66
   range01Vector2: {x: 1, y: 0}
   rangeByNameVector2: {x: 0.66, y: 0.66}

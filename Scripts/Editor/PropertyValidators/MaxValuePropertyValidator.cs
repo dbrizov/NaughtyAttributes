@@ -8,7 +8,9 @@ namespace NaughtyAttributes.Editor
         public override void ValidateProperty(SerializedProperty property)
         {
             MaxValueAttribute maxValueAttribute = PropertyUtility.GetAttribute<MaxValueAttribute>(property);
-            float maxValue = PropertyUtility.GetValue<float>(property, maxValueAttribute.MaxValueName);
+            float maxValue = maxValueAttribute.MaxValue;
+            if (!string.IsNullOrEmpty(maxValueAttribute.MaxValueName))
+                maxValue = PropertyUtility.GetNumericValue(property, maxValueAttribute.MaxValueName);
 
             if (property.propertyType == SerializedPropertyType.Integer)
             {

@@ -9,6 +9,27 @@ namespace NaughtyAttributes.Editor
 {
     public static class PropertyUtility
     {
+        public static float GetNumericValue(SerializedProperty property, string memberName)
+        {
+            object value = GetValue(property, memberName);
+            return ConvertNumericValue(value, memberName);
+        }
+
+        public static object GetValue(SerializedProperty property, string memberName)
+        {
+            object target = GetTargetObjectWithProperty(property);
+            var field = ReflectionUtility.GetField(target, memberName);
+            if (field != null)
+                return field.GetValue(target);
+            var prop = ReflectionUtility.GetProperty(target, memberName);
+            if (prop != null)
+                return prop.GetValue(target);
+            var method = ReflectionUtility.GetMethod(target, memberName);
+            if (method != null)
+                return method.Invoke(target, null);
+            throw new MissingMemberException($"Cannot find member '{memberName}' on object of type '{target.GetType()}'.");
+        }
+
         public static T GetValue<T>(SerializedProperty property, string memberName)
         {
             object target = GetTargetObjectWithProperty(property);
@@ -405,7 +426,7 @@ namespace NaughtyAttributes.Editor
             return enumerator.Current;
         }
 
-        private static float GetNumericValue(object value, string memberName)
+        private static float ConvertNumericValue(object value, string memberName)
         {
             switch (value)
             {

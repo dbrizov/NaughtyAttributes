@@ -8,7 +8,9 @@ namespace NaughtyAttributes.Editor
         public override void ValidateProperty(SerializedProperty property)
         {
             MinValueAttribute minValueAttribute = PropertyUtility.GetAttribute<MinValueAttribute>(property);
-            float minValue = PropertyUtility.GetValue<float>(property, minValueAttribute.MinValueName);
+            float minValue = minValueAttribute.MinValue;
+            if (!string.IsNullOrEmpty(minValueAttribute.MinValueName))
+                minValue = PropertyUtility.GetNumericValue(property, minValueAttribute.MinValueName);
 
             if (property.propertyType == SerializedPropertyType.Integer)
             {
