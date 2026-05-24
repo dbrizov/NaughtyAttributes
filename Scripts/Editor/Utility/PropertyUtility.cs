@@ -9,28 +9,38 @@ namespace NaughtyAttributes.Editor
 {
     public static class PropertyUtility
     {
-        public static float GetValue(SerializedProperty property, IValuableAttribute attribute)
+        public static T GetValue<T>(SerializedProperty property, string memberName)
         {
-            if (!attribute.IsDynamic)
-                return attribute.Value;
+            object target = GetTargetObjectWithProperty(property);
 
-            object target = property.serializedObject.targetObject;
-            var field = ReflectionUtility.GetField(target, attribute.ValueName);
+            var field = ReflectionUtility.GetField(target, memberName);
             if (field != null)
             {
-                object value = field.GetValue(target);
-                return GetNumericValue(value, attribute.ValueName);
+                if (field.FieldType != typeof(T))
+                    throw new InvalidCastException($"Field '{memberName}' is of type '{field.FieldType.FullName}' but was requested as '{typeof(T).FullName}'.");
+
+                return (T)field.GetValue(target);
             }
 
-            var prop = ReflectionUtility.GetProperty(target, attribute.ValueName);
-
+            var prop = ReflectionUtility.GetProperty(target, memberName);
             if (prop != null)
             {
-                object value = prop.GetValue(target);
-                return GetNumericValue(value, attribute.ValueName);
+                if (prop.PropertyType != typeof(T))
+                    throw new InvalidCastException($"Property '{memberName}' is of type '{prop.PropertyType.FullName}' but was requested as '{typeof(T).FullName}'.");
+
+                return (T)prop.GetValue(target);
             }
 
-            throw new MissingMemberException($"Cannot find member '{attribute.ValueName}'");
+            var method = ReflectionUtility.GetMethod(target, memberName);
+            if (method != null)
+            {
+                if (method.ReturnType != typeof(T))
+                    throw new InvalidCastException($"Method '{memberName}' returns '{method.ReturnType.FullName}' but was requested as '{typeof(T).FullName}'.");
+
+                return (T)method.Invoke(target, null);
+            }
+
+            throw new MissingMemberException($"Cannot find member '{memberName}' on object of type '{(target != null ? target.GetType().FullName : "null")}'.");
         }
 
         public static T GetAttribute<T>(SerializedProperty property) where T : class
