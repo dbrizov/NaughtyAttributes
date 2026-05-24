@@ -40,7 +40,7 @@ namespace NaughtyAttributes.Test
         [MinValue(0), MaxValue(1)]
         public Vector4 range01Vector4;
 
-        [MinValue(nameof(rangeMinus10Float)), MaxValue(nameof(range01Float))]
+        [MinValue(nameof(minValue)), MaxValue(nameof(maxValue))]
         public Vector4 rangeByNameVector4;
 
         [MinValue(0)]
@@ -49,8 +49,11 @@ namespace NaughtyAttributes.Test
         [MaxValue(100)]
         public Vector2Int max100Vector2Int;
 
-        [MaxValue(nameof(max0Int))]
-        public Vector2Int maxByNameVector2Int;
+        [MaxValue(nameof(GetMax0Int))]
+        public Vector2Int maxByNameVector2IntThroughFunction;
+
+        [MaxValue(nameof(Max0Float))]
+        public Vector2Int maxByNameVector2IntThroughProperty;
 
         [MinValue(0)]
         public Vector3Int min0Vector3Int;
@@ -58,10 +61,21 @@ namespace NaughtyAttributes.Test
         [MaxValue(100)]
         public Vector3Int max100Vector3Int;
 
-        [MaxValue(nameof(max0Int))]
-        public Vector3Int maxByNameVector3Int;
+        [MinValue(nameof(GetMin0Int)), MaxValue(nameof(GetMax0Int))]
+        public Vector3Int maxByNameVector3IntThroughFunction;
+
+        [MaxValue(nameof(Max0Float))]
+        public Vector3Int maxByNameVector3IntThroughProperty;
 
         public MinMaxValueNest1 nest1;
+
+        private float minValue = -1f;
+        private float maxValue => 1f;
+
+        public float Max0Float => max0Int;
+        public float GetMax0Int() => max0Int;
+
+        private float GetMin0Int() => min0Int;
     }
 
     [System.Serializable]

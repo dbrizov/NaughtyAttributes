@@ -671,6 +671,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c928ea15ae74a44089beb2e534c1a35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  myInt: 0
+  myFloat: 0
+  myFloatThroughFieldName: 0
+  myFloatThroughPropertyName: 0
 --- !u!1 &732714203
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,9 +901,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ca4c27fc649764b9d1625f1740cb9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 91.51193
+  health: 81.43236
   nest1:
-    mana: 25
+    mana: 33.70166
     nest2:
       stamina: 75
   elixir: 83
@@ -2103,10 +2107,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 450a05787c54e6b4fa88ffe223bcee87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  min0Int: 0
+  min0Int: -10
   max0Int: 5
   maxByNameInt: 5
-  minByNameInt: 0
+  minByNameInt: 1
   range01Float: 0.66
   rangeMinus10Float: 0
   rangeByNameFloat: 0.66
@@ -2115,13 +2119,15 @@ MonoBehaviour:
   range01Vector3: {x: 0, y: 0, z: 0}
   rangeByNameVector3: {x: 0, y: 0, z: 0}
   range01Vector4: {x: 0, y: 0, z: 0, w: 0}
-  rangeByNameVector4: {x: 0, y: 0, z: 0, w: 0}
+  rangeByNameVector4: {x: -1, y: 0, z: 0, w: 0}
   min0Vector2Int: {x: 0, y: 0}
   max100Vector2Int: {x: 0, y: 0}
-  maxByNameVector2Int: {x: 5, y: 5}
+  maxByNameVector2IntThroughFunction: {x: 5, y: 0}
+  maxByNameVector2IntThroughProperty: {x: 0, y: 0}
   min0Vector3Int: {x: 0, y: 0, z: 0}
-  max100Vector3Int: {x: 0, y: 0, z: 0}
-  maxByNameVector3Int: {x: 5, y: 5, z: 5}
+  max100Vector3Int: {x: 100, y: 0, z: 0}
+  maxByNameVector3IntThroughFunction: {x: -10, y: 0, z: 0}
+  maxByNameVector3IntThroughProperty: {x: 5, y: 0, z: 0}
   nest1:
     min0Int: 0
     max0Int: 0
