@@ -6,6 +6,7 @@ namespace NaughtyAttributes
     public class MinValueAttribute : ValidatorAttribute
     {
         public float MinValue { get; private set; }
+        public string MinValueName { get; private set; }
 
         public MinValueAttribute(float minValue)
         {
@@ -15,6 +16,11 @@ namespace NaughtyAttributes
         public MinValueAttribute(int minValue)
         {
             MinValue = minValue;
+        }
+
+        public MinValueAttribute(string minValueName)
+        {
+            MinValueName = minValueName;
         }
     }
 }

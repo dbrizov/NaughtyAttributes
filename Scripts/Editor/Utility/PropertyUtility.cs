@@ -9,6 +9,61 @@ namespace NaughtyAttributes.Editor
 {
     public static class PropertyUtility
     {
+        public static float GetNumericValue(SerializedProperty property, string memberName)
+        {
+            object value = GetValue(property, memberName);
+            return ConvertNumericValue(value, memberName);
+        }
+
+        public static object GetValue(SerializedProperty property, string memberName)
+        {
+            object target = GetTargetObjectWithProperty(property);
+            var field = ReflectionUtility.GetField(target, memberName);
+            if (field != null)
+                return field.GetValue(target);
+            var prop = ReflectionUtility.GetProperty(target, memberName);
+            if (prop != null)
+                return prop.GetValue(target);
+            var method = ReflectionUtility.GetMethod(target, memberName);
+            if (method != null)
+                return method.Invoke(target, null);
+            throw new MissingMemberException($"Cannot find member '{memberName}' on object of type '{target.GetType()}'.");
+        }
+
+        public static T GetValue<T>(SerializedProperty property, string memberName)
+        {
+            object target = GetTargetObjectWithProperty(property);
+
+            var field = ReflectionUtility.GetField(target, memberName);
+            if (field != null)
+            {
+                if (field.FieldType != typeof(T))
+                    throw new InvalidCastException($"Field '{memberName}' is of type '{field.FieldType.FullName}' but was requested as '{typeof(T).FullName}'.");
+
+                return (T)field.GetValue(target);
+            }
+
+            var prop = ReflectionUtility.GetProperty(target, memberName);
+            if (prop != null)
+            {
+                if (prop.PropertyType != typeof(T))
+                    throw new InvalidCastException($"Property '{memberName}' is of type '{prop.PropertyType.FullName}' but was requested as '{typeof(T).FullName}'.");
+
+                return (T)prop.GetValue(target);
+            }
+
+            var method = ReflectionUtility.GetMethod(target, memberName);
+            if (method != null)
+            {
+                if (method.ReturnType != typeof(T))
+                    throw new InvalidCastException($"Method '{memberName}' returns '{method.ReturnType.FullName}' but was requested as '{typeof(T).FullName}'.");
+
+                return (T)method.Invoke(target, null);
+            }
+
+            throw new MissingMemberException($"Cannot find member '{memberName}' on object of type '{(target != null ? target.GetType().FullName : "null")}'.");
+        }
+
         public static T GetAttribute<T>(SerializedProperty property) where T : class
         {
             T[] attributes = GetAttributes<T>(property);
@@ -369,6 +424,27 @@ namespace NaughtyAttributes.Editor
             }
 
             return enumerator.Current;
+        }
+
+        private static float ConvertNumericValue(object value, string memberName)
+        {
+            switch (value)
+            {
+                case byte b: return b;
+                case sbyte sb: return sb;
+                case short s: return s;
+                case ushort us: return us;
+                case int i: return i;
+                case uint ui: return ui;
+                case long l: return l;
+                case ulong ul: return ul;
+                case float f: return f;
+                case double d: return (float)d;
+                case decimal m: return (float)m;
+
+                default:
+                    throw new InvalidCastException($"Member '{memberName}' used by [MaxValue(nameof({memberName}))] " + $"must be a numeric type. Actual type: {value?.GetType().Name ?? "null"}");
+            }
         }
     }
 }
