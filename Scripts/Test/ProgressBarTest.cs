@@ -4,15 +4,15 @@ namespace NaughtyAttributes.Test
 {
     public class ProgressBarTest : MonoBehaviour
     {
-        [Header("Constant ProgressBar")]
+        [Header("Fixed")]
         [ProgressBar("Health", 100, EColor.Red)]
         public float health = 50.0f;
 
-        [Header("Nested ProgressBar")]
+        [Header("Nested")]
         public ProgressBarNest1 nest1;
 
-        [Header("Dynamic ProgressBar")]
-        [ProgressBar("Elixir", "maxElixir", color: EColor.Violet)]
+        [Header("Dynamic")]
+        [ProgressBar("Elixir", nameof(maxElixir), color: EColor.Violet)]
         public int elixir = 50;
         public int maxElixir = 100;
     }

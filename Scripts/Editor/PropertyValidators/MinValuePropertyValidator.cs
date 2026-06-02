@@ -10,7 +10,16 @@ namespace NaughtyAttributes.Editor
             MinValueAttribute minValueAttribute = PropertyUtility.GetAttribute<MinValueAttribute>(property);
             float minValue = minValueAttribute.MinValue;
             if (!string.IsNullOrEmpty(minValueAttribute.MinValueName))
-                minValue = PropertyUtility.GetNumericValue(property, minValueAttribute.MinValueName);
+            {
+                if (!PropertyUtility.TryGetNumericValue(property, minValueAttribute.MinValueName, out minValue))
+                {
+                    string warning = string.Format(
+                        "{0} could not resolve '{1}' to a numeric field, property, or parameterless method on {2}",
+                        nameof(MinValueAttribute), minValueAttribute.MinValueName, property.serializedObject.targetObject.GetType().Name);
+                    Debug.LogWarning(warning, property.serializedObject.targetObject);
+                    return;
+                }
+            }
 
             if (property.propertyType == SerializedPropertyType.Integer)
             {

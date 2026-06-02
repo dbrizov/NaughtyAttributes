@@ -10,7 +10,16 @@ namespace NaughtyAttributes.Editor
             MaxValueAttribute maxValueAttribute = PropertyUtility.GetAttribute<MaxValueAttribute>(property);
             float maxValue = maxValueAttribute.MaxValue;
             if (!string.IsNullOrEmpty(maxValueAttribute.MaxValueName))
-                maxValue = PropertyUtility.GetNumericValue(property, maxValueAttribute.MaxValueName);
+            {
+                if (!PropertyUtility.TryGetNumericValue(property, maxValueAttribute.MaxValueName, out maxValue))
+                {
+                    string warning = string.Format(
+                        "{0} could not resolve '{1}' to a numeric field, property, or parameterless method on {2}",
+                        nameof(MaxValueAttribute), maxValueAttribute.MaxValueName, property.serializedObject.targetObject.GetType().Name);
+                    Debug.LogWarning(warning, property.serializedObject.targetObject);
+                    return;
+                }
+            }
 
             if (property.propertyType == SerializedPropertyType.Integer)
             {

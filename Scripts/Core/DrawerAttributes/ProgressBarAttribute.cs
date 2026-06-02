@@ -9,7 +9,6 @@ namespace NaughtyAttributes
         public float MaxValue { get; set; }
         public string MaxValueName { get; private set; }
         public EColor Color { get; private set; }
-        public string ColorName { get; private set; }
 
         public ProgressBarAttribute(string name, float maxValue, EColor color = EColor.Blue)
         {
@@ -33,30 +32,6 @@ namespace NaughtyAttributes
         public ProgressBarAttribute(string maxValueName, EColor color = EColor.Blue)
             : this("", maxValueName, color)
         {
-        }
-
-        public ProgressBarAttribute(string maxValueName, string colorName)
-            : this("", maxValueName, colorName)
-        {
-        }
-
-        public ProgressBarAttribute(float maxValue, string colorName)
-            : this("", maxValue, colorName)
-        {
-        }
-
-        private ProgressBarAttribute(string name, string maxValueName, string colorName)
-        {
-            Name = name;
-            MaxValueName = maxValueName;
-            ColorName = colorName;
-        }
-
-        private ProgressBarAttribute(string name, float maxValue, string colorName)
-        {
-            Name = name;
-            MaxValue = maxValue;
-            ColorName = colorName;
         }
     }
 }

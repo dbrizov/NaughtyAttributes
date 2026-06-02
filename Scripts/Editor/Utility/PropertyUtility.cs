@@ -9,59 +9,35 @@ namespace NaughtyAttributes.Editor
 {
     public static class PropertyUtility
     {
-        public static float GetNumericValue(SerializedProperty property, string memberName)
+        public static bool TryGetNumericValue(SerializedProperty property, string memberName, out float value)
         {
-            object value = GetValue(property, memberName);
-            return ConvertNumericValue(value, memberName);
-        }
+            value = 0f;
 
-        public static object GetValue(SerializedProperty property, string memberName)
-        {
             object target = GetTargetObjectWithProperty(property);
-            var field = ReflectionUtility.GetField(target, memberName);
-            if (field != null)
-                return field.GetValue(target);
-            var prop = ReflectionUtility.GetProperty(target, memberName);
-            if (prop != null)
-                return prop.GetValue(target);
-            var method = ReflectionUtility.GetMethod(target, memberName);
-            if (method != null)
-                return method.Invoke(target, null);
-            throw new MissingMemberException($"Cannot find member '{memberName}' on object of type '{target.GetType()}'.");
-        }
+            if (target == null)
+            {
+                return false;
+            }
 
-        public static T GetValue<T>(SerializedProperty property, string memberName)
-        {
-            object target = GetTargetObjectWithProperty(property);
-
-            var field = ReflectionUtility.GetField(target, memberName);
+            FieldInfo field = ReflectionUtility.GetField(target, memberName);
             if (field != null)
             {
-                if (field.FieldType != typeof(T))
-                    throw new InvalidCastException($"Field '{memberName}' is of type '{field.FieldType.FullName}' but was requested as '{typeof(T).FullName}'.");
-
-                return (T)field.GetValue(target);
+                return TryConvertNumericValue(field.GetValue(target), out value);
             }
 
-            var prop = ReflectionUtility.GetProperty(target, memberName);
+            PropertyInfo prop = ReflectionUtility.GetProperty(target, memberName);
             if (prop != null)
             {
-                if (prop.PropertyType != typeof(T))
-                    throw new InvalidCastException($"Property '{memberName}' is of type '{prop.PropertyType.FullName}' but was requested as '{typeof(T).FullName}'.");
-
-                return (T)prop.GetValue(target);
+                return TryConvertNumericValue(prop.GetValue(target), out value);
             }
 
-            var method = ReflectionUtility.GetMethod(target, memberName);
-            if (method != null)
+            MethodInfo method = ReflectionUtility.GetMethod(target, memberName);
+            if (method != null && method.GetParameters().Length == 0)
             {
-                if (method.ReturnType != typeof(T))
-                    throw new InvalidCastException($"Method '{memberName}' returns '{method.ReturnType.FullName}' but was requested as '{typeof(T).FullName}'.");
-
-                return (T)method.Invoke(target, null);
+                return TryConvertNumericValue(method.Invoke(target, null), out value);
             }
 
-            throw new MissingMemberException($"Cannot find member '{memberName}' on object of type '{(target != null ? target.GetType().FullName : "null")}'.");
+            return false;
         }
 
         public static T GetAttribute<T>(SerializedProperty property) where T : class
@@ -426,24 +402,46 @@ namespace NaughtyAttributes.Editor
             return enumerator.Current;
         }
 
-        private static float ConvertNumericValue(object value, string memberName)
+        private static bool TryConvertNumericValue(object value, out float result)
         {
             switch (value)
             {
-                case byte b: return b;
-                case sbyte sb: return sb;
-                case short s: return s;
-                case ushort us: return us;
-                case int i: return i;
-                case uint ui: return ui;
-                case long l: return l;
-                case ulong ul: return ul;
-                case float f: return f;
-                case double d: return (float)d;
-                case decimal m: return (float)m;
-
+                case byte b:
+                    result = b;
+                    return true;
+                case sbyte sb:
+                    result = sb;
+                    return true;
+                case short s:
+                    result = s;
+                    return true;
+                case ushort us:
+                    result = us;
+                    return true;
+                case int i:
+                    result = i;
+                    return true;
+                case uint ui:
+                    result = ui;
+                    return true;
+                case long l:
+                    result = l;
+                    return true;
+                case ulong ul:
+                    result = ul;
+                    return true;
+                case float f:
+                    result = f;
+                    return true;
+                case double d:
+                    result = (float)d;
+                    return true;
+                case decimal m:
+                    result = (float)m;
+                    return true;
                 default:
-                    throw new InvalidCastException($"Member '{memberName}' used by [MaxValue(nameof({memberName}))] " + $"must be a numeric type. Actual type: {value?.GetType().Name ?? "null"}");
+                    result = 0f;
+                    return false;
             }
         }
     }
