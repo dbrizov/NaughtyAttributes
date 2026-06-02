@@ -22,9 +22,12 @@ namespace NaughtyAttributes.Editor
         {
             EditorGUI.BeginProperty(rect, label, property);
 
+            bool browseClicked = false;
+            FolderPathAttribute folderPathAttribute = null;
+
             if (property.propertyType == SerializedPropertyType.String)
             {
-                FolderPathAttribute folderPathAttribute = PropertyUtility.GetAttribute<FolderPathAttribute>(property);
+                folderPathAttribute = PropertyUtility.GetAttribute<FolderPathAttribute>(property);
 
                 Rect labelRect = new Rect(
                     rect.x,
@@ -53,25 +56,7 @@ namespace NaughtyAttributes.Editor
                     property.stringValue = newValue;
                 }
 
-                if (GUI.Button(buttonRect, BrowseButtonLabel))
-                {
-                    string path = property.stringValue;
-                    string defaultPath = string.IsNullOrEmpty(path) ? folderPathAttribute.DefaultPath : path;
-                    string selectedPath = EditorUtility.OpenFolderPanel(folderPathAttribute.Title, defaultPath, "");
-
-                    if (!string.IsNullOrEmpty(selectedPath))
-                    {
-                        selectedPath = folderPathAttribute.RelativePath
-                            ? NaughtyPathUtility.GetProjectRelativePath(selectedPath)
-                            : NaughtyPathUtility.NormalizePath(selectedPath);
-
-                        property.stringValue = selectedPath;
-                        property.serializedObject.ApplyModifiedProperties();
-                        EditorGUIUtility.editingTextField = false;
-                        GUIUtility.keyboardControl = 0;
-                        GUI.changed = true;
-                    }
-                }
+                browseClicked = GUI.Button(buttonRect, BrowseButtonLabel);
             }
             else
             {
@@ -80,6 +65,46 @@ namespace NaughtyAttributes.Editor
             }
 
             EditorGUI.EndProperty();
+
+            // OpenFolderPanel clears the editor's internal property stack while open. Running it from
+            // inside OnGUI corrupts Unity's outer PropertyDrawer.OnGUISafe pop, so defer to delayCall.
+            if (browseClicked)
+            {
+                SerializedObject serializedObject = property.serializedObject;
+                string propertyPath = property.propertyPath;
+                FolderPathAttribute capturedAttribute = folderPathAttribute;
+                string currentPath = property.stringValue;
+
+                EditorApplication.delayCall += () =>
+                {
+                    string defaultPath = string.IsNullOrEmpty(currentPath) ? capturedAttribute.DefaultPath : currentPath;
+                    string selectedPath = EditorUtility.OpenFolderPanel(capturedAttribute.Title, defaultPath, "");
+
+                    if (string.IsNullOrEmpty(selectedPath))
+                    {
+                        return;
+                    }
+
+                    selectedPath = capturedAttribute.RelativePath
+                        ? NaughtyPathUtility.GetProjectRelativePath(selectedPath)
+                        : NaughtyPathUtility.NormalizePath(selectedPath);
+
+                    if (serializedObject.targetObject == null)
+                    {
+                        return;
+                    }
+
+                    serializedObject.Update();
+                    SerializedProperty deferredProperty = serializedObject.FindProperty(propertyPath);
+                    if (deferredProperty != null)
+                    {
+                        deferredProperty.stringValue = selectedPath;
+                        serializedObject.ApplyModifiedProperties();
+                    }
+
+                    EditorGUIUtility.editingTextField = false;
+                };
+            }
         }
     }
 }

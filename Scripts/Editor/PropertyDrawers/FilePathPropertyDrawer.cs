@@ -28,9 +28,12 @@ namespace NaughtyAttributes.Editor
         {
             EditorGUI.BeginProperty(rect, label, property);
 
+            bool browseClicked = false;
+            FilePathAttribute filePathAttribute = null;
+
             if (property.propertyType == SerializedPropertyType.String)
             {
-                FilePathAttribute filePathAttribute = PropertyUtility.GetAttribute<FilePathAttribute>(property);
+                filePathAttribute = PropertyUtility.GetAttribute<FilePathAttribute>(property);
 
                 Rect labelRect = new Rect(
                     rect.x,
@@ -59,25 +62,7 @@ namespace NaughtyAttributes.Editor
                     property.stringValue = newValue;
                 }
 
-                if (GUI.Button(buttonRect, BrowseButtonLabel))
-                {
-                    string path = property.stringValue;
-                    string directory = string.IsNullOrEmpty(path) ? filePathAttribute.Directory : Path.GetDirectoryName(path);
-                    string selectedPath = EditorUtility.OpenFilePanel(filePathAttribute.Title, directory, filePathAttribute.Filter);
-
-                    if (!string.IsNullOrEmpty(selectedPath))
-                    {
-                        selectedPath = filePathAttribute.RelativePath
-                            ? NaughtyPathUtility.GetProjectRelativePath(selectedPath)
-                            : NaughtyPathUtility.NormalizePath(selectedPath);
-
-                        property.stringValue = selectedPath;
-                        property.serializedObject.ApplyModifiedProperties();
-                        EditorGUIUtility.editingTextField = false;
-                        GUIUtility.keyboardControl = 0;
-                        GUI.changed = true;
-                    }
-                }
+                browseClicked = GUI.Button(buttonRect, BrowseButtonLabel);
 
                 if (ShouldShowFileNotFoundWarning(property))
                 {
@@ -98,6 +83,46 @@ namespace NaughtyAttributes.Editor
             }
 
             EditorGUI.EndProperty();
+
+            // OpenFilePanel clears the editor's internal property stack while open. Running it from
+            // inside OnGUI corrupts Unity's outer PropertyDrawer.OnGUISafe pop, so defer to delayCall.
+            if (browseClicked)
+            {
+                SerializedObject serializedObject = property.serializedObject;
+                string propertyPath = property.propertyPath;
+                FilePathAttribute capturedAttribute = filePathAttribute;
+                string currentPath = property.stringValue;
+
+                EditorApplication.delayCall += () =>
+                {
+                    string directory = string.IsNullOrEmpty(currentPath) ? capturedAttribute.Directory : Path.GetDirectoryName(currentPath);
+                    string selectedPath = EditorUtility.OpenFilePanel(capturedAttribute.Title, directory, capturedAttribute.Filter);
+
+                    if (string.IsNullOrEmpty(selectedPath))
+                    {
+                        return;
+                    }
+
+                    selectedPath = capturedAttribute.RelativePath
+                        ? NaughtyPathUtility.GetProjectRelativePath(selectedPath)
+                        : NaughtyPathUtility.NormalizePath(selectedPath);
+
+                    if (serializedObject.targetObject == null)
+                    {
+                        return;
+                    }
+
+                    serializedObject.Update();
+                    SerializedProperty deferredProperty = serializedObject.FindProperty(propertyPath);
+                    if (deferredProperty != null)
+                    {
+                        deferredProperty.stringValue = selectedPath;
+                        serializedObject.ApplyModifiedProperties();
+                    }
+
+                    EditorGUIUtility.editingTextField = false;
+                };
+            }
         }
 
         private static bool ShouldShowFileNotFoundWarning(SerializedProperty property)
