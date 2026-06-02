@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
@@ -143,50 +144,55 @@ namespace NaughtyAttributes.Editor
             {
                 ButtonAttribute buttonAttribute = (ButtonAttribute)methodInfo.GetCustomAttributes(typeof(ButtonAttribute), true)[0];
                 string buttonText = string.IsNullOrEmpty(buttonAttribute.Text) ? ObjectNames.NicifyVariableName(methodInfo.Name) : buttonAttribute.Text;
+
                 bool buttonEnabled = ButtonUtility.IsEnabled(target, methodInfo);
+
                 EButtonEnableMode mode = buttonAttribute.SelectedEnableMode;
                 buttonEnabled &=
                     mode == EButtonEnableMode.Always ||
                     mode == EButtonEnableMode.Editor && !Application.isPlaying ||
                     mode == EButtonEnableMode.Playmode && Application.isPlaying;
+
                 bool methodIsCoroutine = methodInfo.ReturnType == typeof(IEnumerator);
                 if (methodIsCoroutine)
                 {
                     buttonEnabled &= (Application.isPlaying ? true : false);
                 }
+
                 EditorGUI.BeginDisabledGroup(!buttonEnabled);
+
                 if (GUILayout.Button(buttonText, _buttonStyle))
                 {
                     object[] defaultParams = methodInfo.GetParameters().Select(p => p.DefaultValue).ToArray();
-
-                    // Get all selected objects of the same type
-                    System.Collections.Generic.List<UnityEngine.Object> targetsList = new System.Collections.Generic.List<UnityEngine.Object>();
                     Type targetType = target.GetType();
+                    List<UnityEngine.Object> targets = new List<UnityEngine.Object>();
 
-                    foreach (var obj in Selection.objects)
+                    foreach (UnityEngine.Object obj in Selection.objects)
                     {
                         if (obj == null)
+                        {
                             continue;
+                        }
 
                         if (obj is GameObject go)
                         {
                             Component component = go.GetComponent(targetType);
                             if (component != null)
                             {
-                                targetsList.Add(component);
+                                targets.Add(component);
                             }
+                        }
+                        else if (targetType.IsInstanceOfType(obj))
+                        {
+                            targets.Add(obj);
                         }
                     }
 
-                    UnityEngine.Object[] targets = targetsList.ToArray();
-
-                    // If no multi-selection, fall back to single target
-                    if (targets.Length == 0)
+                    if (targets.Count == 0)
                     {
-                        targets = new UnityEngine.Object[] { target };
+                        targets.Add(target);
                     }
 
-                    // Iterate through all selected targets
                     foreach (UnityEngine.Object t in targets)
                     {
                         IEnumerator methodResult = methodInfo.Invoke(t, defaultParams) as IEnumerator;
@@ -195,6 +201,7 @@ namespace NaughtyAttributes.Editor
                         {
                             // Set target object and scene dirty to serialize changes to disk
                             EditorUtility.SetDirty(t);
+
                             PrefabStage stage = PrefabStageUtility.GetCurrentPrefabStage();
                             if (stage != null)
                             {
@@ -213,6 +220,7 @@ namespace NaughtyAttributes.Editor
                         }
                     }
                 }
+
                 EditorGUI.EndDisabledGroup();
             }
             else

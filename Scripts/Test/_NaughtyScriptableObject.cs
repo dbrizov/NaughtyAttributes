@@ -8,5 +8,19 @@ namespace NaughtyAttributes.Test
     {
         [Expandable]
         public List<_TestScriptableObjectA> listA;
+
+        public int myInt;
+
+        [Button(enabledMode: EButtonEnableMode.Always)]
+        private void IncrementMyInt()
+        {
+            myInt++;
+        }
+
+        [Button("Decrement My Int", EButtonEnableMode.Editor)]
+        private void DecrementMyInt()
+        {
+            myInt--;
+        }
     }
 }
