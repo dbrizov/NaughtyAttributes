@@ -55,7 +55,11 @@ namespace NaughtyAttributes.Editor
 
                         GUI.Label(previewRect, previewTexture);
                     }
-                    else if (AssetPreview.IsLoadingAssetPreview(target.GetInstanceID()))
+#if UNITY_6000_5_OR_NEWER
+                    else if (AssetPreview.IsLoadingAssetPreview(target.GetEntityId()))
+#else
+                    else if (AssetPreview.IsLoadingAssetPreview(target.GetInstanceID()()))
+#endif
                     {
                         EditorWindow focused = EditorWindow.focusedWindow;
                         if (focused != null)
