@@ -37,4 +37,15 @@ ehthumbs.db
 Thumbs.db
 
 ====================
+# Unity baked GI / lighting output
+*LightingData.asset
+*LightingData.asset.meta
+ReflectionProbe-*.exr
+ReflectionProbe-*.exr.meta
+Lightmap-*.exr
+Lightmap-*.exr.meta
+Lightmap-*.png
+Lightmap-*.png.meta
+
+====================
 Builds/
