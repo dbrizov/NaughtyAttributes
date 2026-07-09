@@ -104,6 +104,8 @@ namespace NaughtyAttributes.Editor
             ReadOnlyAttribute readOnlyAttribute = GetAttribute<ReadOnlyAttribute>(property);
             if (readOnlyAttribute != null)
             {
+                if (readOnlyAttribute.IsEditableInEditMode && !Application.isPlaying) true;
+                
                 return false;
             }
 
