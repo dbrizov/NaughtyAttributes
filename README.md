@@ -421,7 +421,7 @@ public class NaughtyComponent : MonoBehaviour
 Give the fields meta data. A field can have more than one meta attributes.
 
 ### BoxGroup
-Surrounds grouped fields with a box.
+Surrounds grouped fields with a box and optionally a foldout.
 
 ```csharp
 public class NaughtyComponent : MonoBehaviour
@@ -431,14 +431,14 @@ public class NaughtyComponent : MonoBehaviour
 	[BoxGroup("Integers")]
 	public int secondInt;
 
-	[BoxGroup("Floats")]
+	[BoxGroup("Floats", true)]
 	public float firstFloat;
-	[BoxGroup("Floats")]
+	[BoxGroup("Floats", true)]
 	public float secondFloat;
 }
 ```
 
-![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/BoxGroup_Inspector.png)
+![inspector](https://github.com/dbrizov/NaughtyAttributes/blob/master/Assets/NaughtyAttributes/Documentation~/BoxGroup_Inspector.gif)
 
 ### Foldout
 Makes a foldout group.

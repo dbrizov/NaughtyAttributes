@@ -6,10 +6,12 @@ namespace NaughtyAttributes
     public class BoxGroupAttribute : MetaAttribute, IGroupAttribute
     {
         public string Name { get; private set; }
+		public bool Foldable { get; private set; }
 
-        public BoxGroupAttribute(string name = "")
+        public BoxGroupAttribute(string name = "", bool foldable = false)
         {
             Name = name;
+			Foldable = foldable;
         }
     }
 }
