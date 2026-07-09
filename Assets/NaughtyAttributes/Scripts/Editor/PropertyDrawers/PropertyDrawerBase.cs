@@ -71,6 +71,11 @@ namespace NaughtyAttributes.Editor
             return EditorGUIUtility.singleLineHeight * 2.0f;
         }
 
+        protected virtual float GetHelpBoxPadding()
+        {
+            return EditorGUIUtility.standardVerticalSpacing;
+        }
+
         public void DrawDefaultPropertyAndHelpBox(Rect rect, SerializedProperty property, string message, MessageType messageType)
         {
             float indentLength = NaughtyEditorGUI.GetIndentLength(rect);
@@ -78,7 +83,7 @@ namespace NaughtyAttributes.Editor
                 rect.x + indentLength,
                 rect.y,
                 rect.width - indentLength,
-                GetHelpBoxHeight());
+                GetHelpBoxHeight() - GetHelpBoxPadding());
 
             NaughtyEditorGUI.HelpBox(helpBoxRect, message, MessageType.Warning, context: property.serializedObject.targetObject);
 
