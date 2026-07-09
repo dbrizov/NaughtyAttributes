@@ -23,35 +23,44 @@ namespace NaughtyAttributes.Editor
             {
                 EditorGUI.BeginProperty(rect, label, property);
 
-                float indentLength = NaughtyEditorGUI.GetIndentLength(rect);
+                bool wideMode = EditorGUIUtility.wideMode;
+
                 float labelWidth = EditorGUIUtility.labelWidth + NaughtyEditorGUI.HorizontalSpacing;
+                float lineHeight = EditorGUIUtility.singleLineHeight;
+                float indentLength = NaughtyEditorGUI.GetIndentLength(rect);
+                float xOffset = ((!wideMode)? 0 : labelWidth) - indentLength;
+                float yOffset = (wideMode)? 0 : lineHeight;
                 float floatFieldWidth = EditorGUIUtility.fieldWidth;
-                float sliderWidth = rect.width - labelWidth - 2.0f * floatFieldWidth;
+                float sliderWidth = rect.width - ((!wideMode)? 0 : labelWidth) - 2.0f * floatFieldWidth;
                 float sliderPadding = 5.0f;
+                
+
 
                 Rect labelRect = new Rect(
                     rect.x,
                     rect.y,
                     labelWidth,
-                    rect.height);
+                    lineHeight);
 
-                Rect sliderRect = new Rect(
-                    rect.x + labelWidth + floatFieldWidth + sliderPadding - indentLength,
-                    rect.y,
-                    sliderWidth - 2.0f * sliderPadding + indentLength,
-                    rect.height);
 
                 Rect minFloatFieldRect = new Rect(
-                    rect.x + labelWidth - indentLength,
-                    rect.y,
+                    rect.x + xOffset,
+                    rect.y + yOffset,
                     floatFieldWidth + indentLength,
-                    rect.height);
+                    lineHeight);
+
+                Rect sliderRect = new Rect(
+                    rect.x + xOffset + floatFieldWidth + sliderPadding,
+                    rect.y + yOffset,
+                    sliderWidth - 2.0f * sliderPadding + indentLength,
+                    lineHeight);
 
                 Rect maxFloatFieldRect = new Rect(
-                    rect.x + labelWidth + floatFieldWidth + sliderWidth - indentLength,
-                    rect.y,
+                    rect.x + xOffset + floatFieldWidth + sliderWidth,
+                    rect.y + yOffset,
                     floatFieldWidth + indentLength,
-                    rect.height);
+                    lineHeight);
+
 
                 // Draw the label
                 EditorGUI.LabelField(labelRect, label.text);
