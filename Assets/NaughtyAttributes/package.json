@@ -7,6 +7,8 @@
   "keywords": [ "attribute", "inspector", "editor" ],
   "category": "editor extensions",
   "dependencies": {},
+  "documentationUrl": "https://dbrizov.github.io/na-docs/",
+  "changelogUrl": "https://github.com/dbrizov/NaughtyAttributes/releases",
   "samples": [
     {
       "displayName": "Demo Scene",
