@@ -1,0 +1,10 @@
+{%- extends "sphinx_rtd_theme/breadcrumbs.html" %}
+
+{%- block breadcrumbs %}
+<li class="na-breadcrumbs-header">
+  <div class="na-docs-title">{{ site_title }}</div>
+  <ul class="wy-breadcrumbs">
+    {{ super() }}
+  </ul>
+</li>
+{%- endblock %}

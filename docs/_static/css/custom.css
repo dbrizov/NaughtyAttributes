@@ -1,0 +1,1059 @@
+/**
+ * Overrides for the Read the Docs theme, adapted from the Godot engine
+ * documentation (https://github.com/godotengine/godot-docs, _static/css/custom.css).
+ *
+ * Every colour is a CSS variable declared on :root, and the dark theme is the
+ * same variable names redeclared under prefers-color-scheme. The rules below
+ * name variables only, so a palette change never touches a selector.
+ *
+ * The theme's own stylesheet is unlayered and loads first, so these rules win on
+ * source order at equal specificity. Where a rule looks over-qualified
+ * (html.writer-html5 ..., .wy-body-for-nav ...), it is matching a selector from
+ * theme.css that would otherwise outrank it.
+ */
+
+@font-face {
+    font-family: "Inter";
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    src: url("fonts/Inter-Regular.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap;
+    src: url("fonts/Inter-Italic.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+    src: url("fonts/Inter-Bold.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-weight: 700;
+    font-style: italic;
+    font-display: swap;
+    src: url("fonts/Inter-BoldItalic.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "JetBrains Mono";
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    src: url("fonts/JetBrainsMono-Regular.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "JetBrains Mono";
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+    src: url("fonts/JetBrainsMono-Medium.woff2") format("woff2");
+}
+
+/* Light theme colours */
+:root {
+    color-scheme: light dark;
+
+    --body-color: #404040;
+    --content-wrap-background-color: #efefef;
+    --content-background-color: #fcfcfc;
+
+    --navbar-background-color: #25282b;
+    --navbar-background-color-hover: #333639;
+    --navbar-background-color-active: #111417;
+    --navbar-current-background-color: #333639;
+    --navbar-current-background-color-hover: #44474a;
+    --navbar-current-background-color-active: #222528;
+    --navbar-current-color: #fefefe;
+    --navbar-level-1-color: #ddd;
+    --navbar-level-2-color: #ccc;
+    --navbar-level-3-color: #bbb;
+    --navbar-expand-base-color: #80848e;
+    --navbar-expand-hover-color: #ccc;
+    --navbar-expand-active-color: #ddd;
+    --navbar-dimmed-color: #bbb;
+    --navbar-heading-color: #569cd6;
+    --navbar-scrollbar-color: #be5460;
+    --navbar-scrollbar-hover-color: #963e48;
+    --navbar-scrollbar-active-color: #5f3034;
+    --navbar-scrollbar-background: #1c1e21;
+
+    --link-color: #2980b9;
+    --link-color-hover: #3091d1;
+    --link-color-active: #105078;
+    --link-color-visited: #9b59b6;
+    --external-reference-icon: url("data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEyIiB3aWR0aD0iMTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjk4MGI5Ij48cGF0aCBkPSJtNy41IDcuMXYzLjRoLTZ2LTZoMy40Ii8+PHBhdGggZD0ibTUuNzY1IDFoNS4yMzV2NS4zOWwtMS41NzMgMS41NDctMS4zMS0xLjMxLTIuNzI0IDIuNzIzLTIuNjktMi42ODggMi44MS0yLjgwOC0xLjMxMy0xLjMxeiIvPjwvZz48L3N2Zz4K");
+
+    --hr-color: #e1e4e5;
+    --image-border-color: #d5d8da;
+    --table-row-odd-background-color: #f3f6f6;
+    --code-background-color: #e9eae5;
+    --code-border-color: #e1e4e5;
+    --code-literal-color: #c03e41;
+    --code-block-border-color: #e6e6e6;
+    --input-background-color: #fcfcfc;
+    --input-focus-border-color: #5f8cff;
+    --footer-color: #808080;
+    --btn-neutral-background-color: #f3f6f6;
+    --btn-neutral-hover-background-color: #e5ebeb;
+    --search-highlighted-color: rgb(255 205 0 / 25%);
+
+    --highlight-background-color: #f4f4f4;
+    --highlight-background-emph-color: #e4e4e4;
+    --highlight-default-color: #000000;
+    --highlight-comment-color: #008000;
+    --highlight-doc-comment-color: #008000;
+    --highlight-keyword-color: #0000ff;
+    --highlight-literal-color: #0000ff;
+    --highlight-keyword2-color: #2b91af;
+    --highlight-control-flow-keyword-color: #0000ff;
+    --highlight-number-color: #098658;
+    --highlight-decorator-color: #2b91af;
+    --highlight-base-type-color: #0000ff;
+    --highlight-engine-type-color: #2b91af;
+    --highlight-user-type-color: #2b91af;
+    --highlight-member-variable-color: #001080;
+    --highlight-function-color: #795e26;
+    --highlight-function-declaration-color: #795e26;
+    --highlight-global-function-color: #795e26;
+    --highlight-operator-color: #000000;
+    --highlight-string-color: #a31515;
+    --highlight-string-name-color: #a31515;
+
+    --admonition-note-background-color: #e7f2fa;
+    --admonition-note-color: #404040;
+    --admonition-note-title-background-color: #6ab0de;
+    --admonition-note-title-color: #fff;
+    --admonition-note-icon: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTggMWE3IDcgMCAwIDAgMCAxNEE3IDcgMCAwIDAgOCAxek03IDRoMnYySDd6bTAgM2gydjVIN3oiLz48L3N2Zz4=");
+    --admonition-attention-background-color: #ffedcc;
+    --admonition-attention-color: #404040;
+    --admonition-attention-title-background-color: #f0b37e;
+    --admonition-attention-title-color: #fff;
+    --admonition-attention-icon: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTggMWE3IDcgMCAwIDAgMCAxNEE3IDcgMCAwIDAgOCAxek03IDNoMnY3SDd6bTAgOGgydjJIN3oiLz48L3N2Zz4=");
+    --admonition-danger-background-color: #fcf3f2;
+    --admonition-danger-color: #404040;
+    --admonition-danger-title-background-color: #e9a499;
+    --admonition-danger-title-color: #fff;
+    --admonition-danger-icon: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTggMmExIDEgMCAwIDAtLjg1LjQ4NGwtNiAxMEExIDEgMCAwIDAgMiAxNGgxMmExIDEgMCAwIDAgLjg1Ny0xLjUxNGwtNi0xMGExIDEgMCAwIDAtLjg1LS40ODR6TTcgNWgydjVIN3ptMCA2aDJ2Mkg3eiIvPjwvc3ZnPg==");
+    --admonition-tip-background-color: #dbfaf4;
+    --admonition-tip-color: #404040;
+    --admonition-tip-title-background-color: #1abc9c;
+    --admonition-tip-title-color: #fff;
+    --admonition-tip-icon: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiI+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTggMWE3IDcgMCAxIDAgMCAxNEE3IDcgMCAwIDAgOCAxem0zLjI5MyAzLjg3NyAxLjQxNCAxLjQxNEw3IDEyLjAwMSAzLjI5MyA4LjI5bDEuNDE0LTEuNDE0TDcgOS4xN3oiLz48L3N2Zz4=");
+
+    /* System stacks in case the web fonts fail to load. */
+    --sans-serif-font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --monospace-font-family: "JetBrains Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", Courier, monospace;
+}
+
+/* Dark theme colours */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --body-color: rgba(255, 255, 255, 0.85);
+        --content-wrap-background-color: #202326;
+        --content-background-color: #2e3236;
+
+
+        --link-color: #8cf;
+        --link-color-hover: #9df;
+        --link-color-active: #6ad;
+        --link-color-visited: #cb99f6;
+        --external-reference-icon: url("data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjEyIiB3aWR0aD0iMTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOGNmIj48cGF0aCBkPSJtNy41IDcuMXYzLjRoLTZ2LTZoMy40Ii8+PHBhdGggZD0ibTUuNzY1IDFoNS4yMzV2NS4zOWwtMS41NzMgMS41NDctMS4zMS0xLjMxLTIuNzI0IDIuNzIzLTIuNjktMi42ODggMi44MS0yLjgwOC0xLjMxMy0xLjMxeiIvPjwvZz48L3N2Zz4K");
+
+        --hr-color: #555;
+        --image-border-color: #505356;
+        --table-row-odd-background-color: #3b3e41;
+        --code-background-color: #22252d;
+        --code-border-color: #505356;
+        --code-literal-color: #d68f8f;
+        --code-block-border-color: #3c3c3c;
+        --input-background-color: #333537;
+        --input-focus-border-color: #5f8cff;
+        --footer-color: #aaa;
+        --btn-neutral-background-color: #404040;
+        --btn-neutral-hover-background-color: #505050;
+        --search-highlighted-color: rgb(255 205 0 / 16%);
+
+        --highlight-background-color: #1e1e1e;
+        --highlight-background-emph-color: #2d2d2d;
+        --highlight-default-color: #dcdcdc;
+        --highlight-comment-color: #57a64a;
+        --highlight-doc-comment-color: #608b4e;
+        --highlight-keyword-color: #569cd6;
+        --highlight-literal-color: #569cd6;
+        --highlight-keyword2-color: #4ec9b0;
+        --highlight-control-flow-keyword-color: #569cd6;
+        --highlight-number-color: #b5cea8;
+        --highlight-decorator-color: #4ec9b0;
+        --highlight-base-type-color: #569cd6;
+        --highlight-engine-type-color: #4ec9b0;
+        --highlight-user-type-color: #4ec9b0;
+        --highlight-member-variable-color: #9cdcfe;
+        --highlight-function-color: #dcdcaa;
+        --highlight-function-declaration-color: #dcdcaa;
+        --highlight-global-function-color: #dcdcaa;
+        --highlight-operator-color: #dcdcdc;
+        --highlight-string-color: #d69d85;
+        --highlight-string-name-color: #d69d85;
+
+        --admonition-note-background-color: #303d4f;
+        --admonition-note-color: #bfeeff;
+        --admonition-note-title-background-color: #305070;
+        --admonition-note-title-color: #bfefff;
+        --admonition-attention-background-color: #444033;
+        --admonition-attention-color: #ffeeaf;
+        --admonition-attention-title-background-color: #665022;
+        --admonition-attention-title-color: #ffeeaf;
+        --admonition-danger-background-color: #433;
+        --admonition-danger-color: #fcc;
+        --admonition-danger-title-background-color: #633;
+        --admonition-danger-title-color: #fcc;
+        --admonition-tip-background-color: #28382d;
+        --admonition-tip-color: #dfd;
+        --admonition-tip-title-background-color: #336648;
+        --admonition-tip-title-color: #dfd;
+    }
+}
+
+/* Typography */
+
+body,
+input[type="text"],
+input[type="button"],
+input[type="reset"],
+input[type="submit"],
+textarea,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+legend,
+.btn,
+.rst-versions,
+.rst-content .toctree-wrapper p.caption {
+    font-family: var(--sans-serif-font-family);
+    font-feature-settings: "calt" 0, "ss04" 1, "tnum" 1;
+}
+
+body,
+.rst-content table.docutils thead,
+.rst-content table.docutils caption {
+    color: var(--body-color);
+}
+
+p,
+article ul,
+article ol,
+.wy-plain-list-disc,
+.wy-plain-list-decimal,
+.rst-content ol.arabic,
+.rst-content .toctree-wrapper ul {
+    /* Increase the line height slightly to account for the different font */
+    line-height: 25px;
+}
+
+/* Depending on the environment, it can be a section tag or a div with the section class. */
+.rst-content section ul,
+.rst-content section ol,
+.rst-content .section ul,
+.rst-content .section ol {
+    line-height: 25px;
+}
+
+.rst-content section ul li,
+.rst-content .section ul li {
+    margin-top: 8px;
+    margin-bottom: 8px;
+}
+
+hr {
+    border-top-color: var(--hr-color);
+}
+
+/* Only the outer list; the nested trail keeps the theme's inline-block flow. */
+div[role="navigation"] > ul.wy-breadcrumbs {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+/* The theme's clearfix pseudo-elements would count as flex items. */
+div[role="navigation"] > ul.wy-breadcrumbs::before,
+div[role="navigation"] > ul.wy-breadcrumbs::after {
+    content: none;
+}
+
+div[role="navigation"] > ul.wy-breadcrumbs > li.na-breadcrumbs-header {
+    display: block;
+    padding-top: 0;
+    min-width: 0;
+}
+
+div[role="navigation"] > ul.wy-breadcrumbs > li.wy-breadcrumbs-aside {
+    float: none;
+    flex: none;
+    padding-top: 0;
+}
+
+.na-docs-title {
+    color: var(--body-color);
+    font-size: 105%;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+footer {
+    color: var(--footer-color);
+}
+
+footer span.commit code,
+footer span.commit .rst-content tt,
+.rst-content footer span.commit tt {
+    background: none;
+}
+
+/* Links */
+
+a {
+    color: var(--link-color);
+}
+
+a:hover {
+    color: var(--link-color-hover);
+    text-decoration: underline;
+}
+
+a:active {
+    /* Add visual feedback when clicking on a link */
+    color: var(--link-color-active);
+}
+
+a:visited {
+    color: var(--link-color-visited);
+}
+
+a.btn:hover {
+    text-decoration: none;
+}
+
+/* Style external links differently to make them easier to distinguish from internal links. */
+.reference.external {
+    background-position: center right;
+    background-repeat: no-repeat;
+    background-image: var(--external-reference-icon);
+    padding-right: 13px;
+}
+
+.btn-neutral {
+    background-color: var(--btn-neutral-background-color) !important;
+    color: var(--body-color) !important;
+}
+
+.btn-neutral:hover {
+    background-color: var(--btn-neutral-hover-background-color) !important;
+}
+
+.btn-neutral:visited {
+    color: var(--body-color) !important;
+}
+
+/* Main sections */
+
+.wy-nav-content-wrap {
+    background-color: var(--content-wrap-background-color);
+}
+
+.wy-nav-content {
+    background-color: var(--content-background-color);
+    max-width: 900px;
+}
+
+.wy-body-for-nav {
+    position: relative;
+    background-color: var(--content-wrap-background-color);
+    overflow: visible;
+}
+
+@media only screen and (min-width: 769px) {
+    .wy-body-for-nav {
+        /* Center the page on wide displays for better readability */
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+}
+
+.wy-breadcrumbs-aside a {
+    color: var(--link-color);
+}
+
+/* Navigation bar logo and search */
+
+.wy-side-nav-search > a.na-brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 6px 0;
+    margin: 0.404em 0 0.809em;
+    color: var(--navbar-current-color);
+    line-height: 1;
+}
+
+.na-brand__logo {
+    width: 48px;
+    height: 48px;
+    flex: none;
+    fill: currentColor;
+}
+
+.na-brand__text {
+    font-weight: 700;
+    font-size: 19px;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+}
+
+.wy-nav-top a.na-brand--compact {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0;
+    margin: 0;
+    vertical-align: middle;
+}
+
+.na-brand--compact .na-brand__logo {
+    width: 28px;
+    height: 28px;
+}
+
+.na-brand--compact .na-brand__text {
+    font-size: 17px;
+}
+
+.wy-side-nav-search {
+    background-color: var(--navbar-background-color);
+    color: var(--navbar-level-1-color);
+    margin-right: 8px;
+}
+
+.wy-side-nav-search > a,
+.wy-side-nav-search .wy-dropdown > a {
+    color: var(--navbar-current-color);
+}
+
+.wy-side-nav-search > a:hover,
+.wy-side-nav-search .wy-dropdown > a:hover {
+    background-color: var(--navbar-background-color-hover);
+}
+
+.wy-side-nav-search > a:active,
+.wy-side-nav-search .wy-dropdown > a:active {
+    background-color: var(--navbar-background-color-active);
+}
+
+.wy-side-nav-search input[type="text"] {
+    background-color: var(--input-background-color);
+    color: var(--body-color);
+    /* Avoid reflowing when toggling the focus state */
+    border: 2px solid transparent;
+    box-shadow: none;
+    /* Make visual feedback instant */
+    transition: none;
+    font-size: 14px;
+}
+
+.wy-side-nav-search input[type="text"]:focus {
+    border: 2px solid var(--input-focus-border-color);
+}
+
+.wy-side-nav-search input[type="text"]::placeholder {
+    color: var(--body-color);
+    opacity: 0.55;
+}
+
+/* Version label below the title */
+.wy-side-nav-search > div.version {
+    color: var(--navbar-dimmed-color);
+    font-size: 14px;
+    opacity: 0.9;
+}
+
+/* Navigational top bar (mobile only) */
+
+.wy-nav-top,
+.wy-nav-top a {
+    background-color: var(--navbar-background-color);
+    color: var(--navbar-level-1-color);
+}
+
+/* Navigational sidebar */
+
+.wy-nav-side {
+    background-color: var(--navbar-background-color);
+}
+
+@media only screen and (min-width: 769px) {
+    .wy-nav-side {
+        /* Required to center the page on wide displays */
+        left: inherit;
+    }
+}
+
+.wy-menu-vertical header,
+.wy-menu-vertical p.caption {
+    color: var(--navbar-heading-color);
+
+    /* Improves the appearance of uppercase text */
+    letter-spacing: 0.75px;
+}
+
+.wy-menu-vertical li {
+    background-color: var(--navbar-background-color);
+}
+
+.wy-menu-vertical li.current {
+    background-color: var(--navbar-current-background-color);
+}
+
+.wy-menu-vertical li > a {
+    color: var(--navbar-level-1-color);
+    font-size: 92%;
+    line-height: 20px;
+    padding: .4045em 1.618em;
+}
+
+.wy-menu-vertical li > a:hover {
+    background-color: var(--navbar-background-color-hover);
+    color: var(--navbar-level-1-color);
+}
+
+.wy-menu-vertical li > a:active {
+    background-color: var(--navbar-background-color-active);
+}
+
+.wy-menu-vertical li > a button.toctree-expand {
+    color: var(--navbar-expand-base-color) !important;
+    opacity: 0.9;
+    margin-right: 8px;
+
+    /* Make the expand icon a bit easier to hit. */
+    position: relative;
+    width: 12px;
+    min-width: 12px; /* Forces the size to stay this way in the flexbox model. */
+    height: 18px;
+}
+
+.wy-menu-vertical li.current > a button.toctree-expand {
+    color: var(--navbar-current-color) !important;
+}
+
+.wy-menu-vertical li > a:hover button.toctree-expand {
+    color: var(--navbar-expand-hover-color) !important;
+    opacity: 1;
+}
+
+.wy-menu-vertical li > a:active button.toctree-expand {
+    color: var(--navbar-expand-active-color) !important;
+    opacity: 1;
+}
+
+.wy-menu-vertical li > a button.toctree-expand:before {
+    position: absolute;
+    top: -2px;
+    left: -6px;
+    width: 24px;
+    height: 24px;
+    padding: 6px;
+}
+
+.wy-menu-vertical li.current > a,
+.wy-menu-vertical li.toctree-l2.current > a {
+    background-color: var(--navbar-current-background-color-hover);
+    border-bottom: 2px solid var(--navbar-current-background-color);
+    color: var(--navbar-current-color);
+    font-weight: 700;
+
+    /* Make long words always display on a single line, keep wrapping for multiple words */
+    display: flex;
+}
+
+.wy-menu-vertical li.current > a:hover,
+.wy-menu-vertical li.toctree-l2.current > a:hover {
+    background-color: var(--navbar-current-background-color-hover);
+}
+
+.wy-menu-vertical li.current > a:active,
+.wy-menu-vertical li.toctree-l2.current > a:active {
+    background-color: var(--navbar-current-background-color-active);
+}
+
+.wy-menu-vertical li.toctree-l1 > a,
+.wy-menu-vertical li.toctree-l1.current > a {
+    border: none;
+    padding: .4045em 1.918em;
+}
+
+.wy-menu-vertical li.toctree-l1.current > a {
+    border-bottom: 2px solid var(--navbar-current-background-color);
+}
+
+.wy-menu-vertical li.current li > a,
+.wy-menu-vertical li.toctree-l2.current li > a,
+.wy-menu-vertical li.toctree-l2.current li.toctree-l3 > a,
+.wy-menu-vertical li.toctree-l2.current li.toctree-l4 > a {
+    background-color: var(--navbar-current-background-color);
+    border: none;
+    border-bottom: 2px solid var(--navbar-current-background-color);
+    color: var(--navbar-level-2-color);
+}
+
+.wy-menu-vertical li.current li > a:hover,
+.wy-menu-vertical li.toctree-l2.current li > a:hover,
+.wy-menu-vertical li.toctree-l2.current li.toctree-l3 > a:hover,
+.wy-menu-vertical li.toctree-l2.current li.toctree-l4 > a:hover {
+    background-color: var(--navbar-current-background-color-hover);
+}
+
+.wy-menu-vertical li.current li > a:active,
+.wy-menu-vertical li.toctree-l2.current li > a:active,
+.wy-menu-vertical li.toctree-l2.current li.toctree-l3 > a:active,
+.wy-menu-vertical li.toctree-l2.current li.toctree-l4 > a:active {
+    background-color: var(--navbar-current-background-color-active);
+}
+
+.wy-menu-vertical li.toctree-l2.current li > a,
+.wy-menu-vertical li.toctree-l2.current li.toctree-l3 > a,
+.wy-menu-vertical li.toctree-l2.current li.toctree-l4 > a {
+    color: var(--navbar-level-3-color);
+}
+
+.wy-menu-vertical li.toctree-l2.current li > a:hover,
+.wy-menu-vertical li.toctree-l2.current li.toctree-l3 > a:hover,
+.wy-menu-vertical li.toctree-l2.current li.toctree-l4 > a:hover {
+    color: var(--navbar-level-1-color);
+}
+
+.wy-menu-vertical li.current li.current > a,
+.wy-menu-vertical li.toctree-l2.current li.current > a,
+.wy-menu-vertical li.toctree-l2.current li.toctree-l3.current > a,
+.wy-menu-vertical li.toctree-l2.current li.toctree-l4.current > a {
+    color: var(--navbar-current-color);
+    font-weight: 700;
+}
+
+/* Sidebar scrollbar */
+
+.wy-menu.wy-menu-vertical {
+    scrollbar-color: var(--navbar-scrollbar-color) var(--navbar-scrollbar-background);
+}
+
+.wy-menu.wy-menu-vertical::-webkit-scrollbar {
+    width: .75rem;
+}
+
+.wy-menu.wy-menu-vertical::-webkit-scrollbar-track {
+    background-color: var(--navbar-scrollbar-background);
+}
+
+.wy-menu.wy-menu-vertical::-webkit-scrollbar-thumb {
+    background-color: var(--navbar-scrollbar-color);
+}
+
+/* Firefox does the dimming on hover automatically. We emulate it for Webkit-based browsers. */
+.wy-menu.wy-menu-vertical::-webkit-scrollbar-thumb:hover {
+    background-color: var(--navbar-scrollbar-hover-color);
+}
+
+.wy-menu.wy-menu-vertical::-webkit-scrollbar-thumb:active {
+    background-color: var(--navbar-scrollbar-active-color);
+}
+
+/* Images */
+
+.rst-content .align-right,
+.rst-content .align-left {
+    clear: both;
+}
+
+.rst-content div.figure p.caption,
+.rst-content figure figcaption {
+    /* Tweak caption styling to be closer to typical captions */
+    text-align: center;
+    margin-top: 8px;
+    opacity: 0.75;
+}
+
+.rst-content div.figure img,
+.rst-content figure img,
+.rst-content section > img,
+.rst-content .section > img {
+    border: 1px solid var(--image-border-color);
+}
+
+/* Tables */
+
+.rst-content table.docutils,
+.wy-table-bordered-all {
+    border: 4px solid var(--code-border-color);
+}
+
+.wy-table-bordered-all td,
+.wy-table thead th,
+.rst-content table.docutils td,
+.rst-content table.docutils thead th,
+.rst-content table.field-list thead th {
+    border-bottom: 2px solid var(--code-border-color);
+    border-left: 2px solid var(--code-border-color);
+    padding: 4px 16px;
+}
+
+html.writer-html5 .rst-content table.docutils th {
+    border-bottom: 4px solid var(--code-border-color);
+    border-left: 2px solid var(--code-border-color);
+    padding: 8px 16px;
+    vertical-align: middle;
+}
+
+.wy-table-odd td,
+.wy-table-striped tr:nth-child(2n-1) td,
+.rst-content table.docutils:not(.field-list) tr:nth-child(2n-1) td {
+    background-color: var(--table-row-odd-background-color);
+}
+
+/* The first column cells are not verbose, no need to wrap them */
+.wy-table-responsive table td:not(:nth-child(1)),
+.wy-table-responsive table th:not(:nth-child(1)) {
+    white-space: normal;
+}
+
+/* Artificially increasing specificity to make it override theme.css. */
+html.writer-html5 .rst-content .wy-table-responsive > table td > p {
+    line-height: 1.425rem;
+}
+
+html.writer-html5 .rst-content .wy-table-responsive > table th > p {
+    line-height: 1.425rem;
+    font-size: .95rem;
+    font-weight: 700;
+}
+
+/* Inline code */
+
+code,
+.rst-content tt,
+.rst-content code {
+    font-size: .875em;
+    font-family: var(--monospace-font-family);
+    font-variant-ligatures: none;
+    background-color: var(--code-background-color);
+    border: none;
+    border-radius: 4px;
+}
+
+.rst-content tt.literal,
+.rst-content code.literal {
+    color: var(--code-literal-color);
+    font-weight: 600;
+    font-variant-ligatures: none;
+    padding: 3px 5px;
+}
+
+/* Code blocks */
+
+.rst-content div[class^="highlight"] {
+    border: 3px solid var(--code-block-border-color);
+}
+
+.rst-content div[class^="highlight"] div[class^="highlight"] {
+    box-shadow: none;
+}
+
+.rst-content pre.literal-block,
+.rst-content div[class^="highlight"] pre,
+.rst-content .linenodiv pre {
+    /* Increase the font size and line height in code blocks */
+    font-size: 14px;
+    line-height: 1.5;
+    font-family: var(--monospace-font-family);
+    font-variant-ligatures: none;
+}
+
+/* Syntax highlighting */
+
+.highlight {
+    background-color: var(--highlight-background-color);
+    tab-size: 4;
+}
+
+/* Remove default red boxes around Pygments errors */
+.highlight .err {
+    border: none;
+}
+
+/* Default Pygments styles make all of these bold */
+.highlight .k /* Keyword */,
+.highlight .ges /* Generic.EmphStrong */,
+.highlight .gh /* Generic.Heading */,
+.highlight .gp /* Generic.Prompt */,
+.highlight .gs /* Generic.Strong */,
+.highlight .gu /* Generic.Subheading */,
+.highlight .kc /* Keyword.Constant */,
+.highlight .kd /* Keyword.Declaration */,
+.highlight .kn /* Keyword.Namespace */,
+.highlight .kr /* Keyword.Reserved */,
+.highlight .nc /* Name.Class */,
+.highlight .nd /* Name.Decorator */,
+.highlight .ni /* Name.Entity */,
+.highlight .nl /* Name.Label */,
+.highlight .nn /* Name.Namespace */,
+.highlight .nt /* Name.Tag */,
+.highlight .ow /* Operator.Word */,
+.highlight .se /* Literal.String.Escape */ {
+    font-weight: revert;
+}
+
+/* Emphasized lines */
+.highlight .hll {
+    background-color: var(--highlight-background-emph-color);
+}
+
+.highlight .n /* Name */ {
+    color: var(--highlight-default-color);
+}
+
+.highlight .gh /* Generic.Heading */,
+.highlight .gu /* Generic.Subheading */,
+.highlight .go /* Generic.Output */,
+.highlight .gt /* Generic.Traceback */ {
+    color: var(--highlight-default-color);
+}
+
+.highlight .c  /* Comment */,
+.highlight .c1 /* Comment.Single */,
+.highlight .cm /* Comment.Multiline */,
+.highlight .cs /* Comment.Special */ {
+    color: var(--highlight-comment-color);
+    font-style: normal;
+}
+
+.highlight .bp /* Name.Builtin.Pseudo */,
+.highlight .k  /* Keyword */,
+.highlight .kc /* Keyword.Constant */,
+.highlight .kd /* Keyword.Declaration */,
+.highlight .kn /* Keyword.Namespace */,
+.highlight .kp /* Keyword.Pseudo */,
+.highlight .kr /* Keyword.Reserved */,
+.highlight .kt /* Keyword.Type */,
+.highlight .ow /* Operator.Word */ {
+    color: var(--highlight-keyword-color);
+}
+
+.highlight .ch /* Comment.Hashbang */,
+.highlight .cp /* Comment.Preproc */ {
+    color: var(--highlight-keyword2-color);
+}
+
+.highlight .l  /* Literal */ {
+    color: var(--highlight-literal-color);
+}
+
+.highlight .m  /* Literal.Number */,
+.highlight .mf /* Literal.Number.Float */,
+.highlight .mi /* Literal.Number.Integer */,
+.highlight .il /* Literal.Number.Integer.Long */,
+.highlight .mb /* Literal.Number.Bin */,
+.highlight .mh /* Literal.Number.Hex */,
+.highlight .mo /* Literal.Number.Oct */ {
+    color: var(--highlight-number-color);
+}
+
+.highlight .na /* Name.Attribute */,
+.highlight .nd /* Name.Decorator */,
+.highlight .ni /* Name.Entity */,
+.highlight .nl /* Name.Label */ {
+    color: var(--highlight-decorator-color);
+}
+
+.highlight .nb /* Name.Builtin */,
+.highlight .ne /* Name.Exception */ {
+    color: var(--highlight-engine-type-color);
+}
+
+.highlight .nc /* Name.Class */,
+.highlight .nn /* Name.Namespace */,
+.highlight .no /* Name.Constant */,
+.highlight .nv /* Name.Variable */,
+.highlight .vc /* Name.Variable.Class */,
+.highlight .vg /* Name.Variable.Global */,
+.highlight .vm /* Name.Variable.Magic */ {
+    color: var(--highlight-user-type-color);
+}
+
+.highlight .vi /* Name.Variable.Instance */ {
+    color: var(--highlight-member-variable-color);
+}
+
+.highlight .nf /* Name.Function */,
+.highlight .fm /* Name.Function.Magic */,
+.highlight .nt /* Name.Tag */ {
+    color: var(--highlight-function-color);
+}
+
+.highlight .o  /* Operator */,
+.highlight .p  /* Punctuation */,
+.highlight .si /* Literal.String.Interpol */,
+.highlight .sr /* Literal.String.Regex */,
+.highlight .ss /* Literal.String.Symbol */ {
+    color: var(--highlight-operator-color);
+}
+
+.highlight .cpf/* Comment.PreprocFile */,
+.highlight .s  /* Literal.String */,
+.highlight .s1 /* Literal.String.Single */,
+.highlight .s2 /* Literal.String.Double */,
+.highlight .sc /* Literal.String.Char */,
+.highlight .se /* Literal.String.Escape */,
+.highlight .sa /* Literal.String.Affix */,
+.highlight .sb /* Literal.String.Backtick */,
+.highlight .dl /* Literal.String.Delimiter */,
+.highlight .sd /* Literal.String.Doc */,
+.highlight .sh /* Literal.String.Heredoc */,
+.highlight .sx /* Literal.String.Other */ {
+    color: var(--highlight-string-color);
+}
+
+/* Admonitions */
+
+.rst-content .admonition,
+.rst-content .admonition.note,
+.rst-content .admonition.seealso {
+    background-color: var(--admonition-note-background-color);
+    border-radius: 4px;
+    box-shadow: 0px 3px 9px 0px rgb(0 0 0 / 29%);
+    color: var(--admonition-note-color);
+}
+
+.rst-content .admonition .admonition-title,
+.rst-content .admonition.note .admonition-title,
+.rst-content .admonition.seealso .admonition-title {
+    background-color: var(--admonition-note-title-background-color);
+    border-radius: 4px 4px 0 0;
+    color: var(--admonition-note-title-color);
+    font-weight: 700;
+    font-size: 105%;
+    line-height: 120%;
+    padding: 6px 16px;
+}
+
+.rst-content .admonition .admonition-title:before {
+    margin-right: 9px;
+}
+
+.rst-content .admonition.note .admonition-title::before,
+.rst-content .admonition.seealso .admonition-title::before,
+.rst-content .admonition.warning .admonition-title::before,
+.rst-content .admonition.attention .admonition-title::before,
+.rst-content .admonition.caution .admonition-title::before,
+.rst-content .admonition.danger .admonition-title::before,
+.rst-content .admonition.tip .admonition-title::before,
+.rst-content .admonition.important .admonition-title::before {
+    content: "";
+    top: 0.1rem;
+    display: inline;
+    height: 1rem;
+    width: 1rem;
+    padding-right: 1rem;
+    mask-repeat: no-repeat;
+}
+
+.rst-content .admonition.note .admonition-title::before,
+.rst-content .admonition.seealso .admonition-title::before {
+    mask-image: var(--admonition-note-icon);
+    background-color: var(--admonition-note-title-color);
+}
+
+.rst-content .admonition.warning .admonition-title::before,
+.rst-content .admonition.danger .admonition-title::before {
+    mask-image: var(--admonition-danger-icon);
+    background-color: var(--admonition-attention-title-color);
+}
+
+.rst-content .admonition.tip .admonition-title::before {
+    mask-image: var(--admonition-tip-icon);
+    background-color: var(--admonition-tip-title-color);
+}
+
+.rst-content .admonition.attention .admonition-title::before,
+.rst-content .admonition.caution .admonition-title::before,
+.rst-content .admonition.important .admonition-title::before {
+    mask-image: var(--admonition-attention-icon);
+    background-color: var(--admonition-attention-title-color);
+}
+
+.rst-content .admonition.attention,
+.rst-content .admonition.caution,
+.rst-content .admonition.warning,
+.rst-content .admonition.important {
+    background-color: var(--admonition-attention-background-color);
+    color: var(--admonition-attention-color);
+}
+
+.rst-content .admonition.attention .admonition-title,
+.rst-content .admonition.caution .admonition-title,
+.rst-content .admonition.warning .admonition-title,
+.rst-content .admonition.important .admonition-title {
+    background-color: var(--admonition-attention-title-background-color);
+    color: var(--admonition-attention-title-color);
+}
+
+.rst-content .admonition.danger {
+    background-color: var(--admonition-danger-background-color);
+    color: var(--admonition-danger-color);
+}
+
+.rst-content .admonition.danger .admonition-title {
+    background-color: var(--admonition-danger-title-background-color);
+    color: var(--admonition-danger-title-color);
+}
+
+.rst-content .admonition.tip {
+    background-color: var(--admonition-tip-background-color);
+    color: var(--admonition-tip-color);
+}
+
+.rst-content .admonition.tip .admonition-title {
+    background-color: var(--admonition-tip-title-background-color);
+    color: var(--admonition-tip-title-color);
+}
+
+/* Search results */
+
+.rst-content .highlighted {
+    background-color: transparent;
+    box-shadow: none;
+    font-weight: inherit;
+    padding: 0;
+}
+
+/* Still slightly highlight matched parts on the dedicated search results page. */
+.rst-content #search-results .highlighted {
+    background-color: var(--search-highlighted-color);
+    border-radius: 2px;
+    color: var(--body-color);
+    font-weight: 700;
+    padding: 0 3px;
+}

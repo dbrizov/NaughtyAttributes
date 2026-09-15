@@ -1,5 +1,5 @@
-NaughtyAttributes' Docs
-=======================
+Introduction
+============
 NaughtyAttributes is an open-source extension for the Unity Inspector.
 
 It expands the range of attributes that Unity provides so that you can create powerful inspectors without the need of custom editors or property drawers.

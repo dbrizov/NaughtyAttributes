@@ -1,0 +1,28 @@
+{% extends "!layout.html" %}
+
+{%- block sidebartitle %}
+  {%- set _root_doc = root_doc|default(master_doc) %}
+  <a href="{{ pathto(_root_doc) }}" class="na-brand">
+    {%- include "engine-logo.html" %}
+    <span class="na-brand__text">NaughtyAttributes</span>
+  </a>
+
+  {%- if READTHEDOCS or DEBUG %}
+    {%- if theme_version_selector or theme_language_selector %}
+      <div class="switch-menus">
+        <div class="version-switch"></div>
+        <div class="language-switch"></div>
+      </div>
+    {%- endif %}
+  {%- endif %}
+
+  {%- include "searchbox.html" %}
+{%- endblock %}
+
+{%- block mobile_nav %}
+  <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+  <a href="{{ pathto(root_doc|default(master_doc)) }}" class="na-brand na-brand--compact">
+    {%- include "engine-logo.html" %}
+    <span class="na-brand__text">NaughtyAttributes</span>
+  </a>
+{%- endblock %}

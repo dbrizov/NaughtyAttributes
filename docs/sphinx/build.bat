@@ -11,7 +11,11 @@ if exist build rmdir /s /q build
 
 REM -d keeps Sphinx's doctree cache out of build\, so it never
 REM reaches the published site.
-%SPHINXBUILD% -b html -d .doctrees src build
+REM -W turns warnings into errors so a broken reference (a bad image
+REM path, a dead :ref:) fails the build instead of shipping silently.
+REM -c points Sphinx at conf.py, which lives in this folder, not in src,
+REM so that src holds only .rst sources.
+%SPHINXBUILD% -b html -W -c . -d .doctrees src build
 if errorlevel 1 goto end
 
 REM ---------------------------------------------------------------

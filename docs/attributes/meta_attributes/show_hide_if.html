@@ -6,9 +6,10 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ShowIf / HideIf &mdash; NaughtyAttributes 2.1.5 documentation</title>
+  <title>ShowIf / HideIf &mdash; NaughtyAttributes for Unity</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/custom.css?v=b1351b48" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
@@ -28,12 +29,9 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-
-          
-          
-          <a href="../../index.html" class="icon icon-home">
-            NaughtyAttributes
-          </a>
+  <a href="../../index.html" class="na-brand"><svg class="na-brand__logo" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m12.9288 4.2939 3.7997 2.1929c.1366.077.1415.2905 0 .3675l-4.515 2.6076a.4192.4192 0 0 1-.4246 0L7.274 6.8543c-.139-.0745-.1415-.293 0-.3675l3.7972-2.193V0L1.3758 5.5977V16.793l3.7177-2.1456v-4.3858c-.0025-.1565.1813-.2682.318-.1838l4.5148 2.6076a.4252.4252 0 0 1 .2136.3676v5.2127c.0025.1565-.1813.2682-.3179.1838l-3.7996-2.1929-3.7178 2.1457L12 24l9.6954-5.5977-3.7178-2.1457-3.7996 2.1929c-.1341.082-.3229-.0248-.3179-.1838V13.053c0-.1565.087-.2956.2136-.3676l4.5149-2.6076c.134-.082.3228.0224.3179.1838v4.3858l3.7177 2.1456V5.5977L12.9288 0Z"/></svg>
+    <span class="na-brand__text">NaughtyAttributes</span>
+  </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -102,17 +100,25 @@
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">NaughtyAttributes</a>
+  <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+  <a href="../../index.html" class="na-brand na-brand--compact"><svg class="na-brand__logo" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m12.9288 4.2939 3.7997 2.1929c.1366.077.1415.2905 0 .3675l-4.515 2.6076a.4192.4192 0 0 1-.4246 0L7.274 6.8543c-.139-.0745-.1415-.293 0-.3675l3.7972-2.193V0L1.3758 5.5977V16.793l3.7177-2.1456v-4.3858c-.0025-.1565.1813-.2682.318-.1838l4.5148 2.6076a.4252.4252 0 0 1 .2136.3676v5.2127c.0025.1565-.1813.2682-.3179.1838l-3.7996-2.1929-3.7178 2.1457L12 24l9.6954-5.5977-3.7178-2.1457-3.7996 2.1929c-.1341.082-.3229-.0248-.3179-.1838V13.053c0-.1565.087-.2956.2136-.3676l4.5149-2.6076c.134-.082.3228.0224.3179.1838v4.3858l3.7177 2.1456V5.5977L12.9288 0Z"/></svg>
+    <span class="na-brand__text">NaughtyAttributes</span>
+  </a>
       </nav>
 
       <div class="wy-nav-content">
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
+<li class="na-breadcrumbs-header">
+  <div class="na-docs-title">NaughtyAttributes’ Docs for Unity</div>
+  <ul class="wy-breadcrumbs">
+    
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">Meta Attributes</a></li>
       <li class="breadcrumb-item active">ShowIf / HideIf</li>
+  </ul>
+</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/docs/sphinx/src/attributes/meta_attributes/show_hide_if.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -131,54 +137,54 @@ The condition can be a <code class="docutils literal notranslate"><span class="p
 <p>If you want to use it on fields that are nested inside serialized structs or classes
 you need to use the <a class="reference internal" href="../special_attributes/allow_nesting.html#label-allow-nesting"><span class="std std-ref">AllowNesting</span></a> attribute.</p>
 </div>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">NaughtyComponent</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">MonoBehaviour</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">NaughtyComponent</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">MonoBehaviour</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">showInt</span><span class="p">;</span>
 
-<span class="w">    </span><span class="na">[ShowIf("showInt")]</span>
+<span class="w">    </span><span class="p">[</span><span class="nc">ShowIf</span><span class="p">(</span><span class="s">"showInt"</span><span class="p">)]</span>
 <span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">myInt</span><span class="p">;</span>
 
-<span class="w">    </span><span class="na">[ShowIf("AlwaysShow")]</span>
+<span class="w">    </span><span class="p">[</span><span class="nc">ShowIf</span><span class="p">(</span><span class="s">"AlwaysShow"</span><span class="p">)]</span>
 <span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">float</span><span class="w"> </span><span class="n">myFloat</span><span class="p">;</span>
 
-<span class="w">    </span><span class="na">[ShowIf("NeverShow")]</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Vector3</span><span class="w"> </span><span class="n">myVector</span><span class="p">;</span>
+<span class="w">    </span><span class="p">[</span><span class="nc">ShowIf</span><span class="p">(</span><span class="s">"NeverShow"</span><span class="p">)]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nc">Vector3</span><span class="w"> </span><span class="n">myVector</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">AlwaysShow</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="k">true</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
 
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">NeverShow</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nc">NeverShow</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="k">false</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <img alt="../../_images/ShowIf_Inspector.gif" src="../../_images/ShowIf_Inspector.gif" />
 <p>You can have more than one condition:</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">NaughtyComponent</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">MonoBehaviour</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">NaughtyComponent</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">MonoBehaviour</span>
 <span class="p">{</span>
 <span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">flag0</span><span class="p">;</span>
 <span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">flag1</span><span class="p">;</span>
 
-<span class="w">    </span><span class="na">[ShowIf(EConditionOperator.And, "flag0", "flag1")]</span>
+<span class="w">    </span><span class="p">[</span><span class="nc">ShowIf</span><span class="p">(</span><span class="nc">EConditionOperator</span><span class="p">.</span><span class="nc">And</span><span class="p">,</span><span class="w"> </span><span class="s">"flag0"</span><span class="p">,</span><span class="w"> </span><span class="s">"flag1"</span><span class="p">)]</span>
 <span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">showIfAll</span><span class="p">;</span>
 
-<span class="w">    </span><span class="na">[ShowIf(EConditionOperator.Or, "flag0", "flag1")]</span>
+<span class="w">    </span><span class="p">[</span><span class="nc">ShowIf</span><span class="p">(</span><span class="nc">EConditionOperator</span><span class="p">.</span><span class="nc">Or</span><span class="p">,</span><span class="w"> </span><span class="s">"flag0"</span><span class="p">,</span><span class="w"> </span><span class="s">"flag1"</span><span class="p">)]</span>
 <span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">showIfAny</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>An enum value can also be used as a condition:</p>
-<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">NaughtyComponent</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">MonoBehaviour</span>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">NaughtyComponent</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">MonoBehaviour</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">EMyEnum</span><span class="w"> </span><span class="n">enumFlag</span><span class="p">;</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nc">EMyEnum</span><span class="w"> </span><span class="n">enumFlag</span><span class="p">;</span>
 
-<span class="w">    </span><span class="na">[ShowIf("enumFlag", EMyEnum.Case0)]</span>
+<span class="w">    </span><span class="p">[</span><span class="nc">ShowIf</span><span class="p">(</span><span class="s">"enumFlag"</span><span class="p">,</span><span class="w"> </span><span class="nc">EMyEnum</span><span class="p">.</span><span class="nc">Case0</span><span class="p">)]</span>
 <span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">enableIfEnum</span><span class="p">;</span><span class="w"> </span><span class="c1">// Will be shown only if enumFlag == EMyEnum.Case0</span>
 <span class="p">}</span>
 
-<span class="k">public</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="n">EMyEnum</span>
+<span class="k">public</span><span class="w"> </span><span class="k">enum</span><span class="w"> </span><span class="nc">EMyEnum</span>
 <span class="p">{</span>
-<span class="w">    </span><span class="n">Case0</span><span class="p">,</span>
-<span class="w">    </span><span class="n">Case1</span><span class="p">,</span>
-<span class="w">    </span><span class="n">Case2</span>
+<span class="w">    </span><span class="nc">Case0</span><span class="p">,</span>
+<span class="w">    </span><span class="nc">Case1</span><span class="p">,</span>
+<span class="w">    </span><span class="nc">Case2</span>
 <span class="p">}</span>
 </pre></div>
 </div>
