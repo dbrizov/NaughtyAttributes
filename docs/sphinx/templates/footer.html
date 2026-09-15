@@ -1,0 +1,7 @@
+{%- extends "sphinx_rtd_theme/footer.html" %}
+
+{%- block contentinfo %}
+  {{ super() }}
+  <a class="na-social" href="https://github.com/{{ github_user }}/{{ github_repo }}"
+     title="GitHub" aria-label="GitHub"><span class="fa fa-github" aria-hidden="true"></span></a>
+{%- endblock %}

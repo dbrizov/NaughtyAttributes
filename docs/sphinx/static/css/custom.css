@@ -319,6 +319,41 @@ footer {
     color: var(--footer-color);
 }
 
+footer div[role="contentinfo"] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+footer div[role="contentinfo"] p {
+    margin-bottom: 0;
+}
+
+.na-social {
+    /* The "Built with Sphinx" line sits outside contentinfo, so centre
+       against both lines rather than just the copyright. */
+    margin-top: 14px;
+    flex: none;
+    font-size: 32px;
+    line-height: 1;
+}
+
+/* Every link state is named: a bare .na-social loses to the a:hover and
+   a:visited rules above, which are more specific. */
+.na-social,
+.na-social:link,
+.na-social:visited,
+.na-social:active {
+    color: var(--footer-color);
+    text-decoration: none;
+}
+
+.na-social:hover {
+    color: var(--body-color);
+    text-decoration: none;
+}
+
 footer span.commit code,
 footer span.commit .rst-content tt,
 .rst-content footer span.commit tt {
