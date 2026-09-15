@@ -9,13 +9,15 @@ It expands the range of attributes that Unity provides so that you can create po
 
 Most of the attributes are implemented using Unity's `CustomPropertyDrawer`, so they will work in your custom editors.
 The attributes that won't work in your custom editors are the meta attributes and some drawer attributes such as
-`ReorderableList`, `Button`, `ShowNonSerializedField` and `ShowNativeProperty`.    
+`ReorderableList`, `Button`, `ShowNonSerializedField` and `ShowNativeProperty`.
 If you want all of the attributes to work in your custom editors, however, you must inherit from `NaughtyInspector` and use the `NaughtyEditorGUI.PropertyField_Layout` function instead of `EditorGUILayout.PropertyField`.
 
-## System Requirements
-Unity **2022.3** or later versions. Don't forget to include the NaughtyAttributes namespace.
+**[Documentation](https://unity.naughtyattributes.com/)**
 
 ## Installation
+
+> NaughtyAttributes requires **2022.3** or later versions.
+
 1. The package is available on the [openupm registry](https://openupm.com). You can install it via [openupm-cli](https://github.com/openupm/openupm-cli).
 ```
 openupm add com.dbrizov.naughtyattributes
@@ -25,16 +27,6 @@ openupm add com.dbrizov.naughtyattributes
 "com.dbrizov.naughtyattributes": "https://github.com/dbrizov/NaughtyAttributes.git#upm"
 ```
 3. You can also download it from the [Asset Store](https://assetstore.unity.com/packages/tools/utilities/naughtyattributes-129996)
-
-## Documentation
-- [Documentation](https://naughtyattributes.com/)
-- [Documentation Repo](https://github.com/dbrizov/NaughtyAttributes-Docs)
-
-## Support
-NaughtyAttributes is an open-source project that I am developing in my free time. If you like it you can support me by donating.
-
-- [PayPal](https://paypal.me/dbrizov)
-- [Buy Me A Coffee](https://www.buymeacoffee.com/dbrizov)
 
 # Overview
 
@@ -108,10 +100,10 @@ public class NaughtyComponent : MonoBehaviour
 {
 	[CurveRange(-1, -1, 1, 1)]
 	public AnimationCurve curve;
-	
+
 	[CurveRange(EColor.Orange)]
 	public AnimationCurve curve1;
-	
+
 	[CurveRange(0, 0, 5, 5, EColor.Red)]
 	public AnimationCurve curve2;
 }
