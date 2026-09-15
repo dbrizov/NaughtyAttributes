@@ -1,0 +1,11 @@
+# Python
+.venv/
+
+# Sphinx
+build/
+
+# Visual Studio Code
+.vscode/
+
+# Sphinx doctree cache
+.doctrees/

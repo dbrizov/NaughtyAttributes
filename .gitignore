@@ -49,3 +49,8 @@ Lightmap-*.png.meta
 
 ====================
 Builds/
+
+====================
+# Sphinx build metadata
+.buildinfo
+/docs/_sources/

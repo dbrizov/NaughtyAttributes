@@ -1,0 +1,33 @@
+name: Deploy docs to Pages
+
+on:
+  push:
+    branches: [master]
+    paths: ['docs/**']     # only when the site changes
+  workflow_dispatch:        # manual "Run workflow" button
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v6
+      - name: Strip Sphinx sources from the published site
+        run: rm -rf docs/sphinx   # docs/ holds the generated site; sphinx/ is its source
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: docs
+      - id: deployment
+        uses: actions/deploy-pages@v5

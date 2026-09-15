@@ -1,0 +1,174 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ReadOnly &mdash; NaughtyAttributes 2.1.5 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=e5df25d7"></script>
+      <script src="../../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../../_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ShowIf / HideIf" href="show_hide_if.html" />
+    <link rel="prev" title="OnValueChanged" href="on_value_changed.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            NaughtyAttributes
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">General</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../general/installation.html">Installation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Attributes</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../decorator_attributes/index.html">Decorator Attributes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../decorator_attributes/horizontal_line.html">HorizontalLine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../decorator_attributes/info_box.html">InfoBox</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../drawer_attributes/index.html">Drawer Attributes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../drawer_attributes/animator_param.html">AnimatorParam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../drawer_attributes/button.html">Button</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../drawer_attributes/curve_range.html">CurveRange</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../drawer_attributes/dropdown.html">Dropdown</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../drawer_attributes/enum_flags.html">EnumFlags</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../drawer_attributes/expandable.html">Expandable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../drawer_attributes/input_axis.html">InputAxis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../drawer_attributes/layer.html">Layer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../drawer_attributes/min_max_slider.html">MinMaxSlider</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../drawer_attributes/progress_bar.html">ProgressBar</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../drawer_attributes/reorderable_list.html">ReorderableList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../drawer_attributes/resizable_text_area.html">ResizableTextArea</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../drawer_attributes/scene.html">Scene</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../drawer_attributes/show_asset_preview.html">ShowAssetPreview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../drawer_attributes/show_native_property.html">ShowNativeProperty</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../drawer_attributes/show_non_serialized_field.html">ShowNonSerializedField</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../drawer_attributes/sorting_layer.html">SortingLayer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../drawer_attributes/tag.html">Tag</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Meta Attributes</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="box_group.html">BoxGroup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="enable_disable_if.html">EnableIf / DisableIf</a></li>
+<li class="toctree-l2"><a class="reference internal" href="foldout.html">Foldout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="label.html">Label</a></li>
+<li class="toctree-l2"><a class="reference internal" href="on_value_changed.html">OnValueChanged</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">ReadOnly</a></li>
+<li class="toctree-l2"><a class="reference internal" href="show_hide_if.html">ShowIf / HideIf</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../validator_attributes/index.html">Validator Attributes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../validator_attributes/min_max_value.html">MinValue / MaxValue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validator_attributes/required.html">Required</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validator_attributes/required_type.html">RequiredType</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../validator_attributes/validate_input.html">ValidateInput</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../special_attributes/index.html">Special Attributes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../special_attributes/allow_nesting.html">AllowNesting</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">NaughtyAttributes</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Meta Attributes</a></li>
+      <li class="breadcrumb-item active">ReadOnly</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/dbrizov/NaughtyAttributes/blob/master/docs/sphinx/src/attributes/meta_attributes/read_only.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="readonly">
+<h1>ReadOnly<a class="headerlink" href="#readonly" title="Link to this heading"></a></h1>
+<p>Make a serialized field readonly</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you want to use it on fields that are nested inside serialized structs or classes
+you need to use the <a class="reference internal" href="../special_attributes/allow_nesting.html#label-allow-nesting"><span class="std std-ref">AllowNesting</span></a> attribute.</p>
+</div>
+<div class="highlight-csharp notranslate"><div class="highlight"><pre><span></span><span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">NaughtyComponent</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">MonoBehaviour</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="na">[ReadOnly]</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="n">Vector3</span><span class="w"> </span><span class="n">forwardVector</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Vector3</span><span class="p">.</span><span class="n">forward</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<img alt="../../_images/ReadOnly_Inspector.png" src="../../_images/ReadOnly_Inspector.png" />
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="on_value_changed.html" class="btn btn-neutral float-left" title="OnValueChanged" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="show_hide_if.html" class="btn btn-neutral float-right" title="ShowIf / HideIf" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2017-2026 Denis Rizov.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
