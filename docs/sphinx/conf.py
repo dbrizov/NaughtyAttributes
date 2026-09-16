@@ -1,5 +1,7 @@
+import json
 import sphinx_rtd_theme
 from datetime import datetime
+from pathlib import Path
 from pygments.lexer import bygroups
 from pygments.lexers.dotnet import CSharpLexer
 from pygments.token import Name, Punctuation, Whitespace
@@ -12,10 +14,16 @@ def get_current_year():
     return datetime.now().year
 
 
+def get_version():
+    package_json = Path(__file__).parent.parent.parent / "Assets" / "NaughtyAttributes" / "package.json"
+    with open(package_json, encoding="utf-8") as file:
+        return json.load(file)["version"]
+
+
 project = "NaughtyAttributes"
 copyright = f"2017-{get_current_year()} Denis Rizov"
 author = "Denis Rizov"
-release = "2.1.5"
+release = get_version()
 
 # -- General configuration ---------------------------------------------------
 
@@ -67,6 +75,10 @@ html_title = "NaughtyAttributes for Unity"
 
 # Drops the _sources\ folder and the "View page source" link that points at it.
 html_copy_source = False
+
+# The theme prints its attribution outside div[role="contentinfo"], where the
+# footer template cannot wrap it. templates/footer.html reprints it inside.
+html_show_sphinx = False
 
 # Replace that link with one that points at the page's source on GitHub.
 html_context = {

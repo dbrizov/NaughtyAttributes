@@ -330,10 +330,9 @@ footer div[role="contentinfo"] p {
     margin-bottom: 0;
 }
 
+/* Both footer lines are stacked in .na-footer-text, so the icon centres
+   against the pair without the nudge the old markup needed. */
 .na-social {
-    /* The "Built with Sphinx" line sits outside contentinfo, so centre
-       against both lines rather than just the copyright. */
-    margin-top: 14px;
     flex: none;
     font-size: 32px;
     line-height: 1;
