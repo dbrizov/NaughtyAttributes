@@ -35,6 +35,15 @@ namespace NaughtyAttributes.Editor
 
         public override void OnInspectorGUI()
         {
+            DrawFields();
+
+            DrawNonSerializedFields();
+            DrawNativeProperties();
+            DrawButtons();
+        }
+
+        protected virtual void DrawFields()
+        {
             GetSerializedProperties(ref _serializedProperties);
 
             bool anyNaughtyAttribute = _serializedProperties.Any(p => PropertyUtility.GetAttribute<INaughtyAttribute>(p) != null);
@@ -46,10 +55,6 @@ namespace NaughtyAttributes.Editor
             {
                 DrawSerializedProperties();
             }
-
-            DrawNonSerializedFields();
-            DrawNativeProperties();
-            DrawButtons();
         }
 
         protected void GetSerializedProperties(ref List<SerializedProperty> outSerializedProperties)
