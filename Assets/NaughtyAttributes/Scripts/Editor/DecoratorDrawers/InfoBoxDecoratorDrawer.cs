@@ -8,7 +8,7 @@ namespace NaughtyAttributes.Editor
     {
         public override float GetHeight()
         {
-            return GetHelpBoxHeight();
+            return GetHelpBoxHeight() + EditorGUIUtility.standardVerticalSpacing;
         }
 
         public override void OnGUI(Rect rect)
