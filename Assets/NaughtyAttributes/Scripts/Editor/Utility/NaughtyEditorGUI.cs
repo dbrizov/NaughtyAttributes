@@ -87,17 +87,22 @@ namespace NaughtyAttributes.Editor
             return indentLength;
         }
 
-        public static void BeginBoxGroup_Layout(string label = "")
+        public static Rect BeginBoxGroup_Layout(string label = "")
         {
-            EditorGUILayout.BeginVertical(GUI.skin.box);
+            var boxRect = EditorGUILayout.BeginVertical(GUI.skin.box);
+
             if (!string.IsNullOrEmpty(label))
             {
                 EditorGUILayout.LabelField(label, EditorStyles.boldLabel);
             }
+			//Indent so the properties in our Box group are fully contained within it, including sub-foldouts.
+            EditorGUI.indentLevel++;
+            return boxRect;
         }
 
         public static void EndBoxGroup_Layout()
         {
+            EditorGUI.indentLevel--;
             EditorGUILayout.EndVertical();
         }
 
