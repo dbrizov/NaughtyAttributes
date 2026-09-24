@@ -9,9 +9,12 @@ namespace NaughtyAttributes
     {
         public string ValuesName { get; private set; }
 
-        public DropdownAttribute(string valuesName)
+        public string DisplayFormat { get; set; }
+
+        public DropdownAttribute(string valuesName, string displayFormat = "")
         {
             ValuesName = valuesName;
+            DisplayFormat = displayFormat;
         }
     }
 

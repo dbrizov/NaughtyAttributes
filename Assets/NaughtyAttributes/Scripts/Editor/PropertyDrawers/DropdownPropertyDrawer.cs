@@ -33,6 +33,13 @@ namespace NaughtyAttributes.Editor
             object valuesObject = GetValues(property, dropdownAttribute.ValuesName);
             FieldInfo dropdownField = ReflectionUtility.GetField(target, property.name);
 
+            Func<object, string> generateDisplayValue = v => v.ToString();
+
+            if (!string.IsNullOrWhiteSpace(dropdownAttribute.DisplayFormat))
+            {
+               generateDisplayValue =  v => string.Format(dropdownAttribute.DisplayFormat, v);
+            }
+
             if (AreValuesValid(valuesObject, dropdownField))
             {
                 if (valuesObject is IList && dropdownField.FieldType == GetElementType(valuesObject))
@@ -49,7 +56,9 @@ namespace NaughtyAttributes.Editor
                     {
                         object value = valuesList[i];
                         values[i] = value;
-                        displayOptions[i] = value == null ? "<null>" : value.ToString();
+                        displayOptions[i] = value == null 
+                                                ? "<null>" 
+                                                : generateDisplayValue(value);
                     }
 
                     // Selected value index
@@ -98,7 +107,7 @@ namespace NaughtyAttributes.Editor
                             }
                             else
                             {
-                                displayOptions.Add(current.Key);
+                                displayOptions.Add(generateDisplayValue(current.Key));
                             }
                         }
                     }
