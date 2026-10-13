@@ -22,6 +22,7 @@ namespace NaughtyAttributes
     public class DropdownList<T> : IDropdownList
     {
         private List<KeyValuePair<string, object>> _values;
+        public int Count { get => _values.Count; }
 
         public DropdownList()
         {
