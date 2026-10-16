@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace NaughtyAttributes
 {
@@ -11,7 +12,7 @@ namespace NaughtyAttributes
         /// <summary>
         ///		If this not null, <see cref="Conditions"/>[0] is name of an enum variable.
         /// </summary>
-        public Enum EnumValue { get; private set; }
+        public Enum[] EnumValues { get; private set; }
 
         public ShowIfAttributeBase(string condition)
         {
@@ -33,7 +34,18 @@ namespace NaughtyAttributes
                 throw new ArgumentNullException(nameof(enumValue), "This parameter must be an enum value.");
             }
 
-            EnumValue = enumValue;
+            EnumValues = new []{ enumValue };
+        }
+
+        public ShowIfAttributeBase(string enumName, params object[] enumValues)
+            : this(enumName)
+        {
+            if (enumValues == null || enumValues.Any(value => value == null))
+            {
+                throw new ArgumentNullException(nameof(enumValues), "All parameters must be enum values.");
+            }
+
+            EnumValues = enumValues.Select(obj => obj as Enum).ToArray();
         }
     }
 }
