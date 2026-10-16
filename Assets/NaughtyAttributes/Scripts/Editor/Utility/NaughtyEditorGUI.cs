@@ -134,6 +134,11 @@ namespace NaughtyAttributes.Editor
 
         public static void Button(UnityEngine.Object target, MethodInfo methodInfo)
         {
+            Button(target, methodInfo, new[] { target });
+        }
+
+        public static void Button(UnityEngine.Object target, MethodInfo methodInfo, IEnumerable<UnityEngine.Object> targets)
+        {
             bool visible = ButtonUtility.IsVisible(target, methodInfo);
             if (!visible)
             {
@@ -164,35 +169,6 @@ namespace NaughtyAttributes.Editor
                 if (GUILayout.Button(buttonText, _buttonStyle))
                 {
                     object[] defaultParams = methodInfo.GetParameters().Select(p => p.DefaultValue).ToArray();
-                    Type targetType = target.GetType();
-                    List<UnityEngine.Object> targets = new List<UnityEngine.Object>();
-
-                    foreach (UnityEngine.Object obj in Selection.objects)
-                    {
-                        if (obj == null)
-                        {
-                            continue;
-                        }
-
-                        if (obj is GameObject go)
-                        {
-                            Component component = go.GetComponent(targetType);
-                            if (component != null)
-                            {
-                                targets.Add(component);
-                            }
-                        }
-                        else if (targetType.IsInstanceOfType(obj))
-                        {
-                            targets.Add(obj);
-                        }
-                    }
-
-                    if (targets.Count == 0)
-                    {
-                        targets.Add(target);
-                    }
-
                     foreach (UnityEngine.Object t in targets)
                     {
                         IEnumerator methodResult = methodInfo.Invoke(t, defaultParams) as IEnumerator;
