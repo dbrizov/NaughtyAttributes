@@ -68,6 +68,23 @@ namespace NaughtyAttributes.Editor
             return label;
         }
 
+        private static UnityEngine.Object _lastCallbackTarget;
+        private static string _lastCallbackPath;
+
+        // A property drawer and NaughtyEditorGUI.PropertyField both check for changes around the same property,
+        // so the callbacks of one change would be invoked twice. NaughtyEditorGUI resets this before drawing
+        // and skips its own call if the drawer already made it.
+        public static void ResetOnValueChangedCallbacksMark()
+        {
+            _lastCallbackTarget = null;
+            _lastCallbackPath = null;
+        }
+
+        public static bool WereOnValueChangedCallbacksCalled(SerializedProperty property)
+        {
+            return _lastCallbackTarget == property.serializedObject.targetObject && _lastCallbackPath == property.propertyPath;
+        }
+
         public static void CallOnValueChangedCallbacks(SerializedProperty property)
         {
             OnValueChangedAttribute[] onValueChangedAttributes = GetAttributes<OnValueChangedAttribute>(property);
@@ -75,6 +92,9 @@ namespace NaughtyAttributes.Editor
             {
                 return;
             }
+
+            _lastCallbackTarget = property.serializedObject.targetObject;
+            _lastCallbackPath = property.propertyPath;
 
             object target = GetTargetObjectWithProperty(property);
             property.serializedObject.ApplyModifiedProperties(); // We must apply modifications so that the new value is updated in the serialized object

@@ -63,6 +63,7 @@ namespace NaughtyAttributes.Editor
                 }
 
                 // Check if enabled and draw
+                PropertyUtility.ResetOnValueChangedCallbacksMark();
                 EditorGUI.BeginChangeCheck();
                 bool enabled = PropertyUtility.IsEnabled(property);
 
@@ -72,7 +73,7 @@ namespace NaughtyAttributes.Editor
                 }
 
                 // Call OnValueChanged callbacks
-                if (EditorGUI.EndChangeCheck())
+                if (EditorGUI.EndChangeCheck() && !PropertyUtility.WereOnValueChangedCallbacksCalled(property))
                 {
                     PropertyUtility.CallOnValueChangedCallbacks(property);
                 }
