@@ -188,8 +188,10 @@ namespace NaughtyAttributes.Editor
                         }
                     }
 
-                    if (targets.Count == 0)
+                    // A locked inspector can show an object that is not part of the current selection
+                    if (!targets.Contains(target))
                     {
+                        targets.Clear();
                         targets.Add(target);
                     }
 
